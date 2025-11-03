@@ -386,3 +386,45 @@ UPDATE funcionario SET Senha = 'senha890' WHERE CPF = '89012345678';
 UPDATE funcionario SET Senha = 'senha901' WHERE CPF = '90123456789';
 UPDATE funcionario SET Senha = 'senha012' WHERE CPF = '01234567890';
 
+
+DELIMITER $$
+
+CREATE TRIGGER trg_baixa_estoque_venda
+AFTER INSERT ON contem
+FOR EACH ROW
+BEGIN
+
+    DECLARE qtd_vendida INT;
+    DECLARE med_id INT;
+
+    SELECT
+        iv.Qtd_ItemVenda
+    INTO
+        qtd_vendida
+    FROM
+        item_venda iv
+    WHERE
+        iv.Cod_ItemVenda = NEW.Cod_ItemVenda;
+
+    SELECT
+        ce.Cod_Med
+    INTO
+        med_id
+    FROM
+        compoe_estoque ce
+    WHERE
+        ce.Cod_ItemVenda = NEW.Cod_ItemVenda
+    LIMIT 1;
+
+    IF med_id IS NOT NULL THEN
+        UPDATE
+            medicamento
+        SET
+            Qtd_Med = Qtd_Med - qtd_vendida
+        WHERE
+            Cod_Med = med_id;
+    END IF;
+END$$
+
+DELIMITER ;
+
