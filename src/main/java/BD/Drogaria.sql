@@ -386,7 +386,6 @@ UPDATE funcionario SET Senha = 'senha890' WHERE CPF = '89012345678';
 UPDATE funcionario SET Senha = 'senha901' WHERE CPF = '90123456789';
 UPDATE funcionario SET Senha = 'senha012' WHERE CPF = '01234567890';
 
-
 DELIMITER $$
 
 CREATE TRIGGER trg_baixa_estoque_venda
@@ -428,3 +427,43 @@ END$$
 
 DELIMITER ;
 
+DELIMITER $$
+
+CREATE PROCEDURE sp_estoque_baixo(
+    IN limite INT -- Parâmetro para definir o nível de alerta
+)
+BEGIN
+    SELECT
+        Cod_Med,
+        Nome_Med,
+        Qtd_Med,
+        CONCAT('Estoque Baixo! Pedir ', limite - Qtd_Med, ' unidades.') AS Acao_Recomendada
+    FROM
+        medicamento
+    WHERE
+        Qtd_Med <= limite
+    ORDER BY
+        Qtd_Med ASC;
+END$$
+
+DELIMITER ;
+
+CREATE VIEW vw_vendas_por_funcionario AS
+SELECT
+    V.NotaFiscal_Saida,
+    V.Data_Venda,
+    V.Valor_Venda,
+    F.Nome_Fun AS Funcionario_Responsavel,
+    F.Email_Fun
+FROM
+    venda V
+JOIN
+    realiza_venda RV ON V.NotaFiscal_Saida = RV.NotaFiscal_Saida
+JOIN
+    funcionario F ON RV.CPF = F.CPF
+ORDER BY
+    V.Data_Venda DESC;
+        
+ 
+    
+    
