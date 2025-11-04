@@ -3,6 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package Janelas;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel; // (e outros imports que já tiver)
+
 
 /**
  *
@@ -15,7 +18,13 @@ public class TelaCadastroFun extends javax.swing.JFrame {
      */
     public TelaCadastroFun() {
         initComponents();
+        
+    jBoxFun.removeAllItems();    
+    jBoxFun.addItem("Gerente");
+    jBoxFun.addItem("Funcionário");    
     }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -36,16 +45,16 @@ public class TelaCadastroFun extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jTNomeFun = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        jTCPF = new javax.swing.JTextField();
         jTCepFun = new javax.swing.JTextField();
         jTNumeroFun = new javax.swing.JTextField();
         jTTelefone = new javax.swing.JTextField();
         jTSenha = new javax.swing.JTextField();
         jBoxFun = new javax.swing.JComboBox<>();
         jTEmailFun = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        jBConfirmar = new javax.swing.JButton();
+        jBAtualizar = new javax.swing.JButton();
+        jBExcluir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -88,11 +97,26 @@ public class TelaCadastroFun extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("CONFIRMAR");
+        jBConfirmar.setText("CONFIRMAR");
+        jBConfirmar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBConfirmarActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("ATUALIZAR");
+        jBAtualizar.setText("ATUALIZAR");
+        jBAtualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBAtualizarActionPerformed(evt);
+            }
+        });
 
-        jButton3.setText("EXCLUIR");
+        jBExcluir.setText("EXCLUIR");
+        jBExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBExcluirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -110,11 +134,11 @@ public class TelaCadastroFun extends javax.swing.JFrame {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                             .addGap(15, 15, 15)
-                            .addComponent(jButton1)
+                            .addComponent(jBConfirmar)
                             .addGap(60, 60, 60)
-                            .addComponent(jButton2)
+                            .addComponent(jBAtualizar)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton3))
+                            .addComponent(jBExcluir))
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                             .addComponent(jLabel9)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -133,7 +157,7 @@ public class TelaCadastroFun extends javax.swing.JFrame {
                             .addComponent(jTCepFun))
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                             .addGap(53, 53, 53)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jTCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jLabel7)
@@ -160,7 +184,7 @@ public class TelaCadastroFun extends javax.swing.JFrame {
                         .addGap(24, 24, 24)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -185,9 +209,9 @@ public class TelaCadastroFun extends javax.swing.JFrame {
                     .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(47, 47, 47)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
+                    .addComponent(jBConfirmar)
+                    .addComponent(jBAtualizar)
+                    .addComponent(jBExcluir))
                 .addGap(44, 44, 44))
         );
 
@@ -203,8 +227,75 @@ public class TelaCadastroFun extends javax.swing.JFrame {
     }//GEN-LAST:event_jTSenhaActionPerformed
 
     private void jBoxFunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBoxFunActionPerformed
-        // TODO add your handling code here:
+   
     }//GEN-LAST:event_jBoxFunActionPerformed
+
+    private void jBConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBConfirmarActionPerformed
+    String nome = jTNomeFun.getText();
+    String cpf = jTCPF.getText();
+    String numero = jTNumeroFun.getText();
+    String cep = jTCepFun.getText();
+    String telefone = jTTelefone.getText();
+    String senha = jTSenha.getText();
+    String email = jTEmailFun.getText();
+    String funcao = (String) jBoxFun.getSelectedItem();
+    
+    // Exibe uma mensagem de confirmação com os dados digitados
+    javax.swing.JOptionPane.showMessageDialog(this,
+        "Funcionário cadastrado com sucesso!\n\n" +
+        "Nome: " + nome + "\n" +
+        "CPF: " + cpf + "\n" +
+        "Número: " + numero + "\n" +
+        "CEP: " + cep + "\n" +
+        "Telefone: " + telefone + "\n" +
+        "Email: " + email + "\n" +
+        "Função: " + funcao,
+        "Confirmação de Cadastro",
+        javax.swing.JOptionPane.INFORMATION_MESSAGE
+    );
+    }//GEN-LAST:event_jBConfirmarActionPerformed
+
+    private void jBExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBExcluirActionPerformed
+    // Verifica se há uma linha selecionada na tabela
+int linhaSelecionada = jTable1.getSelectedRow(); // substitua jTable1 pelo nome da sua tabela
+
+if (linhaSelecionada == -1) {
+    // Nenhuma linha foi selecionada
+    JOptionPane.showMessageDialog(this, "Selecione um funcionário para excluir.");
+} else {
+    // Confirmação de exclusão
+    int confirmacao = JOptionPane.showConfirmDialog(this, "Tem certeza que deseja excluir este funcionário?", "Confirmação", JOptionPane.YES_NO_OPTION);
+    
+    if (confirmacao == JOptionPane.YES_OPTION) {
+        // Obtém o modelo da tabela e remove a linha selecionada
+        DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+        modelo.removeRow(linhaSelecionada);
+
+        // Mensagem de sucesso
+        JOptionPane.showMessageDialog(this, "Funcionário excluído com sucesso!");
+    }
+}
+
+    }//GEN-LAST:event_jBExcluirActionPerformed
+
+    private void jBAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAtualizarActionPerformed
+    // Captura os dados digitados nos campos
+    String nome = jTNomeFun.getText();
+    String cpf = jTCPF.getText();
+    String cargo = (String) jBoxFun.getSelectedItem();
+
+    if (nome.isEmpty() || cpf.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Preencha todos os campos antes de atualizar!");
+        return;
+    }
+
+    JOptionPane.showMessageDialog(this, 
+        "Funcionário atualizado com sucesso!\n\n" +
+        "Nome: " + nome + "\n" +
+        "CPF: " + cpf + "\n" +
+        "Cargo: " + cargo);
+
+    }//GEN-LAST:event_jBAtualizarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -242,10 +333,10 @@ public class TelaCadastroFun extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBAtualizar;
+    private javax.swing.JButton jBConfirmar;
+    private javax.swing.JButton jBExcluir;
     private javax.swing.JComboBox<String> jBoxFun;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -255,12 +346,13 @@ public class TelaCadastroFun extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JTextField jTCPF;
     private javax.swing.JTextField jTCepFun;
     private javax.swing.JTextField jTEmailFun;
     private javax.swing.JTextField jTNomeFun;
     private javax.swing.JTextField jTNumeroFun;
     private javax.swing.JTextField jTSenha;
     private javax.swing.JTextField jTTelefone;
-    private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
+
 }
