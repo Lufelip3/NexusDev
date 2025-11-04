@@ -98,7 +98,7 @@ CREATE TABLE realiza_compra (
 );
 
 -- Tabela Possui
-CREATE TABLE possui (
+CREATE TABLE possuiCompraItem (
   NotaFiscal_Entrada INT,
   Cod_Item INT,
   PRIMARY KEY (NotaFiscal_Entrada, Cod_Item),
@@ -116,7 +116,7 @@ CREATE TABLE compoe_item (
 );
 
 -- Tabela Fornece
-CREATE TABLE fornece (
+CREATE TABLE forneceCatalogoLab (
   Cod_CatMed INT,
   CNPJ_Lab VARCHAR(18),
   PRIMARY KEY (Cod_CatMed, CNPJ_Lab),
@@ -143,7 +143,7 @@ CREATE TABLE compoe_estoque (
 );
 
 -- Tabela Contém
-CREATE TABLE contem (
+CREATE TABLE contemVenda (
   Cod_ItemVenda INT,
   NotaFiscal_Saida INT,
   PRIMARY KEY (Cod_ItemVenda, NotaFiscal_Saida),
@@ -288,7 +288,7 @@ INSERT INTO realiza_compra (CPF, NotaFiscal_Entrada) VALUES
 ('90123456789', 1009),
 ('01234567890', 1010);
 
-INSERT INTO possui (NotaFiscal_Entrada, Cod_Item) VALUES
+INSERT INTO possuiCompraItem (NotaFiscal_Entrada, Cod_Item) VALUES
 (1001, 1),
 (1002, 2),
 (1003, 3),
@@ -312,7 +312,7 @@ INSERT INTO compoe_item (Cod_Item, Cod_CatMed) VALUES
 (9, 9),
 (10, 10);
 
-INSERT INTO fornece (Cod_CatMed, CNPJ_Lab) VALUES
+INSERT INTO forneceCatalogoLab (Cod_CatMed, CNPJ_Lab) VALUES
 (1, '12345678000101'),
 (2, '23456789000102'),
 (3, '34567890000103'),
@@ -348,7 +348,7 @@ INSERT INTO compoe_estoque (Cod_Med, Cod_ItemVenda) VALUES
 (9, 9),
 (10, 10);
 
-INSERT INTO contem (Cod_ItemVenda, NotaFiscal_Saida) VALUES
+INSERT INTO contemVenda (Cod_ItemVenda, NotaFiscal_Saida) VALUES
 (1, 1),
 (2, 2),
 (3, 3),

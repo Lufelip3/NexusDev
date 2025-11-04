@@ -9,5 +9,11 @@ package Objetos;
  * @author luis.fmleite
  */
 public class Laboratorio {
-    
+
+    private String nomeLab;
+    private String cnpjLab;
+    private String telefoneLab;
+    private String emailLab;
+    private int numeroLab;
+    private String cepLab;
 }

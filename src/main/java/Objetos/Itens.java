@@ -8,13 +8,12 @@ package Objetos;
  *
  * @author luis.fmleite
  */
-public class Funcionario {
-
-    private String nome_Fun;
-    private String cpf;
-    private String telefone_Fun;
-    private String Cep_Fun;
-    private int numero_Fun;
-    private String email_Fun;
-
+public class Itens {
+    private String nomeItem;
+    private int codigoItem;
+    private int quantidadeItem;
+    private Double valorItem;
+    private String descricaoItem;
+    private String dataValItem;
+    
 }
