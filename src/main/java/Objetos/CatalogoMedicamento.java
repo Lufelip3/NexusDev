@@ -9,5 +9,9 @@ package Objetos;
  * @author luis.fmleite
  */
 public class CatalogoMedicamento {
+    private String nomeCatalogo;
+    private int codigoCatalogo;
+    private String descCatalogo;
+    private Double valorCatalogo;
     
 }

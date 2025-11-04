@@ -9,5 +9,12 @@ package Objetos;
  * @author luis.fmleite
  */
 public class Drogaria {
-    
+
+    private String nomeDrogaria;
+    private String cnpjDrogaria;
+    private String numeroDrogaria;
+    private String cepDrogaria;
+    private String emailDrogaria;
+    private String telefoneDrogaria;
+
 }

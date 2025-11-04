@@ -9,5 +9,11 @@ package Objetos;
  * @author luis.fmleite
  */
 public class Itens {
+    private String nomeItem;
+    private int codigoItem;
+    private int quantidadeItem;
+    private Double valorItem;
+    private String descricaoItem;
+    private String dataValItem;
     
 }

@@ -9,5 +9,10 @@ package Objetos;
  * @author luis.fmleite
  */
 public class Venda {
-    
+
+    private String nomeVenda;
+    //private String cnpjVenda;
+    private String notaFiscalVenda;
+    private String dataVenda;
+    private Double valorVenda;
 }

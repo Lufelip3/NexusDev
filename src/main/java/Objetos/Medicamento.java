@@ -9,5 +9,11 @@ package Objetos;
  * @author luis.fmleite
  */
 public class Medicamento {
-    
+
+    private String nomeMed;
+    private String codigoMed;
+    private String descricaoMed;
+    private String dataValidadeMed;
+    private int quantEstoqueMed;
+    private Double valorMed;
 }
