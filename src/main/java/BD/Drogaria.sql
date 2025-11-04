@@ -371,3 +371,99 @@ INSERT INTO realiza_venda (CPF, NotaFiscal_Saida) VALUES
 ('89012345678', 8),
 ('90123456789', 9),
 ('01234567890', 10);
+
+ALTER TABLE funcionario
+ADD Senha VARCHAR(30) NOT NULL;
+
+UPDATE funcionario SET Senha = 'senha123' WHERE CPF = '12345678901';
+UPDATE funcionario SET Senha = 'senha234' WHERE CPF = '23456789012';
+UPDATE funcionario SET Senha = 'senha345' WHERE CPF = '34567890123';
+UPDATE funcionario SET Senha = 'senha456' WHERE CPF = '45678901234';
+UPDATE funcionario SET Senha = 'senha567' WHERE CPF = '56789012345';
+UPDATE funcionario SET Senha = 'senha678' WHERE CPF = '67890123456';
+UPDATE funcionario SET Senha = 'senha789' WHERE CPF = '78901234567';
+UPDATE funcionario SET Senha = 'senha890' WHERE CPF = '89012345678';
+UPDATE funcionario SET Senha = 'senha901' WHERE CPF = '90123456789';
+UPDATE funcionario SET Senha = 'senha012' WHERE CPF = '01234567890';
+
+DELIMITER $$
+
+CREATE TRIGGER trg_baixa_estoque_venda
+AFTER INSERT ON contem
+FOR EACH ROW
+BEGIN
+
+    DECLARE qtd_vendida INT;
+    DECLARE med_id INT;
+
+    SELECT
+        iv.Qtd_ItemVenda
+    INTO
+        qtd_vendida
+    FROM
+        item_venda iv
+    WHERE
+        iv.Cod_ItemVenda = NEW.Cod_ItemVenda;
+
+    SELECT
+        ce.Cod_Med
+    INTO
+        med_id
+    FROM
+        compoe_estoque ce
+    WHERE
+        ce.Cod_ItemVenda = NEW.Cod_ItemVenda
+    LIMIT 1;
+
+    IF med_id IS NOT NULL THEN
+        UPDATE
+            medicamento
+        SET
+            Qtd_Med = Qtd_Med - qtd_vendida
+        WHERE
+            Cod_Med = med_id;
+    END IF;
+END$$
+
+DELIMITER ;
+
+DELIMITER $$
+
+CREATE PROCEDURE sp_estoque_baixo(
+    IN limite INT -- Parâmetro para definir o nível de alerta
+)
+BEGIN
+    SELECT
+        Cod_Med,
+        Nome_Med,
+        Qtd_Med,
+        CONCAT('Estoque Baixo! Pedir ', limite - Qtd_Med, ' unidades.') AS Acao_Recomendada
+    FROM
+        medicamento
+    WHERE
+        Qtd_Med <= limite
+    ORDER BY
+        Qtd_Med ASC;
+END$$
+
+DELIMITER ;
+
+CREATE VIEW vw_vendas_por_funcionario AS
+SELECT
+    V.NotaFiscal_Saida,
+    V.Data_Venda,
+    V.Valor_Venda,
+    F.Nome_Fun AS Funcionario_Responsavel,
+    F.Email_Fun
+FROM
+    venda V
+JOIN
+    realiza_venda RV ON V.NotaFiscal_Saida = RV.NotaFiscal_Saida
+JOIN
+    funcionario F ON RV.CPF = F.CPF
+ORDER BY
+    V.Data_Venda DESC;
+        
+ 
+    
+    
