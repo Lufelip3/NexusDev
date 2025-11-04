@@ -101,9 +101,7 @@ public class Menu extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBCadastrarMedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCadastrarMedActionPerformed
-        CadastroMedicamento TMed = new CadastroMedicamento();
-        TMed.setVisible(true);
-        
+        setVisible(false); 
         
         
     }//GEN-LAST:event_jBCadastrarMedActionPerformed
