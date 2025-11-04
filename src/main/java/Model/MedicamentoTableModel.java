@@ -12,5 +12,5 @@ import javax.swing.table.AbstractTableModel;
 
 public class MedicamentoTableModel extends AbstractTableModel {
     
-    private List<med> dados = new ArrayList<>();
+    private List<Medicamento> dados = new ArrayList<>();
 }
