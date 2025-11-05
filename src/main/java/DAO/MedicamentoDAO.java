@@ -51,12 +51,12 @@ public class MedicamentoDAO {
 
         try {
             stmt = con.prepareStatement("INSERT INTO medicamento (Cod_Med, Nome_Med, Desc_Med, Valor_Med, Qtd_Med, DataVal_Med) VALUES (?,?,?,?,?,?)");
-            stmt.setString(1, m.getCodigoMed());
-            stmt.setDouble(2, m.getNomeMed());
-            stmt.setInt(3, m.getDescricaoMed());
+            stmt.setInt(1, m.getCodigoMed());
+            stmt.setString(2, m.getNomeMed());
+            stmt.setString(3, m.getDescricaoMed());
             stmt.setDouble(4, m.getValorMed());
             stmt.setInt(5, m.getQuantEstoqueMed());
-            stmt.setDouble(6, m.getDataValidadeMed());
+            stmt.setString(6, m.getDataValidadeMed());
 
             stmt.execute();
             JOptionPane.showMessageDialog(null, "Produto cadastrado com sucesso!");
@@ -73,13 +73,13 @@ public class MedicamentoDAO {
         PreparedStatement stmt = null;
 
         try {
-            stmt = con.prepareStatement("UPDATE medicamento set Nome_Med = ?, Desc_Med = ?, Valor_Med = ?, Qtd_Med = ?, DataVal_Med = ? where Cod_Med = ?);
-            stmt.setDouble(1, m.getNomeMed());
-            stmt.setInt(2, m.getDescricaoMed());
+            stmt = con.prepareStatement("UPDATE medicamento set Nome_Med = ?, Desc_Med = ?, Valor_Med = ?, Qtd_Med = ?, DataVal_Med = ? where Cod_Med = ?");
+            stmt.setString(1, m.getNomeMed());
+            stmt.setString(2, m.getDescricaoMed());
             stmt.setDouble(3, m.getValorMed());
             stmt.setInt(4, m.getQuantEstoqueMed());
-            stmt.setDouble(5, m.getDataValidadeMed());
-            stmt.setString(6, m.getCodigoMed());
+            stmt.setString(5, m.getDataValidadeMed());
+            stmt.setInt(6, m.getCodigoMed());
 
             stmt.execute();
             JOptionPane.showMessageDialog(null, "Produto atualizado com sucesso!");
