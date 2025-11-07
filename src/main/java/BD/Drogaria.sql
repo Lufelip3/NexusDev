@@ -98,7 +98,7 @@ CREATE TABLE realiza_compra (
 );
 
 -- Tabela Possui
-CREATE TABLE possui (
+CREATE TABLE possuiCompraItem (
   NotaFiscal_Entrada INT,
   Cod_Item INT,
   PRIMARY KEY (NotaFiscal_Entrada, Cod_Item),
@@ -116,7 +116,7 @@ CREATE TABLE compoe_item (
 );
 
 -- Tabela Fornece
-CREATE TABLE fornece (
+CREATE TABLE forneceCatalogoLab (
   Cod_CatMed INT,
   CNPJ_Lab VARCHAR(18),
   PRIMARY KEY (Cod_CatMed, CNPJ_Lab),
@@ -143,7 +143,7 @@ CREATE TABLE compoe_estoque (
 );
 
 -- Tabela Contém
-CREATE TABLE contem (
+CREATE TABLE contemVenda (
   Cod_ItemVenda INT,
   NotaFiscal_Saida INT,
   PRIMARY KEY (Cod_ItemVenda, NotaFiscal_Saida),
@@ -288,7 +288,7 @@ INSERT INTO realiza_compra (CPF, NotaFiscal_Entrada) VALUES
 ('90123456789', 1009),
 ('01234567890', 1010);
 
-INSERT INTO possui (NotaFiscal_Entrada, Cod_Item) VALUES
+INSERT INTO possuiCompraItem (NotaFiscal_Entrada, Cod_Item) VALUES
 (1001, 1),
 (1002, 2),
 (1003, 3),
@@ -312,7 +312,7 @@ INSERT INTO compoe_item (Cod_Item, Cod_CatMed) VALUES
 (9, 9),
 (10, 10);
 
-INSERT INTO fornece (Cod_CatMed, CNPJ_Lab) VALUES
+INSERT INTO forneceCatalogoLab (Cod_CatMed, CNPJ_Lab) VALUES
 (1, '12345678000101'),
 (2, '23456789000102'),
 (3, '34567890000103'),
@@ -348,7 +348,7 @@ INSERT INTO compoe_estoque (Cod_Med, Cod_ItemVenda) VALUES
 (9, 9),
 (10, 10);
 
-INSERT INTO contem (Cod_ItemVenda, NotaFiscal_Saida) VALUES
+INSERT INTO contemVenda (Cod_ItemVenda, NotaFiscal_Saida) VALUES
 (1, 1),
 (2, 2),
 (3, 3),
@@ -386,3 +386,133 @@ UPDATE funcionario SET Senha = 'senha890' WHERE CPF = '89012345678';
 UPDATE funcionario SET Senha = 'senha901' WHERE CPF = '90123456789';
 UPDATE funcionario SET Senha = 'senha012' WHERE CPF = '01234567890';
 
+CREATE OR REPLACE VIEW vw_relatorio_vendas_detalhadas AS
+
+SELECT
+
+    V.NotaFiscal_Saida,
+
+    V.Data_Venda AS Data_Venda,
+
+    V.Valor_Venda AS Valor_Total_Venda,
+
+    IV.Nome_ItemVenda AS Item_Vendido,
+
+    IV.Qtd_ItemVenda AS Quantidade,      -- CORRIGIDO: Agora usa IV (item_venda)
+
+    IV.Valor_ItemVenda AS Valor_Unitario, -- CORRIGIDO: Agora usa IV (item_venda)
+
+    F.Nome_Fun AS Funcionario_Venda
+
+FROM
+
+    venda V
+
+JOIN
+
+    contemVenda CV ON V.NotaFiscal_Saida = CV.NotaFiscal_Saida
+
+JOIN
+
+    item_venda IV ON CV.Cod_ItemVenda = IV.Cod_ItemVenda
+
+JOIN
+
+    realiza_venda RV ON V.NotaFiscal_Saida = RV.NotaFiscal_Saida
+
+JOIN
+
+    funcionario F ON RV.CPF = F.CPF;
+
+DELIMITER $$
+
+CREATE PROCEDURE sp_atualiza_estoque_apos_compra (
+
+    p_Cod_Med INT,
+
+    p_Qtd_Comprada INT
+
+)
+
+BEGIN
+
+    DECLARE v_estoque_atual INT;
+ 
+    -- 1. Verifica o estoque atual
+
+    SELECT Qtd_Med INTO v_estoque_atual
+
+    FROM medicamento
+
+    WHERE Cod_Med = p_Cod_Med;
+ 
+    -- 2. Atualiza a quantidade do medicamento
+
+    UPDATE medicamento
+
+    SET Qtd_Med = v_estoque_atual + p_Qtd_Comprada
+
+    WHERE Cod_Med = p_Cod_Med;
+ 
+    -- 3. Retorna a confirmação e novo estoque
+
+    SELECT CONCAT(
+
+        'Estoque do medicamento (Cod: ', p_Cod_Med, ') atualizado. ',
+
+        'Quantidade adicionada: ', p_Qtd_Comprada,
+
+        '. Novo Estoque Total: ', v_estoque_atual + p_Qtd_Comprada
+
+    ) AS Mensagem_Estoque;
+ 
+END $$
+
+DELIMITER ;
+ 
+DELIMITER $$
+
+CREATE TRIGGER trg_baixa_estoque_apos_venda
+
+AFTER INSERT ON contemVenda
+
+FOR EACH ROW
+
+BEGIN
+
+    DECLARE v_cod_med INT;
+
+    DECLARE v_qtd_vendida INT;
+ 
+    -- 1. Pega o Cod_Med associado ao Item_Venda
+
+    SELECT Cod_Med INTO v_cod_med
+
+    FROM compoe_estoque
+
+    WHERE Cod_ItemVenda = NEW.Cod_ItemVenda;
+ 
+    -- 2. Pega a quantidade vendida da tabela item_venda
+
+    SELECT Qtd_ItemVenda INTO v_qtd_vendida
+
+    FROM item_venda
+
+    WHERE Cod_ItemVenda = NEW.Cod_ItemVenda;
+ 
+    -- 3. Diminui a quantidade no estoque de medicamento
+
+    IF v_cod_med IS NOT NULL THEN
+
+        UPDATE medicamento
+
+        SET Qtd_Med = Qtd_Med - v_qtd_vendida
+
+        WHERE Cod_Med = v_cod_med;
+
+    END IF;
+
+END $$
+
+DELIMITER ;
+ 

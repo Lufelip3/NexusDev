@@ -3,118 +3,115 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package Objetos;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 
 /**
  *
  * @author luis.fmleite
  */
 public class Funcionario {
-    private String Nome;
-    private String CPF;
-    private String Numero;
-    private String CEP;
-    private String Telefone;
-    private String Senha;
-    private String Email;
+
+    private String nome_Fun;
+    private String cpf;
+    private String telefone_Fun;
+    private String Cep_Fun;
+    private int numero_Fun;
+    private String email_Fun;
+    private String senha;
+    private String senhaHash;
+
+    private final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
     /**
-     * @return the Nome
+     * @return the nome_Fun
      */
-    public String getNome() {
-        return Nome;
+    public String getNome_Fun() {
+        return nome_Fun;
     }
 
     /**
-     * @param Nome the Nome to set
+     * @param nome_Fun the nome_Fun to set
      */
-    public void setNome(String Nome) {
-        this.Nome = Nome;
+    public void setNome_Fun(String nome_Fun) {
+        this.nome_Fun = nome_Fun;
     }
 
     /**
-     * @return the CPF
+     * @return the cpf
      */
-    public String getCPF() {
-        return CPF;
+    public String getCpf() {
+        return cpf;
     }
 
     /**
-     * @param CPF the CPF to set
+     * @param cpf the cpf to set
      */
-    public void setCPF(String CPF) {
-        this.CPF = CPF;
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
 
     /**
-     * @return the Numero
+     * @return the telefone_Fun
      */
-    public String getNumero() {
-        return Numero;
+    public String getTelefone_Fun() {
+        return telefone_Fun;
     }
 
     /**
-     * @param Numero the Numero to set
+     * @param telefone_Fun the telefone_Fun to set
      */
-    public void setNumero(String Numero) {
-        this.Numero = Numero;
+    public void setTelefone_Fun(String telefone_Fun) {
+        this.telefone_Fun = telefone_Fun;
     }
 
     /**
-     * @return the CEP
+     * @return the Cep_Fun
      */
-    public String getCEP() {
-        return CEP;
+    public String getCep_Fun() {
+        return Cep_Fun;
     }
 
     /**
-     * @param CEP the CEP to set
+     * @param Cep_Fun the Cep_Fun to set
      */
-    public void setCEP(String CEP) {
-        this.CEP = CEP;
+    public void setCep_Fun(String Cep_Fun) {
+        this.Cep_Fun = Cep_Fun;
     }
 
     /**
-     * @return the Telefone
+     * @return the numero_Fun
      */
-    public String getTelefone() {
-        return Telefone;
+    public int getNumero_Fun() {
+        return numero_Fun;
     }
 
     /**
-     * @param Telefone the Telefone to set
+     * @param numero_Fun the numero_Fun to set
      */
-    public void setTelefone(String Telefone) {
-        this.Telefone = Telefone;
+    public void setNumero_Fun(int numero_Fun) {
+        this.numero_Fun = numero_Fun;
     }
 
     /**
-     * @return the Senha
+     * @return the email_Fun
      */
-    public String getSenha() {
-        return Senha;
+    public String getEmail_Fun() {
+        return email_Fun;
     }
 
     /**
-     * @param Senha the Senha to set
+     * @param email_Fun the email_Fun to set
      */
-    public void setSenha(String Senha) {
-        this.Senha = Senha;
+    public void setEmail_Fun(String email_Fun) {
+        this.email_Fun = email_Fun;
     }
 
-    /**
-     * @return the Email
-     */
-    public String getEmail() {
-        return Email;
+    public void setSenhaHash(String senha) {
+        this.senhaHash = encoder.encode(senha); //faz a criptografia
     }
 
-    /**
-     * @param Email the Email to set
-     */
-    public void setEmail(String Email) {
-        this.Email = Email;
+    public boolean verificarSenha(String senhaDigitada) {
+        return encoder.matches(senhaDigitada, this.senha);
     }
-    
-    
-    
 }
