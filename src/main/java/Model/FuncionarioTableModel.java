@@ -4,17 +4,26 @@
  */
 package Model;
 
+import BD.Conexao;
 import DAO.MedicamentoDAO;
-import Objetos.Medicamento;
+import Objetos.Funcionario;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.table.AbstractTableModel;
 
-public class MedicamentoTableModel extends AbstractTableModel {
-
-    private List<Medicamento> dados = new ArrayList<>();
+/**
+ *
+ * @author luis.fmleite
+ */
+public class FuncionarioTableModel {
+   private List<Medicamento> dados = new ArrayList<>();
     private String[] colunas = {"Código", "Nome", "Descrição", "Quantidade", "Valor", "Data de validade"};
 
+    //nome_Fun;
+   // private String cpf;
+   // private String telefone_Fun;
+   // private String Cep_Fun;
+   // private int numero_Fun;
+   // private String email_Fun;
     @Override
     public String getColumnName(int column) {
         return colunas[column];
@@ -103,5 +112,4 @@ public class MedicamentoTableModel extends AbstractTableModel {
         lerDados();
         this.fireTableDataChanged();
     }
-
 }
