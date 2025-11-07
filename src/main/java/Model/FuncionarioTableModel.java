@@ -15,7 +15,7 @@ import java.util.List;
  * @author luis.fmleite
  */
 public class FuncionarioTableModel {
-   private List<Medicamento> dados = new ArrayList<>();
+   private List<Funcionario> dados = new ArrayList<>();
     private String[] colunas = {"Código", "Nome", "Descrição", "Quantidade", "Valor", "Data de validade"};
 
     //nome_Fun;
