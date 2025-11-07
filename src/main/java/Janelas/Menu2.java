@@ -44,6 +44,11 @@ public class Menu2 extends javax.swing.JFrame {
         });
 
         jBCompra.setText("Compra");
+        jBCompra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBCompraActionPerformed(evt);
+            }
+        });
 
         jBDrogaria.setText("Drogaria");
 
@@ -103,6 +108,10 @@ public class Menu2 extends javax.swing.JFrame {
     private void jBCadastrarMedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCadastrarMedActionPerformed
 
     }//GEN-LAST:event_jBCadastrarMedActionPerformed
+
+    private void jBCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCompraActionPerformed
+        
+    }//GEN-LAST:event_jBCompraActionPerformed
 
     /**
      * @param args the command line arguments
