@@ -45,17 +45,13 @@ public class Laboratório2 extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTNumeroLaboratorio.setText("jTextField5");
-
-        jTCNPJLaboratorio.setText("jTextField2");
-
-        jTNomeLaboratorio.setText("jTextField1");
-
-        jTEnderecoLaboratorio.setText("jTextField3");
+        jTCNPJLaboratorio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTCNPJLaboratorioActionPerformed(evt);
+            }
+        });
 
         jLabel7.setText("Telefone:");
-
-        jTTelLaboratorio.setText("jTextField6");
 
         jLabel5.setText("Nome:");
 
@@ -63,17 +59,24 @@ public class Laboratório2 extends javax.swing.JFrame {
 
         jLabel3.setText("CNPJ:");
 
-        jTEmailLaboratorio.setText("jTextField7");
-
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("LABORATORIO");
+        jLabel4.setText("LABORATÓRIO");
 
         jLabel6.setText("Endereço:");
 
-        jTCEPLaboratorio.setText("jTextField4");
+        jTCEPLaboratorio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTCEPLaboratorioActionPerformed(evt);
+            }
+        });
 
         jBCadastrarLaboratorio.setText("Cadastrar");
+        jBCadastrarLaboratorio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBCadastrarLaboratorioActionPerformed(evt);
+            }
+        });
 
         jLabel9.setText("Número:");
 
@@ -169,6 +172,18 @@ public class Laboratório2 extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jTCNPJLaboratorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTCNPJLaboratorioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTCNPJLaboratorioActionPerformed
+
+    private void jTCEPLaboratorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTCEPLaboratorioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTCEPLaboratorioActionPerformed
+
+    private void jBCadastrarLaboratorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCadastrarLaboratorioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBCadastrarLaboratorioActionPerformed
 
     /**
      * @param args the command line arguments

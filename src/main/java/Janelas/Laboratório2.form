@@ -137,24 +137,15 @@
   </Layout>
   <SubComponents>
     <Component class="javax.swing.JTextField" name="jTNumeroLaboratorio">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jTextField5"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTCNPJLaboratorio">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jTextField2"/>
-      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTCNPJLaboratorioActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="jTNomeLaboratorio">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jTextField1"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTEnderecoLaboratorio">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jTextField3"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel7">
       <Properties>
@@ -162,9 +153,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTTelLaboratorio">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jTextField6"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel5">
       <Properties>
@@ -182,9 +170,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTEmailLaboratorio">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jTextField7"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel4">
       <Properties>
@@ -192,7 +177,7 @@
           <Font name="Segoe UI" size="18" style="1"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="LABORATORIO"/>
+        <Property name="text" type="java.lang.String" value="LABORAT&#xd3;RIO"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel6">
@@ -201,14 +186,17 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTCEPLaboratorio">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jTextField4"/>
-      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTCEPLaboratorioActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jBCadastrarLaboratorio">
       <Properties>
         <Property name="text" type="java.lang.String" value="Cadastrar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBCadastrarLaboratorioActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel9">
       <Properties>

@@ -7,6 +7,7 @@ package Model;
 import BD.Conexao;
 import DAO.MedicamentoDAO;
 import Objetos.Funcionario;
+import Objetos.Medicamento;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -111,5 +112,17 @@ public class FuncionarioTableModel {
         this.dados.clear();
         lerDados();
         this.fireTableDataChanged();
+    }
+
+    private void fireTableRowsUpdated(int linha, int linha0) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    private void fireTableDataChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    private void fireTableRowsDeleted(int linha, int linha0) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }
