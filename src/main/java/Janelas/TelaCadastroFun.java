@@ -7,6 +7,8 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel; // (e outros imports que já tiver)
 
 
+
+
 /**
  *
  * @author lucas.gmpedro
@@ -21,7 +23,13 @@ public class TelaCadastroFun extends javax.swing.JFrame {
         
     jBoxFun.removeAllItems();    
     jBoxFun.addItem("Gerente");
-    jBoxFun.addItem("Funcionário");    
+    jBoxFun.addItem("Funcionário");  
+    
+      DefaultTableModel modelo = new DefaultTableModel(
+            new Object[][]{},
+            new String[]{"Nome", "CPF", "Telefone", "E-mail", "Função"}
+        );
+        jTTable1.setModel(modelo);
     }
     
     
@@ -35,6 +43,7 @@ public class TelaCadastroFun extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -55,6 +64,20 @@ public class TelaCadastroFun extends javax.swing.JFrame {
         jBConfirmar = new javax.swing.JButton();
         jBAtualizar = new javax.swing.JButton();
         jBExcluir = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTTable1 = new javax.swing.JTable();
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -118,10 +141,40 @@ public class TelaCadastroFun extends javax.swing.JFrame {
             }
         });
 
+        jTTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTTable1);
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 10, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -166,8 +219,8 @@ public class TelaCadastroFun extends javax.swing.JFrame {
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jTSenha)
                                 .addComponent(jTEmailFun)))))
-                .addContainerGap(24, Short.MAX_VALUE))
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(21, Short.MAX_VALUE))
+            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -212,7 +265,8 @@ public class TelaCadastroFun extends javax.swing.JFrame {
                     .addComponent(jBConfirmar)
                     .addComponent(jBAtualizar)
                     .addComponent(jBExcluir))
-                .addGap(44, 44, 44))
+                .addGap(18, 18, 18)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -231,33 +285,36 @@ public class TelaCadastroFun extends javax.swing.JFrame {
     }//GEN-LAST:event_jBoxFunActionPerformed
 
     private void jBConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBConfirmarActionPerformed
+     DefaultTableModel modelo = (DefaultTableModel) jTTable1.getModel();
+
     String nome = jTNomeFun.getText();
     String cpf = jTCPF.getText();
-    String numero = jTNumeroFun.getText();
-    String cep = jTCepFun.getText();
     String telefone = jTTelefone.getText();
-    String senha = jTSenha.getText();
     String email = jTEmailFun.getText();
     String funcao = (String) jBoxFun.getSelectedItem();
-    
-    // Exibe uma mensagem de confirmação com os dados digitados
-    javax.swing.JOptionPane.showMessageDialog(this,
-        "Funcionário cadastrado com sucesso!\n\n" +
-        "Nome: " + nome + "\n" +
-        "CPF: " + cpf + "\n" +
-        "Número: " + numero + "\n" +
-        "CEP: " + cep + "\n" +
-        "Telefone: " + telefone + "\n" +
-        "Email: " + email + "\n" +
-        "Função: " + funcao,
-        "Confirmação de Cadastro",
-        javax.swing.JOptionPane.INFORMATION_MESSAGE
-    );
+
+    if (nome.isEmpty() || cpf.isEmpty() || telefone.isEmpty() || email.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Preencha todos os campos antes de confirmar!");
+        return;
+    }
+
+    modelo.addRow(new Object[]{nome, cpf, telefone, email, funcao});
+
+    JOptionPane.showMessageDialog(this, "Funcionário cadastrado e exibido na tabela!");
+
+    jTNomeFun.setText("");
+    jTCPF.setText("");
+    jTTelefone.setText("");
+    jTEmailFun.setText("");
+    jTSenha.setText("");
+    jTCepFun.setText("");
+    jTNumeroFun.setText("");
+    jBoxFun.setSelectedIndex(0);
     }//GEN-LAST:event_jBConfirmarActionPerformed
 
     private void jBExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBExcluirActionPerformed
     // Verifica se há uma linha selecionada na tabela
-int linhaSelecionada = jTable1.getSelectedRow(); // substitua jTable1 pelo nome da sua tabela
+int linhaSelecionada = jTTable1.getSelectedRow(); // substitua jTable1 pelo nome da sua tabela
 
 if (linhaSelecionada == -1) {
     // Nenhuma linha foi selecionada
@@ -268,7 +325,7 @@ if (linhaSelecionada == -1) {
     
     if (confirmacao == JOptionPane.YES_OPTION) {
         // Obtém o modelo da tabela e remove a linha selecionada
-        DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+        DefaultTableModel modelo = (DefaultTableModel) jTTable1.getModel();
         modelo.removeRow(linhaSelecionada);
 
         // Mensagem de sucesso
@@ -346,12 +403,16 @@ if (linhaSelecionada == -1) {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTCPF;
     private javax.swing.JTextField jTCepFun;
     private javax.swing.JTextField jTEmailFun;
     private javax.swing.JTextField jTNomeFun;
     private javax.swing.JTextField jTNumeroFun;
     private javax.swing.JTextField jTSenha;
+    private javax.swing.JTable jTTable1;
     private javax.swing.JTextField jTTelefone;
     // End of variables declaration//GEN-END:variables
 
