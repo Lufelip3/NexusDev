@@ -59,7 +59,7 @@ public class MedicamentoDAO {
             stmt.setString(6, m.getDataValidadeMed());
 
             stmt.execute();
-            JOptionPane.showMessageDialog(null, "Produto cadastrado com sucesso!");
+            JOptionPane.showMessageDialog(null, "Medicamento cadastrado com sucesso!");
 
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Falha ao cadastrar: " + e);
@@ -82,7 +82,7 @@ public class MedicamentoDAO {
             stmt.setInt(6, m.getCodigoMed());
 
             stmt.execute();
-            JOptionPane.showMessageDialog(null, "Produto atualizado com sucesso!");
+            JOptionPane.showMessageDialog(null, "Medicamento atualizado com sucesso!");
 
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Falha ao atualizar: " + e);
