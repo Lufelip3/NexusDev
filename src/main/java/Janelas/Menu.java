@@ -51,12 +51,32 @@ public class Menu extends javax.swing.JFrame {
         });
 
         jBDrogaria.setText("Drogaria");
+        jBDrogaria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBDrogariaActionPerformed(evt);
+            }
+        });
 
         jBLaboratorio.setText("Laboratório");
+        jBLaboratorio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBLaboratorioActionPerformed(evt);
+            }
+        });
 
         jBVenda.setText("Venda");
+        jBVenda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBVendaActionPerformed(evt);
+            }
+        });
 
         jBCadastrarFun.setText("Cadastro Funcionário");
+        jBCadastrarFun.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBCadastrarFunActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -106,15 +126,34 @@ public class Menu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBCadastrarMedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCadastrarMedActionPerformed
-        Produto p = new Produto();
-        ProdutoDAO dao = new ProdutoDAO();
-        
-        
+        CadastroMedicamento cadmed = new CadastroMedicamento();
+        cadmed.setVisible(true);
     }//GEN-LAST:event_jBCadastrarMedActionPerformed
 
     private void jBCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCompraActionPerformed
-        
+        Compra commed = new Compra();
+        commed.setVisible(true);
     }//GEN-LAST:event_jBCompraActionPerformed
+
+    private void jBLaboratorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBLaboratorioActionPerformed
+       Laboratorio lab = new Laboratorio();
+       lab.setVisible(true);
+    }//GEN-LAST:event_jBLaboratorioActionPerformed
+
+    private void jBVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBVendaActionPerformed
+        Venda vmed = new Venda();
+        vmed.setVisible(true);
+    }//GEN-LAST:event_jBVendaActionPerformed
+
+    private void jBDrogariaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBDrogariaActionPerformed
+       Drogaria drogaria = new Drogaria();
+       drogaria.setVisible(true);   
+    }//GEN-LAST:event_jBDrogariaActionPerformed
+
+    private void jBCadastrarFunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCadastrarFunActionPerformed
+       TelaCadastroFun cadfun = new TelaCadastroFun();
+       cadfun.setVisible(true);
+    }//GEN-LAST:event_jBCadastrarFunActionPerformed
 
     /**
      * @param args the command line arguments

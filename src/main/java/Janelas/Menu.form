@@ -89,21 +89,33 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Drogaria"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBDrogariaActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jBLaboratorio">
       <Properties>
         <Property name="text" type="java.lang.String" value="Laborat&#xf3;rio"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBLaboratorioActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jBVenda">
       <Properties>
         <Property name="text" type="java.lang.String" value="Venda"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBVendaActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jBCadastrarFun">
       <Properties>
         <Property name="text" type="java.lang.String" value="Cadastro Funcion&#xe1;rio"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBCadastrarFunActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>

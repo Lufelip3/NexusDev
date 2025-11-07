@@ -4,6 +4,9 @@
  */
 package Janelas;
 
+import DAO.MedicamentoDAO;
+import Objetos.Medicamento;
+
 /**
  *
  * @author luis.fmleite
@@ -15,6 +18,7 @@ public class CadastroMedicamento extends javax.swing.JFrame {
      */
     public CadastroMedicamento() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -61,6 +65,12 @@ public class CadastroMedicamento extends javax.swing.JFrame {
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel5.setText("Data de Validade:");
+
+        jTNomeMedicamento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTNomeMedicamentoActionPerformed(evt);
+            }
+        });
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel6.setText("Quantidade:");
@@ -153,8 +163,22 @@ public class CadastroMedicamento extends javax.swing.JFrame {
     }//GEN-LAST:event_jTDescricaoMedicamentoActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        Medicamento cmed = new Medicamento();
+        MedicamentoDAO dao = new MedicamentoDAO();
+        
+        cmed.setNomeMed(jTNomeMedicamento.getText());
+        cmed.setDescricaoMed(jTQuantidadeMedicamento.getText());
+        cmed.setQuantEstoqueMed(Integer.parseInt(jTQuantidadeMedicamento.getText()));
+        cmed.setCodigoMed(Integer.parseInt(jTCodigoMedicamento.getText()));
+        cmed.setValorMed(Double.valueOf(jTValorMedicamento.getText().replace(",", ".")));
+        cmed.setDataValidadeMed(jTDataValidadeMedicamento.getText());
+        
+        
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jTNomeMedicamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTNomeMedicamentoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTNomeMedicamentoActionPerformed
 
     /**
      * @param args the command line arguments
