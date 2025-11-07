@@ -8,12 +8,12 @@ package Janelas;
  *
  * @author andrey.munhoz
  */
-public class Drogaria2 extends javax.swing.JFrame {
+public class Compra extends javax.swing.JFrame {
 
     /**
-     * Creates new form Drogaria2
+     * Creates new form Compra2
      */
-    public Drogaria2() {
+    public Compra() {
         initComponents();
     }
 
@@ -26,24 +26,38 @@ public class Drogaria2 extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel6 = new javax.swing.JLabel();
+        jTNumero = new javax.swing.JTextField();
+        jTNomeCompra = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jTTel = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jTEmailDrogaria = new javax.swing.JTextField();
+        jTEmail = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jBCadastrarDrogaria = new javax.swing.JButton();
+        jBCadastrarCompra = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
-        jTCNPJDrograria = new javax.swing.JTextField();
-        jTEnderecoDrogaria = new javax.swing.JTextField();
-        jTCEPDrogaria = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
-        jTNumeroDrogaria = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
-        jTTelDrogaria = new javax.swing.JTextField();
-        jTNomeDrogaria = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
+        jTCNPJCompra = new javax.swing.JTextField();
+        jTEnderecoCompra = new javax.swing.JTextField();
+        jTCEP = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jLabel6.setText("Número:");
+
+        jTNumero.setText("jTextField5");
+
+        jTNomeCompra.setText("jTextField1");
+
+        jLabel7.setText("Telefone:");
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("COMPRA");
+
+        jTTel.setText("jTextField6");
 
         jLabel2.setText("Nome:");
 
@@ -51,33 +65,19 @@ public class Drogaria2 extends javax.swing.JFrame {
 
         jLabel3.setText("CNPJ:");
 
-        jTEmailDrogaria.setText("jTextField7");
+        jTEmail.setText("jTextField7");
 
         jLabel4.setText("Endereço:");
 
-        jBCadastrarDrogaria.setText("Cadastrar");
+        jBCadastrarCompra.setText("Cadastrar");
 
         jLabel5.setText("CEP:");
 
-        jTCNPJDrograria.setText("jTextField2");
+        jTCNPJCompra.setText("jTextField2");
 
-        jTEnderecoDrogaria.setText("jTextField3");
+        jTEnderecoCompra.setText("jTextField3");
 
-        jTCEPDrogaria.setText("jTextField4");
-
-        jLabel6.setText("Número:");
-
-        jTNumeroDrogaria.setText("jTextField5");
-
-        jLabel7.setText("Telefone:");
-
-        jTTelDrogaria.setText("jTextField6");
-
-        jTNomeDrogaria.setText("jTextField1");
-
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("DROGARIA");
+        jTCEP.setText("jTextField4");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -94,26 +94,26 @@ public class Drogaria2 extends javax.swing.JFrame {
                 .addGap(3, 3, 3)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jTEnderecoDrogaria, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTEnderecoCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel6)
                         .addGap(18, 18, 18)
-                        .addComponent(jTNumeroDrogaria, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jTNomeDrogaria)
-                    .addComponent(jTCNPJDrograria)
+                        .addComponent(jTNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTNomeCompra)
+                    .addComponent(jTCNPJCompra)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jTCEPDrogaria, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTCEP, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel7)
                         .addGap(18, 18, 18)
-                        .addComponent(jTTelDrogaria))
+                        .addComponent(jTTel))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jTEmailDrogaria, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jBCadastrarDrogaria)
+                .addComponent(jBCadastrarCompra)
                 .addGap(68, 68, 68))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -128,32 +128,32 @@ public class Drogaria2 extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTNomeDrogaria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTNomeCompra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTCNPJDrograria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTCNPJCompra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
-                            .addComponent(jTEnderecoDrogaria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jTEnderecoCompra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
-                            .addComponent(jTCEPDrogaria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTCEP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel7)
-                            .addComponent(jTTelDrogaria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jTTel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel6)
-                        .addComponent(jTNumeroDrogaria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jTNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(jTEmailDrogaria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jBCadastrarDrogaria)
+                .addComponent(jBCadastrarCompra)
                 .addContainerGap(21, Short.MAX_VALUE))
         );
 
@@ -177,26 +177,27 @@ public class Drogaria2 extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Drogaria2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Compra.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Drogaria2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Compra.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Drogaria2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Compra.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Drogaria2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Compra.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Drogaria2().setVisible(true);
+                new Compra().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jBCadastrarDrogaria;
+    private javax.swing.JButton jBCadastrarCompra;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -205,12 +206,12 @@ public class Drogaria2 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JTextField jTCEPDrogaria;
-    private javax.swing.JTextField jTCNPJDrograria;
-    private javax.swing.JTextField jTEmailDrogaria;
-    private javax.swing.JTextField jTEnderecoDrogaria;
-    private javax.swing.JTextField jTNomeDrogaria;
-    private javax.swing.JTextField jTNumeroDrogaria;
-    private javax.swing.JTextField jTTelDrogaria;
+    private javax.swing.JTextField jTCEP;
+    private javax.swing.JTextField jTCNPJCompra;
+    private javax.swing.JTextField jTEmail;
+    private javax.swing.JTextField jTEnderecoCompra;
+    private javax.swing.JTextField jTNomeCompra;
+    private javax.swing.JTextField jTNumero;
+    private javax.swing.JTextField jTTel;
     // End of variables declaration//GEN-END:variables
 }
