@@ -1,6 +1,6 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package Janelas;
 
@@ -8,10 +8,10 @@ package Janelas;
  *
  * @author andrey.munhoz
  */
-public class Drogaria extends javax.swing.JPanel {
+public class Drogaria extends javax.swing.JFrame {
 
     /**
-     * Creates new form Drogaria
+     * Creates new form Drogaria2
      */
     public Drogaria() {
         initComponents();
@@ -26,11 +26,12 @@ public class Drogaria extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTNomeDrogaria = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        jTEmailDrogaria = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
+        jBCadastrarDrogaria = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jTCNPJDrograria = new javax.swing.JTextField();
         jTEnderecoDrogaria = new javax.swing.JTextField();
@@ -39,21 +40,22 @@ public class Drogaria extends javax.swing.JPanel {
         jTNumeroDrogaria = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jTTelDrogaria = new javax.swing.JTextField();
-        jLabel8 = new javax.swing.JLabel();
-        jTEmailDrogaria = new javax.swing.JTextField();
-        jBCadastrarDrogaria = new javax.swing.JButton();
+        jTNomeDrogaria = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
 
-        jTNomeDrogaria.setText("jTextField1");
-
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("DROGARIA");
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel2.setText("Nome:");
 
+        jLabel8.setText("E-mail:");
+
         jLabel3.setText("CNPJ:");
 
+        jTEmailDrogaria.setText("jTextField7");
+
         jLabel4.setText("Endereço:");
+
+        jBCadastrarDrogaria.setText("Cadastrar");
 
         jLabel5.setText("CEP:");
 
@@ -71,14 +73,14 @@ public class Drogaria extends javax.swing.JPanel {
 
         jTTelDrogaria.setText("jTextField6");
 
-        jLabel8.setText("E-mail:");
+        jTNomeDrogaria.setText("jTextField1");
 
-        jTEmailDrogaria.setText("jTextField7");
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("DROGARIA");
 
-        jBCadastrarDrogaria.setText("Cadastrar");
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
@@ -93,7 +95,7 @@ public class Drogaria extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jTEnderecoDrogaria, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel6)
                         .addGap(18, 18, 18)
                         .addComponent(jTNumeroDrogaria, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -152,10 +154,47 @@ public class Drogaria extends javax.swing.JPanel {
                     .addComponent(jTEmailDrogaria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jBCadastrarDrogaria)
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
+
+        pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(Drogaria.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(Drogaria.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(Drogaria.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(Drogaria.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new Drogaria().setVisible(true);
+            }
+        });
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBCadastrarDrogaria;
