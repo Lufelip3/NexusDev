@@ -4,7 +4,6 @@
  */
 package Model;
 
-import BD.Conexao;
 import DAO.FuncionarioDAO;
 import Objetos.Funcionario;
 import java.util.ArrayList;
