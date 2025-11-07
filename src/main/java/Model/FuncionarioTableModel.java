@@ -5,55 +5,49 @@
 package Model;
 
 import BD.Conexao;
-import DAO.MedicamentoDAO;
+import DAO.FuncionarioDAO;
 import Objetos.Funcionario;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.table.AbstractTableModel;
 
 /**
  *
  * @author luis.fmleite
  */
-public class FuncionarioTableModel {
+public class FuncionarioTableModel extends AbstractTableModel {
    private List<Funcionario> dados = new ArrayList<>();
-    private String[] colunas = {"Código", "Nome", "Descrição", "Quantidade", "Valor", "Data de validade"};
+    private String[] colunas = {"CPF", "Nome", "Email", "Telefone", "CEP", "Numero"};
 
-    //nome_Fun;
-   // private String cpf;
-   // private String telefone_Fun;
-   // private String Cep_Fun;
-   // private int numero_Fun;
-   // private String email_Fun;
-    @Override
+@Override
     public String getColumnName(int column) {
         return colunas[column];
     }
-
-    @Override
+@Override
     public int getRowCount() {
         return dados.size();
     }
 
-    @Override
+@Override
     public int getColumnCount() {
         return colunas.length;
     }
 
-    @Override
+
     public Object getValueAt(int linha, int coluna) {
         switch (coluna) {
             case 0:
-                return dados.get(linha).getCodigoMed();
+                return dados.get(linha).getCpf();
             case 1:
-                return dados.get(linha).getNomeMed();
+                return dados.get(linha).getNome_Fun();
             case 2:
-                return dados.get(linha).getDescricaoMed();
+                return dados.get(linha).getEmail_Fun();
             case 3:
-                return dados.get(linha).getQuantEstoqueMed();
+                return dados.get(linha).getTelefone_Fun();
             case 4:
-                return dados.get(linha).getValorMed();
+                return dados.get(linha).getCep_Fun();
             case 5:
-                return dados.get(linha).getDataValidadeMed();
+                return dados.get(linha).getNumero_Fun();
         }
         return null;
     }
@@ -62,29 +56,29 @@ public class FuncionarioTableModel {
     public void setValueAt(Object valor, int linha, int coluna) {
         switch (coluna) {
             case 0:
-                dados.get(linha).setCodigoMed(Integer.parseInt((String) valor));
+                dados.get(linha).setCpf((String) valor);
                 break;
             case 1:
-                dados.get(linha).setNomeMed((String) valor);
+                dados.get(linha).setNome_Fun((String) valor);
                 break;
             case 2:
-                dados.get(linha).setDescricaoMed((String) valor);
+                dados.get(linha).setEmail_Fun((String) valor);
                 break;
             case 3:
-                dados.get(linha).setQuantEstoqueMed(Integer.parseInt((String) valor));
+                dados.get(linha).setTelefone_Fun((String) valor);
                 break;
             case 4:
-                dados.get(linha).setValorMed(Double.valueOf((String) valor));
+                dados.get(linha).setCep_Fun((String) valor);
                 break;
             case 5:
-                dados.get(linha).setDataValidadeMed((String) valor);
+                dados.get(linha).setNumero_Fun(Integer.parseInt((String) valor));
                 break;
         }
         this.fireTableRowsUpdated(linha, linha);
     }
 
-    public void addLinha(Medicamento m) {
-        this.dados.add(m);
+    public void addLinha(Funcionario f) {
+        this.dados.add(f);
         this.fireTableDataChanged();
     }
 
@@ -93,15 +87,15 @@ public class FuncionarioTableModel {
         this.fireTableRowsDeleted(linha, linha);
     }
 
-    public Medicamento pegaDadosLinha(int linha) {
+    public Funcionario pegaDadosLinha(int linha) {
         return dados.get(linha);
     }
 
     private void lerDados() {
-        MedicamentoDAO mdao = new MedicamentoDAO();
+        FuncionarioDAO fdao = new FuncionarioDAO();
 
-        for (Medicamento m : mdao.read()) {
-            this.addLinha(m);
+        for (Funcionario f : fdao.read()) {
+            this.addLinha(f);
 
         }
         this.fireTableDataChanged();
