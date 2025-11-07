@@ -4,8 +4,6 @@
  */
 package Janelas;
 
-import Objetos.Medicamento;
-
 /**
  *
  * @author luis.fmleite
@@ -155,8 +153,7 @@ public class CadastroMedicamento extends javax.swing.JFrame {
     }//GEN-LAST:event_jTDescricaoMedicamentoActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        Medicamento TMed = new Medicamento();
-        TMed.setVisible(true);
+        // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
