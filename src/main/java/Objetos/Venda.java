@@ -10,64 +10,43 @@ package Objetos;
  */
 public class Venda {
 
-    private String nomeVenda;
+    private String cod_Rastreio;
     private String notaFiscalVenda;
     private String dataVenda;
     private Double valorVenda;
 
-    /**
-     * @return the nomeVenda
-     */
-    public String getNomeVenda() {
-        return nomeVenda;
+    public String getCod_Rastreio() {
+        return cod_Rastreio;
     }
 
-    /**
-     * @param nomeVenda the nomeVenda to set
-     */
-    public void setNomeVenda(String nomeVenda) {
-        this.nomeVenda = nomeVenda;
+    public void setCod_Rastreio(String cod_Rastreio) {
+        this.cod_Rastreio = cod_Rastreio;
     }
 
-    /**
-     * @return the notaFiscalVenda
-     */
     public String getNotaFiscalVenda() {
         return notaFiscalVenda;
     }
 
-    /**
-     * @param notaFiscalVenda the notaFiscalVenda to set
-     */
     public void setNotaFiscalVenda(String notaFiscalVenda) {
         this.notaFiscalVenda = notaFiscalVenda;
     }
 
-    /**
-     * @return the dataVenda
-     */
     public String getDataVenda() {
         return dataVenda;
     }
 
-    /**
-     * @param dataVenda the dataVenda to set
-     */
     public void setDataVenda(String dataVenda) {
         this.dataVenda = dataVenda;
     }
 
-    /**
-     * @return the valorVenda
-     */
     public Double getValorVenda() {
         return valorVenda;
     }
 
-    /**
-     * @param valorVenda the valorVenda to set
-     */
     public void setValorVenda(Double valorVenda) {
         this.valorVenda = valorVenda;
     }
+
+    
+    
 }

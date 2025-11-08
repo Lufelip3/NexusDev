@@ -19,6 +19,7 @@ public class CadastroMedicamento extends javax.swing.JFrame {
     public CadastroMedicamento() {
         initComponents();
         this.setLocationRelativeTo(null);
+        
     }
 
     /**
@@ -172,6 +173,7 @@ public class CadastroMedicamento extends javax.swing.JFrame {
         cmed.setCodigoMed(Integer.parseInt(jTCodigoMedicamento.getText()));
         cmed.setValorMed(Double.valueOf(jTValorMedicamento.getText().replace(",", ".")));
         cmed.setDataValidadeMed(jTDataValidadeMedicamento.getText());
+        
         
         
     }//GEN-LAST:event_jButton1ActionPerformed
