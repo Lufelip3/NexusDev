@@ -10,6 +10,13 @@ package Objetos;
  */
 public class Drogaria {
 
+    private String nomeDrogaria;
+    private String cnpjDrogaria;
+    private int numeroDrogaria;
+    private String cepDrogaria;
+    private String emailDrogaria;
+    private String telefoneDrogaria;
+
     /**
      * @return the nomeDrogaria
      */
@@ -41,14 +48,14 @@ public class Drogaria {
     /**
      * @return the numeroDrogaria
      */
-    public String getNumeroDrogaria() {
+    public int getNumeroDrogaria() {
         return numeroDrogaria;
     }
 
     /**
      * @param numeroDrogaria the numeroDrogaria to set
      */
-    public void setNumeroDrogaria(String numeroDrogaria) {
+    public void setNumeroDrogaria(int numeroDrogaria) {
         this.numeroDrogaria = numeroDrogaria;
     }
 
@@ -93,12 +100,5 @@ public class Drogaria {
     public void setTelefoneDrogaria(String telefoneDrogaria) {
         this.telefoneDrogaria = telefoneDrogaria;
     }
-
-    private String nomeDrogaria;
-    private String cnpjDrogaria;
-    private String numeroDrogaria;
-    private String cepDrogaria;
-    private String emailDrogaria;
-    private String telefoneDrogaria;
 
 }
