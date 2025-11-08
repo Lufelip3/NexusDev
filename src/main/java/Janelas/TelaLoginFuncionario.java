@@ -4,6 +4,10 @@
  */
 package Janelas;
 
+import DAO.FuncionarioDAO;
+import Objetos.Funcionario;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author lucas.gmpedro
@@ -30,8 +34,8 @@ public class TelaLoginFuncionario extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jTNomeLogin = new javax.swing.JTextField();
-        jTSenhaLogin = new javax.swing.JTextField();
         jBEntrar = new javax.swing.JButton();
+        jPSenha = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -51,12 +55,6 @@ public class TelaLoginFuncionario extends javax.swing.JFrame {
             }
         });
 
-        jTSenhaLogin.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTSenhaLoginActionPerformed(evt);
-            }
-        });
-
         jBEntrar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jBEntrar.setText("Entrar");
         jBEntrar.addActionListener(new java.awt.event.ActionListener() {
@@ -73,16 +71,19 @@ public class TelaLoginFuncionario extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTSenhaLogin))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTNomeLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addComponent(jLabel2)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jTNomeLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addComponent(jLabel3)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jPSenha)))
+                                .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(132, 132, 132)
                         .addComponent(jBEntrar)))
@@ -98,10 +99,10 @@ public class TelaLoginFuncionario extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(jTNomeLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(76, 76, 76)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTSenhaLogin)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(64, 64, 64)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(63, 63, 63)
                 .addComponent(jBEntrar)
                 .addContainerGap(65, Short.MAX_VALUE))
         );
@@ -113,13 +114,22 @@ public class TelaLoginFuncionario extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTNomeLoginActionPerformed
 
-    private void jTSenhaLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTSenhaLoginActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTSenhaLoginActionPerformed
-
     private void jBEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEntrarActionPerformed
+        FuncionarioDAO dao = new FuncionarioDAO();
+        Funcionario user;
 
-        
+        user = dao.verificaFuncionario(jTNomeLogin.getText());
+
+        if (user.verificarSenha(new String(jPSenha.getPassword()))) {
+            Menu m = new Menu();
+            m.setVisible(true);
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Falha na autenticação");
+
+        }
+
+
     }//GEN-LAST:event_jBEntrarActionPerformed
 
     /**
@@ -162,7 +172,7 @@ public class TelaLoginFuncionario extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JPasswordField jPSenha;
     private javax.swing.JTextField jTNomeLogin;
-    private javax.swing.JTextField jTSenhaLogin;
     // End of variables declaration//GEN-END:variables
 }

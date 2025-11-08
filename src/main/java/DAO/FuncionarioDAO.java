@@ -109,4 +109,36 @@ public class FuncionarioDAO {
             Conexao.closeConnection(con, stmt);
         }
     }
+    public Funcionario verificaFuncionario(String CPF) {
+        Connection con = Conexao.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        Funcionario f = new Funcionario();
+
+        try {
+            stmt = con.prepareStatement("SELECT * FROM funcionario WHERE CPF = ?");
+            stmt.setString(1, CPF);
+            rs = stmt.executeQuery();
+            
+            while (rs.next()) {
+
+                f.setCpf(rs.getString("CPF"));
+                f.setNome_Fun(rs.getString("Nome_Fun"));
+                f.setTelefone_Fun(rs.getString("Telefone_Fun"));
+                f.setCep_Fun(rs.getString("Cep_Fun"));
+                f.setNumero_Fun(rs.getInt("Num_Fun"));
+                f.setEmail_Fun(rs.getString("Email_Fun"));
+                f.setSenhaHash(rs.getString("senha"));
+
+            }
+            return f;
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Falha ao obter dados: " + e);
+        } finally {
+            Conexao.closeConnection(con, stmt, rs);
+        }
+        return null;
+    }
+    
+    
 }
