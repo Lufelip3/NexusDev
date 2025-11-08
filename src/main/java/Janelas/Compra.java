@@ -70,6 +70,11 @@ public class Compra extends javax.swing.JFrame {
         jLabel4.setText("Endereço:");
 
         jBCadastrarCompra.setText("Cadastrar");
+        jBCadastrarCompra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBCadastrarCompraActionPerformed(evt);
+            }
+        });
 
         jLabel5.setText("CEP:");
 
@@ -159,6 +164,11 @@ public class Compra extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jBCadastrarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCadastrarCompraActionPerformed
+        Compra c = new Compra();
+        
+    }//GEN-LAST:event_jBCadastrarCompraActionPerformed
 
     /**
      * @param args the command line arguments
