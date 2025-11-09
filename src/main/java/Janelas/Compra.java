@@ -4,6 +4,8 @@
  */
 package Janelas;
 
+import DAO.CompraDAO;
+
 /**
  *
  * @author andrey.munhoz
@@ -166,7 +168,12 @@ public class Compra extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBCadastrarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCadastrarCompraActionPerformed
-        Compra c = new Compra();
+        Compra ccompra = new Compra();
+        CompraDAO dao = new CompraDAO();
+        
+        
+        
+      
         
     }//GEN-LAST:event_jBCadastrarCompraActionPerformed
 

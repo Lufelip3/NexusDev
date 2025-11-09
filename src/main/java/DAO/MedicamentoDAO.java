@@ -6,8 +6,6 @@ package DAO;
     
 import BD.Conexao;
 import Objetos.Medicamento;
-import com.mysql.cj.protocol.Resultset;
-import com.mysql.cj.xdevapi.PreparableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

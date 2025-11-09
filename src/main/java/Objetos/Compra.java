@@ -9,50 +9,95 @@ package Objetos;
  * @author luis.fmleite
  */
 public class Compra {
+    
+    private String dataCompra;
+    private Double valorCompra;
+    private int notaFiscalCompra;
+    private String nomeCompra;
+    private int cnpjCompra;
+    private String enderecoCompra;
+    private int cepCompra;
+    private String emailCompra;
+    private int telefoneCompra;
+    private Double numeroCompra;
 
-    /**
-     * @return the dataCompra
-     */
     public String getDataCompra() {
         return dataCompra;
     }
 
-    /**
-     * @param dataCompra the dataCompra to set
-     */
     public void setDataCompra(String dataCompra) {
         this.dataCompra = dataCompra;
     }
 
-    /**
-     * @return the valorCompra
-     */
     public Double getValorCompra() {
         return valorCompra;
     }
 
-    /**
-     * @param valorCompra the valorCompra to set
-     */
     public void setValorCompra(Double valorCompra) {
         this.valorCompra = valorCompra;
     }
 
-    /**
-     * @return the notaFiscalCompra
-     */
     public int getNotaFiscalCompra() {
         return notaFiscalCompra;
     }
 
-    /**
-     * @param notaFiscalCompra the notaFiscalCompra to set
-     */
     public void setNotaFiscalCompra(int notaFiscalCompra) {
         this.notaFiscalCompra = notaFiscalCompra;
     }
 
-    private String dataCompra;
-    private Double valorCompra;
-    private int notaFiscalCompra;
+    public String getNomeCompra() {
+        return nomeCompra;
+    }
+
+    public void setNomeCompra(String nomeCompra) {
+        this.nomeCompra = nomeCompra;
+    }
+
+    public int getCnpjCompra() {
+        return cnpjCompra;
+    }
+
+    public void setCnpjCompra(int cnpjCompra) {
+        this.cnpjCompra = cnpjCompra;
+    }
+
+    public String getEnderecoCompra() {
+        return enderecoCompra;
+    }
+
+    public void setEnderecoCompra(String enderecoCompra) {
+        this.enderecoCompra = enderecoCompra;
+    }
+
+    public int getCepCompra() {
+        return cepCompra;
+    }
+
+    public void setCepCompra(int cepCompra) {
+        this.cepCompra = cepCompra;
+    }
+
+    public String getEmailCompra() {
+        return emailCompra;
+    }
+
+    public void setEmailCompra(String emailCompra) {
+        this.emailCompra = emailCompra;
+    }
+
+    public int getTelefoneCompra() {
+        return telefoneCompra;
+    }
+
+    public void setTelefoneCompra(int telefoneCompra) {
+        this.telefoneCompra = telefoneCompra;
+    }
+
+    public Double getNumeroCompra() {
+        return numeroCompra;
+    }
+
+    public void setNumeroCompra(Double numeroCompra) {
+        this.numeroCompra = numeroCompra;
+    }
 }

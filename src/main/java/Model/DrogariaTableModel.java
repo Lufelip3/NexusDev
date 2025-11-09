@@ -5,7 +5,7 @@
 package Model;
 
 import DAO.DrogariaDAO;
-import Objetos.Drogaria;
+import Objetos.DrogariaObjeto;
 import Objetos.Medicamento;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +17,7 @@ import javax.swing.table.AbstractTableModel;
  */
 public class DrogariaTableModel extends AbstractTableModel {
 
-    private List<Drogaria> dados = new ArrayList<>();
+    private List<DrogariaObjeto> dados = new ArrayList<>();
     private String[] colunas = {"CNPJ", "Nome", "Telefone", "Email", "CEP", "Numero"};
     
     @Override
@@ -79,7 +79,7 @@ public class DrogariaTableModel extends AbstractTableModel {
         this.fireTableRowsUpdated(linha, linha);
     }
 
-    public void addLinha(Drogaria d) {
+    public void addLinha(DrogariaObjeto d) {
         this.dados.add(d);
         this.fireTableDataChanged();
     }
@@ -89,14 +89,14 @@ public class DrogariaTableModel extends AbstractTableModel {
         this.fireTableRowsDeleted(linha, linha);
     }
 
-    public Drogaria pegaDadosLinha(int linha) {
+    public DrogariaObjeto pegaDadosLinha(int linha) {
         return dados.get(linha);
     }
 
     private void lerDados() {
         DrogariaDAO ddao = new DrogariaDAO();
 
-        for (Drogaria d : ddao.read()) {
+        for (DrogariaObjeto d : ddao.read()) {
             this.addLinha(d);
 
         }

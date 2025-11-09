@@ -4,6 +4,9 @@
  */
 package Janelas;
 
+import DAO.DrogariaDAO;
+import Objetos.DrogariaObjeto;
+
 /**
  *
  * @author andrey.munhoz
@@ -56,6 +59,11 @@ public class Drogaria extends javax.swing.JFrame {
         jLabel4.setText("Endereço:");
 
         jBCadastrarDrogaria.setText("Cadastrar");
+        jBCadastrarDrogaria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBCadastrarDrogariaActionPerformed(evt);
+            }
+        });
 
         jLabel5.setText("CEP:");
 
@@ -159,6 +167,20 @@ public class Drogaria extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jBCadastrarDrogariaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCadastrarDrogariaActionPerformed
+        DrogariaObjeto d = new DrogariaObjeto();
+        DrogariaDAO dao = new DrogariaDAO();
+        
+        d.setNomeDrogaria(jTNomeDrogaria.getText());
+        d.setCnpjDrogaria(jTCNPJDrograria.getText());
+        d.setEndereco(jTEnderecoDrogaria.getText());
+        d.setCepDrogaria(jTCEPDrogaria.getText());
+        d.setEmailDrogaria(jTEmailDrogaria.getText());
+        d.setTelefoneDrogaria(jTTelDrogaria.getText());
+        d.setNumeroDrogaria(Integer.parseInt(jTNumeroDrogaria.getText()));
+        
+    }//GEN-LAST:event_jBCadastrarDrogariaActionPerformed
 
     /**
      * @param args the command line arguments

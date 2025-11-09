@@ -5,7 +5,7 @@
 package DAO;
 
 import BD.Conexao;
-import Objetos.Drogaria;
+import Objetos.DrogariaObjeto;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -19,17 +19,17 @@ import javax.swing.JOptionPane;
  * @author luis.fmleite
  */
 public class DrogariaDAO {
-    public List<Drogaria> read() {
+    public List<DrogariaObjeto> read() {
         Connection con = Conexao.getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;
-        List<Drogaria> drogarias = new ArrayList<>();
+        List<DrogariaObjeto> drogarias = new ArrayList<>();
         try {
             stmt = con.prepareStatement("SELECT * FROM funcionario");
             rs = stmt.executeQuery();
 
             while (rs.next()) {
-                Drogaria d = new Drogaria();
+                DrogariaObjeto d = new DrogariaObjeto();
                 d.setCnpjDrogaria(rs.getString("CNPJ_Drog"));
                 d.setNomeDrogaria(rs.getString("Nome_Drog"));
                 d.setEmailDrogaria(rs.getString("Email_Drog"));
@@ -46,7 +46,7 @@ public class DrogariaDAO {
         return drogarias;
     }
 
-    public void create(Drogaria d) {
+    public void create(DrogariaObjeto d) {
         Connection con = Conexao.getConnection();
         PreparedStatement stmt = null;
 
@@ -69,7 +69,7 @@ public class DrogariaDAO {
         }
     }
 
-    public void updtae(Drogaria d) {
+    public void updtae(DrogariaObjeto d) {
         Connection con = Conexao.getConnection();
         PreparedStatement stmt = null;
 
@@ -92,7 +92,7 @@ public class DrogariaDAO {
         }
     }
 
-    public void delete(Drogaria d) {
+    public void delete(DrogariaObjeto d) {
         Connection con = Conexao.getConnection();
         PreparedStatement stmt = null;
 
