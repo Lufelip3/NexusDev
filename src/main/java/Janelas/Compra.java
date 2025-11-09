@@ -168,7 +168,7 @@ public class Compra extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBCadastrarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCadastrarCompraActionPerformed
-        Compra ccompra = new Compra();
+        Compra c = new Compra();
         CompraDAO dao = new CompraDAO();
         
         

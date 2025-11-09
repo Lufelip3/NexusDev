@@ -8,7 +8,7 @@ package Objetos;
  *
  * @author luis.fmleite
  */
-public class Compra {
+public class CompraObjeto {
     
     private String dataCompra;
     private Double valorCompra;

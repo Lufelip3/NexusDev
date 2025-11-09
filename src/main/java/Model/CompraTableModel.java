@@ -5,7 +5,7 @@
 package Model;
 
 import DAO.CompraDAO;
-import Objetos.Compra;
+import Objetos.CompraObjeto;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
@@ -15,7 +15,7 @@ import javax.swing.table.AbstractTableModel;
  * @author Andrey
  */
 public class CompraTableModel extends AbstractTableModel {
-   private List<Compra> dados = new ArrayList<>();
+   private List<CompraObjeto> dados = new ArrayList<>();
     private String[] colunas = {"DataCompra", "ValorCompra", "NotaFiscalCompra"};
 
 @Override
@@ -71,12 +71,33 @@ public class CompraTableModel extends AbstractTableModel {
             case 2:
                 dados.get(linha).setNotaFiscalCompra((int) valor);
                 break;
-            
+            case 3:
+                dados.get(linha).setNomeCompra((String)valor);
+                break;
+            case 4:
+                dados.get(linha).setCnpjCompra((int)valor);
+                break;
+            case 5:
+                dados.get(linha).setEnderecoCompra((String)valor);
+                break;
+            case 6:
+                dados.get(linha).setCepCompra((int)valor);
+                break;
+            case 7:
+                dados.get(linha).setEmailCompra((String)valor);
+                break;
+            case 8:
+                dados.get(linha).setTelefoneCompra((int)valor);
+                break;
+            case 9:
+                dados.get(linha).setNumeroCompra((Double)valor);
+                break;
+                
         }
         this.fireTableRowsUpdated(linha, linha);
     }
 
-    public void addLinha(Compra c) {
+    public void addLinha(CompraObjeto c) {
         this.dados.add(c);
         this.fireTableDataChanged();
     }
@@ -86,14 +107,14 @@ public class CompraTableModel extends AbstractTableModel {
         this.fireTableRowsDeleted(linha, linha);
     }
 
-    public Compra pegaDadosLinha(int linha) {
+    public CompraObjeto pegaDadosLinha(int linha) {
         return dados.get(linha);
     }
 
     private void lerDados() {
         CompraDAO cdao = new CompraDAO();
 
-        for (Compra c : cdao.read()) {
+        for (CompraObjeto c : cdao.read()) {
             this.addLinha(c);
 
         }
