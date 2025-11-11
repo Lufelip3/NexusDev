@@ -106,6 +106,11 @@ public class Venda extends javax.swing.JPanel {
 
         jCTipo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jCTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jCTipo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCTipoActionPerformed(evt);
+            }
+        });
 
         jTTipo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jTTipo.setText("Tipo:");
@@ -225,10 +230,11 @@ public class Venda extends javax.swing.JPanel {
 
     private void jBAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAlterarActionPerformed
          if (jTVenda.getSelectedRow() != -1){
-        modelo.setValueAt(jTDescricao.getText(), jTVenda.getSelectedRow(), 0);
-        modelo.setValueAt(jTQuantidade.getText(), jTVenda.getSelectedRow(), 1);  
-        modelo.setValueAt(jTValor.getText(), jTVenda.getSelectedRow(), 2);  
-        Venda v = modelo.pegaDadosLinha(jTVenda.getSelectedRow());
+        modelo.setValueAt(jT
+                Descricao.getText(), jTDescricao.getSelectedRow(), 0);
+        modelo.setValueAt(jTQuantidade1 en.getText(), jTQuantidade1.getSelectedRow(), 1);  
+        modelo.setValueAt(jTProdutos.getText(), jTProdutos.getSelectedRow(), 2);  
+        Venda v = modelo.pegaDadosLinha(jTValor1.getSelectedRow());
         Venda venmed = new Venda();
         venmed.update(v);
         limpaCampos();
@@ -246,6 +252,10 @@ public class Venda extends javax.swing.JPanel {
     modelo.recarregaTabela();
     limpaCampos();
     }//GEN-LAST:event_jBCadastrarActionPerformed
+
+    private void jCTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCTipoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCTipoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -290,5 +300,15 @@ public class Venda extends javax.swing.JPanel {
 
     private void delete(Venda v) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    private static class jTVenda {
+
+        private static int getSelectedRow() {
+            throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        }
+
+        public jTVenda() {
+        }
     }
 }

@@ -15,16 +15,15 @@ import java.util.List;
  *
  * @author luis.fmleite
  */
-public class FuncionarioTableModel {
-   private List<Medicamento> dados = new ArrayList<>();
-    private String[] colunas = {"Código", "Nome", "Descrição", "Quantidade", "Valor", "Data de validade"};
 
-    //nome_Fun;
-   // private String cpf;
-   // private String telefone_Fun;
-   // private String Cep_Fun;
-   // private int numero_Fun;
-   // private String email_Fun;
+    private List<Funcionario> dados = new ArrayList<>(); 
+    private String[] colunas = {"cpf", "telefone_Fun", "Cep_Fun", "numero_Fun", "email_Fun"};
+    private String cpf;
+    private String telefone_Fun;
+    private String Cep_Fun;
+    private int numero_Fun;
+    private String email_Fun; 
+    
     @Override
     public String getColumnName(int column) {
         return colunas[column];
@@ -44,48 +43,44 @@ public class FuncionarioTableModel {
     public Object getValueAt(int linha, int coluna) {
         switch (coluna) {
             case 0:
-                return dados.get(linha).getCodigoMed();
+                return dados.get(linha).getCpf();
             case 1:
-                return dados.get(linha).getNomeMed();
+                return dados.get(linha).getTelefone_Fun();
             case 2:
-                return dados.get(linha).getDescricaoMed();
+                return dados.get(linha).getCep_Fun();
             case 3:
-                return dados.get(linha).getQuantEstoqueMed();
+                return dados.get(linha).getNumero_Fun();
             case 4:
-                return dados.get(linha).getValorMed();
-            case 5:
-                return dados.get(linha).getDataValidadeMed();
+                return dados.get(linha).getEmail_Fun();
+            
         }
         return null;
     }
 
     @Override
     public void setValueAt(Object valor, int linha, int coluna) {
-        switch (coluna) {
-            case 0:
-                dados.get(linha).setCodigoMed(Integer.parseInt((String) valor));
-                break;
-            case 1:
-                dados.get(linha).setNomeMed((String) valor);
-                break;
-            case 2:
-                dados.get(linha).setDescricaoMed((String) valor);
-                break;
-            case 3:
-                dados.get(linha).setQuantEstoqueMed(Integer.parseInt((String) valor));
-                break;
-            case 4:
-                dados.get(linha).setValorMed(Double.valueOf((String) valor));
-                break;
-            case 5:
-                dados.get(linha).setDataValidadeMed((String) valor);
-                break;
-        }
-        this.fireTableRowsUpdated(linha, linha);
+    switch (coluna) {
+        case 0:
+            dados.get(linha).setCpf((String) valor);
+            break;
+        case 1:
+            dados.get(linha).setTelefone_Fun((String) valor);
+            break;
+        case 2:
+            dados.get(linha).setCep_Fun((String) valor);
+            break;
+        case 3: 
+            dados.get(linha).setNumero_Fun(Integer.parseInt((String) valor));
+            break;
+        case 4:
+            dados.get(linha).setEmail_Fun((String) valor);
+            break;
     }
 
-    public void addLinha(Medicamento m) {
-        this.dados.add(m);
+    this.fireTableRowsUpdated(linha, linha); 
+}
+    public void addLinha(Funcionario f) {
+        this.dados.add(f);
         this.fireTableDataChanged();
     }
 
@@ -94,18 +89,18 @@ public class FuncionarioTableModel {
         this.fireTableRowsDeleted(linha, linha);
     }
 
-    public Medicamento pegaDadosLinha(int linha) {
-        return dados.get(linha);
-    }
-
+  public Funcionario pegaDadosLinha(int linha) {
+    return dados.get(linha);
+}  
+     
     private void lerDados() {
-        MedicamentoDAO mdao = new MedicamentoDAO();
+    // 1. Correção da sintaxe de instanciação
+    FuncionarioTable fun = new FuncionarioTable(); 
 
-        for (Medicamento m : mdao.read()) {
-            this.addLinha(m);
-
-        }
-        this.fireTableDataChanged();
+    // 2. Correção da lógica/semântica: Deve iterar sobre Funcionario (não Medicamento)
+    for (Funcionario f : fun.read()) {
+        this.addLinha(f);
+    }
     }
 
     public void recarregaTabela() {
@@ -125,4 +120,5 @@ public class FuncionarioTableModel {
     private void fireTableRowsDeleted(int linha, int linha0) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-}
+
+
