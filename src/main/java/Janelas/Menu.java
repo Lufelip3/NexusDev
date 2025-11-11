@@ -5,15 +5,10 @@
 package Janelas;
 
 import BD.Conexao;
-import Menu.Menu;
 import Objetos.Medicamento;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.List;
-import javax.swing.JOptionPane;
-
 /**
  *
  * @author andrey.munhoz
@@ -116,10 +111,12 @@ public class Menu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBCadastrarMedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCadastrarMedActionPerformed
-        public List<Menu> read() {
+
+    public List<Medicamento> read() {
         Connection con = Conexao.getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;
+        List<Medicamento> medicamentos = new ArrayList<>();
         try {
             stmt = con.prepareStatement("SELECT * FROM tbl_Produto");
             rs = stmt.executeQuery();
@@ -139,8 +136,7 @@ public class Menu extends javax.swing.JFrame {
         } finally {
             Conexao.closeConnection(con, stmt, rs);
         }
-        List<Menu> venda = null;
-        return venda;
+        return medicamentos;
     }
 
     public void create(Medicamento m) {
