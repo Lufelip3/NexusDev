@@ -27,7 +27,7 @@ public class ItnesDAO {
         ResultSet rs = null;
         List<Itens> itens = new ArrayList<>();
         try {
-            stmt = con.prepareStatement("SELECT * FROM funcionario");
+            stmt = con.prepareStatement("SELECT * FROM itens");
             rs = stmt.executeQuery();
 
             while (rs.next()) {
@@ -53,7 +53,7 @@ public class ItnesDAO {
         PreparedStatement stmt = null;
 
         try {
-            stmt = con.prepareStatement("INSERT INTO funcionario (Nome_Item, Desc_Item, DataVal_Item, Qtd_Item, Valor_Item) VALUES (?,?,?,?,?)");
+            stmt = con.prepareStatement("INSERT INTO intens (Nome_Item, Desc_Item, DataVal_Item, Qtd_Item, Valor_Item) VALUES (?,?,?,?,?)");
             stmt.setString(1, i.getNomeItem());
             stmt.setString(2, i.getDescricaoItem());
             stmt.setString(3, i.getDataValItem());
@@ -75,7 +75,7 @@ public class ItnesDAO {
         PreparedStatement stmt = null;
 
         try {
-            stmt = con.prepareStatement("UPDATE funcionario set Nome_Item = ?, Desc_Item = ?, DataVal_Item = ?, Qtd_Item = ?, Valor_Item = ? where Cod_Item = ?");
+            stmt = con.prepareStatement("UPDATE itens set Nome_Item = ?, Desc_Item = ?, DataVal_Item = ?, Qtd_Item = ?, Valor_Item = ? where Cod_Item = ?");
             stmt.setString(1, i.getNomeItem());
             stmt.setString(2, i.getDescricaoItem());
             stmt.setString(3, i.getDataValItem());
@@ -98,7 +98,7 @@ public class ItnesDAO {
         PreparedStatement stmt = null;
 
         try {
-            stmt = con.prepareStatement("DELETE FROM funcionario where Cod_Item = ?");
+            stmt = con.prepareStatement("DELETE FROM itens where Cod_Item = ?");
             stmt.setInt(1, i.getCodigoItem());
 
             stmt.execute();

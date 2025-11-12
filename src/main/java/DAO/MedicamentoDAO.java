@@ -22,7 +22,7 @@ public class MedicamentoDAO {
         ResultSet rs = null;
         List<Medicamento> medicamentos = new ArrayList<>();
         try {
-            stmt = con.prepareStatement("SELECT * FROM tbl_Produto");
+            stmt = con.prepareStatement("SELECT * FROM medicamento");
             rs = stmt.executeQuery();
 
             while (rs.next()) {

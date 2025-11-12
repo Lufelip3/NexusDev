@@ -60,7 +60,7 @@ public class FuncionarioDAO {
             stmt.setString(6, f.getEmail_Fun());
 
             stmt.execute();
-            JOptionPane.showMessageDialog(null, "Produto cadastrado com sucesso!");
+            JOptionPane.showMessageDialog(null, "Funcionário cadastrado com sucesso!");
 
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Falha ao cadastrar: " + e);
@@ -83,7 +83,7 @@ public class FuncionarioDAO {
             stmt.setString(6, f.getEmail_Fun());
 
             stmt.execute();
-            JOptionPane.showMessageDialog(null, "Produto atualizado com sucesso!");
+            JOptionPane.showMessageDialog(null, "Funcionário atualizado com sucesso!");
 
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Falha ao atualizar: " + e);
@@ -101,7 +101,7 @@ public class FuncionarioDAO {
             stmt.setString(1, f.getCpf());
 
             stmt.execute();
-            JOptionPane.showMessageDialog(null, "Medicamento removido com sucesso!");
+            JOptionPane.showMessageDialog(null, "Funcionário removido com sucesso!");
 
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Falha ao remover: " + e);

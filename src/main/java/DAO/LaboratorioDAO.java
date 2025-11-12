@@ -25,7 +25,7 @@ public class LaboratorioDAO {
         ResultSet rs = null;
         List<Laboratorio> laboratorio = new ArrayList<>();
         try {
-            stmt = con.prepareStatement("SELECT * FROM funcionario");
+            stmt = con.prepareStatement("SELECT * FROM laboratorio");
             rs = stmt.executeQuery();
 
             while (rs.next()) {
@@ -51,7 +51,7 @@ public class LaboratorioDAO {
         PreparedStatement stmt = null;
 
         try {
-            stmt = con.prepareStatement("INSERT INTO funcionario (CNPJ_Lab, Nome_Lab, Telefone_Lab, Cep_Lab, Num_Lab, Email_Lab) VALUES (?,?,?,?,?,?)");
+            stmt = con.prepareStatement("INSERT INTO laboratorio (CNPJ_Lab, Nome_Lab, Telefone_Lab, Cep_Lab, Num_Lab, Email_Lab) VALUES (?,?,?,?,?,?)");
             stmt.setString(1, l.getNomeLab());
             stmt.setString(2, l.getTelefoneLab());
             stmt.setString(3, l.getCepLab());
@@ -74,7 +74,7 @@ public class LaboratorioDAO {
         PreparedStatement stmt = null;
 
         try {
-            stmt = con.prepareStatement("UPDATE funcionario set Nome_Lab = ?, Telefone_Lab = ?, Cep_Lab = ?, Num_Lab = ?, Email_Lab = ? where CNPJ_Lab = ?");
+            stmt = con.prepareStatement("UPDATE laboratorio set Nome_Lab = ?, Telefone_Lab = ?, Cep_Lab = ?, Num_Lab = ?, Email_Lab = ? where CNPJ_Lab = ?");
             stmt.setString(1, l.getNomeLab());
             stmt.setString(2, l.getTelefoneLab());
             stmt.setString(3, l.getCepLab());
@@ -97,11 +97,11 @@ public class LaboratorioDAO {
         PreparedStatement stmt = null;
 
         try {
-            stmt = con.prepareStatement("DELETE FROM funcionario where Cod_Item = ?");
+            stmt = con.prepareStatement("DELETE FROM laboratorio where Cod_Item = ?");
             stmt.setString(1, l.getCnpjLab());
 
             stmt.execute();
-            JOptionPane.showMessageDialog(null, "Item removido com sucesso!");
+            JOptionPane.showMessageDialog(null, "Laboratório removido com sucesso!");
 
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Falha ao remover: " + e);

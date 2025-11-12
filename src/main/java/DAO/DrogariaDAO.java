@@ -25,7 +25,7 @@ public class DrogariaDAO {
         ResultSet rs = null;
         List<DrogariaObjeto> drogarias = new ArrayList<>();
         try {
-            stmt = con.prepareStatement("SELECT * FROM funcionario");
+            stmt = con.prepareStatement("SELECT * FROM drogaria");
             rs = stmt.executeQuery();
 
             while (rs.next()) {
@@ -51,8 +51,7 @@ public class DrogariaDAO {
         PreparedStatement stmt = null;
 
         try {
-            stmt = con.prepareStatement("INSERT INTO drogaria (CNPJ_Drog, Nome_Drog, Telefone_Drog, Cep_Drog, Num_Drog, Email_Drog) VALUES (?,?,?,?,?,?)");
-            stmt.setString(1, d.getCnpjDrogaria());
+            stmt = con.prepareStatement("INSERT INTO drogaria (Nome_Drog, Telefone_Drog, Cep_Drog, Num_Drog, Email_Drog) VALUES (?,?,?,?,?)");
             stmt.setString(2, d.getNomeDrogaria());
             stmt.setString(3, d.getTelefoneDrogaria());
             stmt.setString(4, d.getCepDrogaria());
@@ -97,7 +96,7 @@ public class DrogariaDAO {
         PreparedStatement stmt = null;
 
         try {
-            stmt = con.prepareStatement("DELETE FROM funcionario where CPF = ?");
+            stmt = con.prepareStatement("DELETE FROM drogaria where CPF = ?");
             stmt.setString(1, d.getCnpjDrogaria());
 
             stmt.execute();
