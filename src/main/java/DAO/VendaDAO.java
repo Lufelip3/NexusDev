@@ -23,24 +23,23 @@ public class VendaDAO {
         Connection con = Conexao.getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;
-        List<Venda> Venda = new ArrayList<>();
+        List<Venda> vendas = new ArrayList<>();
         try {
-            stmt = con.prepareStatement("SELECT * FROM funcionario");
+            stmt = con.prepareStatement("SELECT * FROM venda");
             rs = stmt.executeQuery();
 
             while (rs.next()) {
                 Venda v = new Venda();
                 v.setDataVenda(rs.getString("Data_Venda"));
                 v.setValorVenda(rs.getDouble("Valor_Venda"));
-                v.setCod_Rastreio(rs.getString("Cod_Rastreio"));
-                Venda.add(v);
+                vendas.add(v);
             }
         } catch (SQLException e) {
             JOptionPane.showConfirmDialog(null, "Falha ao obter dados: " + e);
         } finally {
             Conexao.closeConnection(con, stmt, rs);
         }
-        return Venda;
+        return vendas;
     }
 
     public void create(Venda v) {
@@ -48,10 +47,9 @@ public class VendaDAO {
         PreparedStatement stmt = null;
 
         try {
-            stmt = con.prepareStatement("INSERT INTO funcionario (Data_Venda, Valor_Venda, COD_Rastreio) VALUES (?,?,?)");
+            stmt = con.prepareStatement("INSERT INTO venda (Data_Venda, Valor_Venda) VALUES (?,?)");
             stmt.setString(1, v.getDataVenda());
             stmt.setDouble(2, v.getValorVenda());
-            stmt.setString(3, v.getCod_Rastreio());
 
             stmt.execute();
             JOptionPane.showMessageDialog(null, "Venda cadastrado com sucesso!");
@@ -68,11 +66,10 @@ public class VendaDAO {
         PreparedStatement stmt = null;
 
         try {
-            stmt = con.prepareStatement("UPDATE funcionario set Data_Venda = ?, Valor_Venda = ?, Cod_Rastreio = ?, where NotaFiscal = ?");
+            stmt = con.prepareStatement("UPDATE venda set Data_Venda = ?, Valor_Venda = ?, where NotaFiscal = ?");
             stmt.setString(1, v.getDataVenda());
             stmt.setDouble(2, v.getValorVenda());
-            stmt.setString(3, v.getCod_Rastreio());
-            stmt.setString(4, v.getNotaFiscalVenda());          
+            stmt.setString(3, v.getNotaFiscalVenda());          
 
             stmt.execute();
             JOptionPane.showMessageDialog(null, "Venda atualizado com sucesso!");
@@ -89,7 +86,7 @@ public class VendaDAO {
         PreparedStatement stmt = null;
 
         try {
-            stmt = con.prepareStatement("DELETE FROM funcionario where Cod_Item = ?");
+            stmt = con.prepareStatement("DELETE FROM venda where NotaFiscal = ?");
             stmt.setString(1, v.getNotaFiscalVenda());
 
             stmt.execute();
