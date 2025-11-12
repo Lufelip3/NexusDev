@@ -1,41 +1,35 @@
 CREATE DATABASE Drogaria;
 USE Drogaria;
 
+-- Tabela Drogaria
+CREATE TABLE drogaria (
+  CNPJ_Drog VARCHAR(18) PRIMARY KEY,
+  Nome_Drog VARCHAR(50) NOT NULL,
+  Telefone_Drog VARCHAR(15) NOT NULL,
+  Cep_Drog VARCHAR(10) NOT NULL,
+  Num_Drog INT NOT NULL,
+  Email_Drog VARCHAR(50) UNIQUE NOT NULL
+);
+
 -- Tabela Funcionário
 CREATE TABLE funcionario (
-  CPF VARCHAR(14) UNIQUE PRIMARY KEY,
+  CPF VARCHAR(14) PRIMARY KEY,
   Nome_Fun VARCHAR(50) NOT NULL,
   Telefone_Fun VARCHAR(15) NOT NULL,
   Cep_Fun VARCHAR(10) NOT NULL,
   Num_Fun VARCHAR(15) NOT NULL,
   Email_Fun VARCHAR(50) UNIQUE NOT NULL
+  Senha varchar(255) not null,
 );
 
--- Tabela Compra
-CREATE TABLE compra (
-  NotaFiscal_Entrada INT UNIQUE PRIMARY KEY,
-  Data_Venda DATE NOT NULL,
-  Valor_Total DECIMAL(10,2) NOT NULL
-);
-
--- Tabela Item
-CREATE TABLE item (
-  Cod_Item INT AUTO_INCREMENT PRIMARY KEY,
-  Nome_Item VARCHAR(50) NOT NULL,
-  Desc_Item VARCHAR(100) NOT NULL,
-  DataVal_Item DATE NOT NULL,
-  Qtd_Item INT NOT NULL,
-  Valor_Item DECIMAL(10,2) NOT NULL
-);
-
--- Tabela Medicamento
-CREATE TABLE medicamento (
-  Cod_Med INT UNIQUE PRIMARY KEY,
-  Nome_Med VARCHAR(50) NOT NULL,
-  Desc_Med VARCHAR(100) NOT NULL,
-  DataVal_Med DATE NOT NULL,
-  Qtd_Med INT NOT NULL,
-  Valor_Med DECIMAL(10,2) NOT NULL
+-- Tabela Laboratório
+CREATE TABLE laboratorio (
+  CNPJ_Lab VARCHAR(18) PRIMARY KEY,
+  Nome_Lab VARCHAR(50) NOT NULL,
+  Telefone_Lab VARCHAR(15) NOT NULL,
+  Cep_Lab VARCHAR(10) NOT NULL,
+  Num_Lab INT UNIQUE NOT NULL,
+  Email_Lab VARCHAR(50) UNIQUE NOT NULL
 );
 
 -- Tabela Catálogo de Medicamentos
@@ -44,28 +38,28 @@ CREATE TABLE catalogo_medicamento (
   Nome_CatMed VARCHAR(50) NOT NULL,
   Desc_CatMed VARCHAR(100) NOT NULL,
   Valor_CatMed DECIMAL(10,2) NOT NULL,
-  Cod_Med INT NOT NULL,
-  CONSTRAINT fk_cod_med FOREIGN KEY (Cod_Med) REFERENCES medicamento(Cod_Med)
+  CNPJ_Lab VARCHAR(18),
+  FOREIGN KEY (CNPJ_Lab) REFERENCES laboratorio(CNPJ_Lab)
 );
 
--- Tabela Laboratório
-CREATE TABLE laboratorio (
-  CNPJ_Lab VARCHAR(18) UNIQUE PRIMARY KEY,
-  Nome_Lab VARCHAR(50) NOT NULL,
-  Telefone_Lab VARCHAR(15) NOT NULL,
-  Cep_Lab VARCHAR(10) NOT NULL,
-  Num_Lab INT UNIQUE NOT NULL,
-  Email_Lab VARCHAR(50) UNIQUE NOT NULL
+-- Tabela Medicamento
+CREATE TABLE medicamento (
+  Cod_Med INT AUTO_INCREMENT PRIMARY KEY,
+  Nome_Med VARCHAR(50) NOT NULL,
+  Desc_Med VARCHAR(100) NOT NULL,
+  DataVal_Med DATE NOT NULL,
+  Qtd_Med INT NOT NULL,
+  Valor_Med DECIMAL(10,2) NOT NULL,
+  Cod_CatMed INT,
+  FOREIGN KEY (Cod_CatMed) REFERENCES catalogo_medicamento(Cod_CatMed)
 );
 
--- Tabela Item Venda
-CREATE TABLE item_venda (
-  Cod_ItemVenda INT AUTO_INCREMENT PRIMARY KEY,
-  Nome_ItemVenda VARCHAR(50) NOT NULL,
-  Desc_ItemVenda VARCHAR(100) NOT NULL,
-  DataVal_ItemVenda DATE NOT NULL,
-  Qtd_ItemVenda INT NOT NULL,
-  Valor_ItemVenda DECIMAL(10,2) NOT NULL
+-- Tabela Compra
+CREATE TABLE compra (
+  NotaFiscal_Entrada INT AUTO_INCREMENT PRIMARY KEY,
+  Valor_Total DECIMAL(10,2) NOT NULL,
+  CPF VARCHAR(14),
+  FOREIGN KEY (CPF) REFERENCES funcionario(CPF)
 );
 
 -- Tabela Venda
@@ -73,92 +67,41 @@ CREATE TABLE venda (
   NotaFiscal_Saida INT AUTO_INCREMENT PRIMARY KEY,
   Data_Venda DATE NOT NULL,
   Valor_Venda DECIMAL(10,2) NOT NULL,
-  Cod_Rastreio VARCHAR(30)
-);
-
--- Tabela Drogaria
-CREATE TABLE drogaria (
-  CNPJ_Drog VARCHAR(18) UNIQUE PRIMARY KEY,
-  Nome_Drog VARCHAR(50) NOT NULL,
-  Telefone_Drog VARCHAR(15) NOT NULL,
-  Cep_Drog VARCHAR(10) NOT NULL,
-  Num_Drog INT NOT NULL,
-  Email_Drog VARCHAR(50) UNIQUE NOT NULL,
-  NotaFiscal_Saida INT NOT NULL,
-  CONSTRAINT fk_nota_saida_drog FOREIGN KEY (NotaFiscal_Saida) REFERENCES venda(NotaFiscal_Saida)
-);
-
--- Tabela RealizaCompra
-CREATE TABLE realiza_compra (
+  Cod_Rastreio VARCHAR(30),
+  CNPJ_Drog VARCHAR(18),
   CPF VARCHAR(14),
+  FOREIGN KEY (CNPJ_Drog) REFERENCES drogaria(CNPJ_Drog),
+  FOREIGN KEY (CPF) REFERENCES funcionario(CPF)
+);
+
+-- Tabela Item
+CREATE TABLE item (
+  Cod_Item INT AUTO_INCREMENT PRIMARY KEY,
+  DataVal_Item DATE NOT NULL,
+  Qtd_Item INT NOT NULL,
+  Valor_Item DECIMAL(10,2) NOT NULL,
+  Data_Venda DATE NOT NULL,
   NotaFiscal_Entrada INT,
-  PRIMARY KEY (CPF, NotaFiscal_Entrada),
-  CONSTRAINT fk_cpf_compra FOREIGN KEY (CPF) REFERENCES funcionario(CPF),
-  CONSTRAINT fk_nf_entrada_compra FOREIGN KEY (NotaFiscal_Entrada) REFERENCES compra(NotaFiscal_Entrada)
-);
-
--- Tabela Possui
-CREATE TABLE possuiCompraItem (
-  NotaFiscal_Entrada INT,
-  Cod_Item INT,
-  PRIMARY KEY (NotaFiscal_Entrada, Cod_Item),
-  CONSTRAINT fk_nf_entrada_possui FOREIGN KEY (NotaFiscal_Entrada) REFERENCES compra(NotaFiscal_Entrada),
-  CONSTRAINT fk_cod_item_possui FOREIGN KEY (Cod_Item) REFERENCES item(Cod_Item)
-);
-
--- Tabela CompõeItem
-CREATE TABLE compoe_item (
-  Cod_Item INT,
-  Cod_CatMed INT,
-  PRIMARY KEY (Cod_Item, Cod_CatMed),
-  CONSTRAINT fk_cod_item_compoe FOREIGN KEY (Cod_Item) REFERENCES item(Cod_Item),
-  CONSTRAINT fk_cod_catmed_compoe FOREIGN KEY (Cod_CatMed) REFERENCES catalogo_medicamento(Cod_CatMed)
-);
-
--- Tabela Fornece
-CREATE TABLE forneceCatalogoLab (
-  Cod_CatMed INT,
-  CNPJ_Lab VARCHAR(18),
-  PRIMARY KEY (Cod_CatMed, CNPJ_Lab),
-  CONSTRAINT fk_cod_catmed_fornece FOREIGN KEY (Cod_CatMed) REFERENCES catalogo_medicamento(Cod_CatMed),
-  CONSTRAINT fk_cnpj_lab_fornece FOREIGN KEY (CNPJ_Lab) REFERENCES laboratorio(CNPJ_Lab)
-);
-
--- Tabela CompoeMedicamento
-CREATE TABLE compoe_medicamento (
   Cod_CatMed INT,
   Cod_Med INT,
-  PRIMARY KEY (Cod_CatMed, Cod_Med),
-  CONSTRAINT fk_cod_catmed_med FOREIGN KEY (Cod_CatMed) REFERENCES catalogo_medicamento(Cod_CatMed),
-  CONSTRAINT fk_cod_med_compoe FOREIGN KEY (Cod_Med) REFERENCES medicamento(Cod_Med)
+  FOREIGN KEY (NotaFiscal_Entrada) REFERENCES compra(NotaFiscal_Entrada),
+  FOREIGN KEY (Cod_CatMed) REFERENCES catalogo_medicamento(Cod_CatMed),
+  FOREIGN KEY (Cod_Med) REFERENCES medicamento(Cod_Med)
 );
 
--- Tabela CompoeEstoque
-CREATE TABLE compoe_estoque (
+-- Tabela Item Venda
+CREATE TABLE item_venda (
+  Cod_ItemVenda INT AUTO_INCREMENT PRIMARY KEY,
+  DataVal_ItemVenda DATE NOT NULL,
+  Qtd_ItemVenda INT NOT NULL,
+  Valor_ItemVenda DECIMAL(10,2) NOT NULL,
   Cod_Med INT,
-  Cod_ItemVenda INT,
-  PRIMARY KEY (Cod_Med, Cod_ItemVenda),
-  CONSTRAINT fk_cod_med_estoque FOREIGN KEY (Cod_Med) REFERENCES medicamento(Cod_Med),
-  CONSTRAINT fk_cod_itemvenda_estoque FOREIGN KEY (Cod_ItemVenda) REFERENCES item_venda(Cod_ItemVenda)
+  NotaFiscal_Saida INT,
+  FOREIGN KEY (Cod_Med) REFERENCES medicamento(Cod_Med),
+  FOREIGN KEY (NotaFiscal_Saida) REFERENCES venda(NotaFiscal_Saida)
 );
 
--- Tabela Contém
-CREATE TABLE contemVenda (
-  Cod_ItemVenda INT,
-  NotaFiscal_Saida INT,
-  PRIMARY KEY (Cod_ItemVenda, NotaFiscal_Saida),
-  CONSTRAINT fk_cod_itemvenda_contem FOREIGN KEY (Cod_ItemVenda) REFERENCES item_venda(Cod_ItemVenda),
-  CONSTRAINT fk_nf_saida_contem FOREIGN KEY (NotaFiscal_Saida) REFERENCES venda(NotaFiscal_Saida)
-);
 
--- Tabela RealizaVenda
-CREATE TABLE realiza_venda (
-  CPF VARCHAR(14),
-  NotaFiscal_Saida INT,
-  PRIMARY KEY (CPF, NotaFiscal_Saida),
-  CONSTRAINT fk_cpf_venda FOREIGN KEY (CPF) REFERENCES funcionario(CPF),
-  CONSTRAINT fk_nf_saida_venda FOREIGN KEY (NotaFiscal_Saida) REFERENCES venda(NotaFiscal_Saida)
-);
 
 -- 1. TABELAS SEM DEPENDÊNCIAS (podem ser inseridas primeiro)
 INSERT INTO funcionario (CPF, Nome_Fun, Telefone_Fun, Cep_Fun, Num_Fun, Email_Fun) VALUES
