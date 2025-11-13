@@ -233,134 +233,80 @@ INSERT INTO item_venda (DataVal_ItemVenda, Qtd_ItemVenda, Valor_ItemVenda, Cod_M
 ('2026-12-01', 2, 70.00, 9, 9),
 ('2027-09-05', 3, 68.70, 10, 10);
 
-
 CREATE OR REPLACE VIEW vw_relatorio_vendas_detalhadas AS
-
 SELECT
-
     V.NotaFiscal_Saida,
-
     V.Data_Venda AS Data_Venda,
-
     V.Valor_Venda AS Valor_Total_Venda,
-
-    IV.Nome_ItemVenda AS Item_Vendido,
-
-    IV.Qtd_ItemVenda AS Quantidade,      -- CORRIGIDO: Agora usa IV (item_venda)
-
-    IV.Valor_ItemVenda AS Valor_Unitario, -- CORRIGIDO: Agora usa IV (item_venda)
-
-    F.Nome_Fun AS Funcionario_Venda
-
+    M.Nome_Med AS Medicamento_Vendido,
+    M.Valor_Med AS Valor_Base_Medicamento,
+    IV.Qtd_ItemVenda AS Quantidade,
+    IV.Valor_ItemVenda AS Valor_Unitario_Venda,
+    F.Nome_Fun AS Funcionario_Venda,
+    D.Nome_Drog AS Drogaria_Venda
 FROM
-
     venda V
-
 JOIN
-
-    contemVenda CV ON V.NotaFiscal_Saida = CV.NotaFiscal_Saida
-
+    item_venda IV ON V.NotaFiscal_Saida = IV.NotaFiscal_Saida
 JOIN
-
-    item_venda IV ON CV.Cod_ItemVenda = IV.Cod_ItemVenda
-
+    medicamento M ON IV.Cod_Med = M.Cod_Med
 JOIN
-
-    realiza_venda RV ON V.NotaFiscal_Saida = RV.NotaFiscal_Saida
-
+    funcionario F ON V.CPF = F.CPF
 JOIN
-
-    funcionario F ON RV.CPF = F.CPF;
+    drogaria D ON V.CNPJ_Drog = D.CNPJ_Drog;
 
 DELIMITER $$
 
+DELIMITER $$
+
+DROP PROCEDURE IF EXISTS sp_atualiza_estoque_apos_compra $$
 CREATE PROCEDURE sp_atualiza_estoque_apos_compra (
-
-    p_Cod_Med INT,
-
-    p_Qtd_Comprada INT
-
+    IN p_Cod_Med INT,
+    IN p_Qtd_Comprada INT
 )
-
 BEGIN
-
     DECLARE v_estoque_atual INT;
- 
-    -- 1. Verifica o estoque atual
 
+    -- 1. Busca o estoque atual do medicamento
     SELECT Qtd_Med INTO v_estoque_atual
-
     FROM medicamento
-
     WHERE Cod_Med = p_Cod_Med;
- 
-    -- 2. Atualiza a quantidade do medicamento
 
+    -- 2. Atualiza o estoque com a nova quantidade
     UPDATE medicamento
-
     SET Qtd_Med = v_estoque_atual + p_Qtd_Comprada
-
     WHERE Cod_Med = p_Cod_Med;
- 
-    -- 3. Retorna a confirmação e novo estoque
 
+    -- 3. Retorna uma mensagem de confirmação
     SELECT CONCAT(
-
-        'Estoque do medicamento (Cod: ', p_Cod_Med, ') atualizado. ',
-
+        'Estoque atualizado com sucesso! (Cod_Med: ', p_Cod_Med, ') ',
         'Quantidade adicionada: ', p_Qtd_Comprada,
-
-        '. Novo Estoque Total: ', v_estoque_atual + p_Qtd_Comprada
-
+        '. Novo total: ', v_estoque_atual + p_Qtd_Comprada
     ) AS Mensagem_Estoque;
- 
 END $$
 
 DELIMITER ;
- 
+
 DELIMITER $$
 
+DROP TRIGGER IF EXISTS trg_baixa_estoque_apos_venda $$
 CREATE TRIGGER trg_baixa_estoque_apos_venda
-
-AFTER INSERT ON contemVenda
-
+AFTER INSERT ON item_venda
 FOR EACH ROW
-
 BEGIN
-
     DECLARE v_cod_med INT;
-
     DECLARE v_qtd_vendida INT;
- 
-    -- 1. Pega o Cod_Med associado ao Item_Venda
 
-    SELECT Cod_Med INTO v_cod_med
+    -- 1️⃣ Pega o código e quantidade vendidos diretamente do novo registro
+    SET v_cod_med = NEW.Cod_Med;
+    SET v_qtd_vendida = NEW.Qtd_ItemVenda;
 
-    FROM compoe_estoque
-
-    WHERE Cod_ItemVenda = NEW.Cod_ItemVenda;
- 
-    -- 2. Pega a quantidade vendida da tabela item_venda
-
-    SELECT Qtd_ItemVenda INTO v_qtd_vendida
-
-    FROM item_venda
-
-    WHERE Cod_ItemVenda = NEW.Cod_ItemVenda;
- 
-    -- 3. Diminui a quantidade no estoque de medicamento
-
+    -- 2️⃣ Atualiza o estoque do medicamento
     IF v_cod_med IS NOT NULL THEN
-
         UPDATE medicamento
-
         SET Qtd_Med = Qtd_Med - v_qtd_vendida
-
         WHERE Cod_Med = v_cod_med;
-
     END IF;
-
 END $$
 
 DELIMITER ;
- 
