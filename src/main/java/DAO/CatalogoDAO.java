@@ -25,7 +25,7 @@ public class CatalogoDAO {
         ResultSet rs = null;
         List<CatalogoMedicamento> catalogoMedicamento = new ArrayList<>();
         try {
-            stmt = con.prepareStatement("SELECT * FROM catalogo");
+            stmt = con.prepareStatement("SELECT * FROM catalogo_medicamento");
             rs = stmt.executeQuery();
 
             while (rs.next()) {

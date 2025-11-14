@@ -20,6 +20,7 @@ public class Funcionario {
     private String email_Fun;
     private String senha;
     private String senhaHash;
+    private String cargo;
 
     private final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
@@ -113,5 +114,19 @@ public class Funcionario {
 
     public boolean verificarSenha(String senhaDigitada) {
         return encoder.matches(senhaDigitada, this.senha);
+    }
+
+    /**
+     * @return the cargo
+     */
+    public String getCargo() {
+        return cargo;
+    }
+
+    /**
+     * @param cargo the cargo to set
+     */
+    public void setCargo(String cargo) {
+        this.cargo = cargo;
     }
 }
