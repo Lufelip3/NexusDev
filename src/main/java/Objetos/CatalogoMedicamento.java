@@ -13,7 +13,6 @@ public class CatalogoMedicamento {
     
     private int codCatMed;
     private String nomeCatalogo;
-    private int codigoCatalogo;
     private String descCatalogo;
     private Double valorCatalogo;
 
@@ -31,14 +30,6 @@ public class CatalogoMedicamento {
 
     public void setNomeCatalogo(String nomeCatalogo) {
         this.nomeCatalogo = nomeCatalogo;
-    }
-
-    public int getCodigoCatalogo() {
-        return codigoCatalogo;
-    }
-
-    public void setCodigoCatalogo(int codigoCatalogo) {
-        this.codigoCatalogo = codigoCatalogo;
     }
 
     public String getDescCatalogo() {
