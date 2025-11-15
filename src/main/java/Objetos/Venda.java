@@ -10,51 +10,81 @@ package Objetos;
  */
 public class Venda {
 
-    private String notaFiscalVenda;
+    private int notaFiscalVenda;
     private String dataVenda;
     private Double valorVenda;
-    private String cnpjDrog;
-    private String cpfDrog;
+    private String cnpjVenda;
+    private String cpfVenda;
 
-    public String getNotaFiscalVenda() {
+    /**
+     * @return the notaFiscalVenda
+     */
+    public int getNotaFiscalVenda() {
         return notaFiscalVenda;
     }
 
-    public void setNotaFiscalVenda(String notaFiscalVenda) {
+    /**
+     * @param notaFiscalVenda the notaFiscalVenda to set
+     */
+    public void setNotaFiscalVenda(int notaFiscalVenda) {
         this.notaFiscalVenda = notaFiscalVenda;
     }
 
+    /**
+     * @return the dataVenda
+     */
     public String getDataVenda() {
         return dataVenda;
     }
 
+    /**
+     * @param dataVenda the dataVenda to set
+     */
     public void setDataVenda(String dataVenda) {
         this.dataVenda = dataVenda;
     }
 
+    /**
+     * @return the valorVenda
+     */
     public Double getValorVenda() {
         return valorVenda;
     }
 
+    /**
+     * @param valorVenda the valorVenda to set
+     */
     public void setValorVenda(Double valorVenda) {
         this.valorVenda = valorVenda;
     }
 
-    public String getCnpjDrog() {
-        return cnpjDrog;
+    /**
+     * @return the cnpjVenda
+     */
+    public String getCnpjVenda() {
+        return cnpjVenda;
     }
 
-    public void setCnpjDrog(String cnpjDrog) {
-        this.cnpjDrog = cnpjDrog;
+    /**
+     * @param cnpjVenda the cnpjVenda to set
+     */
+    public void setCnpjVenda(String cnpjVenda) {
+        this.cnpjVenda = cnpjVenda;
     }
 
-    public String getCpfDrog() {
-        return cpfDrog;
+    /**
+     * @return the cpfVenda
+     */
+    public String getCpfVenda() {
+        return cpfVenda;
     }
 
-    public void setCpfDrog(String cpfDrog) {
-        this.cpfDrog = cpfDrog;
+    /**
+     * @param cpfVenda the cpfVenda to set
+     */
+    public void setCpfVenda(String cpfVenda) {
+        this.cpfVenda = cpfVenda;
     }
 
-    
+   
 }

@@ -12,20 +12,17 @@ CREATE TABLE drogaria (
   Num_Drog INT NOT NULL,
   Email_Drog VARCHAR(50) UNIQUE NOT NULL
 );
-
 -- ===============================
--- Tabela: funcionario
+-- Tabela: laboratorio
 -- ===============================
-CREATE TABLE funcionario (
-  CPF VARCHAR(14) PRIMARY KEY,
-  Nome_Fun VARCHAR(50) NOT NULL,
-  Telefone_Fun VARCHAR(15) NOT NULL,
-  Cep_Fun VARCHAR(10) NOT NULL,
-  Num_Fun VARCHAR(15) NOT NULL,
-  Email_Fun VARCHAR(50) UNIQUE NOT NULL,
-  Senha VARCHAR(255) NOT NULL
+CREATE TABLE laboratorio (
+  CNPJ_Lab VARCHAR(18) PRIMARY KEY,
+  Nome_Lab VARCHAR(50) NOT NULL,
+  Telefone_Lab VARCHAR(15) NOT NULL,
+  Cep_Lab VARCHAR(10) NOT NULL,
+  Num_Lab INT UNIQUE NOT NULL,
+  Email_Lab VARCHAR(50) UNIQUE NOT NULL
 );
-
 -- ===============================
 -- Tabela: laboratorio
 -- ===============================

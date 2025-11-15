@@ -15,52 +15,76 @@ public class CatalogoMedicamento {
     private String nomeCatalogo;
     private String descCatalogo;
     private Double valorCatalogo;
-    private String cnpjLab;
+    private String cnpjLabCat;
 
+    /**
+     * @return the codCatMed
+     */
     public int getCodCatMed() {
         return codCatMed;
     }
 
+    /**
+     * @param codCatMed the codCatMed to set
+     */
     public void setCodCatMed(int codCatMed) {
         this.codCatMed = codCatMed;
     }
 
+    /**
+     * @return the nomeCatalogo
+     */
     public String getNomeCatalogo() {
         return nomeCatalogo;
     }
 
+    /**
+     * @param nomeCatalogo the nomeCatalogo to set
+     */
     public void setNomeCatalogo(String nomeCatalogo) {
         this.nomeCatalogo = nomeCatalogo;
     }
 
+    /**
+     * @return the descCatalogo
+     */
     public String getDescCatalogo() {
         return descCatalogo;
     }
 
+    /**
+     * @param descCatalogo the descCatalogo to set
+     */
     public void setDescCatalogo(String descCatalogo) {
         this.descCatalogo = descCatalogo;
     }
 
+    /**
+     * @return the valorCatalogo
+     */
     public Double getValorCatalogo() {
         return valorCatalogo;
     }
 
+    /**
+     * @param valorCatalogo the valorCatalogo to set
+     */
     public void setValorCatalogo(Double valorCatalogo) {
         this.valorCatalogo = valorCatalogo;
     }
 
     /**
-     * @return the cnpjLab
+     * @return the cnpjLabCat
      */
-    public String getCnpjLab() {
-        return cnpjLab;
+    public String getCnpjLabCat() {
+        return cnpjLabCat;
     }
 
     /**
-     * @param cnpjLab the cnpjLab to set
+     * @param cnpjLabCat the cnpjLabCat to set
      */
-    public void setCnpjLab(String cnpjLab) {
-        this.cnpjLab = cnpjLab;
+    public void setCnpjLabCat(String cnpjLabCat) {
+        this.cnpjLabCat = cnpjLabCat;
     }
-    
+
 }

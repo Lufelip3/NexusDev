@@ -14,65 +14,106 @@ public class Medicamento {
     private String descricaoMed;
     private String dataValidadeMed;
     private Double valorMed;
-    private String quantidadeMed;
-    private String codMed;
-    private String codCatMed;
+    private int quantidadeMed;
+    private int codMed;
+    private int codCatMed;
 
+    /**
+     * @return the nomeMed
+     */
     public String getNomeMed() {
         return nomeMed;
     }
 
+    /**
+     * @param nomeMed the nomeMed to set
+     */
     public void setNomeMed(String nomeMed) {
         this.nomeMed = nomeMed;
     }
 
+    /**
+     * @return the descricaoMed
+     */
     public String getDescricaoMed() {
         return descricaoMed;
     }
 
+    /**
+     * @param descricaoMed the descricaoMed to set
+     */
     public void setDescricaoMed(String descricaoMed) {
         this.descricaoMed = descricaoMed;
     }
 
+    /**
+     * @return the dataValidadeMed
+     */
     public String getDataValidadeMed() {
         return dataValidadeMed;
     }
 
+    /**
+     * @param dataValidadeMed the dataValidadeMed to set
+     */
     public void setDataValidadeMed(String dataValidadeMed) {
         this.dataValidadeMed = dataValidadeMed;
     }
 
+    /**
+     * @return the valorMed
+     */
     public Double getValorMed() {
         return valorMed;
     }
 
+    /**
+     * @param valorMed the valorMed to set
+     */
     public void setValorMed(Double valorMed) {
         this.valorMed = valorMed;
     }
 
-    public String getQuantidadeMed() {
+    /**
+     * @return the quantidadeMed
+     */
+    public int getQuantidadeMed() {
         return quantidadeMed;
     }
 
-    public void setQuantidadeMed(String quantidadeMed) {
+    /**
+     * @param quantidadeMed the quantidadeMed to set
+     */
+    public void setQuantidadeMed(int quantidadeMed) {
         this.quantidadeMed = quantidadeMed;
     }
 
-    public String getCodMed() {
+    /**
+     * @return the codMed
+     */
+    public int getCodMed() {
         return codMed;
     }
 
-    public void setCodMed(String codMed) {
+    /**
+     * @param codMed the codMed to set
+     */
+    public void setCodMed(int codMed) {
         this.codMed = codMed;
     }
 
-    public String getCodCatMed() {
+    /**
+     * @return the codCatMed
+     */
+    public int getCodCatMed() {
         return codCatMed;
     }
 
-    public void setCodCatMed(String codCatMed) {
+    /**
+     * @param codCatMed the codCatMed to set
+     */
+    public void setCodCatMed(int codCatMed) {
         this.codCatMed = codCatMed;
     }
 
-    
 }

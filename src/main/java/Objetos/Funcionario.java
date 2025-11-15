@@ -167,3 +167,4 @@ public class Funcionario {
     public void setEncoder(BCryptPasswordEncoder encoder) {
         this.encoder = encoder;
     }
+}
