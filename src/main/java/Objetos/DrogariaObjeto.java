@@ -13,11 +13,10 @@ public class DrogariaObjeto {
 
     private String nomeDrogaria;
     private String cnpjDrogaria;
-    private String endereco;
     private int numeroDrogaria;
     private String cepDrogaria;
     private String emailDrogaria;
-    private String telefoneDrogaria;
+    private String telefoneDrogaria; 
 
     public String getNomeDrogaria() {
         return nomeDrogaria;
@@ -33,14 +32,6 @@ public class DrogariaObjeto {
 
     public void setCnpjDrogaria(String cnpjDrogaria) {
         this.cnpjDrogaria = cnpjDrogaria;
-    }
-
-    public String getEndereco() {
-        return endereco;
-    }
-
-    public void setEndereco(String endereco) {
-        this.endereco = endereco;
     }
 
     public int getNumeroDrogaria() {
@@ -74,6 +65,4 @@ public class DrogariaObjeto {
     public void setTelefoneDrogaria(String telefoneDrogaria) {
         this.telefoneDrogaria = telefoneDrogaria;
     }
-
-    
 }

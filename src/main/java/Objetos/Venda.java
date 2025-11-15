@@ -10,18 +10,11 @@ package Objetos;
  */
 public class Venda {
 
-    private String cod_Rastreio;
     private String notaFiscalVenda;
     private String dataVenda;
     private Double valorVenda;
-
-    public String getCod_Rastreio() {
-        return cod_Rastreio;
-    }
-
-    public void setCod_Rastreio(String cod_Rastreio) {
-        this.cod_Rastreio = cod_Rastreio;
-    }
+    private String cnpjDrog;
+    private String cpfDrog;
 
     public String getNotaFiscalVenda() {
         return notaFiscalVenda;
@@ -47,6 +40,21 @@ public class Venda {
         this.valorVenda = valorVenda;
     }
 
-    
+    public String getCnpjDrog() {
+        return cnpjDrog;
+    }
+
+    public void setCnpjDrog(String cnpjDrog) {
+        this.cnpjDrog = cnpjDrog;
+    }
+
+    public String getCpfDrog() {
+        return cpfDrog;
+    }
+
+    public void setCpfDrog(String cpfDrog) {
+        this.cpfDrog = cpfDrog;
+    }
+
     
 }

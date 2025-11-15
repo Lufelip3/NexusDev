@@ -16,7 +16,6 @@ public class Laboratorio {
     private String emailLab;
     private int numeroLab;
     private String cepLab;
-    private String endereco;
 
     public String getNomeLab() {
         return nomeLab;
@@ -66,11 +65,5 @@ public class Laboratorio {
         this.cepLab = cepLab;
     }
 
-    public String getEndereco() {
-        return endereco;
-    }
-
-    public void setEndereco(String endereco) {
-        this.endereco = endereco;
-    }
+   
 }
