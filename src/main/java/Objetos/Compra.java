@@ -10,31 +10,15 @@ package Objetos;
  */
 public class Compra {
     
-    private String dataCompra;
-    private Double valorCompra;
+    private Double valorTotal;
     private int notaFiscalCompra;
-    private String nomeCompra;
-    private int cnpjCompra;
-    private String enderecoCompra;
-    private int cepCompra;
-    private String emailCompra;
-    private int telefoneCompra;
-    private Double numeroCompra;
 
-    public String getDataCompra() {
-        return dataCompra;
+    public Double getValorTotal() {
+        return valorTotal;
     }
 
-    public void setDataCompra(String dataCompra) {
-        this.dataCompra = dataCompra;
-    }
-
-    public Double getValorCompra() {
-        return valorCompra;
-    }
-
-    public void setValorCompra(Double valorCompra) {
-        this.valorCompra = valorCompra;
+    public void setValorTotal(Double valorTotal) {
+        this.valorTotal = valorTotal;
     }
 
     public int getNotaFiscalCompra() {
@@ -43,61 +27,5 @@ public class Compra {
 
     public void setNotaFiscalCompra(int notaFiscalCompra) {
         this.notaFiscalCompra = notaFiscalCompra;
-    }
-
-    public String getNomeCompra() {
-        return nomeCompra;
-    }
-
-    public void setNomeCompra(String nomeCompra) {
-        this.nomeCompra = nomeCompra;
-    }
-
-    public int getCnpjCompra() {
-        return cnpjCompra;
-    }
-
-    public void setCnpjCompra(int cnpjCompra) {
-        this.cnpjCompra = cnpjCompra;
-    }
-
-    public String getEnderecoCompra() {
-        return enderecoCompra;
-    }
-
-    public void setEnderecoCompra(String enderecoCompra) {
-        this.enderecoCompra = enderecoCompra;
-    }
-
-    public int getCepCompra() {
-        return cepCompra;
-    }
-
-    public void setCepCompra(int cepCompra) {
-        this.cepCompra = cepCompra;
-    }
-
-    public String getEmailCompra() {
-        return emailCompra;
-    }
-
-    public void setEmailCompra(String emailCompra) {
-        this.emailCompra = emailCompra;
-    }
-
-    public int getTelefoneCompra() {
-        return telefoneCompra;
-    }
-
-    public void setTelefoneCompra(int telefoneCompra) {
-        this.telefoneCompra = telefoneCompra;
-    }
-
-    public Double getNumeroCompra() {
-        return numeroCompra;
-    }
-
-    public void setNumeroCompra(Double numeroCompra) {
-        this.numeroCompra = numeroCompra;
     }
 }
