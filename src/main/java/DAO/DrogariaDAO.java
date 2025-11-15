@@ -51,7 +51,8 @@ public class DrogariaDAO {
         PreparedStatement stmt = null;
 
         try {
-            stmt = con.prepareStatement("INSERT INTO drogaria (Nome_Drog, Telefone_Drog, Cep_Drog, Num_Drog, Email_Drog) VALUES (?,?,?,?,?)");
+            stmt = con.prepareStatement("INSERT INTO drogaria (CNPJ_Drog, Nome_Drog, Telefone_Drog, Cep_Drog, Num_Drog, Email_Drog) VALUES (?,?,?,?,?,?)");
+            stmt.setString(1, d.getCnpjDrogaria());
             stmt.setString(2, d.getNomeDrogaria());
             stmt.setString(3, d.getTelefoneDrogaria());
             stmt.setString(4, d.getCepDrogaria());
@@ -96,7 +97,7 @@ public class DrogariaDAO {
         PreparedStatement stmt = null;
 
         try {
-            stmt = con.prepareStatement("DELETE FROM drogaria where CPF = ?");
+            stmt = con.prepareStatement("DELETE FROM drogaria where CNPJ_Lab = ?");
             stmt.setString(1, d.getCnpjDrogaria());
 
             stmt.execute();

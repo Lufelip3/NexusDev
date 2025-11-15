@@ -15,9 +15,9 @@ public class Itens {
     private String dataValItem;
     private Double valorItemItem;
     private String dataVendaItem;
-    private String notaFiscalCompraItem;
-    private String codCatMedItem;
-    private String codMedItem;
+    private int notaFiscalCompraItem;
+    private int codCatMedItem;
+    private int codMedItem;
 
     /**
      * @return the codigoItem
@@ -92,42 +92,42 @@ public class Itens {
     /**
      * @return the notaFiscalCompraItem
      */
-    public String getNotaFiscalCompraItem() {
+    public int getNotaFiscalCompraItem() {
         return notaFiscalCompraItem;
     }
 
     /**
      * @param notaFiscalCompraItem the notaFiscalCompraItem to set
      */
-    public void setNotaFiscalCompraItem(String notaFiscalCompraItem) {
+    public void setNotaFiscalCompraItem(int notaFiscalCompraItem) {
         this.notaFiscalCompraItem = notaFiscalCompraItem;
     }
 
     /**
      * @return the codCatMedItem
      */
-    public String getCodCatMedItem() {
+    public int getCodCatMedItem() {
         return codCatMedItem;
     }
 
     /**
      * @param codCatMedItem the codCatMedItem to set
      */
-    public void setCodCatMedItem(String codCatMedItem) {
+    public void setCodCatMedItem(int codCatMedItem) {
         this.codCatMedItem = codCatMedItem;
     }
 
     /**
      * @return the codMedItem
      */
-    public String getCodMedItem() {
+    public int getCodMedItem() {
         return codMedItem;
     }
 
     /**
      * @param codMedItem the codMedItem to set
      */
-    public void setCodMedItem(String codMedItem) {
+    public void setCodMedItem(int codMedItem) {
         this.codMedItem = codMedItem;
     }
 

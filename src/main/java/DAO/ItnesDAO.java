@@ -27,17 +27,19 @@ public class ItnesDAO {
         ResultSet rs = null;
         List<Itens> itens = new ArrayList<>();
         try {
-            stmt = con.prepareStatement("SELECT * FROM itens");
+            stmt = con.prepareStatement("SELECT * FROM item");
             rs = stmt.executeQuery();
 
             while (rs.next()) {
                 Itens i = new Itens();
-                i.setNomeItem(rs.getString("Nome_Item"));
-                i.setCodigoItem(rs.getInt("Cod_Item"));
-                i.setDescricaoItem(rs.getString("Desc_Item"));
+                i.setCodCatMedItem(rs.getInt("Cod_Item"));
                 i.setDataValItem(rs.getString("DataVal_Item"));
                 i.setQuantidadeItem(rs.getInt("Qtd_Item"));
-                i.setValorItem(rs.getDouble("Valor_Item"));
+                i.setValorItemItem(rs.getDouble("Valor_Item"));
+                i.setDataValItem(rs.getString("Data_Venda"));
+                i.setNotaFiscalCompraItem(rs.getInt("NotaFiscal_Entrada"));
+                i.setCodCatMedItem(rs.getInt("Cod_CatMed"));
+                i.setCodMedItem(rs.getInt("Cod_Med"));
                 itens.add(i);
             }
         } catch (SQLException e) {
@@ -53,7 +55,7 @@ public class ItnesDAO {
         PreparedStatement stmt = null;
 
         try {
-            stmt = con.prepareStatement("INSERT INTO intens (Nome_Item, Desc_Item, DataVal_Item, Qtd_Item, Valor_Item) VALUES (?,?,?,?,?)");
+            stmt = con.prepareStatement("INSERT INTO item (Nome_Item, Desc_Item, DataVal_Item, Qtd_Item, Valor_Item) VALUES (?,?,?,?,?)");
             stmt.setString(1, i.getNomeItem());
             stmt.setString(2, i.getDescricaoItem());
             stmt.setString(3, i.getDataValItem());

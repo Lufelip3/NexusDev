@@ -35,7 +35,7 @@ public class CatalogoDAO {
                 cm.setCodCatMed(rs.getInt("Cod_CatMed"));
                 cm.setDescCatalogo(rs.getString("Desc_CatMed"));
                 cm.setValorCatalogo(rs.getDouble("Valor_CatMed"));
-                cm.setCnpjLab(rs.getString("CNPJ_Lab"));
+                cm.setCnpjLabCat(rs.getString("CNPJ_Lab"));
                 catalogoMedicamento.add(cm);
             }
         } catch (SQLException e) {
@@ -55,7 +55,7 @@ public class CatalogoDAO {
             stmt.setString(1, cm.getNomeCatalogo());
             stmt.setString(2, cm.getDescCatalogo());
             stmt.setDouble(3, cm.getValorCatalogo());
-            stmt.setString(4, cm.getCnpjLab());
+            stmt.setString(4, cm.getCnpjLabCat());
 
             stmt.execute();
             JOptionPane.showMessageDialog(null, "Catálogo cadastrado com sucesso!");
@@ -76,7 +76,7 @@ public class CatalogoDAO {
             stmt.setString(2, cm.getNomeCatalogo());
             stmt.setString(3, cm.getDescCatalogo());
             stmt.setDouble(4, cm.getValorCatalogo());
-            stmt.setString(4, cm.getCnpjLab());
+            stmt.setString(4, cm.getCnpjLabCat());
             stmt.setInt(5, cm.getCodCatMed());
 
             stmt.execute();
