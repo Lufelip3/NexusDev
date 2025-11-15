@@ -19,6 +19,7 @@ import javax.swing.JOptionPane;
  * @author andrey.munhoz
  */
 public class CatalogoDAO {
+
     public List<CatalogoMedicamento> read() {
         Connection con = Conexao.getConnection();
         PreparedStatement stmt = null;
@@ -30,10 +31,11 @@ public class CatalogoDAO {
 
             while (rs.next()) {
                 CatalogoMedicamento cm = new CatalogoMedicamento();
-                cm.setNomeCatalogo(rs.getString("NomeCatalogo"));
-                cm.setCodigoCatalogo(rs.getInt("CodigoCatalogo"));
-                cm.setDescCatalogo(rs.getString("DescCatalogo"));
-                cm.setValorCatalogo(rs.getDouble("ValorCatalogo"));
+                cm.setNomeCatalogo(rs.getString("Nome_CatMed"));
+                cm.setCodCatMed(rs.getInt("Cod_CatMed"));
+                cm.setDescCatalogo(rs.getString("Desc_CatMed"));
+                cm.setValorCatalogo(rs.getDouble("Valor_CatMed"));
+                cm.setCnpjLab(rs.getString("CNPJ_Lab"));
                 catalogoMedicamento.add(cm);
             }
         } catch (SQLException e) {
@@ -49,11 +51,11 @@ public class CatalogoDAO {
         PreparedStatement stmt = null;
 
         try {
-            stmt = con.prepareStatement("INSERT INTO catalogoMedicamento (nomeCatalogo, codigoCatalogo, descCatalogo, ValorCatalogo) VALUES (?,?,?,?)");
+            stmt = con.prepareStatement("INSERT INTO catalogoMedicamento (Nome_CatMed, Desc_CatMed, Valor_CatMed, CNPJ_Lab) VALUES (?,?,?,?)");
             stmt.setString(1, cm.getNomeCatalogo());
-            stmt.setInt(2, cm.getCodigoCatalogo());
-            stmt.setString(3, cm.getDescCatalogo());
-            stmt.setDouble(4, cm.getValorCatalogo());
+            stmt.setString(2, cm.getDescCatalogo());
+            stmt.setDouble(3, cm.getValorCatalogo());
+            stmt.setString(4, cm.getCnpjLab());
 
             stmt.execute();
             JOptionPane.showMessageDialog(null, "Catálogo cadastrado com sucesso!");
@@ -70,11 +72,11 @@ public class CatalogoDAO {
         PreparedStatement stmt = null;
 
         try {
-            stmt = con.prepareStatement("UPDATE drogaria (codCatMed = ?, nomeCatalogo = ?, codigoCatalogo = ?, descCatalogo = ?, ValorCatalogo = ? where codCatMed = ?");
-            stmt.setString(1, cm.getNomeCatalogo());
-            stmt.setInt(2, cm.getCodigoCatalogo());
+            stmt = con.prepareStatement("UPDATE catalogo_medicamento (Nome_CatMed = ?, Desc_CatMed = ?, Valor_CatMed = ?, CNPJ_Lab = ? where codCatMed = ?");
+            stmt.setString(2, cm.getNomeCatalogo());
             stmt.setString(3, cm.getDescCatalogo());
             stmt.setDouble(4, cm.getValorCatalogo());
+            stmt.setString(4, cm.getCnpjLab());
             stmt.setInt(5, cm.getCodCatMed());
 
             stmt.execute();
@@ -92,7 +94,7 @@ public class CatalogoDAO {
         PreparedStatement stmt = null;
 
         try {
-            stmt = con.prepareStatement("DELETE FROM catalogo where CPF = ?");
+            stmt = con.prepareStatement("DELETE FROM catalogo_medicamento where Cod_CatMed = ?");
             stmt.setInt(1, cm.getCodCatMed());
 
             stmt.execute();

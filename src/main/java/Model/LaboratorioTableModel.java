@@ -8,6 +8,6 @@ package Model;
  *
  * @author andrey.munhoz
  */
-public class LaboratorioTableModle {
+public class LaboratorioTableModel {
     
 }

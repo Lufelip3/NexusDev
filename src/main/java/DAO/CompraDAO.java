@@ -29,7 +29,6 @@ public class CompraDAO {
         try {
             stmt = con.prepareStatement("SELECT * FROM funcionario");
             rs = stmt.executeQuery();
-            maDADM
 
             while (rs.next()) {
                 Compra c = new Compra();
