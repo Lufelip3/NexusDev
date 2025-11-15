@@ -13,9 +13,9 @@ public class CatalogoMedicamento {
     
     private int codCatMed;
     private String nomeCatalogo;
-    private int codigoCatalogo;
     private String descCatalogo;
     private Double valorCatalogo;
+    private String cnpjLab;
 
     public int getCodCatMed() {
         return codCatMed;
@@ -33,14 +33,6 @@ public class CatalogoMedicamento {
         this.nomeCatalogo = nomeCatalogo;
     }
 
-    public int getCodigoCatalogo() {
-        return codigoCatalogo;
-    }
-
-    public void setCodigoCatalogo(int codigoCatalogo) {
-        this.codigoCatalogo = codigoCatalogo;
-    }
-
     public String getDescCatalogo() {
         return descCatalogo;
     }
@@ -55,6 +47,20 @@ public class CatalogoMedicamento {
 
     public void setValorCatalogo(Double valorCatalogo) {
         this.valorCatalogo = valorCatalogo;
+    }
+
+    /**
+     * @return the cnpjLab
+     */
+    public String getCnpjLab() {
+        return cnpjLab;
+    }
+
+    /**
+     * @param cnpjLab the cnpjLab to set
+     */
+    public void setCnpjLab(String cnpjLab) {
+        this.cnpjLab = cnpjLab;
     }
     
 }

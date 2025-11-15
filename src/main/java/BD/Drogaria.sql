@@ -29,13 +29,15 @@ CREATE TABLE funcionario (
 -- ===============================
 -- Tabela: laboratorio
 -- ===============================
-CREATE TABLE laboratorio (
-  CNPJ_Lab VARCHAR(18) PRIMARY KEY,
-  Nome_Lab VARCHAR(50) NOT NULL,
-  Telefone_Lab VARCHAR(15) NOT NULL,
-  Cep_Lab VARCHAR(10) NOT NULL,
-  Num_Lab INT UNIQUE NOT NULL,
-  Email_Lab VARCHAR(50) UNIQUE NOT NULL
+CREATE TABLE funcionario (
+  CPF VARCHAR(14) PRIMARY KEY,
+  Nome_Fun VARCHAR(50) NOT NULL,
+  Telefone_Fun VARCHAR(15) NOT NULL,
+  Cep_Fun VARCHAR(10) NOT NULL,
+  Num_Fun VARCHAR(15) NOT NULL,
+  Email_Fun VARCHAR(50) UNIQUE NOT NULL,
+  Senha VARCHAR(255) NOT NULL,
+  Cargo VARCHAR(20) NOT NULL
 );
 
 -- ===============================
@@ -137,17 +139,17 @@ INSERT INTO drogaria (CNPJ_Drog, Nome_Drog, Telefone_Drog, Cep_Drog, Num_Drog, E
 ('90.123.456/0001-99', 'Drogaria Nacional', '(61)91111-9999', '70010-000', 109, 'sac@drogarianacional.com'),
 ('11.222.333/0001-00', 'Drogaria Prime', '(19)90000-0000', '13010-000', 110, 'prime@drogariaprime.com');
 
-INSERT INTO funcionario (CPF, Nome_Fun, Telefone_Fun, Cep_Fun, Num_Fun, Email_Fun, Senha) VALUES
-('111.111.111-11', 'Marcos Silva', '(11)91111-1111', '01001-000', '101A', 'marcos@drogariacentral.com', '12345'),
-('222.222.222-22', 'Ana Paula Costa', '(11)92222-2222', '01002-000', '102B', 'ana@drogariavida.com', 'abc123'),
-('333.333.333-33', 'Lucas Ferreira', '(21)93333-3333', '20010-000', '103C', 'lucas@drogariasãojoao.com', 'senha321'),
-('444.444.444-44', 'Fernanda Oliveira', '(31)94444-4444', '30110-000', '104D', 'fernanda@drogariabemestar.com', 'senha123'),
-('555.555.555-55', 'Bruno Santos', '(41)95555-5555', '80010-000', '105E', 'bruno@drogariapopular.com', 'bruno@1'),
-('666.666.666-66', 'Juliana Rocha', '(51)96666-6666', '90010-000', '106F', 'juliana@drogariasaopaulo.com', 'jul123'),
-('777.777.777-77', 'Rafael Almeida', '(71)97777-7777', '40010-000', '107G', 'rafael@farmamais.com', 'rafael1'),
-('888.888.888-88', 'Paula Mendes', '(85)98888-8888', '60010-000', '108H', 'paula@economica.com', 'paula2024'),
-('999.999.999-99', 'Thiago Moreira', '(61)99999-9999', '70010-000', '109I', 'thiago@nacional.com', 'thg123'),
-('123.456.789-00', 'Beatriz Nunes', '(19)91234-5678', '13010-000', '110J', 'beatriz@prime.com', 'bprime');
+INSERT INTO funcionario (CPF, Nome_Fun, Telefone_Fun, Cep_Fun, Num_Fun, Email_Fun, Senha, Cargo) VALUES
+('111.111.111-11', 'Marcos Silva', '(11)91111-1111', '01001-000', '101A', 'marcos@drogariacentral.com', '12345', 'Gerente'),
+('222.222.222-22', 'Ana Paula Costa', '(11)92222-2222', '01002-000', '102B', 'ana@drogariavida.com', 'abc123', 'Gerente'),
+('333.333.333-33', 'Lucas Ferreira', '(21)93333-3333', '20010-000', '103C', 'lucas@drogariasãojoao.com', 'senha321', 'Usuario'),
+('444.444.444-44', 'Fernanda Oliveira', '(31)94444-4444', '30110-000', '104D', 'fernanda@drogariabemestar.com', 'senha123', 'Usuario'),
+('555.555.555-55', 'Bruno Santos', '(41)95555-5555', '80010-000', '105E', 'bruno@drogariapopular.com', 'bruno@1', 'Usuario'),
+('666.666.666-66', 'Juliana Rocha', '(51)96666-6666', '90010-000', '106F', 'juliana@drogariasaopaulo.com', 'jul123', 'Usuario'),
+('777.777.777-77', 'Rafael Almeida', '(71)97777-7777', '40010-000', '107G', 'rafael@farmamais.com', 'rafael1', 'Usuario'),
+('888.888.888-88', 'Paula Mendes', '(85)98888-8888', '60010-000', '108H', 'paula@economica.com', 'paula2024', 'Usuario'),
+('999.999.999-99', 'Thiago Moreira', '(61)99999-9999', '70010-000', '109I', 'thiago@nacional.com', 'thg123', 'Usuario'),
+('123.456.789-00', 'Beatriz Nunes', '(19)91234-5678', '13010-000', '110J', 'beatriz@prime.com', 'bprime', 'Usuario');
 
 INSERT INTO laboratorio (CNPJ_Lab, Nome_Lab, Telefone_Lab, Cep_Lab, Num_Lab, Email_Lab) VALUES
 ('01.111.111/0001-01', 'Pfizer', '(11)90000-0001', '01010-000', 1, 'contato@pfizer.com'),

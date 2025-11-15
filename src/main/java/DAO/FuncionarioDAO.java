@@ -19,6 +19,7 @@ import javax.swing.JOptionPane;
  * @author lucas.gmpedro
  */
 public class FuncionarioDAO {
+
     public List<Funcionario> read() {
         Connection con = Conexao.getConnection();
         PreparedStatement stmt = null;
@@ -36,6 +37,8 @@ public class FuncionarioDAO {
                 f.setCep_Fun(rs.getString("Cep_Fun"));
                 f.setNumero_Fun(rs.getInt("Num_Fun"));
                 f.setEmail_Fun(rs.getString("Email_Fun"));
+                f.setSenha(rs.getString("Senha"));
+                f.setCargo(rs.getString("Cargo"));
                 funcionarios.add(f);
             }
         } catch (SQLException e) {
@@ -51,13 +54,15 @@ public class FuncionarioDAO {
         PreparedStatement stmt = null;
 
         try {
-            stmt = con.prepareStatement("INSERT INTO funcionario (CPF, Nome_Fun, Telefone_Fun, Cep_Fun, Num_Fun, Email_Fun) VALUES (?,?,?,?,?,?)");
+            stmt = con.prepareStatement("INSERT INTO funcionario (CPF, Nome_Fun, Telefone_Fun, Cep_Fun, Num_Fun, Email_Fun, Senha, Cargo) VALUES (?,?,?,?,?,?,?,?)");
             stmt.setString(1, f.getCpf());
             stmt.setString(2, f.getNome_Fun());
             stmt.setString(3, f.getTelefone_Fun());
             stmt.setString(4, f.getCep_Fun());
             stmt.setInt(5, f.getNumero_Fun());
             stmt.setString(6, f.getEmail_Fun());
+            stmt.setString(7, f.getSenhaHash());
+            stmt.setString(8, f.getCargo());
 
             stmt.execute();
             JOptionPane.showMessageDialog(null, "Funcionário cadastrado com sucesso!");
@@ -74,14 +79,15 @@ public class FuncionarioDAO {
         PreparedStatement stmt = null;
 
         try {
-            stmt = con.prepareStatement("UPDATE funcionario set Nome_Fun = ?, Telefone_Fun = ?, Cep_Fun = ?, Num_Fun = ?, Email_Fun = ? where CPF = ?");
-            stmt.setString(1, f.getCpf());
-            stmt.setString(2, f.getNome_Fun());
-            stmt.setString(3, f.getTelefone_Fun());
-            stmt.setString(4, f.getCep_Fun());
-            stmt.setInt(5, f.getNumero_Fun());
-            stmt.setString(6, f.getEmail_Fun());
-
+            stmt = con.prepareStatement("UPDATE funcionario set Nome_Fun = ?, Telefone_Fun = ?, Cep_Fun = ?, Num_Fun = ?, Email_Fun = ? Senha = ? Cargo = ? where CPF = ?");
+            stmt.setString(1, f.getNome_Fun());
+            stmt.setString(2, f.getTelefone_Fun());
+            stmt.setString(3, f.getCep_Fun());
+            stmt.setInt(4, f.getNumero_Fun());
+            stmt.setString(5, f.getEmail_Fun());
+            stmt.setString(6, f.getSenhaHash());
+            stmt.setString(7, f.getCargo());
+            stmt.setString(8, f.getCpf());
             stmt.execute();
             JOptionPane.showMessageDialog(null, "Funcionário atualizado com sucesso!");
 
