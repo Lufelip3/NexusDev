@@ -13,7 +13,7 @@ public class Itens {
     private int codigoItem;
     private int quantidadeItem;
     private String dataValItem;
-    private Double valorItemItem;
+    private Double valorItem;
     private String dataVendaItem;
     private int notaFiscalCompraItem;
     private int codCatMedItem;
@@ -64,15 +64,15 @@ public class Itens {
     /**
      * @return the valorItemItem
      */
-    public Double getValorItemItem() {
-        return valorItemItem;
+    public Double getValorItem() {
+        return valorItem;
     }
 
     /**
      * @param valorItemItem the valorItemItem to set
      */
-    public void setValorItemItem(Double valorItemItem) {
-        this.valorItemItem = valorItemItem;
+    public void setValorItem(Double valorItemItem) {
+        this.valorItem = valorItemItem;
     }
 
     /**

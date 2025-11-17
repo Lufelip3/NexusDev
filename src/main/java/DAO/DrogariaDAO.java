@@ -60,7 +60,7 @@ public class DrogariaDAO {
             stmt.setString(6, d.getEmailDrogaria());
 
             stmt.execute();
-            JOptionPane.showMessageDialog(null, "Drogaria cadastrado com sucesso!");
+            JOptionPane.showMessageDialog(null, "Drogaria cadastrada com sucesso!");
 
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Falha ao cadastrar: " + e);
@@ -83,7 +83,7 @@ public class DrogariaDAO {
             stmt.setString(6, d.getCnpjDrogaria());
 
             stmt.execute();
-            JOptionPane.showMessageDialog(null, "Drogaria atualizado com sucesso!");
+            JOptionPane.showMessageDialog(null, "Drogaria atualizada com sucesso!");
 
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Falha ao atualizar: " + e);
@@ -101,7 +101,7 @@ public class DrogariaDAO {
             stmt.setString(1, d.getCnpjDrogaria());
 
             stmt.execute();
-            JOptionPane.showMessageDialog(null, "Drogaria removido com sucesso!");
+            JOptionPane.showMessageDialog(null, "Drogaria removida com sucesso!");
 
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Falha ao remover: " + e);
