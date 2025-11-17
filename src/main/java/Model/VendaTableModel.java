@@ -4,9 +4,9 @@
  */
 package Model;
 
-import DAO.LaboratorioDAO;
 import DAO.MedicamentoDAO;
-import Objetos.Laboratorio;
+import DAO.VendaDAO;
+import Objetos.Venda;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
@@ -15,9 +15,9 @@ import javax.swing.table.AbstractTableModel;
  *
  * @author andrey.munhoz
  */
-public class LaboratorioTableModel extends AbstractTableModel{
-    private List<Laboratorio> dados = new ArrayList<>();
-    private String[] colunas = {"Nome", "CNPJ", "Telefone","E-mail","Número" ,"CEP"};
+public class VendaTableModel extends AbstractTableModel{
+   private List<Venda> dados = new ArrayList<>();
+    private String[] colunas = {"Código", "NotaFiscal", "DataDeVenda", "ValorDeVenda"};
 
     @Override
     public String getColumnName(int column) {
@@ -38,17 +38,13 @@ public class LaboratorioTableModel extends AbstractTableModel{
     public Object getValueAt(int linha, int coluna) {
         switch (coluna) {
             case 0:
-                return dados.get(linha).getNomeLab();
+                return dados.get(linha).getCod_Rastreio();
             case 1:
-                return dados.get(linha).getCnpjLab();
+                return dados.get(linha).getNotaFiscalVenda();
             case 2:
-                return dados.get(linha).getTelefoneLab();
+                return dados.get(linha).getDataVenda();
             case 3:
-                return dados.get(linha).getEmailLab();
-            case 4:
-                return dados.get(linha).getNumeroLab();
-            case 5:
-                return dados.get(linha).getCepLab();
+                return dados.get(linha).getValorVenda();
         }
         return null;
     }
@@ -57,29 +53,23 @@ public class LaboratorioTableModel extends AbstractTableModel{
     public void setValueAt(Object valor, int linha, int coluna) {
         switch (coluna) {
             case 0:
-                dados.get(linha).setNomeLab((String)valor);
+                dados.get(linha).setCod_Rastreio((String) valor);
                 break;
             case 1:
-                dados.get(linha).setCnpjLab((String)valor);
+                dados.get(linha).setNotaFiscalVenda((String) valor);
                 break;
             case 2:
-                dados.get(linha).setTelefoneLab((String)valor);
+                dados.get(linha).setDataVenda((String) valor);
                 break;
             case 3:
-                dados.get(linha).setEmailLab((String)valor);
-                break;
-            case 4:
-                dados.get(linha).setNumeroLab(Integer.parseInt((String)valor));
-                break;
-            case 5:
-                dados.get(linha).setCepLab((String)valor);
+                dados.get(linha).setValorVenda(Double.valueOf((String)valor));
                 break;
         }
         this.fireTableRowsUpdated(linha, linha);
     }
 
-    public void addLinha(Laboratorio l) {
-        this.dados.add(l);
+    public void addLinha(Venda v) {
+        this.dados.add(v);
         this.fireTableDataChanged();
     }
 
@@ -88,15 +78,15 @@ public class LaboratorioTableModel extends AbstractTableModel{
         this.fireTableRowsDeleted(linha, linha);
     }
 
-    public Laboratorio pegaDadosLinha(int linha) {
+    public Venda pegaDadosLinha(int linha) {
         return dados.get(linha);
     }
 
     private void lerDados() {
-        LaboratorioDAO ldao = new LaboratorioDAO();
+        VendaDAO vdao = new VendaDAO();
 
-        for (Laboratorio l : ldao.read()) {
-            this.addLinha(l);
+        for (Venda v : vdao.read()) {
+            this.addLinha(v);
 
         }
         this.fireTableDataChanged();
