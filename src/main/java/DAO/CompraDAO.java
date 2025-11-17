@@ -4,16 +4,102 @@
  */
 package DAO;
 
+import BD.Conexao;
 import Objetos.Compra;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author luis.fmleite
  */
 public class CompraDAO {
+public List<Compra> read() {
+        Connection con = Conexao.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        List<Compra> compras = new ArrayList<>();
+        try {
+            stmt = con.prepareStatement("SELECT * FROM compra");
+            rs = stmt.executeQuery();
 
-    public Iterable<Compra> read() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+            while (rs.next()) {
+                Compra c = new Compra();
+                c.setNotaFiscalCompra(rs.getInt("NotaFiscal_Entrada"));
+                c.setValorTotal(rs.getDouble("Valor_Total"));
+                c.setCpfCompra(rs.getString("CPF"));
+                c.setCnpjCompra(rs.getString("CNPJ_Drog"));
+                compras.add(c);
+            }
+        } catch (SQLException e) {
+            JOptionPane.showConfirmDialog(null, "Falha ao obter dados: " + e);
+        } finally {
+            Conexao.closeConnection(con, stmt, rs);
+        }
+        return compras;
     }
-    
+
+    public void create(Compra c) {
+        Connection con = Conexao.getConnection();
+        PreparedStatement stmt = null;
+
+        try {
+            stmt = con.prepareStatement("INSERT INTO compra (Valor_Total, CPF, CNPJ_Drog) VALUES (?,?,?)");
+            stmt.setDouble(1, c.getValorTotal());
+            stmt.setString(2, c.getCpfCompra());
+            stmt.setString(3, c.getCnpjCompra());
+
+            stmt.execute();
+            JOptionPane.showMessageDialog(null, "Venda cadastrada com sucesso!");
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Falha ao cadastrar: " + e);
+        } finally {
+            Conexao.closeConnection(con, stmt);
+        }
+    }
+
+    public void updtae(Compra c) {
+        Connection con = Conexao.getConnection();
+        PreparedStatement stmt = null;
+
+        try {
+            stmt = con.prepareStatement("UPDATE compra set Valor_Total = ?, CPF = ?, CNPJ_Drog = ? where NotaFiscal_Entrada = ?");
+            stmt.setDouble(1, c.getValorTotal());
+            stmt.setString(2, c.getCpfCompra());
+            stmt.setString(3, c.getCnpjCompra());
+            stmt.setInt(4, c.getNotaFiscalCompra());
+
+            stmt.execute();
+            JOptionPane.showMessageDialog(null, "Compra atualizada com sucesso!");
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Falha ao atualizar: " + e);
+        } finally {
+            Conexao.closeConnection(con, stmt);
+        }
+    }
+
+    public void delete(Compra c) {
+        Connection con = Conexao.getConnection();
+        PreparedStatement stmt = null;
+
+        try {
+            stmt = con.prepareStatement("DELETE FROM compra where NotaFiscal_Entrada = ?");
+            stmt.setInt(1, c.getNotaFiscalCompra());
+
+            stmt.execute();
+            JOptionPane.showMessageDialog(null, "Compra removida com sucesso!");
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Falha ao remover: " + e);
+        } finally {
+            Conexao.closeConnection(con, stmt);
+        }
+    }
 }

@@ -25,7 +25,7 @@ public class DrogariaDAO {
         ResultSet rs = null;
         List<DrogariaObjeto> drogarias = new ArrayList<>();
         try {
-            stmt = con.prepareStatement("SELECT * FROM funcionario");
+            stmt = con.prepareStatement("SELECT * FROM drogaria");
             rs = stmt.executeQuery();
 
             while (rs.next()) {
@@ -60,7 +60,7 @@ public class DrogariaDAO {
             stmt.setString(6, d.getEmailDrogaria());
 
             stmt.execute();
-            JOptionPane.showMessageDialog(null, "Drogaria cadastrado com sucesso!");
+            JOptionPane.showMessageDialog(null, "Drogaria cadastrada com sucesso!");
 
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Falha ao cadastrar: " + e);
@@ -83,7 +83,7 @@ public class DrogariaDAO {
             stmt.setString(6, d.getCnpjDrogaria());
 
             stmt.execute();
-            JOptionPane.showMessageDialog(null, "Drogaria atualizado com sucesso!");
+            JOptionPane.showMessageDialog(null, "Drogaria atualizada com sucesso!");
 
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Falha ao atualizar: " + e);
@@ -97,11 +97,11 @@ public class DrogariaDAO {
         PreparedStatement stmt = null;
 
         try {
-            stmt = con.prepareStatement("DELETE FROM funcionario where CPF = ?");
+            stmt = con.prepareStatement("DELETE FROM drogaria where CNPJ_Lab = ?");
             stmt.setString(1, d.getCnpjDrogaria());
 
             stmt.execute();
-            JOptionPane.showMessageDialog(null, "Drogaria removido com sucesso!");
+            JOptionPane.showMessageDialog(null, "Drogaria removida com sucesso!");
 
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Falha ao remover: " + e);

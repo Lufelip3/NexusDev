@@ -131,12 +131,12 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_jBCadastrarMedActionPerformed
 
     private void jBCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCompraActionPerformed
-        Compra commed = new Compra();
+        JanelaCompra commed = new JanelaCompra();
         commed.setVisible(true);
     }//GEN-LAST:event_jBCompraActionPerformed
 
     private void jBLaboratorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBLaboratorioActionPerformed
-       Laboratorio lab = new Laboratorio();
+       JanelaLaboratorio lab = new JanelaLaboratorio();
        lab.setVisible(true);
     }//GEN-LAST:event_jBLaboratorioActionPerformed
 

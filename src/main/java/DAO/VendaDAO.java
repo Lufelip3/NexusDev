@@ -23,24 +23,26 @@ public class VendaDAO {
         Connection con = Conexao.getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;
-        List<Venda> Venda = new ArrayList<>();
+        List<Venda> vendas = new ArrayList<>();
         try {
-            stmt = con.prepareStatement("SELECT * FROM funcionario");
+            stmt = con.prepareStatement("SELECT * FROM venda");
             rs = stmt.executeQuery();
 
             while (rs.next()) {
                 Venda v = new Venda();
+                v.setNotaFiscalVenda(rs.getInt("NotaFiscal_Saida"));
                 v.setDataVenda(rs.getString("Data_Venda"));
                 v.setValorVenda(rs.getDouble("Valor_Venda"));
-                v.setCod_Rastreio(rs.getString("Cod_Rastreio"));
-                Venda.add(v);
+                v.setCnpjVenda(rs.getString("CNPJ_Drog"));
+                v.setCpfVenda(rs.getString("CPF"));
+                vendas.add(v);
             }
         } catch (SQLException e) {
             JOptionPane.showConfirmDialog(null, "Falha ao obter dados: " + e);
         } finally {
             Conexao.closeConnection(con, stmt, rs);
         }
-        return Venda;
+        return vendas;
     }
 
     public void create(Venda v) {
@@ -48,13 +50,14 @@ public class VendaDAO {
         PreparedStatement stmt = null;
 
         try {
-            stmt = con.prepareStatement("INSERT INTO funcionario (Data_Venda, Valor_Venda, COD_Rastreio) VALUES (?,?,?)");
+            stmt = con.prepareStatement("INSERT INTO venda (Data_Venda, Valor_Venda, CNPJ_Drog, CPF) VALUES (?,?,?,?)");
             stmt.setString(1, v.getDataVenda());
             stmt.setDouble(2, v.getValorVenda());
-            stmt.setString(3, v.getCod_Rastreio());
+            stmt.setString(3, v.getCnpjVenda());
+            stmt.setString(4, v.getCpfVenda());
 
             stmt.execute();
-            JOptionPane.showMessageDialog(null, "Venda cadastrado com sucesso!");
+            JOptionPane.showMessageDialog(null, "Venda cadastrada com sucesso!");
 
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Falha ao cadastrar: " + e);
@@ -68,14 +71,15 @@ public class VendaDAO {
         PreparedStatement stmt = null;
 
         try {
-            stmt = con.prepareStatement("UPDATE funcionario set Data_Venda = ?, Valor_Venda = ?, Cod_Rastreio = ?, where NotaFiscal = ?");
+            stmt = con.prepareStatement("UPDATE venda set Data_Venda = ?, Valor_Venda = ?, CNPJ_Drog = ?, CPF = ? where NotaFiscal = ?");
             stmt.setString(1, v.getDataVenda());
             stmt.setDouble(2, v.getValorVenda());
-            stmt.setString(3, v.getCod_Rastreio());
-            stmt.setString(4, v.getNotaFiscalVenda());          
+            stmt.setString(3, v.getCnpjVenda());
+            stmt.setString(4, v.getCpfVenda());   
+            stmt.setInt(5, v.getNotaFiscalVenda());
 
             stmt.execute();
-            JOptionPane.showMessageDialog(null, "Venda atualizado com sucesso!");
+            JOptionPane.showMessageDialog(null, "Venda atualizada com sucesso!");
 
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Falha ao atualizar: " + e);
@@ -89,11 +93,11 @@ public class VendaDAO {
         PreparedStatement stmt = null;
 
         try {
-            stmt = con.prepareStatement("DELETE FROM funcionario where Cod_Item = ?");
-            stmt.setString(1, v.getNotaFiscalVenda());
+            stmt = con.prepareStatement("DELETE FROM venda where NotaFiscal = ?");
+            stmt.setInt(1, v.getNotaFiscalVenda());
 
             stmt.execute();
-            JOptionPane.showMessageDialog(null, "Venda removido com sucesso!");
+            JOptionPane.showMessageDialog(null, "Venda removida com sucesso!");
 
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Falha ao remover: " + e);

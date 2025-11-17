@@ -10,19 +10,14 @@ package Objetos;
  */
 public class Itens {
 
-    /**
-     * @return the nomeItem
-     */
-    public String getNomeItem() {
-        return nomeItem;
-    }
-
-    /**
-     * @param nomeItem the nomeItem to set
-     */
-    public void setNomeItem(String nomeItem) {
-        this.nomeItem = nomeItem;
-    }
+    private int codigoItem;
+    private int quantidadeItem;
+    private String dataValItem;
+    private Double valorItem;
+    private String dataVendaItem;
+    private int notaFiscalCompraItem;
+    private int codCatMedItem;
+    private int codMedItem;
 
     /**
      * @return the codigoItem
@@ -53,34 +48,6 @@ public class Itens {
     }
 
     /**
-     * @return the valorItem
-     */
-    public Double getValorItem() {
-        return valorItem;
-    }
-
-    /**
-     * @param valorItem the valorItem to set
-     */
-    public void setValorItem(Double valorItem) {
-        this.valorItem = valorItem;
-    }
-
-    /**
-     * @return the descricaoItem
-     */
-    public String getDescricaoItem() {
-        return descricaoItem;
-    }
-
-    /**
-     * @param descricaoItem the descricaoItem to set
-     */
-    public void setDescricaoItem(String descricaoItem) {
-        this.descricaoItem = descricaoItem;
-    }
-
-    /**
      * @return the dataValItem
      */
     public String getDataValItem() {
@@ -93,11 +60,75 @@ public class Itens {
     public void setDataValItem(String dataValItem) {
         this.dataValItem = dataValItem;
     }
-    private String nomeItem;
-    private int codigoItem;
-    private int quantidadeItem;
-    private Double valorItem;
-    private String descricaoItem;
-    private String dataValItem;
-    
+
+    /**
+     * @return the valorItemItem
+     */
+    public Double getValorItem() {
+        return valorItem;
+    }
+
+    /**
+     * @param valorItemItem the valorItemItem to set
+     */
+    public void setValorItem(Double valorItemItem) {
+        this.valorItem = valorItemItem;
+    }
+
+    /**
+     * @return the dataVendaItem
+     */
+    public String getDataVendaItem() {
+        return dataVendaItem;
+    }
+
+    /**
+     * @param dataVendaItem the dataVendaItem to set
+     */
+    public void setDataVendaItem(String dataVendaItem) {
+        this.dataVendaItem = dataVendaItem;
+    }
+
+    /**
+     * @return the notaFiscalCompraItem
+     */
+    public int getNotaFiscalCompraItem() {
+        return notaFiscalCompraItem;
+    }
+
+    /**
+     * @param notaFiscalCompraItem the notaFiscalCompraItem to set
+     */
+    public void setNotaFiscalCompraItem(int notaFiscalCompraItem) {
+        this.notaFiscalCompraItem = notaFiscalCompraItem;
+    }
+
+    /**
+     * @return the codCatMedItem
+     */
+    public int getCodCatMedItem() {
+        return codCatMedItem;
+    }
+
+    /**
+     * @param codCatMedItem the codCatMedItem to set
+     */
+    public void setCodCatMedItem(int codCatMedItem) {
+        this.codCatMedItem = codCatMedItem;
+    }
+
+    /**
+     * @return the codMedItem
+     */
+    public int getCodMedItem() {
+        return codMedItem;
+    }
+
+    /**
+     * @param codMedItem the codMedItem to set
+     */
+    public void setCodMedItem(int codMedItem) {
+        this.codMedItem = codMedItem;
+    }
+
 }

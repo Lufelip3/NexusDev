@@ -11,11 +11,12 @@ package Objetos;
 public class Medicamento {
 
     private String nomeMed;
-    private int codigoMed;
     private String descricaoMed;
     private String dataValidadeMed;
-    private int quantEstoqueMed;
     private Double valorMed;
+    private int quantidadeMed;
+    private int codMed;
+    private int codCatMed;
 
     /**
      * @return the nomeMed
@@ -29,20 +30,6 @@ public class Medicamento {
      */
     public void setNomeMed(String nomeMed) {
         this.nomeMed = nomeMed;
-    }
-
-    /**
-     * @return the codigoMed
-     */
-    public int getCodigoMed() {
-        return codigoMed;
-    }
-
-    /**
-     * @param codigoMed the codigoMed to set
-     */
-    public void setCodigoMed(int codigoMed) {
-        this.codigoMed = codigoMed;
     }
 
     /**
@@ -74,20 +61,6 @@ public class Medicamento {
     }
 
     /**
-     * @return the quantEstoqueMed
-     */
-    public int getQuantEstoqueMed() {
-        return quantEstoqueMed;
-    }
-
-    /**
-     * @param quantEstoqueMed the quantEstoqueMed to set
-     */
-    public void setQuantEstoqueMed(int quantEstoqueMed) {
-        this.quantEstoqueMed = quantEstoqueMed;
-    }
-
-    /**
      * @return the valorMed
      */
     public Double getValorMed() {
@@ -100,4 +73,47 @@ public class Medicamento {
     public void setValorMed(Double valorMed) {
         this.valorMed = valorMed;
     }
+
+    /**
+     * @return the quantidadeMed
+     */
+    public int getQuantidadeMed() {
+        return quantidadeMed;
+    }
+
+    /**
+     * @param quantidadeMed the quantidadeMed to set
+     */
+    public void setQuantidadeMed(int quantidadeMed) {
+        this.quantidadeMed = quantidadeMed;
+    }
+
+    /**
+     * @return the codMed
+     */
+    public int getCodMed() {
+        return codMed;
+    }
+
+    /**
+     * @param codMed the codMed to set
+     */
+    public void setCodMed(int codMed) {
+        this.codMed = codMed;
+    }
+
+    /**
+     * @return the codCatMed
+     */
+    public int getCodCatMed() {
+        return codCatMed;
+    }
+
+    /**
+     * @param codCatMed the codCatMed to set
+     */
+    public void setCodCatMed(int codCatMed) {
+        this.codCatMed = codCatMed;
+    }
+
 }

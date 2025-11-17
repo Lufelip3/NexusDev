@@ -10,6 +10,27 @@ package Objetos;
  */
 public class CatalogoMedicamento {
 
+    
+    private int codCatMed;
+    private String nomeCatalogo;
+    private String descCatalogo;
+    private Double valorCatalogo;
+    private String cnpjLabCat;
+
+    /**
+     * @return the codCatMed
+     */
+    public int getCodCatMed() {
+        return codCatMed;
+    }
+
+    /**
+     * @param codCatMed the codCatMed to set
+     */
+    public void setCodCatMed(int codCatMed) {
+        this.codCatMed = codCatMed;
+    }
+
     /**
      * @return the nomeCatalogo
      */
@@ -22,20 +43,6 @@ public class CatalogoMedicamento {
      */
     public void setNomeCatalogo(String nomeCatalogo) {
         this.nomeCatalogo = nomeCatalogo;
-    }
-
-    /**
-     * @return the codigoCatalogo
-     */
-    public int getCodigoCatalogo() {
-        return codigoCatalogo;
-    }
-
-    /**
-     * @param codigoCatalogo the codigoCatalogo to set
-     */
-    public void setCodigoCatalogo(int codigoCatalogo) {
-        this.codigoCatalogo = codigoCatalogo;
     }
 
     /**
@@ -65,9 +72,19 @@ public class CatalogoMedicamento {
     public void setValorCatalogo(Double valorCatalogo) {
         this.valorCatalogo = valorCatalogo;
     }
-    private String nomeCatalogo;
-    private int codigoCatalogo;
-    private String descCatalogo;
-    private Double valorCatalogo;
-    
+
+    /**
+     * @return the cnpjLabCat
+     */
+    public String getCnpjLabCat() {
+        return cnpjLabCat;
+    }
+
+    /**
+     * @param cnpjLabCat the cnpjLabCat to set
+     */
+    public void setCnpjLabCat(String cnpjLabCat) {
+        this.cnpjLabCat = cnpjLabCat;
+    }
+
 }

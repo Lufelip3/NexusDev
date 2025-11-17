@@ -10,43 +10,81 @@ package Objetos;
  */
 public class Venda {
 
-    private String cod_Rastreio;
-    private String notaFiscalVenda;
+    private int notaFiscalVenda;
     private String dataVenda;
     private Double valorVenda;
+    private String cnpjVenda;
+    private String cpfVenda;
 
-    public String getCod_Rastreio() {
-        return cod_Rastreio;
-    }
-
-    public void setCod_Rastreio(String cod_Rastreio) {
-        this.cod_Rastreio = cod_Rastreio;
-    }
-
-    public String getNotaFiscalVenda() {
+    /**
+     * @return the notaFiscalVenda
+     */
+    public int getNotaFiscalVenda() {
         return notaFiscalVenda;
     }
 
-    public void setNotaFiscalVenda(String notaFiscalVenda) {
+    /**
+     * @param notaFiscalVenda the notaFiscalVenda to set
+     */
+    public void setNotaFiscalVenda(int notaFiscalVenda) {
         this.notaFiscalVenda = notaFiscalVenda;
     }
 
+    /**
+     * @return the dataVenda
+     */
     public String getDataVenda() {
         return dataVenda;
     }
 
+    /**
+     * @param dataVenda the dataVenda to set
+     */
     public void setDataVenda(String dataVenda) {
         this.dataVenda = dataVenda;
     }
 
+    /**
+     * @return the valorVenda
+     */
     public Double getValorVenda() {
         return valorVenda;
     }
 
+    /**
+     * @param valorVenda the valorVenda to set
+     */
     public void setValorVenda(Double valorVenda) {
         this.valorVenda = valorVenda;
     }
 
-    
-    
+    /**
+     * @return the cnpjVenda
+     */
+    public String getCnpjVenda() {
+        return cnpjVenda;
+    }
+
+    /**
+     * @param cnpjVenda the cnpjVenda to set
+     */
+    public void setCnpjVenda(String cnpjVenda) {
+        this.cnpjVenda = cnpjVenda;
+    }
+
+    /**
+     * @return the cpfVenda
+     */
+    public String getCpfVenda() {
+        return cpfVenda;
+    }
+
+    /**
+     * @param cpfVenda the cpfVenda to set
+     */
+    public void setCpfVenda(String cpfVenda) {
+        this.cpfVenda = cpfVenda;
+    }
+
+   
 }

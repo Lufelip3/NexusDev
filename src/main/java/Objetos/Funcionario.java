@@ -20,8 +20,13 @@ public class Funcionario {
     private String email_Fun;
     private String senha;
     private String senhaHash;
+    private String cargo;
 
-    private final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+    private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+
+    public boolean verificarSenha(String senhaDigitada) {
+        return getEncoder().matches(senhaDigitada, this.getSenha());
+    }
 
     /**
      * @return the nome_Fun
@@ -107,11 +112,59 @@ public class Funcionario {
         this.email_Fun = email_Fun;
     }
 
-    public void setSenhaHash(String senha) {
-        this.senhaHash = encoder.encode(senha); //faz a criptografia
+    /**
+     * @return the senha
+     */
+    public String getSenha() {
+        return senha;
     }
 
-    public boolean verificarSenha(String senhaDigitada) {
-        return encoder.matches(senhaDigitada, this.senha);
+    /**
+     * @param senha the senha to set
+     */
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
+    /**
+     * @return the senhaHash
+     */
+    public String getSenhaHash() {
+        return senhaHash;
+    }
+
+    /**
+     * @param senhaHash the senhaHash to set
+     */
+    public void setSenhaHash(String senhaHash) {
+        this.senhaHash = senhaHash;
+    }
+
+    /**
+     * @return the cargo
+     */
+    public String getCargo() {
+        return cargo;
+    }
+
+    /**
+     * @param cargo the cargo to set
+     */
+    public void setCargo(String cargo) {
+        this.cargo = cargo;
+    }
+
+    /**
+     * @return the encoder
+     */
+    public BCryptPasswordEncoder getEncoder() {
+        return encoder;
+    }
+
+    /**
+     * @param encoder the encoder to set
+     */
+    public void setEncoder(BCryptPasswordEncoder encoder) {
+        this.encoder = encoder;
     }
 }

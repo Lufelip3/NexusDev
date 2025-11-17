@@ -27,17 +27,19 @@ public class ItnesDAO {
         ResultSet rs = null;
         List<Itens> itens = new ArrayList<>();
         try {
-            stmt = con.prepareStatement("SELECT * FROM funcionario");
+            stmt = con.prepareStatement("SELECT * FROM item");
             rs = stmt.executeQuery();
 
             while (rs.next()) {
                 Itens i = new Itens();
-                i.setNomeItem(rs.getString("Nome_Item"));
-                i.setCodigoItem(rs.getInt("Cod_Item"));
-                i.setDescricaoItem(rs.getString("Desc_Item"));
+                i.setCodCatMedItem(rs.getInt("Cod_Item"));
                 i.setDataValItem(rs.getString("DataVal_Item"));
                 i.setQuantidadeItem(rs.getInt("Qtd_Item"));
                 i.setValorItem(rs.getDouble("Valor_Item"));
+                i.setDataValItem(rs.getString("Data_Venda"));
+                i.setNotaFiscalCompraItem(rs.getInt("NotaFiscal_Entrada"));
+                i.setCodCatMedItem(rs.getInt("Cod_CatMed"));
+                i.setCodMedItem(rs.getInt("Cod_Med"));
                 itens.add(i);
             }
         } catch (SQLException e) {
@@ -53,12 +55,14 @@ public class ItnesDAO {
         PreparedStatement stmt = null;
 
         try {
-            stmt = con.prepareStatement("INSERT INTO funcionario (Nome_Item, Desc_Item, DataVal_Item, Qtd_Item, Valor_Item) VALUES (?,?,?,?,?)");
-            stmt.setString(1, i.getNomeItem());
-            stmt.setString(2, i.getDescricaoItem());
-            stmt.setString(3, i.getDataValItem());
-            stmt.setInt(4, i.getQuantidadeItem());
-            stmt.setDouble(5, i.getValorItem());
+            stmt = con.prepareStatement("INSERT INTO item (DataVal_Item, Qtd_Item, Valor_Item, Data_Venda, NotaFiscal_Entrada, Cod_CatMed,Cod_Med) VALUES (?,?,?,?,?,?,?)");
+            stmt.setString(1, i.getDataValItem());
+            stmt.setInt(2, i.getQuantidadeItem());
+            stmt.setDouble(3, i.getValorItem());
+            stmt.setString(4, i.getDataVendaItem());
+            stmt.setInt(5, i.getNotaFiscalCompraItem());
+            stmt.setInt(6, i.getCodCatMedItem());
+            stmt.setInt(7, i.getCodMedItem());
 
             stmt.execute();
             JOptionPane.showMessageDialog(null, "Item cadastrado com sucesso!");
@@ -75,13 +79,15 @@ public class ItnesDAO {
         PreparedStatement stmt = null;
 
         try {
-            stmt = con.prepareStatement("UPDATE funcionario set Nome_Item = ?, Desc_Item = ?, DataVal_Item = ?, Qtd_Item = ?, Valor_Item = ? where Cod_Item = ?");
-            stmt.setString(1, i.getNomeItem());
-            stmt.setString(2, i.getDescricaoItem());
-            stmt.setString(3, i.getDataValItem());
-            stmt.setInt(4, i.getQuantidadeItem());
-            stmt.setDouble(5, i.getValorItem());
-            stmt.setInt(6, i.getCodigoItem());
+            stmt = con.prepareStatement("UPDATE item set DataVal_Item = ?, Qtd_Item = ?, Valor_Item = ?, Data_Venda = ?, NotaFiscal_Entrada = ? Cod_CatMed = ? Cod_Med = ? where Cod_Item = ?");
+            stmt.setString(1, i.getDataValItem());
+            stmt.setInt(2, i.getQuantidadeItem());
+            stmt.setDouble(3, i.getValorItem());
+            stmt.setString(4, i.getDataVendaItem());
+            stmt.setInt(5, i.getNotaFiscalCompraItem());
+            stmt.setInt(6, i.getCodCatMedItem());
+            stmt.setInt(7, i.getCodMedItem());
+            stmt.setInt(8, i.getCodigoItem());
 
             stmt.execute();
             JOptionPane.showMessageDialog(null, "Item atualizado com sucesso!");
@@ -98,7 +104,7 @@ public class ItnesDAO {
         PreparedStatement stmt = null;
 
         try {
-            stmt = con.prepareStatement("DELETE FROM funcionario where Cod_Item = ?");
+            stmt = con.prepareStatement("DELETE FROM item where Cod_Item = ?");
             stmt.setInt(1, i.getCodigoItem());
 
             stmt.execute();
