@@ -6,7 +6,6 @@ package Model;
 
 import DAO.DrogariaDAO;
 import Objetos.DrogariaObjeto;
-import Objetos.Medicamento;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
