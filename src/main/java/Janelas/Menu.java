@@ -15,6 +15,7 @@ public class Menu extends javax.swing.JFrame {
      */
     public Menu() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -128,31 +129,37 @@ public class Menu extends javax.swing.JFrame {
     private void jBCadastrarMedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCadastrarMedActionPerformed
         CadastroMedicamento cadmed = new CadastroMedicamento();
         cadmed.setVisible(true);
+        dispose();
     }//GEN-LAST:event_jBCadastrarMedActionPerformed
 
     private void jBCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCompraActionPerformed
         JanelaCompra commed = new JanelaCompra();
         commed.setVisible(true);
+        dispose();
     }//GEN-LAST:event_jBCompraActionPerformed
 
     private void jBLaboratorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBLaboratorioActionPerformed
        JanelaLaboratorio lab = new JanelaLaboratorio();
        lab.setVisible(true);
+       dispose();
     }//GEN-LAST:event_jBLaboratorioActionPerformed
 
     private void jBVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBVendaActionPerformed
         Venda vmed = new Venda();
         vmed.setVisible(true);
+        dispose();
     }//GEN-LAST:event_jBVendaActionPerformed
 
     private void jBDrogariaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBDrogariaActionPerformed
        Drogaria drogaria = new Drogaria();
-       drogaria.setVisible(true);   
+       drogaria.setVisible(true);
+       dispose();
     }//GEN-LAST:event_jBDrogariaActionPerformed
 
     private void jBCadastrarFunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCadastrarFunActionPerformed
        TelaCadastroFun cadfun = new TelaCadastroFun();
        cadfun.setVisible(true);
+       dispose();
     }//GEN-LAST:event_jBCadastrarFunActionPerformed
 
     /**
