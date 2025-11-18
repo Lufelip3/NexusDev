@@ -5,7 +5,6 @@
 package Model;
 
 import DAO.LaboratorioDAO;
-import DAO.MedicamentoDAO;
 import Objetos.Laboratorio;
 import java.util.ArrayList;
 import java.util.List;

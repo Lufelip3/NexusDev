@@ -16,7 +16,7 @@ import javax.swing.table.AbstractTableModel;
  */
 public class CompraTableModel extends AbstractTableModel {
    private List<Compra> dados = new ArrayList<>();
-    private String[] colunas = {"DataCompra", "ValorCompra", "NotaFiscalCompra"};
+    private String[] colunas = {"Nota Fiscal", "Valor", "CNPJ", "CPF"};
 
 @Override
     public String getColumnName(int column) {
@@ -36,25 +36,13 @@ public class CompraTableModel extends AbstractTableModel {
     public Object getValueAt(int linha, int coluna) {
         switch (coluna) {
             case 0:
-                return dados.get(linha).getDataCompra();
-            case 1:
-                return dados.get(linha).getValorCompra();
-            case 2:
                 return dados.get(linha).getNotaFiscalCompra();
-            case 3:
-                return dados.get(linha).getNomeCompra();
-            case 4:
+            case 1:
+                return dados.get(linha).getValorTotal();
+            case 2:
                 return dados.get(linha).getCnpjCompra();
-            case 5:
-                return dados.get(linha).getEnderecoCompra();
-            case 6:
-                return dados.get(linha).getCepCompra();
-            case 7:
-                return dados.get(linha).getEmailCompra();
-            case 8:
-                return dados.get(linha).getTelefoneCompra();
-            case 9:
-                return dados.get(linha).getNumeroCompra();
+            case 3:
+                return dados.get(linha).getCpfCompra();
         }
         return null;
     }
@@ -63,13 +51,16 @@ public class CompraTableModel extends AbstractTableModel {
     public void setValueAt(Object valor, int linha, int coluna) {
         switch (coluna) {
             case 0:
-                dados.get(linha).setDataCompra((String) valor);
+                dados.get(linha).setNotaFiscalCompra((int) valor);
                 break;
             case 1:
-                dados.get(linha).setValorCompra((Double) valor);
+                dados.get(linha).setValorTotal((Double) valor);
                 break;
             case 2:
-                dados.get(linha).setNotaFiscalCompra((int) valor);
+                dados.get(linha).setCnpjCompra((String) valor);
+                break;
+            case 3:
+                dados.get(linha).setCpfCompra((String) valor);
                 break;
             
         }

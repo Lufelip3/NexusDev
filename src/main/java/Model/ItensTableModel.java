@@ -5,7 +5,6 @@
 package Model;
 
 import DAO.ItnesDAO;
-import DAO.LaboratorioDAO;
 import Objetos.Itens;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,8 +16,8 @@ import javax.swing.table.AbstractTableModel;
  */
 public class ItensTableModel extends AbstractTableModel{
     private List<Itens> dados = new ArrayList<>();
-    private String[] colunas = {"Nome", "Código", "Quantidade","Valor","Descrição" ,"Data de Validade"};
-
+    private String[] colunas = {"Código", "Quantidade", "Valor", "Data de Validade", "Data da venda", "Nota fiscal", "Código do medicamento"};
+    
     @Override
     public String getColumnName(int column) {
         return colunas[column];
@@ -38,17 +37,19 @@ public class ItensTableModel extends AbstractTableModel{
     public Object getValueAt(int linha, int coluna) {
         switch (coluna) {
             case 0:
-                return dados.get(linha).getNomeItem();
-            case 1:
                 return dados.get(linha).getCodigoItem();
-            case 2:
+            case 1:
                 return dados.get(linha).getQuantidadeItem();
-            case 3:
+            case 2:
                 return dados.get(linha).getValorItem();
-            case 4:
-                return dados.get(linha).getDescricaoItem();
-            case 5:
+            case 3:
                 return dados.get(linha).getDataValItem();
+            case 4:
+                return dados.get(linha).getDataVendaItem();
+            case 5:
+                return dados.get(linha).getNotaFiscalCompraItem();
+            case 6:
+                return dados.get(linha).getCodMedItem();
         }
         return null;
     }
@@ -57,22 +58,25 @@ public class ItensTableModel extends AbstractTableModel{
     public void setValueAt(Object valor, int linha, int coluna) {
         switch (coluna) {
             case 0:
-                dados.get(linha).setNomeItem((String)valor);
-                break;
-            case 1:
                 dados.get(linha).setCodigoItem(Integer.parseInt((String)valor));
                 break;
-            case 2:
+            case 1:
                 dados.get(linha).setQuantidadeItem(Integer.parseInt((String)valor));
                 break;
+            case 2:
+                dados.get(linha).setValorItem(Double.parseDouble((String)valor));
+                break;
             case 3:
-                dados.get(linha).setValorItem(Double.valueOf((String)valor));
+                dados.get(linha).setDataValItem((String)valor);
                 break;
             case 4:
-                dados.get(linha).setDescricaoItem((String)valor);
+                dados.get(linha).setDataVendaItem((String)valor);
                 break;
             case 5:
-                dados.get(linha).setDataValItem((String)valor);
+                dados.get(linha).setNotaFiscalCompraItem(Integer.parseInt((String)valor));
+                break;
+            case 6:
+                dados.get(linha).setCodMedItem(Integer.parseInt((String)valor));
                 break;
         }
         this.fireTableRowsUpdated(linha, linha);
