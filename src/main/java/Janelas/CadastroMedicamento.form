@@ -25,7 +25,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="32767" attributes="0"/>
-              <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+              <Component id="jBCadastrarMedicamento" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
           </Group>
           <Group type="102" alignment="0" attributes="0">
@@ -96,7 +96,7 @@
                   <Component id="jTValorMedicamento" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+              <Component id="jBCadastrarMedicamento" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="19" max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -104,6 +104,9 @@
   </Layout>
   <SubComponents>
     <Component class="javax.swing.JTextField" name="jTQuantidadeMedicamento">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTQuantidadeMedicamentoActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="jTCodigoMedicamento">
     </Component>
@@ -178,12 +181,12 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTDescricaoMedicamentoActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton1">
+    <Component class="javax.swing.JButton" name="jBCadastrarMedicamento">
       <Properties>
         <Property name="text" type="java.lang.String" value="Cadastrar"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBCadastrarMedicamentoActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

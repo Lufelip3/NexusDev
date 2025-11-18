@@ -105,4 +105,5 @@ public class CompraTableModel extends AbstractTableModel {
         lerDados();
         this.fireTableDataChanged();
     }
+    
 }
