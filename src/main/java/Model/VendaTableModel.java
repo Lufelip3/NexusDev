@@ -4,7 +4,6 @@
  */
 package Model;
 
-import DAO.MedicamentoDAO;
 import DAO.VendaDAO;
 import Objetos.Venda;
 import java.util.ArrayList;
