@@ -16,7 +16,7 @@ import javax.swing.table.AbstractTableModel;
  */
 public class VendaTableModel extends AbstractTableModel{
    private List<Venda> dados = new ArrayList<>();
-    private String[] colunas = {"Nota Fiscal", "Data de Venda", "Valor de VEnda", "CNPJ", "CPF"};
+    private String[] colunas = {"Nota Fiscal", "Data de Venda", "Valor de Venda", "CNPJ", "CPF"};
 
     @Override
     public String getColumnName(int column) {
