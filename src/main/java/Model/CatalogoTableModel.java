@@ -4,6 +4,7 @@
  */
 package Model;
 
+import DAO.CatalogoDAO;
 import DAO.ItnesDAO;
 import Objetos.CatalogoMedicamento;
 import java.util.ArrayList;
@@ -39,7 +40,7 @@ public class CatalogoTableModel extends AbstractTableModel{
             case 0:
                 return dados.get(linha).getNomeCatalogo();
             case 1:
-                return dados.get(linha).getCodigoCatalogo();
+                return dados.get(linha).getCodCatMed();
             case 2:
                 return dados.get(linha).getDescCatalogo();
             case 3:
@@ -55,7 +56,7 @@ public class CatalogoTableModel extends AbstractTableModel{
                 dados.get(linha).setNomeCatalogo((String)valor);
                 break;
             case 1:
-                dados.get(linha).setCodigoCatalogo(Integer.parseInt((String)valor));
+                dados.get(linha).setCodCatMed(Integer.parseInt((String)valor));
                 break;
             case 2:
                 dados.get(linha).setDescCatalogo((String)valor);
@@ -82,9 +83,9 @@ public class CatalogoTableModel extends AbstractTableModel{
     }
 
     private void lerDados() {
-        CatalogoDAO cdao = new CatalogDAO();
+        CatalogoDAO cdao = new CatalogoDAO();
 
-        for (CatalogoMedicamento cd : idao.read()) {
+        for (CatalogoMedicamento cd : cdao.read()) {
             this.addLinha(cd);
 
         }
