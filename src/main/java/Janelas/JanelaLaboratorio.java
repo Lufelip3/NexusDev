@@ -45,6 +45,7 @@ public class JanelaLaboratorio extends javax.swing.JFrame {
         jBCadastrarLaboratorio = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
+        jBVoltarLaboratorio = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -87,6 +88,13 @@ public class JanelaLaboratorio extends javax.swing.JFrame {
 
         jLabel10.setText("CEP:");
 
+        jBVoltarLaboratorio.setText("Voltar");
+        jBVoltarLaboratorio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBVoltarLaboratorioActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -109,7 +117,6 @@ public class JanelaLaboratorio extends javax.swing.JFrame {
                             .addComponent(jTCNPJLaboratorio)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jBCadastrarLaboratorio, javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                             .addComponent(jTCEPLaboratorio)
@@ -126,7 +133,12 @@ public class JanelaLaboratorio extends javax.swing.JFrame {
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addComponent(jTTelLaboratorio))))
                                     .addComponent(jTNomeLaboratorio)
-                                    .addComponent(jTEmailLaboratorio))
+                                    .addComponent(jTEmailLaboratorio)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(jBCadastrarLaboratorio)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jBVoltarLaboratorio)
+                                        .addGap(33, 33, 33)))
                                 .addGap(0, 0, Short.MAX_VALUE))))
                     .addComponent(jLabel10))
                 .addContainerGap())
@@ -171,7 +183,9 @@ public class JanelaLaboratorio extends javax.swing.JFrame {
                     .addComponent(jLabel8)
                     .addComponent(jTEmailLaboratorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jBCadastrarLaboratorio)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jBCadastrarLaboratorio)
+                    .addComponent(jBVoltarLaboratorio))
                 .addGap(24, 24, 24))
         );
 
@@ -184,7 +198,6 @@ public class JanelaLaboratorio extends javax.swing.JFrame {
             
             l.setNomeLab(jTNomeLaboratorio.getText());
             l.setCnpjLab(jTCNPJLaboratorio.getText());
-            l.setEndereco(jTEnderecoLaboratorio.getText());
             l.setCepLab(jTCEPLaboratorio.getText());
             l.setEmailLab(jTEmailLaboratorio.getText());
             l.setTelefoneLab(jTTelLaboratorio.getText());
@@ -192,6 +205,12 @@ public class JanelaLaboratorio extends javax.swing.JFrame {
             
             
     }//GEN-LAST:event_jBCadastrarLaboratorioActionPerformed
+
+    private void jBVoltarLaboratorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBVoltarLaboratorioActionPerformed
+        Menu m = new Menu();
+        m.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jBVoltarLaboratorioActionPerformed
 
     /**
      * @param args the command line arguments
@@ -237,6 +256,7 @@ public class JanelaLaboratorio extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBCadastrarLaboratorio;
+    private javax.swing.JButton jBVoltarLaboratorio;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

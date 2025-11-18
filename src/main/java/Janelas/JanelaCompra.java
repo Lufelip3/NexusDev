@@ -12,12 +12,16 @@ import Objetos.Compra;
  * @author andrey.munhoz
  */
 public class JanelaCompra extends javax.swing.JFrame {
-
+    
+    
+    
     /**
      * Creates new form Compra2
      */
     public JanelaCompra() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        
     }
 
     /**
@@ -30,47 +34,36 @@ public class JanelaCompra extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel6 = new javax.swing.JLabel();
-        jTNumero = new javax.swing.JTextField();
-        jTNomeCompra = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
+        jTValorCompra = new javax.swing.JTextField();
+        jTCnpjCompra = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        jTTel = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jTEmail = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
+        jTCpfCompra = new javax.swing.JTextField();
         jBCadastrarCompra = new javax.swing.JButton();
-        jLabel5 = new javax.swing.JLabel();
-        jTCNPJCompra = new javax.swing.JTextField();
-        jTEnderecoCompra = new javax.swing.JTextField();
-        jTCEP = new javax.swing.JTextField();
+        jTNotaFiscalCompra = new javax.swing.JTextField();
+        jBVoltarCompra = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel6.setText("Número:");
+        jLabel6.setText("Valor:");
 
-        jTNumero.setText("jTextField5");
+        jTValorCompra.setText("jTextField5");
 
-        jTNomeCompra.setText("jTextField1");
-
-        jLabel7.setText("Telefone:");
+        jTCnpjCompra.setText("jTextField1");
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("COMPRA");
 
-        jTTel.setText("jTextField6");
+        jLabel2.setText("CNPJ:");
 
-        jLabel2.setText("Nome:");
+        jLabel8.setText("CPF:");
 
-        jLabel8.setText("E-mail:");
+        jLabel3.setText("Nota Fiscal:");
 
-        jLabel3.setText("CNPJ:");
-
-        jTEmail.setText("jTextField7");
-
-        jLabel4.setText("Endereço:");
+        jTCpfCompra.setText("jTextField7");
 
         jBCadastrarCompra.setText("Cadastrar");
         jBCadastrarCompra.addActionListener(new java.awt.event.ActionListener() {
@@ -79,50 +72,48 @@ public class JanelaCompra extends javax.swing.JFrame {
             }
         });
 
-        jLabel5.setText("CEP:");
+        jTNotaFiscalCompra.setText("jTextField2");
 
-        jTCNPJCompra.setText("jTextField2");
-
-        jTEnderecoCompra.setText("jTextField3");
-
-        jTCEP.setText("jTextField4");
+        jBVoltarCompra.setText("Voltar");
+        jBVoltarCompra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBVoltarCompraActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel8))
-                .addGap(3, 3, 3)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jTEnderecoCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel6)
-                        .addGap(18, 18, 18)
-                        .addComponent(jTNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jTNomeCompra)
-                    .addComponent(jTCNPJCompra)
+                        .addGap(12, 12, 12)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTCnpjCompra)
+                            .addComponent(jTNotaFiscalCompra)))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jTCEP, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel7)
-                        .addGap(18, 18, 18)
-                        .addComponent(jTTel))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jTEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(0, 49, Short.MAX_VALUE)
+                                .addComponent(jLabel8)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jTCpfCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(43, 43, 43)
+                                .addComponent(jLabel6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jTValorCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(29, 29, 29)
+                        .addComponent(jBCadastrarCompra)
+                        .addGap(26, 26, 26)
+                        .addComponent(jBVoltarCompra)
+                        .addGap(46, 46, 46)))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jBCadastrarCompra)
-                .addGap(68, 68, 68))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
@@ -136,33 +127,22 @@ public class JanelaCompra extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTNomeCompra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTCnpjCompra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTCNPJCompra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(jTEnderecoCompra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
-                            .addComponent(jTCEP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7)
-                            .addComponent(jTTel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel6)
-                        .addComponent(jTNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
+                    .addComponent(jTNotaFiscalCompra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(9, 9, 9)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(jTEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTCpfCompra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jBCadastrarCompra)
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(jTValorCompra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBCadastrarCompra)
+                    .addComponent(jBVoltarCompra))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         pack();
@@ -172,18 +152,19 @@ public class JanelaCompra extends javax.swing.JFrame {
         Compra c = new Compra();
         CompraDAO dao = new CompraDAO();
         
-        c.setNomeCompra(jTNomeCompra.getText());
-        c.setCnpjCompra(Integer.parseInt(jTCNPJCompra.getText()));
-        c.setEnderecoCompra(jTEnderecoCompra.getText());
-        c.setCepCompra(Integer.parseInt(jTCEP.getText()));
-        c.setEmailCompra(jTEmail.getText());
-        c.setTelefoneCompra(Integer.parseInt(jTTel.getText()));
-        c.setNumeroCompra(Double.valueOf(jTNumero.getText()));
-        
-        
+        c.setNotaFiscalCompra(Integer.parseInt(jTNotaFiscalCompra.getText()));
+        c.setValorTotal(Double.valueOf(jTValorCompra.getText()));
+        c.setCpfCompra(jTCpfCompra.getText());
+        c.setCnpjCompra(jTCnpjCompra.getText());
       
         
     }//GEN-LAST:event_jBCadastrarCompraActionPerformed
+
+    private void jBVoltarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBVoltarCompraActionPerformed
+        Menu m = new Menu();
+        m.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jBVoltarCompraActionPerformed
 
     /**
      * @param args the command line arguments
@@ -225,20 +206,15 @@ public class JanelaCompra extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBCadastrarCompra;
+    private javax.swing.JButton jBVoltarCompra;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JTextField jTCEP;
-    private javax.swing.JTextField jTCNPJCompra;
-    private javax.swing.JTextField jTEmail;
-    private javax.swing.JTextField jTEnderecoCompra;
-    private javax.swing.JTextField jTNomeCompra;
-    private javax.swing.JTextField jTNumero;
-    private javax.swing.JTextField jTTel;
+    private javax.swing.JTextField jTCnpjCompra;
+    private javax.swing.JTextField jTCpfCompra;
+    private javax.swing.JTextField jTNotaFiscalCompra;
+    private javax.swing.JTextField jTValorCompra;
     // End of variables declaration//GEN-END:variables
 }

@@ -36,6 +36,7 @@ public class CatalogoMedicamento extends javax.swing.JFrame {
         jLCodigoCatalogo = new javax.swing.JLabel();
         jLDescricaoCatalogo = new javax.swing.JLabel();
         jBCadastrarCatMed = new javax.swing.JButton();
+        jBVoltarCatalogo = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -62,6 +63,13 @@ public class CatalogoMedicamento extends javax.swing.JFrame {
         jBCadastrarCatMed.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBCadastrarCatMedActionPerformed(evt);
+            }
+        });
+
+        jBVoltarCatalogo.setText("Voltar");
+        jBVoltarCatalogo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBVoltarCatalogoActionPerformed(evt);
             }
         });
 
@@ -93,7 +101,9 @@ public class CatalogoMedicamento extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jBCadastrarCatMed)
-                .addGap(25, 25, 25))
+                .addGap(18, 18, 18)
+                .addComponent(jBVoltarCatalogo)
+                .addGap(9, 9, 9))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -117,7 +127,9 @@ public class CatalogoMedicamento extends javax.swing.JFrame {
                     .addComponent(jLabel5)
                     .addComponent(jLValorCatalogo))
                 .addGap(18, 18, 18)
-                .addComponent(jBCadastrarCatMed)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jBCadastrarCatMed)
+                    .addComponent(jBVoltarCatalogo))
                 .addContainerGap(11, Short.MAX_VALUE))
         );
 
@@ -127,6 +139,12 @@ public class CatalogoMedicamento extends javax.swing.JFrame {
     private void jBCadastrarCatMedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCadastrarCatMedActionPerformed
         
     }//GEN-LAST:event_jBCadastrarCatMedActionPerformed
+
+    private void jBVoltarCatalogoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBVoltarCatalogoActionPerformed
+        Menu m = new Menu();
+        m.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jBVoltarCatalogoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -166,6 +184,7 @@ public class CatalogoMedicamento extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBCadastrarCatMed;
+    private javax.swing.JButton jBVoltarCatalogo;
     private javax.swing.JLabel jLCodigoCatalogo;
     private javax.swing.JLabel jLDescricaoCatalogo;
     private javax.swing.JLabel jLNomeCatalogo;
