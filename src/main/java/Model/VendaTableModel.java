@@ -17,7 +17,7 @@ import javax.swing.table.AbstractTableModel;
  */
 public class VendaTableModel extends AbstractTableModel{
    private List<Venda> dados = new ArrayList<>();
-    private String[] colunas = {"Código", "NotaFiscal", "DataDeVenda", "ValorDeVenda"};
+    private String[] colunas = {"Nota Fiscal", "Data de Venda", "Valor de VEnda", "CNPJ", "CPF"};
 
     @Override
     public String getColumnName(int column) {
@@ -38,13 +38,15 @@ public class VendaTableModel extends AbstractTableModel{
     public Object getValueAt(int linha, int coluna) {
         switch (coluna) {
             case 0:
-                return dados.get(linha).getCod_Rastreio();
-            case 1:
                 return dados.get(linha).getNotaFiscalVenda();
-            case 2:
+            case 1:
                 return dados.get(linha).getDataVenda();
-            case 3:
+            case 2:
                 return dados.get(linha).getValorVenda();
+            case 3:
+                return dados.get(linha).getCnpjVenda();
+            case 4:
+                return dados.get(linha).getCpfVenda();
         }
         return null;
     }
@@ -53,16 +55,19 @@ public class VendaTableModel extends AbstractTableModel{
     public void setValueAt(Object valor, int linha, int coluna) {
         switch (coluna) {
             case 0:
-                dados.get(linha).setCod_Rastreio((String) valor);
+                dados.get(linha).setNotaFiscalVenda(Integer.parseInt((String)valor));
                 break;
             case 1:
-                dados.get(linha).setNotaFiscalVenda((String) valor);
+                dados.get(linha).setDataVenda((String)valor);
                 break;
             case 2:
-                dados.get(linha).setDataVenda((String) valor);
+                dados.get(linha).setValorVenda(Double.valueOf((String)valor));
                 break;
             case 3:
-                dados.get(linha).setValorVenda(Double.valueOf((String)valor));
+                dados.get(linha).setCnpjVenda((String)valor);
+                break;
+            case 4:
+                dados.get(linha).setCpfVenda((String)valor);
                 break;
         }
         this.fireTableRowsUpdated(linha, linha);
