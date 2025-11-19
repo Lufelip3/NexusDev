@@ -49,11 +49,7 @@ public class JanelaCompra extends javax.swing.JFrame {
 
         jLabel6.setText("Valor:");
 
-        jTValorCompra.setText("jTextField5");
-
-        jTCnpjCompra.setText("jTextField1");
-
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("COMPRA");
 
@@ -63,16 +59,12 @@ public class JanelaCompra extends javax.swing.JFrame {
 
         jLabel3.setText("Nota Fiscal:");
 
-        jTCpfCompra.setText("jTextField7");
-
         jBCadastrarCompra.setText("Cadastrar");
         jBCadastrarCompra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBCadastrarCompraActionPerformed(evt);
             }
         });
-
-        jTNotaFiscalCompra.setText("jTextField2");
 
         jBVoltarCompra.setText("Voltar");
         jBVoltarCompra.addActionListener(new java.awt.event.ActionListener() {

@@ -107,19 +107,13 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTValorCompra">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jTextField5"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTCnpjCompra">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jTextField1"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Segoe UI" size="18" style="1"/>
+          <Font name="Segoe UI Black" size="18" style="1"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
         <Property name="text" type="java.lang.String" value="COMPRA"/>
@@ -141,9 +135,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTCpfCompra">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jTextField7"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="jBCadastrarCompra">
       <Properties>
@@ -154,9 +145,6 @@
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="jTNotaFiscalCompra">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jTextField2"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="jBVoltarCompra">
       <Properties>

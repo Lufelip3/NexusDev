@@ -49,17 +49,7 @@ public class JanelaLaboratorio extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTNumeroLaboratorio.setText("jTextField5");
-
-        jTCNPJLaboratorio.setText("jTextField2");
-
-        jTNomeLaboratorio.setText("jTextField1");
-
-        jTEnderecoLaboratorio.setText("jTextField3");
-
         jLabel7.setText("Telefone:");
-
-        jTTelLaboratorio.setText("jTextField6");
 
         jLabel5.setText("Nome:");
 
@@ -67,15 +57,11 @@ public class JanelaLaboratorio extends javax.swing.JFrame {
 
         jLabel3.setText("CNPJ:");
 
-        jTEmailLaboratorio.setText("jTextField7");
-
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("LABORATORIO");
+        jLabel4.setText("LABORATÓRIO");
 
         jLabel6.setText("Endereço:");
-
-        jTCEPLaboratorio.setText("jTextField4");
 
         jBCadastrarLaboratorio.setText("Cadastrar");
         jBCadastrarLaboratorio.addActionListener(new java.awt.event.ActionListener() {

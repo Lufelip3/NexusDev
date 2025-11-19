@@ -53,7 +53,11 @@ public class Drogaria extends javax.swing.JFrame {
 
         jLabel3.setText("CNPJ:");
 
-        jTEmailDrogaria.setText("jTextField7");
+        jTEmailDrogaria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTEmailDrogariaActionPerformed(evt);
+            }
+        });
 
         jBCadastrarDrogaria.setText("Cadastrar");
         jBCadastrarDrogaria.addActionListener(new java.awt.event.ActionListener() {
@@ -64,21 +68,17 @@ public class Drogaria extends javax.swing.JFrame {
 
         jLabel5.setText("CEP:");
 
-        jTCNPJDrograria.setText("jTextField2");
-
-        jTCEPDrogaria.setText("jTextField4");
+        jTCNPJDrograria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTCNPJDrograriaActionPerformed(evt);
+            }
+        });
 
         jLabel6.setText("Número:");
 
-        jTNumeroDrogaria.setText("jTextField5");
-
         jLabel7.setText("Telefone:");
 
-        jTTelDrogaria.setText("jTextField6");
-
-        jTNomeDrogaria.setText("jTextField1");
-
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("DROGARIA");
 
@@ -132,7 +132,7 @@ public class Drogaria extends javax.swing.JFrame {
                                 .addComponent(jBVoltarDrogaria)))))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(243, Short.MAX_VALUE)
+                .addContainerGap(235, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(261, 261, 261))
         );
@@ -189,6 +189,14 @@ public class Drogaria extends javax.swing.JFrame {
         m.setVisible(true);
         dispose();
     }//GEN-LAST:event_jBVoltarDrogariaActionPerformed
+
+    private void jTCNPJDrograriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTCNPJDrograriaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTCNPJDrograriaActionPerformed
+
+    private void jTEmailDrogariaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTEmailDrogariaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTEmailDrogariaActionPerformed
 
     /**
      * @param args the command line arguments
