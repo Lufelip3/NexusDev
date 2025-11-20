@@ -18,6 +18,7 @@ public class Drogaria extends javax.swing.JFrame {
      */
     public Drogaria() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**

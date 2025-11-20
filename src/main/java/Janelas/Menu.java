@@ -145,7 +145,7 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_jBLaboratorioActionPerformed
 
     private void jBVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBVendaActionPerformed
-        Venda vmed = new Venda();
+        VendaJanela vmed = new VendaJanela();
         vmed.setVisible(true);
         dispose();
     }//GEN-LAST:event_jBVendaActionPerformed

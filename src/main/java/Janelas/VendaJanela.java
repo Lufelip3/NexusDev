@@ -4,17 +4,21 @@
  */
 package Janelas;
 
+import DAO.VendaDAO;
+import Objetos.Venda;
+
 /**
  *
  * @author luis.fmleite
  */
-public class Venda extends javax.swing.JFrame {
+public class VendaJanela extends javax.swing.JFrame {
 
     /**
      * Creates new form Venda
      */
-    public Venda() {
+    public VendaJanela() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -38,8 +42,7 @@ public class Venda extends javax.swing.JFrame {
         jTValorVenda = new javax.swing.JTextField();
         jTNotaFiscalVenda = new javax.swing.JTextField();
         jBCadastrar = new javax.swing.JButton();
-        jBExcluir = new javax.swing.JButton();
-        jBAlterar = new javax.swing.JButton();
+        jBVoltar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -73,14 +76,12 @@ public class Venda extends javax.swing.JFrame {
             }
         });
 
-        jBExcluir.setText("Excluir");
-        jBExcluir.addActionListener(new java.awt.event.ActionListener() {
+        jBVoltar.setText("Voltar");
+        jBVoltar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBExcluirActionPerformed(evt);
+                jBVoltarActionPerformed(evt);
             }
         });
-
-        jBAlterar.setText("Alterar");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -111,21 +112,18 @@ public class Venda extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(157, 157, 157)
                         .addComponent(jLabel1)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(0, 175, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(5, 5, 5)
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTNotaFiscalVenda)))
+                        .addComponent(jTNotaFiscalVenda))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jBCadastrar)
+                        .addGap(32, 32, 32)
+                        .addComponent(jBVoltar)))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 93, Short.MAX_VALUE)
-                .addComponent(jBAlterar)
-                .addGap(27, 27, 27)
-                .addComponent(jBExcluir)
-                .addGap(32, 32, 32)
-                .addComponent(jBCadastrar)
-                .addGap(24, 24, 24))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -153,23 +151,31 @@ public class Venda extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(jTNotaFiscalVenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(41, 41, 41)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBCadastrar)
-                    .addComponent(jBExcluir)
-                    .addComponent(jBAlterar))
-                .addContainerGap(7, Short.MAX_VALUE))
+                    .addComponent(jBVoltar))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jBExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBExcluirActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jBExcluirActionPerformed
+    private void jBVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBVoltarActionPerformed
+        Menu m = new Menu();
+        m.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jBVoltarActionPerformed
 
     private void jBCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCadastrarActionPerformed
-        // TODO add your handling code here:
+        Venda v = new Venda();
+        VendaDAO dao = new VendaDAO();
+        
+        v.setNotaFiscalVenda(Integer.parseInt(jTNotaFiscalVenda.getText()));
+        v.setDataVenda(jTDataVenda.getText());
+        v.setValorVenda(Double.valueOf(jTValorVenda.getText()));
+        v.setCnpjVenda(jTCNPJVenda.getText());
+        v.setCpfVenda(jTCPFVenda.getText());
     }//GEN-LAST:event_jBCadastrarActionPerformed
 
     /**
@@ -189,28 +195,28 @@ public class Venda extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Venda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VendaJanela.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Venda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VendaJanela.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Venda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VendaJanela.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Venda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VendaJanela.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Venda().setVisible(true);
+                new VendaJanela().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jBAlterar;
     private javax.swing.JButton jBCadastrar;
-    private javax.swing.JButton jBExcluir;
+    private javax.swing.JButton jBVoltar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
