@@ -6,6 +6,7 @@ package DAO;
 
 import BD.Conexao;
 import Objetos.Compra;
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -20,6 +21,22 @@ import javax.swing.JOptionPane;
  */
 public class CompraDAO {
 public List<Compra> read() {
+//    String sql = "INSERT INTO compra (Valor_Total, CPF, CNPJ_Drog) VALUES (?, ?, ?)";
+//try (PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+//
+//    stmt.setBigDecimal(1, new BigDecimal("123.45")); // exemplo de Valor_Total
+//    stmt.setString(2, "123.456.789-00");             // CPF válido
+//    stmt.setString(3, "12.345.678/0001-99");         // CNPJ válido
+//
+//    stmt.executeUpdate();
+//
+//    try (ResultSet rs = stmt.getGeneratedKeys()) {
+//        if (rs.next()) {
+//            long id = rs.getLong(1); // NotaFiscal_Entrada gerado automaticamente
+//            System.out.println("NotaFiscal_Entrada gerado: " + id);
+//        }
+//    }
+//}
         Connection con = Conexao.getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;
