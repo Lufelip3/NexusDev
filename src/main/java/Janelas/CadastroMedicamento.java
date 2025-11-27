@@ -110,7 +110,8 @@ public class CadastroMedicamento extends javax.swing.JFrame {
             }
         });
 
-        jLabel8.setText("Código Catalogo");
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel8.setText("Código Catálogo");
 
         jTTabelaMed.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

@@ -49,10 +49,6 @@ public class JanelaCompra extends javax.swing.JFrame {
 
         jLabel6.setText("Valor:");
 
-        jTValorCompra.setText("jTextField5");
-
-        jTCnpjCompra.setText("jTextField1");
-
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("COMPRA");
@@ -63,7 +59,11 @@ public class JanelaCompra extends javax.swing.JFrame {
 
         jLabel3.setText("Nota Fiscal:");
 
-        jTCpfCompra.setText("jTextField7");
+        jTCpfCompra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTCpfCompraActionPerformed(evt);
+            }
+        });
 
         jBCadastrarCompra.setText("Cadastrar");
         jBCadastrarCompra.addActionListener(new java.awt.event.ActionListener() {
@@ -71,8 +71,6 @@ public class JanelaCompra extends javax.swing.JFrame {
                 jBCadastrarCompraActionPerformed(evt);
             }
         });
-
-        jTNotaFiscalCompra.setText("jTextField2");
 
         jBVoltarCompra.setText("Voltar");
         jBVoltarCompra.addActionListener(new java.awt.event.ActionListener() {
@@ -165,6 +163,10 @@ public class JanelaCompra extends javax.swing.JFrame {
         m.setVisible(true);
         dispose();
     }//GEN-LAST:event_jBVoltarCompraActionPerformed
+
+    private void jTCpfCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTCpfCompraActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTCpfCompraActionPerformed
 
     /**
      * @param args the command line arguments
