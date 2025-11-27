@@ -37,7 +37,7 @@ public class Menu extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jBCadastrarMed.setText("Cadastrar Medicamento");
+        jBCadastrarMed.setText("Medicamento");
         jBCadastrarMed.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBCadastrarMedActionPerformed(evt);
@@ -100,9 +100,11 @@ public class Menu extends javax.swing.JFrame {
                         .addGap(29, 29, 29)
                         .addComponent(jBDrogaria))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jBCadastrarMed, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(16, 16, 16)
+                        .addComponent(jBCadastrarMed, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jBCadastrarFun)))
+                        .addComponent(jBCadastrarFun)
+                        .addGap(13, 13, 13)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
