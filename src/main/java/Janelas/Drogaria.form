@@ -137,9 +137,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTEmailDrogaria">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jTextField7"/>
-      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTEmailDrogariaActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jBCadastrarDrogaria">
       <Properties>
@@ -155,14 +155,8 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTCNPJDrograria">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jTextField2"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTCEPDrogaria">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jTextField4"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel6">
       <Properties>
@@ -170,9 +164,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTNumeroDrogaria">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jTextField5"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel7">
       <Properties>
@@ -180,14 +171,8 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTTelDrogaria">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jTextField6"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTNomeDrogaria">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jTextField1"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
