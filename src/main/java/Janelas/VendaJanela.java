@@ -59,15 +59,11 @@ public class VendaJanela extends javax.swing.JFrame {
 
         jLabel6.setText("Nota Fiscal Venda:");
 
-        jTDataVenda.setText("jTextField1");
-
-        jTCPFVenda.setText("jTextField2");
-
-        jTCNPJVenda.setText("jTextField3");
-
-        jTValorVenda.setText("jTextField4");
-
-        jTNotaFiscalVenda.setText("jTextField5");
+        jTCPFVenda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTCPFVendaActionPerformed(evt);
+            }
+        });
 
         jBCadastrar.setText("Cadastrar");
         jBCadastrar.addActionListener(new java.awt.event.ActionListener() {
@@ -177,6 +173,10 @@ public class VendaJanela extends javax.swing.JFrame {
         v.setCnpjVenda(jTCNPJVenda.getText());
         v.setCpfVenda(jTCPFVenda.getText());
     }//GEN-LAST:event_jBCadastrarActionPerformed
+
+    private void jTCPFVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTCPFVendaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTCPFVendaActionPerformed
 
     /**
      * @param args the command line arguments
