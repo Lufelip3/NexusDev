@@ -160,6 +160,8 @@ public class CatalogoMedicamentoJanela extends javax.swing.JFrame {
        catalogomed.setDescCatalogo(jTDescricaoCatMed.getText());
        catalogomed.setValorCatalogo(Double.valueOf(jTValorCatMed.getText()));
        catalogomed.setCnpjLabCat(jTCnpjCatMed.getText());
+       
+       
     }//GEN-LAST:event_jBCadastrarCatMedActionPerformed
 
     private void jBVoltarCatalogoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBVoltarCatalogoActionPerformed
