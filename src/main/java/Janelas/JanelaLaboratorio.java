@@ -5,6 +5,7 @@
 package Janelas;
 
 import DAO.LaboratorioDAO;
+import Model.LaboratorioTableModel;
 import Objetos.Laboratorio;
 
 /**
@@ -13,12 +14,21 @@ import Objetos.Laboratorio;
  */
 public class JanelaLaboratorio extends javax.swing.JFrame {
 
+    LaboratorioTableModel modelo = new LaboratorioTableModel();
+
     /**
      * Creates new form Laboratório2
      */
     public JanelaLaboratorio() {
         initComponents();
         this.setLocationRelativeTo(null);
+    }
+
+    public JanelaLaboratorio(Laboratorio l) {
+        initComponents();
+        this.setLocationRelativeTo(null);
+        jTTabelaLab.setModel(modelo);
+        modelo.recarregaTabela();
     }
 
     /**
@@ -45,6 +55,10 @@ public class JanelaLaboratorio extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jBVoltarLaboratorio = new javax.swing.JButton();
+        jBAlterarLaboratorio = new javax.swing.JButton();
+        jBExcluirLaboratorio = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTTabelaLab = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -84,6 +98,38 @@ public class JanelaLaboratorio extends javax.swing.JFrame {
             }
         });
 
+        jBAlterarLaboratorio.setText("Alterar");
+        jBAlterarLaboratorio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBAlterarLaboratorioActionPerformed(evt);
+            }
+        });
+
+        jBExcluirLaboratorio.setText("Cadastrar");
+        jBExcluirLaboratorio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBExcluirLaboratorioActionPerformed(evt);
+            }
+        });
+
+        jTTabelaLab.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jTTabelaLab.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTTabelaLabMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jTTabelaLab);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -94,38 +140,46 @@ public class JanelaLaboratorio extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(27, 27, 27)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel10)
-                    .addComponent(jLabel8))
-                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTCNPJLaboratorio)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTNomeLaboratorio)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jBCadastrarLaboratorio)
-                                .addGap(18, 18, 18)
-                                .addComponent(jBVoltarLaboratorio)
-                                .addGap(33, 33, 33))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 729, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel10)
+                            .addComponent(jLabel8))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTCNPJLaboratorio)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jTEmailLaboratorio, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 319, Short.MAX_VALUE)
-                                    .addComponent(jTCEPLaboratorio, javax.swing.GroupLayout.Alignment.LEADING))
-                                .addGap(49, 49, 49)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGap(70, 70, 70)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jTNomeLaboratorio)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(3, 3, 3)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                            .addComponent(jTEmailLaboratorio, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 319, Short.MAX_VALUE)
+                                            .addComponent(jTCEPLaboratorio, javax.swing.GroupLayout.Alignment.LEADING))
+                                        .addGap(49, 49, 49)
+                                        .addComponent(jLabel7)
+                                        .addGap(29, 29, 29)
+                                        .addComponent(jTTelLaboratorio))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addGap(365, 365, 365)
                                         .addComponent(jLabel9)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jTNumeroLaboratorio, javax.swing.GroupLayout.DEFAULT_SIZE, 241, Short.MAX_VALUE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel7)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(jBCadastrarLaboratorio)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jTTelLaboratorio)))))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                                        .addComponent(jBAlterarLaboratorio)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jBExcluirLaboratorio)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jBVoltarLaboratorio)
+                                        .addGap(33, 33, 33)))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -155,10 +209,14 @@ public class JanelaLaboratorio extends javax.swing.JFrame {
                     .addComponent(jTTelLaboratorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTEmailLaboratorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBCadastrarLaboratorio)
-                    .addComponent(jBVoltarLaboratorio))
+                    .addComponent(jBVoltarLaboratorio)
+                    .addComponent(jBAlterarLaboratorio)
+                    .addComponent(jBExcluirLaboratorio))
                 .addGap(24, 24, 24))
         );
 
@@ -166,17 +224,20 @@ public class JanelaLaboratorio extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBCadastrarLaboratorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCadastrarLaboratorioActionPerformed
-            Laboratorio l = new Laboratorio();
-            LaboratorioDAO dao = new LaboratorioDAO();
-            
-            l.setNomeLab(jTNomeLaboratorio.getText());
-            l.setCnpjLab(jTCNPJLaboratorio.getText());
-            l.setCepLab(jTCEPLaboratorio.getText());
-            l.setEmailLab(jTEmailLaboratorio.getText());
-            l.setTelefoneLab(jTTelLaboratorio.getText());
-            l.setNumeroLab(Integer.parseInt(jTNumeroLaboratorio.getText()));
-            
-            
+        Laboratorio l = new Laboratorio();
+        LaboratorioDAO dao = new LaboratorioDAO();
+
+        l.setNomeLab(jTNomeLaboratorio.getText());
+        l.setCnpjLab(jTCNPJLaboratorio.getText());
+        l.setCepLab(jTCEPLaboratorio.getText());
+        l.setEmailLab(jTEmailLaboratorio.getText());
+        l.setTelefoneLab(jTTelLaboratorio.getText());
+        l.setNumeroLab(Integer.parseInt(jTNumeroLaboratorio.getText()));
+
+        dao.create(l);
+        modelo.recarregaTabela();
+        limpaCampos();
+
     }//GEN-LAST:event_jBCadastrarLaboratorioActionPerformed
 
     private void jBVoltarLaboratorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBVoltarLaboratorioActionPerformed
@@ -188,6 +249,51 @@ public class JanelaLaboratorio extends javax.swing.JFrame {
     private void jTCEPLaboratorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTCEPLaboratorioActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTCEPLaboratorioActionPerformed
+
+    private void jBAlterarLaboratorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAlterarLaboratorioActionPerformed
+        if (jTTabelaLab.getSelectedRow() != -1) {
+            modelo.setValueAt(jTNomeLaboratorio.getText(), jTTabelaLab.getSelectedRow(), 0);
+            modelo.setValueAt(jTCNPJLaboratorio.getText(), jTTabelaLab.getSelectedRow(), 1);
+            modelo.setValueAt(jTTelLaboratorio.getText(), jTTabelaLab.getSelectedRow(), 2);
+            modelo.setValueAt(jTEmailLaboratorio.getText(), jTTabelaLab.getSelectedRow(), 3);
+            modelo.setValueAt(jTNumeroLaboratorio.getText(), jTTabelaLab.getSelectedRow(), 4);
+            modelo.setValueAt(jTCEPLaboratorio.getText(), jTTabelaLab.getSelectedRow(), 5);
+
+            Laboratorio lab = modelo.pegaDadosLinha(jTTabelaLab.getSelectedRow());
+            LaboratorioDAO dao = new LaboratorioDAO();
+            dao.updtae(lab);
+            limpaCampos();
+            modelo.recarregaTabela();
+        }
+    }//GEN-LAST:event_jBAlterarLaboratorioActionPerformed
+
+    private void jBExcluirLaboratorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBExcluirLaboratorioActionPerformed
+        if (jTTabelaLab.getSelectedRow() != -1) {
+            Laboratorio l = modelo.pegaDadosLinha(jTTabelaLab.getSelectedRow());
+            LaboratorioDAO dao = new LaboratorioDAO();
+            dao.delete(l);
+            modelo.recarregaTabela();
+        }    }//GEN-LAST:event_jBExcluirLaboratorioActionPerformed
+
+    private void jTTabelaLabMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTTabelaLabMouseClicked
+        if (jTTabelaLab.getSelectedRow() != -1) {
+            Laboratorio l = modelo.pegaDadosLinha(jTTabelaLab.getSelectedRow());
+            jTNomeLaboratorio.setText(l.getNomeLab());
+            jTCNPJLaboratorio.setText(l.getCnpjLab());
+            jTTelLaboratorio.setText(l.getTelefoneLab());
+            jTNumeroLaboratorio.setText(String.valueOf(l.getNumeroLab()));
+            jTCEPLaboratorio.setText(l.getCepLab());
+        }
+    }//GEN-LAST:event_jTTabelaLabMouseClicked
+
+    private void limpaCampos() {
+        jTCEPLaboratorio.setText("");
+        jTCNPJLaboratorio.setText("");
+        jTEmailLaboratorio.setText("");
+        jTNomeLaboratorio.setText("");
+        jTNumeroLaboratorio.setText("");
+        jTTelLaboratorio.setText("");
+    }
 
     /**
      * @param args the command line arguments
@@ -232,7 +338,9 @@ public class JanelaLaboratorio extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBAlterarLaboratorio;
     private javax.swing.JButton jBCadastrarLaboratorio;
+    private javax.swing.JButton jBExcluirLaboratorio;
     private javax.swing.JButton jBVoltarLaboratorio;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel3;
@@ -241,11 +349,14 @@ public class JanelaLaboratorio extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTCEPLaboratorio;
     private javax.swing.JTextField jTCNPJLaboratorio;
     private javax.swing.JTextField jTEmailLaboratorio;
     private javax.swing.JTextField jTNomeLaboratorio;
     private javax.swing.JTextField jTNumeroLaboratorio;
+    private javax.swing.JTable jTTabelaLab;
     private javax.swing.JTextField jTTelLaboratorio;
     // End of variables declaration//GEN-END:variables
+
 }

@@ -49,7 +49,7 @@ public class CadastroMedicamento extends javax.swing.JFrame {
         jTNomeMedicamento = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jTDescricaoMedicamento = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        jBCadastrarMed = new javax.swing.JButton();
         jBVoltarCadastroMedicamento = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         jTCodigoCatalogo = new javax.swing.JTextField();
@@ -96,10 +96,10 @@ public class CadastroMedicamento extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Cadastrar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jBCadastrarMed.setText("Cadastrar");
+        jBCadastrarMed.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jBCadastrarMedActionPerformed(evt);
             }
         });
 
@@ -156,7 +156,7 @@ public class CadastroMedicamento extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jButton1)
+                                .addComponent(jBCadastrarMed)
                                 .addGap(18, 18, 18)
                                 .addComponent(jBExcluirMed)
                                 .addGap(26, 26, 26)
@@ -229,7 +229,7 @@ public class CadastroMedicamento extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(jBCadastrarMed)
                     .addComponent(jBVoltarCadastroMedicamento)
                     .addComponent(jBExcluirMed)
                     .addComponent(jBAlterarMed))
@@ -243,7 +243,7 @@ public class CadastroMedicamento extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jTDescricaoMedicamentoActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jBCadastrarMedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCadastrarMedActionPerformed
         Medicamento cmed = new Medicamento();
         MedicamentoDAO dao = new MedicamentoDAO();
 
@@ -259,7 +259,7 @@ public class CadastroMedicamento extends javax.swing.JFrame {
         modelo.recarregaTabela();
         LimpaCampos();
 
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jBCadastrarMedActionPerformed
 
     private void jTNomeMedicamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTNomeMedicamentoActionPerformed
 
@@ -358,9 +358,9 @@ public class CadastroMedicamento extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBAlterarMed;
+    private javax.swing.JButton jBCadastrarMed;
     private javax.swing.JButton jBExcluirMed;
     private javax.swing.JButton jBVoltarCadastroMedicamento;
-    private javax.swing.JButton jButton1;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
