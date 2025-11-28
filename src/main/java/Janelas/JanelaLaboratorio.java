@@ -22,14 +22,12 @@ public class JanelaLaboratorio extends javax.swing.JFrame {
     public JanelaLaboratorio() {
         initComponents();
         this.setLocationRelativeTo(null);
-    }
-
-    public JanelaLaboratorio(Laboratorio l) {
-        initComponents();
-        this.setLocationRelativeTo(null);
+      
         jTTabelaLab.setModel(modelo);
         modelo.recarregaTabela();
     }
+
+  
 
     /**
      * This method is called from within the constructor to initialize the form.

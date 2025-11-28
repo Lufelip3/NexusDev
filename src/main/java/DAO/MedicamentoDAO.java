@@ -32,8 +32,9 @@ public class MedicamentoDAO {
                 m.setDescricaoMed(rs.getString("Desc_Med"));
                 m.setDataValidadeMed(rs.getString("DataVal_Med"));
                 m.setQuantidadeMed(rs.getInt("Qtd_Med"));
-                m.setDataValidadeMed(rs.getString("Valor_Med"));
+                m.setValorMed(rs.getDouble("Valor_Med"));
                 m.setCodCatMed(rs.getInt("Cod_CatMed"));
+               
                 medicamentos.add(m);
             }
         } catch (SQLException e) {

@@ -36,6 +36,7 @@ public class LaboratorioDAO {
                 l.setCepLab(rs.getString("Cep_Lab"));
                 l.setNumeroLab(rs.getInt("Num_Lab"));
                 l.setEmailLab(rs.getString("Email_Lab"));
+                System.out.println(l.getNomeLab());
                 laboratorio.add(l);
             }
         } catch (SQLException e) {

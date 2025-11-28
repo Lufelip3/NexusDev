@@ -34,17 +34,17 @@ public class MedicamentoTableModel extends AbstractTableModel {
     public Object getValueAt(int linha, int coluna) {
         switch (coluna) {
             case 0:
-                return dados.get(linha).getNomeMed();
-            case 1:
-                return dados.get(linha).getDescricaoMed();
-            case 2:
-                return dados.get(linha).getDataValidadeMed();
-            case 3:
-                return dados.get(linha).getValorMed();
-            case 4:
-                return dados.get(linha).getQuantidadeMed();
-            case 5:
                 return dados.get(linha).getCodMed();
+            case 1:
+                return dados.get(linha).getNomeMed();
+            case 2:
+                return dados.get(linha).getDescricaoMed();
+            case 3:
+                return dados.get(linha).getQuantidadeMed();
+            case 4:
+                return dados.get(linha).getValorMed();
+            case 5:
+                return dados.get(linha).getDataValidadeMed();
             case 6:
                 return dados.get(linha).getCodCatMed();
         }
@@ -55,22 +55,22 @@ public class MedicamentoTableModel extends AbstractTableModel {
     public void setValueAt(Object valor, int linha, int coluna) {
         switch (coluna) {
             case 0:
-                dados.get(linha).setNomeMed((String)valor);
+                dados.get(linha).setCodMed(Integer.parseInt((String)valor));
                 break;
             case 1:
-                dados.get(linha).setDescricaoMed((String)valor);
+                dados.get(linha).setNomeMed((String)valor);
                 break;
             case 2:
-                dados.get(linha).setDataValidadeMed((String)valor);
+                dados.get(linha).setDescricaoMed((String)valor);
                 break;
             case 3:
-                dados.get(linha).setValorMed(Double.valueOf((String)valor));
-                break;
-            case 4:
                 dados.get(linha).setQuantidadeMed(Integer.parseInt((String)valor));
                 break;
+            case 4:
+                dados.get(linha).setValorMed(Double.valueOf((String)valor));
+                break;
             case 5:
-                dados.get(linha).setCodMed(Integer.parseInt((String)valor));
+                dados.get(linha).setDataValidadeMed((String)valor);
                 break;
             case 6:
                 dados.get(linha).setCodCatMed(Integer.parseInt((String)valor));
