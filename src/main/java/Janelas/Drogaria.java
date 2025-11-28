@@ -5,6 +5,7 @@
 package Janelas;
 
 import DAO.DrogariaDAO;
+import Model.DrogariaTableModel;
 import Objetos.DrogariaObjeto;
 
 /**
@@ -12,6 +13,8 @@ import Objetos.DrogariaObjeto;
  * @author andrey.munhoz
  */
 public class Drogaria extends javax.swing.JFrame {
+    
+     DrogariaTableModel modelo = new DrogariaTableModel();
 
     /**
      * Creates new form Drogaria2
@@ -19,6 +22,8 @@ public class Drogaria extends javax.swing.JFrame {
     public Drogaria() {
         initComponents();
         this.setLocationRelativeTo(null);
+        jTTabelaDrogaria.setModel(modelo);
+        modelo.recarregaTabela();
     }
 
     /**
@@ -45,6 +50,10 @@ public class Drogaria extends javax.swing.JFrame {
         jTNomeDrogaria = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jBVoltarDrogaria = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTTabelaDrogaria = new javax.swing.JTable();
+        jBExcluirDrogaria = new javax.swing.JButton();
+        jBAlterarDrogaria = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -84,6 +93,38 @@ public class Drogaria extends javax.swing.JFrame {
             }
         });
 
+        jTTabelaDrogaria.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jTTabelaDrogaria.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTTabelaDrogariaMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jTTabelaDrogaria);
+
+        jBExcluirDrogaria.setText("Excluir");
+        jBExcluirDrogaria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBExcluirDrogariaActionPerformed(evt);
+            }
+        });
+
+        jBAlterarDrogaria.setText("Alterar");
+        jBAlterarDrogaria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBAlterarDrogariaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -120,8 +161,18 @@ public class Drogaria extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel7)
                                 .addGap(18, 18, 18)
-                                .addComponent(jTTelDrogaria, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jTTelDrogaria, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(90, 90, 90))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jBAlterarDrogaria)
+                                .addGap(18, 18, 18)
+                                .addComponent(jBExcluirDrogaria)
+                                .addGap(18, 18, 18)
                                 .addComponent(jBCadastrarDrogaria)
                                 .addGap(18, 18, 18)
                                 .addComponent(jBVoltarDrogaria)))))
@@ -156,10 +207,14 @@ public class Drogaria extends javax.swing.JFrame {
                     .addComponent(jTTelDrogaria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8)
                     .addComponent(jTEmailDrogaria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addGap(59, 59, 59)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBCadastrarDrogaria)
-                    .addComponent(jBVoltarDrogaria))
+                    .addComponent(jBVoltarDrogaria)
+                    .addComponent(jBExcluirDrogaria)
+                    .addComponent(jBAlterarDrogaria))
                 .addGap(14, 14, 14))
         );
 
@@ -177,6 +232,10 @@ public class Drogaria extends javax.swing.JFrame {
         d.setTelefoneDrogaria(jTTelDrogaria.getText());
         d.setNumeroDrogaria(Integer.parseInt(jTNumeroDrogaria.getText()));
         
+        dao.create(d);
+        modelo.recarregaTabela();
+        LimpaCampos();
+        
     }//GEN-LAST:event_jBCadastrarDrogariaActionPerformed
 
     private void jBVoltarDrogariaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBVoltarDrogariaActionPerformed
@@ -189,6 +248,54 @@ public class Drogaria extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTEmailDrogariaActionPerformed
 
+    private void jTTabelaDrogariaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTTabelaDrogariaMouseClicked
+         if (jTTabelaDrogaria.getSelectedRow() != -1){
+           DrogariaObjeto d = modelo.pegaDadosLinha(jTTabelaDrogaria.getSelectedRow());
+            jTNomeDrogaria.setText(d.getNomeDrogaria());
+            jTCNPJDrograria.setText(d.getCnpjDrogaria());
+            jTNumeroDrogaria.setText(String.valueOf(d.getNumeroDrogaria()));
+            jTCEPDrogaria.setText(d.getCepDrogaria());
+            jTEmailDrogaria.setText(d.getEmailDrogaria());
+            jTTelDrogaria.setText(d.getTelefoneDrogaria());
+        }
+    }//GEN-LAST:event_jTTabelaDrogariaMouseClicked
+
+    private void jBAlterarDrogariaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAlterarDrogariaActionPerformed
+        if (jTTabelaDrogaria.getSelectedRow() != -1) {
+            modelo.setValueAt(jTCNPJDrograria.getText(), jTTabelaDrogaria.getSelectedRow(), 0);
+            modelo.setValueAt(jTNomeDrogaria.getText(), jTTabelaDrogaria.getSelectedRow(), 1);
+            modelo.setValueAt(jTTelDrogaria.getText(), jTTabelaDrogaria.getSelectedRow(), 2);
+            modelo.setValueAt(jTEmailDrogaria.getText(), jTTabelaDrogaria.getSelectedRow(), 3);
+            modelo.setValueAt(jTCEPDrogaria.getText(), jTTabelaDrogaria.getSelectedRow(), 4);
+            modelo.setValueAt(jTCEPDrogaria.getText(), jTTabelaDrogaria.getSelectedRow(), 5);
+            modelo.setValueAt(jTNumeroDrogaria.getText(), jTTabelaDrogaria.getSelectedRow(), 6);
+
+            DrogariaObjeto d = modelo.pegaDadosLinha(jTTabelaDrogaria.getSelectedRow());
+            DrogariaDAO dao = new DrogariaDAO();
+            dao.updtae(d);
+            LimpaCampos();
+            modelo.recarregaTabela();
+        }
+    }//GEN-LAST:event_jBAlterarDrogariaActionPerformed
+
+    private void jBExcluirDrogariaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBExcluirDrogariaActionPerformed
+        if (jTTabelaDrogaria.getSelectedRow() != -1) {
+            DrogariaObjeto d = modelo.pegaDadosLinha(jTTabelaDrogaria.getSelectedRow());
+            DrogariaDAO dao = new DrogariaDAO();
+            dao.delete(d);
+            modelo.recarregaTabela();
+        }
+    }//GEN-LAST:event_jBExcluirDrogariaActionPerformed
+
+    private void LimpaCampos() {
+        jTCEPDrogaria.setText("");
+        jTCNPJDrograria.setText("");
+        jTEmailDrogaria.setText("");
+        jTNomeDrogaria.setText("");
+        jTNumeroDrogaria.setText("");
+        jTTelDrogaria.setText("");
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -226,7 +333,9 @@ public class Drogaria extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBAlterarDrogaria;
     private javax.swing.JButton jBCadastrarDrogaria;
+    private javax.swing.JButton jBExcluirDrogaria;
     private javax.swing.JButton jBVoltarDrogaria;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -235,11 +344,13 @@ public class Drogaria extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTCEPDrogaria;
     private javax.swing.JTextField jTCNPJDrograria;
     private javax.swing.JTextField jTEmailDrogaria;
     private javax.swing.JTextField jTNomeDrogaria;
     private javax.swing.JTextField jTNumeroDrogaria;
+    private javax.swing.JTable jTTabelaDrogaria;
     private javax.swing.JTextField jTTelDrogaria;
     // End of variables declaration//GEN-END:variables
 }
