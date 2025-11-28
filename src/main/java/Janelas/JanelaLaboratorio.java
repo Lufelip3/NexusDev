@@ -103,7 +103,7 @@ public class JanelaLaboratorio extends javax.swing.JFrame {
             }
         });
 
-        jBExcluirLaboratorio.setText("Cadastrar");
+        jBExcluirLaboratorio.setText("Excluir");
         jBExcluirLaboratorio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBExcluirLaboratorioActionPerformed(evt);
@@ -281,6 +281,7 @@ public class JanelaLaboratorio extends javax.swing.JFrame {
             jTTelLaboratorio.setText(l.getTelefoneLab());
             jTNumeroLaboratorio.setText(String.valueOf(l.getNumeroLab()));
             jTCEPLaboratorio.setText(l.getCepLab());
+            jTEmailLaboratorio.setText(l.getEmailLab());
         }
     }//GEN-LAST:event_jTTabelaLabMouseClicked
 

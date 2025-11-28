@@ -98,7 +98,7 @@ public class LaboratorioDAO {
         PreparedStatement stmt = null;
 
         try {
-            stmt = con.prepareStatement("DELETE FROM laboratorio where Cod_Item = ?");
+            stmt = con.prepareStatement("DELETE FROM laboratorio where CNPJ_Lab = ?");
             stmt.setString(1, l.getCnpjLab());
 
             stmt.execute();
