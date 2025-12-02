@@ -267,8 +267,7 @@ public class Drogaria extends javax.swing.JFrame {
             modelo.setValueAt(jTTelDrogaria.getText(), jTTabelaDrogaria.getSelectedRow(), 2);
             modelo.setValueAt(jTEmailDrogaria.getText(), jTTabelaDrogaria.getSelectedRow(), 3);
             modelo.setValueAt(jTCEPDrogaria.getText(), jTTabelaDrogaria.getSelectedRow(), 4);
-            modelo.setValueAt(jTCEPDrogaria.getText(), jTTabelaDrogaria.getSelectedRow(), 5);
-            modelo.setValueAt(jTNumeroDrogaria.getText(), jTTabelaDrogaria.getSelectedRow(), 6);
+            modelo.setValueAt(jTNumeroDrogaria.getText(), jTTabelaDrogaria.getSelectedRow(), 5);
 
             DrogariaObjeto d = modelo.pegaDadosLinha(jTTabelaDrogaria.getSelectedRow());
             DrogariaDAO dao = new DrogariaDAO();

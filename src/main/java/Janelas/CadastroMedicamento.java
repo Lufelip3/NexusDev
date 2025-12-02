@@ -265,12 +265,12 @@ public class CadastroMedicamento extends javax.swing.JFrame {
 
     private void jBAlterarMedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAlterarMedActionPerformed
         if (jTTabelaMed.getSelectedRow() != -1) {
-            modelo.setValueAt(jTNomeMedicamento.getText(), jTTabelaMed.getSelectedRow(), 0);
-            modelo.setValueAt(jTDescricaoMedicamento.getText(), jTTabelaMed.getSelectedRow(), 1);
-            modelo.setValueAt(jTQuantidadeMedicamento.getText(), jTTabelaMed.getSelectedRow(), 2);
-            modelo.setValueAt(jTValorMedicamento.getText(), jTTabelaMed.getSelectedRow(), 3);
-            modelo.setValueAt(jTDataValidadeMedicamento.getText(), jTTabelaMed.getSelectedRow(), 4);
-            modelo.setValueAt(jTCodigoCatalogo.getText(), jTTabelaMed.getSelectedRow(), 5);
+            modelo.setValueAt(jTNomeMedicamento.getText(), jTTabelaMed.getSelectedRow(), 1);
+            modelo.setValueAt(jTDescricaoMedicamento.getText(), jTTabelaMed.getSelectedRow(), 2);
+            modelo.setValueAt(jTQuantidadeMedicamento.getText(), jTTabelaMed.getSelectedRow(), 3);
+            modelo.setValueAt(jTValorMedicamento.getText(), jTTabelaMed.getSelectedRow(), 4);
+            modelo.setValueAt(jTDataValidadeMedicamento.getText(), jTTabelaMed.getSelectedRow(), 5);
+            modelo.setValueAt(jTCodigoCatalogo.getText(), jTTabelaMed.getSelectedRow(), 6);
 
             Medicamento cmed = modelo.pegaDadosLinha(jTTabelaMed.getSelectedRow());
             MedicamentoDAO dao = new MedicamentoDAO();
