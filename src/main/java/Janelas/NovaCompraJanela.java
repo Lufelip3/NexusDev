@@ -51,6 +51,11 @@ public class NovaCompraJanela extends javax.swing.JFrame {
         jCItemNovaCompra.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jBFinalizarNovaCompra.setText("Finalizar");
+        jBFinalizarNovaCompra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBFinalizarNovaCompraActionPerformed(evt);
+            }
+        });
 
         jBCancelarNovaCompra.setText("Cancelar");
 
@@ -138,8 +143,12 @@ public class NovaCompraJanela extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTTabelaNovaCompraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTTabelaNovaCompraMouseClicked
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_jTTabelaNovaCompraMouseClicked
+
+    private void jBFinalizarNovaCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBFinalizarNovaCompraActionPerformed
+        
+    }//GEN-LAST:event_jBFinalizarNovaCompraActionPerformed
 
     /**
      * @param args the command line arguments
