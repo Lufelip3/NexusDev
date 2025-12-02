@@ -6,6 +6,7 @@ package Janelas;
 
 import DAO.VendaDAO;
 import Objetos.Venda;
+import java.awt.Color;
 
 /**
  *
@@ -19,6 +20,7 @@ public class VendaJanela extends javax.swing.JFrame {
     public VendaJanela() {
         initComponents();
         this.setLocationRelativeTo(null);
+        getContentPane().setBackground(Color.GRAY);
     }
 
     /**
@@ -47,6 +49,7 @@ public class VendaJanela extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("VENDA");
 
         jLabel2.setText("Data Venda:");
@@ -106,29 +109,29 @@ public class VendaJanela extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jTValorVenda))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(157, 157, 157)
-                        .addComponent(jLabel1)
-                        .addGap(0, 175, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(5, 5, 5)
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTNotaFiscalVenda))
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap(210, Short.MAX_VALUE)
                         .addComponent(jBCadastrar)
                         .addGap(32, 32, 32)
-                        .addComponent(jBVoltar)))
+                        .addComponent(jBVoltar))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(157, 157, 157)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
                             .addComponent(jTDataVenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))

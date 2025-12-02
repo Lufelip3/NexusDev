@@ -7,6 +7,7 @@ package Janelas;
 import DAO.MedicamentoDAO;
 import Model.MedicamentoTableModel;
 import Objetos.Medicamento;
+import java.awt.Color;
 
 /**
  *
@@ -24,6 +25,7 @@ public class CadastroMedicamento extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         jTTabelaMed.setModel(modelo);
         modelo.recarregaTabela();
+        getContentPane().setBackground(Color.GRAY);
     }
 
     /**
@@ -183,10 +185,10 @@ public class CadastroMedicamento extends javax.swing.JFrame {
                                         .addComponent(jLabel5)
                                         .addGap(18, 18, 18)
                                         .addComponent(jTDataValidadeMedicamento, javax.swing.GroupLayout.DEFAULT_SIZE, 317, Short.MAX_VALUE))
+                                    .addComponent(jTCodigoCatalogo)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel1)
-                                        .addGap(0, 0, Short.MAX_VALUE))
-                                    .addComponent(jTCodigoCatalogo)))))
+                                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 543, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE))))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jScrollPane1)))

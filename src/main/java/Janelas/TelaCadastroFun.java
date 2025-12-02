@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package Janelas;
+import java.awt.Color;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel; // (e outros imports que já tiver)
 
@@ -20,6 +21,7 @@ public class TelaCadastroFun extends javax.swing.JFrame {
      */
     public TelaCadastroFun() {
         initComponents();
+        getContentPane().setBackground(Color.GRAY);
         
     jBoxFun.removeAllItems();    
     jBoxFun.addItem("Gerente");

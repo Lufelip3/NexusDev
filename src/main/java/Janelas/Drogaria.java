@@ -7,6 +7,7 @@ package Janelas;
 import DAO.DrogariaDAO;
 import Model.DrogariaTableModel;
 import Objetos.DrogariaObjeto;
+import java.awt.Color;
 
 /**
  *
@@ -24,6 +25,7 @@ public class Drogaria extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         jTTabelaDrogaria.setModel(modelo);
         modelo.recarregaTabela();
+        getContentPane().setBackground(Color.GRAY);
     }
 
     /**
@@ -176,11 +178,11 @@ public class Drogaria extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(261, 261, 261))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 498, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(189, 189, 189))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

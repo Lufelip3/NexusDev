@@ -4,6 +4,8 @@
  */
 package Janelas;
 
+import java.awt.Color;
+
 /**
  *
  * @author andrey.munhoz
@@ -16,6 +18,7 @@ public class Menu extends javax.swing.JFrame {
     public Menu() {
         initComponents();
         this.setLocationRelativeTo(null);
+        getContentPane().setBackground(Color.GRAY);
     }
 
     /**

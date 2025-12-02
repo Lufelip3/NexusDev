@@ -4,6 +4,8 @@
  */
 package Janelas;
 
+import java.awt.Color;
+
 /**
  *
  * @author lucas.gmpedro
@@ -15,6 +17,7 @@ public class TelaLoginFuncionario extends javax.swing.JFrame {
      */
     public TelaLoginFuncionario() {
         initComponents();
+        getContentPane().setBackground(Color.GRAY);
     }
 
     /**
