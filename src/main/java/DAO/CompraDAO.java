@@ -6,7 +6,6 @@ package DAO;
 
 import BD.Conexao;
 import Objetos.Compra;
-import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

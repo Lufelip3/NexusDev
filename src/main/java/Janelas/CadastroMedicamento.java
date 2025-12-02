@@ -248,7 +248,7 @@ public class CadastroMedicamento extends javax.swing.JFrame {
         MedicamentoDAO dao = new MedicamentoDAO();
 
         cmed.setNomeMed(jTNomeMedicamento.getText());
-        cmed.setDescricaoMed(jTQuantidadeMedicamento.getText());
+        cmed.setDescricaoMed(jTDescricaoMedicamento.getText());
         cmed.setQuantidadeMed(Integer.parseInt(jTQuantidadeMedicamento.getText()));
         cmed.setCodMed(Integer.parseInt(jTCodigoMedicamento.getText()));
         cmed.setValorMed(Double.valueOf(jTValorMedicamento.getText().replace(",", ".")));
