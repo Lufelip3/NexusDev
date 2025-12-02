@@ -68,7 +68,7 @@ CREATE TABLE medicamento (
 -- ===============================
 CREATE TABLE compra (
   NotaFiscal_Entrada INT AUTO_INCREMENT PRIMARY KEY,
-  Valor_Total DECIMAL(10,2) NOT NULL,
+  Valor_Total DECIMAL(10,2),
   CPF VARCHAR(14),
   CNPJ_Drog VARCHAR(18),
   FOREIGN KEY (CPF) REFERENCES funcionario(CPF),
@@ -80,8 +80,8 @@ CREATE TABLE compra (
 -- ===============================
 CREATE TABLE venda (
   NotaFiscal_Saida INT AUTO_INCREMENT PRIMARY KEY,
-  Data_Venda DATE NOT NULL,
-  Valor_Venda DECIMAL(10,2) NOT NULL,
+  Data_Venda DATE,
+  Valor_Venda DECIMAL(10,2),
   CNPJ_Drog VARCHAR(18),
   CPF VARCHAR(14),
   FOREIGN KEY (CNPJ_Drog) REFERENCES drogaria(CNPJ_Drog),
