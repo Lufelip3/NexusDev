@@ -164,23 +164,23 @@ public class Drogaria extends javax.swing.JFrame {
                                 .addComponent(jTTelDrogaria, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(90, 90, 90))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jBAlterarDrogaria)
-                                .addGap(18, 18, 18)
-                                .addComponent(jBExcluirDrogaria)
-                                .addGap(18, 18, 18)
-                                .addComponent(jBCadastrarDrogaria)
-                                .addGap(18, 18, 18)
-                                .addComponent(jBVoltarDrogaria)))))
+                        .addComponent(jBAlterarDrogaria)
+                        .addGap(18, 18, 18)
+                        .addComponent(jBExcluirDrogaria)
+                        .addGap(18, 18, 18)
+                        .addComponent(jBCadastrarDrogaria)
+                        .addGap(18, 18, 18)
+                        .addComponent(jBVoltarDrogaria)))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(243, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(261, 261, 261))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(261, 261, 261))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 498, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -207,9 +207,9 @@ public class Drogaria extends javax.swing.JFrame {
                     .addComponent(jTTelDrogaria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8)
                     .addComponent(jTEmailDrogaria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(59, 59, 59)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 479, Short.MAX_VALUE)
+                .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBCadastrarDrogaria)
                     .addComponent(jBVoltarDrogaria)
@@ -267,8 +267,7 @@ public class Drogaria extends javax.swing.JFrame {
             modelo.setValueAt(jTTelDrogaria.getText(), jTTabelaDrogaria.getSelectedRow(), 2);
             modelo.setValueAt(jTEmailDrogaria.getText(), jTTabelaDrogaria.getSelectedRow(), 3);
             modelo.setValueAt(jTCEPDrogaria.getText(), jTTabelaDrogaria.getSelectedRow(), 4);
-            modelo.setValueAt(jTCEPDrogaria.getText(), jTTabelaDrogaria.getSelectedRow(), 5);
-            modelo.setValueAt(jTNumeroDrogaria.getText(), jTTabelaDrogaria.getSelectedRow(), 6);
+            modelo.setValueAt(jTNumeroDrogaria.getText(), jTTabelaDrogaria.getSelectedRow(), 5);
 
             DrogariaObjeto d = modelo.pegaDadosLinha(jTTabelaDrogaria.getSelectedRow());
             DrogariaDAO dao = new DrogariaDAO();
