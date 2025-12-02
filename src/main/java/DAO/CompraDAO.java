@@ -47,30 +47,37 @@ public class CompraDAO {
     // ---------------------------------------------------------------------
     // CRIAR COMPRA (SEM ITENS AINDA)
     // ---------------------------------------------------------------------
-    public void create(Compra c) {
+    public int create(Compra c) {
+    Connection con = Conexao.getConnection();
+    PreparedStatement stmt = null;
+    ResultSet rs = null;
 
-        Connection con = Conexao.getConnection();
-        PreparedStatement stmt = null;
+    try {
+        stmt = con.prepareStatement(
+            "INSERT INTO compra (Valor_Total, CPF, CNPJ_Drog) VALUES (?, ?, ?)",
+            PreparedStatement.RETURN_GENERATED_KEYS
+        );
 
-        try {
-            stmt = con.prepareStatement(
-                "INSERT INTO compra (Valor_Total, CPF, CNPJ_Drog) VALUES (?,?,?)"
-            );
+        stmt.setDouble(1, c.getValorTotal());
+        stmt.setString(2, c.getCpfCompra());
+        stmt.setString(3, c.getCnpjCompra());
 
-            stmt.setDouble(1, c.getValorTotal());
-            stmt.setString(2, c.getCpfCompra());
-            stmt.setString(3, c.getCnpjCompra());
+        stmt.executeUpdate();
 
-            stmt.executeUpdate();
-
-            JOptionPane.showMessageDialog(null, "Compra iniciada com sucesso!");
-
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Falha ao cadastrar: " + e);
-        } finally {
-            Conexao.closeConnection(con, stmt);
+        rs = stmt.getGeneratedKeys();
+        if (rs.next()) {
+            return rs.getInt(1); // <<< Aqui devolve a nota fiscal gerada!
         }
+
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(null, "Falha ao cadastrar: " + e);
+    } finally {
+        Conexao.closeConnection(con, stmt, rs);
     }
+
+    return -1; // caso dê erro
+}
+
 
     // ---------------------------------------------------------------------
     // ATUALIZAR COMPRA
