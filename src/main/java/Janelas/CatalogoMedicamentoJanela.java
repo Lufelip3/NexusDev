@@ -6,6 +6,7 @@ package Janelas;
 
 import DAO.CatalogoDAO;
 import Objetos.CatalogoMedicamento;
+import java.awt.Color;
 
 /**
  *
@@ -19,6 +20,7 @@ public class CatalogoMedicamentoJanela extends javax.swing.JFrame {
     public CatalogoMedicamentoJanela() {
         initComponents();
         this.setLocationRelativeTo(null);
+        getContentPane().setBackground(Color.GRAY);
     }
 
     /**
@@ -47,6 +49,7 @@ public class CatalogoMedicamentoJanela extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("CATÁLOGO MEDICAMENTO");
 
         jLabel2.setText("Nome:");
@@ -98,19 +101,17 @@ public class CatalogoMedicamentoJanela extends javax.swing.JFrame {
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2)
+                                .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
-                                        .addComponent(jLabel1)
-                                        .addGap(63, 63, 63))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(18, 18, 18)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jTCnpjCatMed)
-                                            .addComponent(jTNomeCatMed))))))))
+                                    .addComponent(jTCnpjCatMed)
+                                    .addComponent(jTNomeCatMed)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(27, 27, 27)))))
                 .addGap(9, 9, 9))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(224, Short.MAX_VALUE)
                 .addComponent(jBCadastrarCatMed)
                 .addGap(18, 18, 18)
                 .addComponent(jBVoltarCatalogo)

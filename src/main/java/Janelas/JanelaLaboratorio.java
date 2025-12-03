@@ -7,6 +7,7 @@ package Janelas;
 import DAO.LaboratorioDAO;
 import Model.LaboratorioTableModel;
 import Objetos.Laboratorio;
+import java.awt.Color;
 
 /**
  *
@@ -25,6 +26,7 @@ public class JanelaLaboratorio extends javax.swing.JFrame {
       
         jTTabelaLab.setModel(modelo);
         modelo.recarregaTabela();
+        getContentPane().setBackground(Color.GRAY);
     }
 
   
@@ -60,7 +62,19 @@ public class JanelaLaboratorio extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jTNomeLaboratorio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTNomeLaboratorioActionPerformed(evt);
+            }
+        });
+
         jLabel7.setText("Telefone:");
+
+        jTTelLaboratorio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTTelLaboratorioActionPerformed(evt);
+            }
+        });
 
         jLabel5.setText("Nome:");
 
@@ -132,10 +146,6 @@ public class JanelaLaboratorio extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel4)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -145,11 +155,15 @@ public class JanelaLaboratorio extends javax.swing.JFrame {
                     .addComponent(jLabel8))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTCNPJLaboratorio)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel10)
+                            .addComponent(jLabel8))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jTNomeLaboratorio)
                                 .addGroup(layout.createSequentialGroup()
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                         .addComponent(jTEmailLaboratorio, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 319, Short.MAX_VALUE)
@@ -172,11 +186,14 @@ public class JanelaLaboratorio extends javax.swing.JFrame {
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addComponent(jBVoltarLaboratorio)
                                     .addGap(33, 33, 33)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 729, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(33, 33, 33)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                            .addComponent(jTNomeLaboratorio, javax.swing.GroupLayout.PREFERRED_SIZE, 729, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTCNPJLaboratorio)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 767, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -206,8 +223,8 @@ public class JanelaLaboratorio extends javax.swing.JFrame {
                     .addComponent(jTEmailLaboratorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 476, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBCadastrarLaboratorio)
                     .addComponent(jBVoltarLaboratorio)
@@ -282,6 +299,14 @@ public class JanelaLaboratorio extends javax.swing.JFrame {
             jTEmailLaboratorio.setText(l.getEmailLab());
         }
     }//GEN-LAST:event_jTTabelaLabMouseClicked
+
+    private void jTNomeLaboratorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTNomeLaboratorioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTNomeLaboratorioActionPerformed
+
+    private void jTTelLaboratorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTTelLaboratorioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTTelLaboratorioActionPerformed
 
     private void limpaCampos() {
         jTCEPLaboratorio.setText("");

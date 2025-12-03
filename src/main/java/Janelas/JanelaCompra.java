@@ -6,6 +6,7 @@ package Janelas;
 
 import DAO.CompraDAO;
 import Objetos.Compra;
+import java.awt.Color;
 
 /**
  *
@@ -21,6 +22,7 @@ public class JanelaCompra extends javax.swing.JFrame {
     public JanelaCompra() {
         initComponents();
         this.setLocationRelativeTo(null);
+        getContentPane().setBackground(Color.GRAY);
         
     }
 
@@ -111,6 +113,10 @@ public class JanelaCompra extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 714, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(224, 224, 224))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
