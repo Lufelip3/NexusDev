@@ -113,10 +113,6 @@ public class JanelaCompra extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 714, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(224, 224, 224))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -146,15 +142,7 @@ public class JanelaCompra extends javax.swing.JFrame {
     }//GEN-LAST:event_jBVoltarCompraActionPerformed
 
     private void jTTabelaMedMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTTabelaMedMouseClicked
-        if (jTTabelaMed.getSelectedRow() != -1){
-            Medicamento cmed = modelo.pegaDadosLinha(jTTabelaMed.getSelectedRow());
-            jTNomeMedicamento.setText(cmed.getNomeMed());
-            jTDescricaoMedicamento.setText(cmed.getDescricaoMed());
-            jTDataValidadeMedicamento.setText(cmed.getDataValidadeMed());
-            jTValorMedicamento.setText(String.valueOf(cmed.getValorMed()));
-            jTQuantidadeMedicamento.setText(String.valueOf(cmed.getQuantidadeMed()));
-            jTCodigoCatalogo.setText(String.valueOf(cmed.getCodCatMed()));
-        }
+        
     }//GEN-LAST:event_jTTabelaMedMouseClicked
 
     /**
