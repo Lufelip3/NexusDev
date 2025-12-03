@@ -46,7 +46,7 @@ public class TelaLoginFuncionario extends javax.swing.JFrame {
         jLabel1.setText("NEXUS DEV");
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel2.setText("Nome:");
+        jLabel2.setText("Email:");
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel3.setText("Senha:");
