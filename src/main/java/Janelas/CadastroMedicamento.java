@@ -39,12 +39,10 @@ public class CadastroMedicamento extends javax.swing.JFrame {
 
         jComboBox1 = new javax.swing.JComboBox<>();
         jTQuantidadeMedicamento = new javax.swing.JTextField();
-        jTCodigoMedicamento = new javax.swing.JTextField();
         jTDataValidadeMedicamento = new javax.swing.JTextField();
         jTValorMedicamento = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -70,9 +68,6 @@ public class CadastroMedicamento extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel2.setText("Nome:");
-
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel3.setText("Código:");
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel4.setText("Descrição:");
@@ -191,7 +186,27 @@ public class CadastroMedicamento extends javax.swing.JFrame {
                                         .addGap(0, 0, Short.MAX_VALUE))))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane1)))
+                        .addComponent(jScrollPane1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(34, 34, 34)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel5))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTValorMedicamento)
+                            .addComponent(jTQuantidadeMedicamento)
+                            .addComponent(jTDescricaoMedicamento)
+                            .addComponent(jTNomeMedicamento)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jTCodigoCatalogo)
+                            .addComponent(jTDataValidadeMedicamento, javax.swing.GroupLayout.Alignment.TRAILING))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -212,13 +227,9 @@ public class CadastroMedicamento extends javax.swing.JFrame {
                     .addComponent(jLabel6)
                     .addComponent(jTQuantidadeMedicamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel3)
-                        .addComponent(jTCodigoMedicamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel5)
-                        .addComponent(jTDataValidadeMedicamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(jTDataValidadeMedicamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
@@ -250,9 +261,8 @@ public class CadastroMedicamento extends javax.swing.JFrame {
         MedicamentoDAO dao = new MedicamentoDAO();
 
         cmed.setNomeMed(jTNomeMedicamento.getText());
-        cmed.setDescricaoMed(jTQuantidadeMedicamento.getText());
+        cmed.setDescricaoMed(jTDescricaoMedicamento.getText());
         cmed.setQuantidadeMed(Integer.parseInt(jTQuantidadeMedicamento.getText()));
-        cmed.setCodMed(Integer.parseInt(jTCodigoMedicamento.getText()));
         cmed.setValorMed(Double.valueOf(jTValorMedicamento.getText().replace(",", ".")));
         cmed.setDataValidadeMed(jTDataValidadeMedicamento.getText());
         cmed.setCodCatMed(Integer.parseInt(jTCodigoCatalogo.getText()));
@@ -284,7 +294,6 @@ public class CadastroMedicamento extends javax.swing.JFrame {
 
     private void jBAlterarMedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAlterarMedActionPerformed
         if (jTTabelaMed.getSelectedRow() != -1) {
-            modelo.setValueAt(jTCodigoMedicamento.getText(), jTTabelaMed.getSelectedRow(), 0);
             modelo.setValueAt(jTNomeMedicamento.getText(), jTTabelaMed.getSelectedRow(), 1);
             modelo.setValueAt(jTDescricaoMedicamento.getText(), jTTabelaMed.getSelectedRow(), 2);
             modelo.setValueAt(jTQuantidadeMedicamento.getText(), jTTabelaMed.getSelectedRow(), 3);
@@ -308,14 +317,12 @@ public class CadastroMedicamento extends javax.swing.JFrame {
             jTDataValidadeMedicamento.setText(cmed.getDataValidadeMed());
             jTValorMedicamento.setText(String.valueOf(cmed.getValorMed()));
             jTQuantidadeMedicamento.setText(String.valueOf(cmed.getQuantidadeMed()));
-            jTCodigoMedicamento.setText(String.valueOf(cmed.getCodMed()));
             jTCodigoCatalogo.setText(String.valueOf(cmed.getCodCatMed()));
         }
     }//GEN-LAST:event_jTTabelaMedMouseClicked
 
     private void LimpaCampos() {
         jTCodigoCatalogo.setText("");
-        jTCodigoMedicamento.setText("");
         jTDataValidadeMedicamento.setText("");
         jTDescricaoMedicamento.setText("");
         jTNomeMedicamento.setText("");
@@ -366,7 +373,6 @@ public class CadastroMedicamento extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -374,7 +380,6 @@ public class CadastroMedicamento extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTCodigoCatalogo;
-    private javax.swing.JTextField jTCodigoMedicamento;
     private javax.swing.JTextField jTDataValidadeMedicamento;
     private javax.swing.JTextField jTDescricaoMedicamento;
     private javax.swing.JTextField jTNomeMedicamento;

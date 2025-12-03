@@ -4,7 +4,7 @@
  */
 package Model;
 
-import DAO.ItnesDAO;
+import DAO.ItensDAO;
 import Objetos.Itens;
 import java.util.ArrayList;
 import java.util.List;
@@ -64,7 +64,7 @@ public class ItensTableModel extends AbstractTableModel{
                 dados.get(linha).setQuantidadeItem(Integer.parseInt((String)valor));
                 break;
             case 2:
-                dados.get(linha).setValorItem(Double.parseDouble((String)valor));
+                dados.get(linha).setValorItem(Double.valueOf((String)valor));
                 break;
             case 3:
                 dados.get(linha).setDataValItem((String)valor);
@@ -97,7 +97,7 @@ public class ItensTableModel extends AbstractTableModel{
     }
 
     private void lerDados() {
-        ItnesDAO idao = new ItnesDAO();
+        ItensDAO idao = new ItensDAO();
 
         for (Itens i : idao.read()) {
             this.addLinha(i);
