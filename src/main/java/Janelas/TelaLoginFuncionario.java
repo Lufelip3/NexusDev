@@ -6,6 +6,7 @@ package Janelas;
 
 import DAO.FuncionarioDAO;
 import Objetos.Funcionario;
+import java.awt.Color;
 import javax.swing.JOptionPane;
 
 /**

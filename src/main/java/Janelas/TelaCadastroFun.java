@@ -5,6 +5,7 @@
 package Janelas;
 import DAO.FuncionarioDAO;
 import Objetos.Funcionario;
+import java.awt.Color;
 import java.awt.HeadlessException;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
