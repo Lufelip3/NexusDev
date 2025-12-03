@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package DAO;
 
 import BD.Conexao;
@@ -14,17 +10,22 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author lucas.gmpedro
- */
 public class FuncionarioDAO {
 
+    // =============================
+    // LISTAR FUNCIONÁRIOS
+    // =============================
     public List<Funcionario> read() {
         Connection con = Conexao.getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;
         List<Funcionario> funcionarios = new ArrayList<>();
+
+        if (con == null) {
+            JOptionPane.showMessageDialog(null, "Erro: Não foi possível conectar ao banco de dados!");
+            return funcionarios;
+        }
+
         try {
             stmt = con.prepareStatement("SELECT * FROM funcionario");
             rs = stmt.executeQuery();
@@ -37,24 +38,43 @@ public class FuncionarioDAO {
                 f.setCep_Fun(rs.getString("Cep_Fun"));
                 f.setNumero_Fun(rs.getInt("Num_Fun"));
                 f.setEmail_Fun(rs.getString("Email_Fun"));
-                f.setSenha(rs.getString("Senha"));
-                f.setCargo(rs.getString("Cargo"));
+                f.setSenhaHashDireto(rs.getString("Senha_Fun"));
+                
+                // CARREGA A FUNÇÃO DO BANCO
+                f.setFuncao(rs.getString("Funcao"));
+
                 funcionarios.add(f);
             }
+
         } catch (SQLException e) {
-            JOptionPane.showConfirmDialog(null, "Falha ao obter dados: " + e);
+            JOptionPane.showMessageDialog(null, "Falha ao obter dados: " + e.getMessage());
+            e.printStackTrace();
         } finally {
             Conexao.closeConnection(con, stmt, rs);
         }
+
         return funcionarios;
     }
 
-    public void create(Funcionario f) {
+    // =============================
+    // CADASTRAR FUNCIONÁRIO
+    // =============================
+    public void salvar(Funcionario f) {
         Connection con = Conexao.getConnection();
+        
+        if (con == null) {
+            JOptionPane.showMessageDialog(null, "Erro: Não foi possível conectar ao banco de dados!");
+            return;
+        }
+        
         PreparedStatement stmt = null;
 
         try {
-            stmt = con.prepareStatement("INSERT INTO funcionario (CPF, Nome_Fun, Telefone_Fun, Cep_Fun, Num_Fun, Email_Fun, Senha, Cargo) VALUES (?,?,?,?,?,?,?,?)");
+            // ADICIONADO "Funcao" NO INSERT
+            stmt = con.prepareStatement(
+                "INSERT INTO funcionario (CPF, Nome_Fun, Telefone_Fun, Cep_Fun, Num_Fun, Email_Fun, Senha_Fun, Funcao) VALUES (?,?,?,?,?,?,?,?)"
+            );
+
             stmt.setString(1, f.getCpf());
             stmt.setString(2, f.getNome_Fun());
             stmt.setString(3, f.getTelefone_Fun());
@@ -62,57 +82,132 @@ public class FuncionarioDAO {
             stmt.setInt(5, f.getNumero_Fun());
             stmt.setString(6, f.getEmail_Fun());
             stmt.setString(7, f.getSenhaHash());
-            stmt.setString(8, f.getCargo());
+            
+            // SALVA A FUNÇÃO
+            stmt.setString(8, f.getFuncao());
 
             stmt.execute();
-            JOptionPane.showMessageDialog(null, "Funcionário cadastrado com sucesso!");
+            System.out.println("✓ Funcionário salvo com sucesso no banco!");
 
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Falha ao cadastrar: " + e);
+            JOptionPane.showMessageDialog(null, "Erro ao cadastrar funcionário: " + e.getMessage());
+            e.printStackTrace();
         } finally {
             Conexao.closeConnection(con, stmt);
         }
     }
 
-    public void updtae(Funcionario f) {
+    // =============================
+    // ATUALIZAR FUNCIONÁRIO
+    // =============================
+    public void update(Funcionario f) {
         Connection con = Conexao.getConnection();
+        
+        if (con == null) {
+            JOptionPane.showMessageDialog(null, "Erro: Não foi possível conectar ao banco de dados!");
+            return;
+        }
+        
         PreparedStatement stmt = null;
 
         try {
-            stmt = con.prepareStatement("UPDATE funcionario set Nome_Fun = ?, Telefone_Fun = ?, Cep_Fun = ?, Num_Fun = ?, Email_Fun = ? Senha = ? Cargo = ? where CPF = ?");
+            // ADICIONADO "Funcao" NO UPDATE
+            stmt = con.prepareStatement(
+                "UPDATE funcionario SET Nome_Fun=?, Telefone_Fun=?, Cep_Fun=?, Num_Fun=?, Email_Fun=?, Senha_Fun=?, Funcao=? WHERE CPF=?"
+            );
+
             stmt.setString(1, f.getNome_Fun());
             stmt.setString(2, f.getTelefone_Fun());
             stmt.setString(3, f.getCep_Fun());
             stmt.setInt(4, f.getNumero_Fun());
             stmt.setString(5, f.getEmail_Fun());
             stmt.setString(6, f.getSenhaHash());
-            stmt.setString(7, f.getCargo());
+            
+            // ATUALIZA A FUNÇÃO
+            stmt.setString(7, f.getFuncao());
             stmt.setString(8, f.getCpf());
+
             stmt.execute();
-            JOptionPane.showMessageDialog(null, "Funcionário atualizado com sucesso!");
+            System.out.println("✓ Funcionário atualizado com sucesso no banco!");
 
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Falha ao atualizar: " + e);
+            JOptionPane.showMessageDialog(null, "Erro ao atualizar funcionário: " + e.getMessage());
+            e.printStackTrace();
         } finally {
             Conexao.closeConnection(con, stmt);
         }
     }
 
+    // =============================
+    // REMOVER FUNCIONÁRIO
+    // =============================
     public void delete(Funcionario f) {
         Connection con = Conexao.getConnection();
+        
+        if (con == null) {
+            JOptionPane.showMessageDialog(null, "Erro: Não foi possível conectar ao banco de dados!");
+            return;
+        }
+        
         PreparedStatement stmt = null;
 
         try {
-            stmt = con.prepareStatement("DELETE FROM funcionario where CPF = ?");
+            stmt = con.prepareStatement("DELETE FROM funcionario WHERE CPF=?");
             stmt.setString(1, f.getCpf());
-
             stmt.execute();
-            JOptionPane.showMessageDialog(null, "Funcionário removido com sucesso!");
+            System.out.println("✓ Funcionário removido com sucesso do banco!");
 
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Falha ao remover: " + e);
+            JOptionPane.showMessageDialog(null, "Erro ao remover funcionário: " + e.getMessage());
+            e.printStackTrace();
         } finally {
             Conexao.closeConnection(con, stmt);
         }
+    }
+
+    // =============================
+    // LOGIN — BUSCAR FUNCIONÁRIO
+    // =============================
+    public Funcionario verificaFuncionario(String email) {
+        Connection con = Conexao.getConnection();
+        
+        if (con == null) {
+            JOptionPane.showMessageDialog(null, "Erro: Não foi possível conectar ao banco de dados!");
+            return null;
+        }
+        
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
+        try {
+            stmt = con.prepareStatement("SELECT * FROM funcionario WHERE Email_Fun = ?");
+            stmt.setString(1, email);
+            rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                Funcionario f = new Funcionario();
+
+                f.setCpf(rs.getString("CPF"));
+                f.setNome_Fun(rs.getString("Nome_Fun"));
+                f.setTelefone_Fun(rs.getString("Telefone_Fun"));
+                f.setCep_Fun(rs.getString("Cep_Fun"));
+                f.setNumero_Fun(rs.getInt("Num_Fun"));
+                f.setEmail_Fun(rs.getString("Email_Fun"));
+                f.setSenhaHashDireto(rs.getString("Senha_Fun"));
+                
+                // CARREGA A FUNÇÃO
+                f.setFuncao(rs.getString("Funcao"));
+
+                return f;
+            }
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Erro ao buscar funcionário: " + e.getMessage());
+            e.printStackTrace();
+        } finally {
+            Conexao.closeConnection(con, stmt, rs);
+        }
+
+        return null;
     }
 }
