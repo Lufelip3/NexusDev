@@ -115,19 +115,42 @@ public class TelaLoginFuncionario extends javax.swing.JFrame {
     }//GEN-LAST:event_jTNomeLoginActionPerformed
 
     private void jBEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEntrarActionPerformed
-        FuncionarioDAO dao = new FuncionarioDAO();
-        Funcionario user;
+         // ---------------------------
+    // 1. PEGAR DADOS DA TELA
+    // ---------------------------
+    String email = jTNomeLogin.getText();
+    String senhaDigitada = new String(jPSenha.getPassword());
 
-        user = dao.verificaFuncionario(jTNomeLogin.getText());
+    // ---------------------------
+    // 2. VALIDAÇÃO
+    // ---------------------------
+    if (email.isEmpty() || senhaDigitada.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Preencha email e senha!");
+        return;
+    }
 
-        if (user.verificarSenha(new String(jPSenha.getPassword()))) {
-            Menu m = new Menu();
-            m.setVisible(true);
-            this.dispose();
-        } else {
-            JOptionPane.showMessageDialog(rootPane, "Falha na autenticação");
+    // ---------------------------
+    // 3. BUSCAR FUNCIONÁRIO NO BANCO
+    // ---------------------------
+    FuncionarioDAO dao = new FuncionarioDAO();
+    Funcionario user = dao.verificaFuncionario(email);
 
-        }
+    if (user == null) {
+        JOptionPane.showMessageDialog(this, "Email não encontrado!");
+        return;
+    }
+
+    // ---------------------------
+    // 4. VERIFICAR SENHA (BCrypt)
+    // ---------------------------
+    if (user.verificarSenha(senhaDigitada)) {
+        // LOGIN OK → abrir menu
+        Menu m = new Menu();
+        m.setVisible(true);
+        this.dispose();
+    } else {
+        JOptionPane.showMessageDialog(this, "Senha incorreta!");
+    }
 
 
     }//GEN-LAST:event_jBEntrarActionPerformed
@@ -160,10 +183,8 @@ public class TelaLoginFuncionario extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new TelaLoginFuncionario().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new TelaLoginFuncionario().setVisible(true);
         });
     }
 

@@ -2,14 +2,22 @@ CREATE DATABASE Drogaria;
 USE Drogaria;
 
 -- Tabela Funcionário
-CREATE TABLE funcionario (
+  CREATE TABLE funcionario (
   CPF VARCHAR(14) UNIQUE PRIMARY KEY,
   Nome_Fun VARCHAR(50) NOT NULL,
   Telefone_Fun VARCHAR(15) NOT NULL,
   Cep_Fun VARCHAR(10) NOT NULL,
-  Num_Fun VARCHAR(15) NOT NULL,
-  Email_Fun VARCHAR(50) UNIQUE NOT NULL
+  Num_Fun INT NOT NULL,
+  Email_Fun VARCHAR(50) UNIQUE NOT NULL,
+  Senha_Fun VARCHAR(255) NOT NULL,
+  Funcao VARCHAR(50)
 );
+
+SELECT * FROM funcionario;
+
+
+
+
 
 -- Tabela Compra
 CREATE TABLE compra (
@@ -150,6 +158,9 @@ CREATE TABLE contemVenda (
   CONSTRAINT fk_cod_itemvenda_contem FOREIGN KEY (Cod_ItemVenda) REFERENCES item_venda(Cod_ItemVenda),
   CONSTRAINT fk_nf_saida_contem FOREIGN KEY (NotaFiscal_Saida) REFERENCES venda(NotaFiscal_Saida)
 );
+
+select * from funcionario;
+
 
 -- Tabela RealizaVenda
 CREATE TABLE realiza_venda (
@@ -515,4 +526,4 @@ BEGIN
 END $$
 
 DELIMITER ;
- 
+ select*from funcionario;
