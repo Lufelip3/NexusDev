@@ -7,23 +7,28 @@ package Janelas;
 import DAO.CompraDAO;
 import Objetos.Compra;
 import java.awt.Color;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author andrey.munhoz
  */
 public class JanelaCompra extends javax.swing.JFrame {
-    
-    
-    
+
+    private String cpf;
+
     /**
      * Creates new form Compra2
      */
     public JanelaCompra() {
         initComponents();
+    }
+
+    public JanelaCompra(String cpf) {
+        initComponents();
         this.setLocationRelativeTo(null);
         getContentPane().setBackground(Color.GRAY);
-        
+        this.cpf = cpf;
     }
 
     /**
@@ -42,6 +47,7 @@ public class JanelaCompra extends javax.swing.JFrame {
         jBVoltarCompra = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTTabelaMed = new javax.swing.JTable();
+        jCFuncionarios = new javax.swing.JComboBox<>();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -94,50 +100,76 @@ public class JanelaCompra extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(jTTabelaMed);
 
+        jCFuncionarios.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 476, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jBCadastrarCompra)
                 .addGap(18, 18, 18)
                 .addComponent(jBVoltarCompra)
                 .addGap(48, 48, 48))
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 714, Short.MAX_VALUE)))
+                .addGap(12, 12, 12)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(224, 224, 224))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jCFuncionarios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jBCadastrarCompra)
-                    .addComponent(jBVoltarCompra))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(66, 66, 66)
+                        .addComponent(jCFuncionarios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(363, 363, 363)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jBCadastrarCompra)
+                            .addComponent(jBVoltarCompra))
+                        .addContainerGap(371, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBCadastrarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCadastrarCompraActionPerformed
-  
+        iniciarCompra();
     }//GEN-LAST:event_jBCadastrarCompraActionPerformed
+    private void iniciarCompra() {
+        try {
+
+            Compra compra = new Compra();
+            compra.setValorTotal(0.0);
+            compra.setCpfCompra(cpf);
+            compra.setCnpjCompra(null); // definido depois
+
+            CompraDAO compraDAO = new CompraDAO();
+            int notaGerada = compraDAO.createAndReturnNota(compra);
+
+            JOptionPane.showMessageDialog(this,
+                    "Compra iniciada! Nota Fiscal gerada: " + notaGerada);
+
+            SelecaoItensCompra itensJanela = new SelecaoItensCompra(notaGerada);
+            itensJanela.setVisible(true);
+            this.dispose();
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Erro ao iniciar compra: " + e);
+        }
+    }
 
     private void jBVoltarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBVoltarCompraActionPerformed
         Menu m = new Menu();
@@ -146,15 +178,7 @@ public class JanelaCompra extends javax.swing.JFrame {
     }//GEN-LAST:event_jBVoltarCompraActionPerformed
 
     private void jTTabelaMedMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTTabelaMedMouseClicked
-        if (jTTabelaMed.getSelectedRow() != -1){
-            Medicamento cmed = modelo.pegaDadosLinha(jTTabelaMed.getSelectedRow());
-            jTNomeMedicamento.setText(cmed.getNomeMed());
-            jTDescricaoMedicamento.setText(cmed.getDescricaoMed());
-            jTDataValidadeMedicamento.setText(cmed.getDataValidadeMed());
-            jTValorMedicamento.setText(String.valueOf(cmed.getValorMed()));
-            jTQuantidadeMedicamento.setText(String.valueOf(cmed.getQuantidadeMed()));
-            jTCodigoCatalogo.setText(String.valueOf(cmed.getCodCatMed()));
-        }
+
     }//GEN-LAST:event_jTTabelaMedMouseClicked
 
     /**
@@ -198,6 +222,7 @@ public class JanelaCompra extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBCadastrarCompra;
     private javax.swing.JButton jBVoltarCompra;
+    private javax.swing.JComboBox<String> jCFuncionarios;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;

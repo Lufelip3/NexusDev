@@ -61,37 +61,48 @@ public class CadastroMedicamento extends javax.swing.JFrame {
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().add(jTQuantidadeMedicamento);
+        getContentPane().add(jTDataValidadeMedicamento);
+        getContentPane().add(jTValorMedicamento);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("CADASTRO MEDICAMENTO");
+        getContentPane().add(jLabel1);
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel2.setText("Nome:");
+        getContentPane().add(jLabel2);
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel4.setText("Descrição:");
+        getContentPane().add(jLabel4);
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel7.setText("Valor:");
+        getContentPane().add(jLabel7);
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel5.setText("Data de Validade:");
+        getContentPane().add(jLabel5);
 
         jTNomeMedicamento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTNomeMedicamentoActionPerformed(evt);
             }
         });
+        getContentPane().add(jTNomeMedicamento);
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel6.setText("Quantidade:");
+        getContentPane().add(jLabel6);
 
         jTDescricaoMedicamento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTDescricaoMedicamentoActionPerformed(evt);
             }
         });
+        getContentPane().add(jTDescricaoMedicamento);
 
         jBCadastrarMed.setText("Cadastrar");
         jBCadastrarMed.addActionListener(new java.awt.event.ActionListener() {
@@ -99,6 +110,7 @@ public class CadastroMedicamento extends javax.swing.JFrame {
                 jBCadastrarMedActionPerformed(evt);
             }
         });
+        getContentPane().add(jBCadastrarMed);
 
         jBVoltarCadastroMedicamento.setText("Voltar");
         jBVoltarCadastroMedicamento.addActionListener(new java.awt.event.ActionListener() {
@@ -106,9 +118,12 @@ public class CadastroMedicamento extends javax.swing.JFrame {
                 jBVoltarCadastroMedicamentoActionPerformed(evt);
             }
         });
+        getContentPane().add(jBVoltarCadastroMedicamento);
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel8.setText("Código Catálogo");
+        getContentPane().add(jLabel8);
+        getContentPane().add(jTCodigoCatalogo);
 
         jTTabelaMed.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -128,12 +143,15 @@ public class CadastroMedicamento extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTTabelaMed);
 
+        getContentPane().add(jScrollPane1);
+
         jBExcluirMed.setText("Excluir");
         jBExcluirMed.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBExcluirMedActionPerformed(evt);
             }
         });
+        getContentPane().add(jBExcluirMed);
 
         jBAlterarMed.setText("Alterar");
         jBAlterarMed.addActionListener(new java.awt.event.ActionListener() {
@@ -141,113 +159,7 @@ public class CadastroMedicamento extends javax.swing.JFrame {
                 jBAlterarMedActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(38, 38, 38)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jBCadastrarMed)
-                                .addGap(18, 18, 18)
-                                .addComponent(jBExcluirMed)
-                                .addGap(26, 26, 26)
-                                .addComponent(jBAlterarMed)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jBVoltarCadastroMedicamento))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel8)
-                                    .addComponent(jLabel7))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTValorMedicamento)
-                                    .addComponent(jTQuantidadeMedicamento)
-                                    .addComponent(jTDescricaoMedicamento)
-                                    .addComponent(jTNomeMedicamento)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jTCodigoMedicamento, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jLabel5)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jTDataValidadeMedicamento, javax.swing.GroupLayout.DEFAULT_SIZE, 317, Short.MAX_VALUE))
-                                    .addComponent(jTCodigoCatalogo)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 543, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, Short.MAX_VALUE))))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(34, 34, 34)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel5))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTValorMedicamento)
-                            .addComponent(jTQuantidadeMedicamento)
-                            .addComponent(jTDescricaoMedicamento)
-                            .addComponent(jTNomeMedicamento)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(jTCodigoCatalogo)
-                            .addComponent(jTDataValidadeMedicamento, javax.swing.GroupLayout.Alignment.TRAILING))))
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jTNomeMedicamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jTDescricaoMedicamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(jTQuantidadeMedicamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(jTDataValidadeMedicamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(jTCodigoCatalogo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(jTValorMedicamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jBCadastrarMed)
-                    .addComponent(jBVoltarCadastroMedicamento)
-                    .addComponent(jBExcluirMed)
-                    .addComponent(jBAlterarMed))
-                .addContainerGap())
-        );
+        getContentPane().add(jBAlterarMed);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

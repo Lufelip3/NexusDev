@@ -3,22 +3,22 @@ package DAO;
 import BD.Conexao;
 import Objetos.Itens;
 import java.sql.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 public class ItensDAO {
 
-    // -----------------------------------------------------
-    //  LÊ TODOS OS ITENS
-    // -----------------------------------------------------
     public List<Itens> read() {
+        Connection con = Conexao.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
         List<Itens> itens = new ArrayList<>();
 
-        String sql = "SELECT * FROM item";
-
-        try (Connection con = Conexao.getConnection();
-             PreparedStatement stmt = con.prepareStatement(sql);
-             ResultSet rs = stmt.executeQuery()) {
+        try {
+            stmt = con.prepareStatement("SELECT * FROM item");
+            rs = stmt.executeQuery();
 
             while (rs.next()) {
                 Itens i = new Itens();
@@ -34,50 +34,24 @@ public class ItensDAO {
             }
 
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Falha ao obter dados: " + e);
+            JOptionPane.showMessageDialog(null, "Erro ao listar: " + e);
+        } finally {
+            Conexao.closeConnection(con, stmt, rs);
         }
 
         return itens;
     }
 
-    // -----------------------------------------------------
-    //  CALCULA O TOTAL DA NOTA (SOMA QUANTIDADE * VALOR)
-    // -----------------------------------------------------
-    public double totalDaNota(int notaFiscal) {
-        String sql = """
-                SELECT SUM(Valor_Item * Qtd_Item) AS total
-                FROM item
-                WHERE NotaFiscal_Entrada = ?
-                """;
-
-        try (Connection con = Conexao.getConnection();
-             PreparedStatement stmt = con.prepareStatement(sql)) {
-
-            stmt.setInt(1, notaFiscal);
-            ResultSet rs = stmt.executeQuery();
-
-            if (rs.next())
-                return rs.getDouble("total");
-
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Erro ao calcular total da nota: " + e);
-        }
-
-        return 0;
-    }
-
-    // -----------------------------------------------------
-    //  INSERE UM ITEM + ATUALIZA VALOR TOTAL DA NOTA
-    // -----------------------------------------------------
     public void create(Itens i) {
-        String sql = """
-                INSERT INTO item
-                (DataVal_Item, Qtd_Item, Valor_Item, Data_Venda, NotaFiscal_Entrada, Cod_CatMed, Cod_Med)
-                VALUES (?,?,?,?,?,?,?)
-                """;
 
-        try (Connection con = Conexao.getConnection();
-             PreparedStatement stmt = con.prepareStatement(sql)) {
+        Connection con = Conexao.getConnection();
+        PreparedStatement stmt = null;
+
+        try {
+            stmt = con.prepareStatement(
+                "INSERT INTO item (DataVal_Item, Qtd_Item, Valor_Item, Data_Venda, NotaFiscal_Entrada, Cod_CatMed, Cod_Med)"
+              + " VALUES (?, ?, ?, ?, ?, ?, ?)"
+            );
 
             stmt.setString(1, i.getDataValItem());
             stmt.setInt(2, i.getQuantidadeItem());
@@ -87,85 +61,45 @@ public class ItensDAO {
             stmt.setInt(6, i.getCodCatMedItem());
             stmt.setInt(7, i.getCodMedItem());
 
-            stmt.executeUpdate();
+            stmt.execute();
 
-            atualizarTotalDaNota(i);
+            // Recalcular TOTAL após inserir item
+            double total = totalDaNota(i.getNotaFiscalCompraItem());
+            new CompraDAO().atualizarValorTotal(i.getNotaFiscalCompraItem(), total);
 
             JOptionPane.showMessageDialog(null, "Item cadastrado com sucesso!");
 
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Falha ao cadastrar: " + e);
+            JOptionPane.showMessageDialog(null, "Erro ao cadastrar: " + e);
+        } finally {
+            Conexao.closeConnection(con, stmt);
         }
     }
 
-    // -----------------------------------------------------
-    //  ATUALIZA UM ITEM + REATUALIZA VALOR TOTAL DA NOTA
-    // -----------------------------------------------------
-    public void update(Itens i) {
-        String sql = """
-                UPDATE item
-                SET DataVal_Item = ?, Qtd_Item = ?, Valor_Item = ?, Data_Venda = ?,
-                    NotaFiscal_Entrada = ?, Cod_CatMed = ?, Cod_Med = ?
-                WHERE Cod_Item = ?
-                """;
+    public double totalDaNota(int notaFiscal) {
+        Connection con = Conexao.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
 
-        try (Connection con = Conexao.getConnection();
-             PreparedStatement stmt = con.prepareStatement(sql)) {
+        try {
+            stmt = con.prepareStatement(
+                "SELECT SUM(Valor_Item * Qtd_Item) AS Total "
+              + "FROM item WHERE NotaFiscal_Entrada = ?"
+            );
 
-            stmt.setString(1, i.getDataValItem());
-            stmt.setInt(2, i.getQuantidadeItem());
-            stmt.setDouble(3, i.getValorItem());
-            stmt.setString(4, i.getDataVendaItem());
-            stmt.setInt(5, i.getNotaFiscalCompraItem());
-            stmt.setInt(6, i.getCodCatMedItem());
-            stmt.setInt(7, i.getCodMedItem());
-            stmt.setInt(8, i.getCodigoItem());
+            stmt.setInt(1, notaFiscal);
+            rs = stmt.executeQuery();
 
-            stmt.executeUpdate();
-
-            atualizarTotalDaNota(i);
-
-            JOptionPane.showMessageDialog(null, "Item atualizado com sucesso!");
+            if (rs.next()) {
+                return rs.getDouble("Total");
+            }
 
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Falha ao atualizar: " + e);
+            JOptionPane.showMessageDialog(null, "Erro ao somar itens: " + e);
+        } finally {
+            Conexao.closeConnection(con, stmt, rs);
         }
-    }
 
-    // -----------------------------------------------------
-    //  DELETA UM ITEM + REATUALIZA TOTAL DA NOTA
-    // -----------------------------------------------------
-    public void delete(Itens i) {
-        String sql = "DELETE FROM item WHERE Cod_Item = ?";
-
-        int numeroNota = i.getNotaFiscalCompraItem();
-
-        try (Connection con = Conexao.getConnection();
-             PreparedStatement stmt = con.prepareStatement(sql)) {
-
-            stmt.setInt(1, i.getCodigoItem());
-            stmt.executeUpdate();
-
-            atualizarTotalDaNota(numeroNota);
-
-            JOptionPane.showMessageDialog(null, "Item removido com sucesso!");
-
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Falha ao remover: " + e);
-        }
-    }
-
-    // -----------------------------------------------------
-    //  FUNÇÃO CENTRAL: REATUALIZA VALOR TOTAL DA NOTA
-    // -----------------------------------------------------
-    private void atualizarTotalDaNota(Itens i) {
-        atualizarTotalDaNota(i.getNotaFiscalCompraItem());
-    }
-
-    private void atualizarTotalDaNota(int nota) {
-        double total = totalDaNota(nota);
-
-        CompraDAO compraDAO = new CompraDAO();
-        compraDAO.atualizarValorTotal(nota, total);
+        return 0;
     }
 }

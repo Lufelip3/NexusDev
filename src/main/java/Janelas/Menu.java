@@ -4,6 +4,7 @@
  */
 package Janelas;
 
+import Objetos.Funcionario;
 import java.awt.Color;
 
 /**
@@ -12,13 +13,20 @@ import java.awt.Color;
  */
 public class Menu extends javax.swing.JFrame {
 
+    private Funcionario user;
+
     /**
      * Creates new form Menu2
      */
     public Menu() {
         initComponents();
+    }
+
+    public Menu(Funcionario f) {
+        initComponents();
         this.setLocationRelativeTo(null);
         getContentPane().setBackground(Color.GRAY);
+        this.user = f;
     }
 
     /**
@@ -138,15 +146,15 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_jBCadastrarMedActionPerformed
 
     private void jBCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCompraActionPerformed
-        JanelaCompra commed = new JanelaCompra();
+        JanelaCompra commed = new JanelaCompra(user.getCpf());
         commed.setVisible(true);
         dispose();
     }//GEN-LAST:event_jBCompraActionPerformed
 
     private void jBLaboratorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBLaboratorioActionPerformed
-       JanelaLaboratorio lab = new JanelaLaboratorio();
-       lab.setVisible(true);
-       dispose();
+        JanelaLaboratorio lab = new JanelaLaboratorio();
+        lab.setVisible(true);
+        dispose();
     }//GEN-LAST:event_jBLaboratorioActionPerformed
 
     private void jBVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBVendaActionPerformed
@@ -156,15 +164,15 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_jBVendaActionPerformed
 
     private void jBDrogariaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBDrogariaActionPerformed
-       Drogaria drogaria = new Drogaria();
-       drogaria.setVisible(true);
-       dispose();
+        Drogaria drogaria = new Drogaria();
+        drogaria.setVisible(true);
+        dispose();
     }//GEN-LAST:event_jBDrogariaActionPerformed
 
     private void jBCadastrarFunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCadastrarFunActionPerformed
-       TelaCadastroFun cadfun = new TelaCadastroFun();
-       cadfun.setVisible(true);
-       dispose();
+        TelaCadastroFun cadfun = new TelaCadastroFun();
+        cadfun.setVisible(true);
+        dispose();
     }//GEN-LAST:event_jBCadastrarFunActionPerformed
 
     /**

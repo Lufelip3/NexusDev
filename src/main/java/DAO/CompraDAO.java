@@ -2,24 +2,18 @@ package DAO;
 
 import BD.Conexao;
 import Objetos.Compra;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 
 public class CompraDAO {
 
-    // ---------------------------------------------------------------------
-    // LER TODAS AS COMPRAS
-    // ---------------------------------------------------------------------
     public List<Compra> read() {
-
         Connection con = Conexao.getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;
+
         List<Compra> compras = new ArrayList<>();
 
         try {
@@ -34,111 +28,52 @@ public class CompraDAO {
                 c.setCnpjCompra(rs.getString("CNPJ_Drog"));
                 compras.add(c);
             }
-
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Falha ao obter dados: " + e);
         } finally {
             Conexao.closeConnection(con, stmt, rs);
         }
-
         return compras;
     }
+    
+public int createAndReturnNota(Compra c) {
+    String sql = "INSERT INTO compra (Valor_Total, CPF, CNPJ_Drog) VALUES (?, ?, ?)";
 
-    // ---------------------------------------------------------------------
-    // CRIAR COMPRA (SEM ITENS AINDA)
-    // ---------------------------------------------------------------------
-    public int create(Compra c) {
-    Connection con = Conexao.getConnection();
-    PreparedStatement stmt = null;
-    ResultSet rs = null;
-
-    try {
-        stmt = con.prepareStatement(
-            "INSERT INTO compra (Valor_Total, CPF, CNPJ_Drog) VALUES (?, ?, ?)",
-            PreparedStatement.RETURN_GENERATED_KEYS
-        );
+    try (Connection con = Conexao.getConnection();
+         PreparedStatement stmt = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
 
         stmt.setDouble(1, c.getValorTotal());
         stmt.setString(2, c.getCpfCompra());
-        stmt.setString(3, c.getCnpjCompra());
+        
+        if (c.getCnpjCompra() == null) {
+            stmt.setNull(3, Types.VARCHAR);
+        } else {
+            stmt.setString(3, c.getCnpjCompra());
+        }
 
-        stmt.executeUpdate();
+        int affected = stmt.executeUpdate();
+        if (affected == 0) {
+            JOptionPane.showMessageDialog(null, "Inserção falhou: nenhuma linha afetada.");
+            return -1;
+        }
 
-        rs = stmt.getGeneratedKeys();
-        if (rs.next()) {
-            return rs.getInt(1); // <<< Aqui devolve a nota fiscal gerada!
+        try (ResultSet rs = stmt.getGeneratedKeys()) {
+            if (rs.next()) {
+                return rs.getInt(1); // chave gerada
+            } else {
+                JOptionPane.showMessageDialog(null, "Nenhuma chave gerada pela inserção.");
+                return -1;
+            }
         }
 
     } catch (SQLException e) {
-        JOptionPane.showMessageDialog(null, "Falha ao cadastrar: " + e);
-    } finally {
-        Conexao.closeConnection(con, stmt, rs);
+        JOptionPane.showMessageDialog(null, "Erro ao criar compra: " + e);
+        return -1;
     }
-
-    return -1; // caso dê erro
 }
 
 
-    // ---------------------------------------------------------------------
-    // ATUALIZAR COMPRA
-    // ---------------------------------------------------------------------
-    public void updtae(Compra c) {
-
-        Connection con = Conexao.getConnection();
-        PreparedStatement stmt = null;
-
-        try {
-            stmt = con.prepareStatement(
-                "UPDATE compra SET Valor_Total = ?, CPF = ?, CNPJ_Drog = ? WHERE NotaFiscal_Entrada = ?"
-            );
-
-            stmt.setDouble(1, c.getValorTotal());
-            stmt.setString(2, c.getCpfCompra());
-            stmt.setString(3, c.getCnpjCompra());
-            stmt.setInt(4, c.getNotaFiscalCompra());
-
-            stmt.executeUpdate();
-
-            JOptionPane.showMessageDialog(null, "Compra atualizada com sucesso!");
-
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Falha ao atualizar: " + e);
-        } finally {
-            Conexao.closeConnection(con, stmt);
-        }
-    }
-
-    // ---------------------------------------------------------------------
-    // REMOVER COMPRA
-    // ---------------------------------------------------------------------
-    public void delete(Compra c) {
-
-        Connection con = Conexao.getConnection();
-        PreparedStatement stmt = null;
-
-        try {
-            stmt = con.prepareStatement(
-                "DELETE FROM compra WHERE NotaFiscal_Entrada = ?"
-            );
-
-            stmt.setInt(1, c.getNotaFiscalCompra());
-            stmt.executeUpdate();
-
-            JOptionPane.showMessageDialog(null, "Compra removida com sucesso!");
-
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Falha ao remover: " + e);
-        } finally {
-            Conexao.closeConnection(con, stmt);
-        }
-    }
-
-    // ---------------------------------------------------------------------
-    // ATUALIZAR VALOR TOTAL DA NOTA
-    // Chamado automaticamente pelo ItensDAO
-    // ---------------------------------------------------------------------
     public void atualizarValorTotal(int nota, double total) {
-
         Connection con = Conexao.getConnection();
         PreparedStatement stmt = null;
 
@@ -146,14 +81,53 @@ public class CompraDAO {
             stmt = con.prepareStatement(
                 "UPDATE compra SET Valor_Total = ? WHERE NotaFiscal_Entrada = ?"
             );
-
             stmt.setDouble(1, total);
+            stmt.setInt(2, nota);
+            stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Erro ao atualizar total: " + e);
+        } finally {
+            Conexao.closeConnection(con, stmt);
+        }
+    }
+
+    public void atualizarCnpj(int nota, String cnpj) {
+        Connection con = Conexao.getConnection();
+        PreparedStatement stmt = null;
+
+        try {
+            stmt = con.prepareStatement(
+                "UPDATE compra SET CNPJ_Drog = ? WHERE NotaFiscal_Entrada = ?"
+            );
+
+            stmt.setString(1, cnpj);
             stmt.setInt(2, nota);
 
             stmt.executeUpdate();
 
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Erro ao atualizar valor total: " + e);
+            JOptionPane.showMessageDialog(null, "Erro ao definir CNPJ: " + e);
+        } finally {
+            Conexao.closeConnection(con, stmt);
+        }
+    }
+
+    public void delete(Compra c) {
+        Connection con = Conexao.getConnection();
+        PreparedStatement stmt = null;
+
+        try {
+            stmt = con.prepareStatement(
+                "DELETE FROM compra WHERE NotaFiscal_Entrada = ?"
+            );
+            stmt.setInt(1, c.getNotaFiscalCompra());
+            stmt.executeUpdate();
+
+            JOptionPane.showMessageDialog(null, "Compra removida com sucesso!");
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Falha ao remover: " + e);
         } finally {
             Conexao.closeConnection(con, stmt);
         }

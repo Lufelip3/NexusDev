@@ -13,8 +13,18 @@ public class SelecaoItensCompra extends javax.swing.JFrame {
     /**
      * Creates new form NovaVendaJanela
      */
-    public SelecaoItensCompra() {
+    private int notaFiscal;
+
+    public SelecaoItensCompra(int notaFiscal) {
         initComponents();
+        this.notaFiscal = notaFiscal;
+
+        jLValorTotalSelecaoItens.setText("Nota Fiscal: " + notaFiscal); // opcional, caso tenha um label
+    }
+    
+     public SelecaoItensCompra() {
+        initComponents();
+        
     }
 
     /**

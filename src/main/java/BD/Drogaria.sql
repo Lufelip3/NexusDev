@@ -24,17 +24,18 @@ CREATE TABLE laboratorio (
   Email_Lab VARCHAR(50) UNIQUE NOT NULL
 );
 -- ===============================
--- Tabela: laboratorio
+-- Tabela Funcionário
 -- ===============================
+
 CREATE TABLE funcionario (
-  CPF VARCHAR(14) PRIMARY KEY,
-  Nome_Fun VARCHAR(50) NOT NULL,
-  Telefone_Fun VARCHAR(15) NOT NULL,
-  Cep_Fun VARCHAR(10) NOT NULL,
-  Num_Fun VARCHAR(15) NOT NULL,
-  Email_Fun VARCHAR(50) UNIQUE NOT NULL,
-  Senha VARCHAR(255) NOT NULL,
-  Cargo VARCHAR(20) NOT NULL
+CPF VARCHAR(14) UNIQUE PRIMARY KEY,
+Nome_Fun VARCHAR(50) NOT NULL,
+Telefone_Fun VARCHAR(15) NOT NULL,
+Cep_Fun VARCHAR(10) NOT NULL,
+Num_Fun INT NOT NULL,
+Email_Fun VARCHAR(50) UNIQUE NOT NULL,
+Senha_Fun VARCHAR(255) NOT NULL,
+Funcao VARCHAR(50)
 );
 
 -- ===============================
