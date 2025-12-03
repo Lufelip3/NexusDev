@@ -4,17 +4,21 @@
  */
 package Model;
 
-import DAO.MedicamentoDAO;
-import Objetos.Medicamento;
+import DAO.DrogariaDAO;
+import Objetos.DrogariaObjeto;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
-public class MedicamentoTableModel extends AbstractTableModel {
+/**
+ *
+ * @author luis.fmleite
+ */
+public class DrogariaTableModel extends AbstractTableModel {
 
-    private List<Medicamento> dados = new ArrayList<>();
-    private String[] colunas = {"Código Medicamento", "Nome", "Descrição", "Quantidade", "Valor", "Data de validade","Código Catalogo"};
-
+    private List<DrogariaObjeto> dados = new ArrayList<>();
+    private String[] colunas = {"CNPJ", "Nome", "Telefone", "Email", "CEP", "Numero"};
+    
     @Override
     public String getColumnName(int column) {
         return colunas[column];
@@ -34,19 +38,17 @@ public class MedicamentoTableModel extends AbstractTableModel {
     public Object getValueAt(int linha, int coluna) {
         switch (coluna) {
             case 0:
-                return dados.get(linha).getCodMed();
+                return dados.get(linha).getCnpjDrogaria();
             case 1:
-                return dados.get(linha).getNomeMed();
+                return dados.get(linha).getNomeDrogaria();
             case 2:
-                return dados.get(linha).getDescricaoMed();
+                return dados.get(linha).getTelefoneDrogaria();
             case 3:
-                return dados.get(linha).getQuantidadeMed();
+                return dados.get(linha).getEmailDrogaria();
             case 4:
-                return dados.get(linha).getValorMed();
+                return dados.get(linha).getCepDrogaria();
             case 5:
-                return dados.get(linha).getDataValidadeMed();
-            case 6:
-                return dados.get(linha).getCodCatMed();
+                return dados.get(linha).getNumeroDrogaria();
         }
         return null;
     }
@@ -55,32 +57,29 @@ public class MedicamentoTableModel extends AbstractTableModel {
     public void setValueAt(Object valor, int linha, int coluna) {
         switch (coluna) {
             case 0:
-                dados.get(linha).setCodMed(Integer.parseInt((String)valor));
+                dados.get(linha).setCnpjDrogaria((String) valor);
                 break;
             case 1:
-                dados.get(linha).setNomeMed((String)valor);
+                dados.get(linha).setNomeDrogaria((String) valor);
                 break;
             case 2:
-                dados.get(linha).setDescricaoMed((String)valor);
+                dados.get(linha).setTelefoneDrogaria((String) valor);
                 break;
             case 3:
-                dados.get(linha).setQuantidadeMed(Integer.parseInt((String)valor));
+                dados.get(linha).setEmailDrogaria((String) valor);
                 break;
             case 4:
-                dados.get(linha).setValorMed(Double.valueOf((String)valor));
+                dados.get(linha).setCepDrogaria((String) valor);
                 break;
             case 5:
-                dados.get(linha).setDataValidadeMed((String)valor);
-                break;
-            case 6:
-                dados.get(linha).setCodCatMed(Integer.parseInt((String)valor));
+                dados.get(linha).setNumeroDrogaria(Integer.parseInt((String) valor));
                 break;
         }
         this.fireTableRowsUpdated(linha, linha);
     }
 
-    public void addLinha(Medicamento m) {
-        this.dados.add(m);
+    public void addLinha(DrogariaObjeto d) {
+        this.dados.add(d);
         this.fireTableDataChanged();
     }
 
@@ -89,15 +88,15 @@ public class MedicamentoTableModel extends AbstractTableModel {
         this.fireTableRowsDeleted(linha, linha);
     }
 
-    public Medicamento pegaDadosLinha(int linha) {
+    public DrogariaObjeto pegaDadosLinha(int linha) {
         return dados.get(linha);
     }
 
     private void lerDados() {
-        MedicamentoDAO mdao = new MedicamentoDAO();
+        DrogariaDAO ddao = new DrogariaDAO();
 
-        for (Medicamento m : mdao.read()) {
-            this.addLinha(m);
+        for (DrogariaObjeto d : ddao.read()) {
+            this.addLinha(d);
 
         }
         this.fireTableDataChanged();
@@ -108,5 +107,5 @@ public class MedicamentoTableModel extends AbstractTableModel {
         lerDados();
         this.fireTableDataChanged();
     }
-
+    
 }

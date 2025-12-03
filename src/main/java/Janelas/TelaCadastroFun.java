@@ -21,6 +21,7 @@ public class TelaCadastroFun extends javax.swing.JFrame {
      
     public TelaCadastroFun() {
         initComponents();
+        getContentPane().setBackground(Color.GRAY);
         
         jBoxFun.removeAllItems();    
         jBoxFun.addItem("Gerente");

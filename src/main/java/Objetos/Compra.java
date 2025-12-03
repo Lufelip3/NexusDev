@@ -9,33 +9,24 @@ package Objetos;
  * @author luis.fmleite
  */
 public class Compra {
+    
+    private Double valorTotal;
+    private int notaFiscalCompra;
+    private String cpfCompra;
+    private String cnpjCompra;
 
     /**
-     * @return the dataCompra
+     * @return the valorTotal
      */
-    public String getDataCompra() {
-        return dataCompra;
+    public Double getValorTotal() {
+        return valorTotal;
     }
 
     /**
-     * @param dataCompra the dataCompra to set
+     * @param valorTotal the valorTotal to set
      */
-    public void setDataCompra(String dataCompra) {
-        this.dataCompra = dataCompra;
-    }
-
-    /**
-     * @return the valorCompra
-     */
-    public Double getValorCompra() {
-        return valorCompra;
-    }
-
-    /**
-     * @param valorCompra the valorCompra to set
-     */
-    public void setValorCompra(Double valorCompra) {
-        this.valorCompra = valorCompra;
+    public void setValorTotal(Double valorTotal) {
+        this.valorTotal = valorTotal;
     }
 
     /**
@@ -52,7 +43,32 @@ public class Compra {
         this.notaFiscalCompra = notaFiscalCompra;
     }
 
-    private String dataCompra;
-    private Double valorCompra;
-    private int notaFiscalCompra;
+    /**
+     * @return the cpfCompra
+     */
+    public String getCpfCompra() {
+        return cpfCompra;
+    }
+
+    /**
+     * @param cpfCompra the cpfCompra to set
+     */
+    public void setCpfCompra(String cpfCompra) {
+        this.cpfCompra = cpfCompra;
+    }
+
+    /**
+     * @return the cnpjCompra
+     */
+    public String getCnpjCompra() {
+        return cnpjCompra;
+    }
+
+    /**
+     * @param cnpjCompra the cnpjCompra to set
+     */
+    public void setCnpjCompra(String cnpjCompra) {
+        this.cnpjCompra = cnpjCompra;
+    }
+
 }

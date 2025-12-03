@@ -10,36 +10,23 @@ package Objetos;
  */
 public class Venda {
 
-    private String nomeVenda;
-    private String notaFiscalVenda;
+    private int notaFiscalVenda;
     private String dataVenda;
     private Double valorVenda;
-
-    /**
-     * @return the nomeVenda
-     */
-    public String getNomeVenda() {
-        return nomeVenda;
-    }
-
-    /**
-     * @param nomeVenda the nomeVenda to set
-     */
-    public void setNomeVenda(String nomeVenda) {
-        this.nomeVenda = nomeVenda;
-    }
+    private String cnpjVenda;
+    private String cpfVenda;
 
     /**
      * @return the notaFiscalVenda
      */
-    public String getNotaFiscalVenda() {
+    public int getNotaFiscalVenda() {
         return notaFiscalVenda;
     }
 
     /**
      * @param notaFiscalVenda the notaFiscalVenda to set
      */
-    public void setNotaFiscalVenda(String notaFiscalVenda) {
+    public void setNotaFiscalVenda(int notaFiscalVenda) {
         this.notaFiscalVenda = notaFiscalVenda;
     }
 
@@ -70,4 +57,34 @@ public class Venda {
     public void setValorVenda(Double valorVenda) {
         this.valorVenda = valorVenda;
     }
+
+    /**
+     * @return the cnpjVenda
+     */
+    public String getCnpjVenda() {
+        return cnpjVenda;
+    }
+
+    /**
+     * @param cnpjVenda the cnpjVenda to set
+     */
+    public void setCnpjVenda(String cnpjVenda) {
+        this.cnpjVenda = cnpjVenda;
+    }
+
+    /**
+     * @return the cpfVenda
+     */
+    public String getCpfVenda() {
+        return cpfVenda;
+    }
+
+    /**
+     * @param cpfVenda the cpfVenda to set
+     */
+    public void setCpfVenda(String cpfVenda) {
+        this.cpfVenda = cpfVenda;
+    }
+
+   
 }

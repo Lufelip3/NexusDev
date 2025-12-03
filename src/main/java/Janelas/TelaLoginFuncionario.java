@@ -19,6 +19,7 @@ public class TelaLoginFuncionario extends javax.swing.JFrame {
      */
     public TelaLoginFuncionario() {
         initComponents();
+        getContentPane().setBackground(Color.GRAY);
     }
 
     /**
