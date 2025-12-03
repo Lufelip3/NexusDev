@@ -62,42 +62,23 @@ public class CadastroMedicamento extends javax.swing.JFrame {
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().add(jTQuantidadeMedicamento);
-        getContentPane().add(jTDataValidadeMedicamento);
-        getContentPane().add(jTValorMedicamento);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("CADASTRO MEDICAMENTO");
-        getContentPane().add(jLabel1);
 
-<<<<<<< HEAD
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel2.setText("Nome:");
-        getContentPane().add(jLabel2);
-
-=======
->>>>>>> e3600e961c9055d8c6731e5448a6301783e9468d
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel4.setText("Descrição:");
-        getContentPane().add(jLabel4);
 
-<<<<<<< HEAD
-        jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel7.setText("Valor:");
-        getContentPane().add(jLabel7);
-=======
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Nome:");
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel8.setText("Código Catálogo:");
->>>>>>> e3600e961c9055d8c6731e5448a6301783e9468d
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel5.setText("Data de Validade:");
-        getContentPane().add(jLabel5);
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel6.setText("Quantidade:");
@@ -107,48 +88,16 @@ public class CadastroMedicamento extends javax.swing.JFrame {
                 jTNomeMedicamentoActionPerformed(evt);
             }
         });
-        getContentPane().add(jTNomeMedicamento);
 
-<<<<<<< HEAD
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel6.setText("Quantidade:");
-        getContentPane().add(jLabel6);
-=======
         jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel7.setText("Valor:");
->>>>>>> e3600e961c9055d8c6731e5448a6301783e9468d
 
         jTDescricaoMedicamento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTDescricaoMedicamentoActionPerformed(evt);
             }
         });
-        getContentPane().add(jTDescricaoMedicamento);
 
-<<<<<<< HEAD
-        jBCadastrarMed.setText("Cadastrar");
-        jBCadastrarMed.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBCadastrarMedActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jBCadastrarMed);
-
-        jBVoltarCadastroMedicamento.setText("Voltar");
-        jBVoltarCadastroMedicamento.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBVoltarCadastroMedicamentoActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jBVoltarCadastroMedicamento);
-
-        jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel8.setText("Código Catálogo");
-        getContentPane().add(jLabel8);
-        getContentPane().add(jTCodigoCatalogo);
-
-=======
->>>>>>> e3600e961c9055d8c6731e5448a6301783e9468d
         jTTabelaMed.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -167,29 +116,13 @@ public class CadastroMedicamento extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTTabelaMed);
 
-<<<<<<< HEAD
-        getContentPane().add(jScrollPane1);
-
-        jBExcluirMed.setText("Excluir");
-        jBExcluirMed.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBExcluirMedActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jBExcluirMed);
-
-=======
         jBAlterarMed.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
->>>>>>> e3600e961c9055d8c6731e5448a6301783e9468d
         jBAlterarMed.setText("Alterar");
         jBAlterarMed.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBAlterarMedActionPerformed(evt);
             }
         });
-<<<<<<< HEAD
-        getContentPane().add(jBAlterarMed);
-=======
 
         jBVoltarCadastroMedicamento.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jBVoltarCadastroMedicamento.setText("Voltar");
@@ -323,7 +256,6 @@ public class CadastroMedicamento extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
->>>>>>> e3600e961c9055d8c6731e5448a6301783e9468d
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
