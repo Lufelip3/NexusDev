@@ -181,11 +181,7 @@ public class JanelaCompra extends javax.swing.JFrame {
     }//GEN-LAST:event_jBVoltarCompraActionPerformed
 
     private void jTTabelaMedMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTTabelaMedMouseClicked
-<<<<<<< HEAD
 
-=======
-        
->>>>>>> e3600e961c9055d8c6731e5448a6301783e9468d
     }//GEN-LAST:event_jTTabelaMedMouseClicked
 
     /**
