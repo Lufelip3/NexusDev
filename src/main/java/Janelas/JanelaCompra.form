@@ -59,11 +59,14 @@
               <Component id="jLabel1" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
+<<<<<<< HEAD
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="32767" attributes="0"/>
               <Component id="jCFuncionarios" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
           </Group>
+=======
+>>>>>>> e3600e961c9055d8c6731e5448a6301783e9468d
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">

@@ -310,3 +310,4 @@ BEGIN
 END $$
 
 DELIMITER ;
+ select*from funcionario;

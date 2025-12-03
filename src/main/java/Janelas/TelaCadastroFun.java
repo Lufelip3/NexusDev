@@ -3,10 +3,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package Janelas;
-import java.awt.Color;
+import DAO.FuncionarioDAO;
+import Objetos.Funcionario;
+import java.awt.HeadlessException;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel; // (e outros imports que já tiver)
-
+import javax.swing.table.DefaultTableModel;
 
 
 
@@ -15,23 +16,76 @@ import javax.swing.table.DefaultTableModel; // (e outros imports que já tiver)
  * @author lucas.gmpedro
  */
 public class TelaCadastroFun extends javax.swing.JFrame {
-
-    /**
-     * Creates new form TelaCadastroFun
-     */
+   
+    private final DefaultTableModel modelo;
+     
     public TelaCadastroFun() {
         initComponents();
         getContentPane().setBackground(Color.GRAY);
         
-    jBoxFun.removeAllItems();    
-    jBoxFun.addItem("Gerente");
-    jBoxFun.addItem("Funcionário");  
-    
-      DefaultTableModel modelo = new DefaultTableModel(
+        jBoxFun.removeAllItems();    
+        jBoxFun.addItem("Gerente");
+        jBoxFun.addItem("Funcionário");  
+        
+        modelo = new DefaultTableModel(
             new Object[][]{},
             new String[]{"Nome", "CPF", "Telefone", "E-mail", "Função"}
         );
         jTTable1.setModel(modelo);
+        
+        
+        carregarTabelaFuncionarios();
+        
+         // Ao clicar na tabela, preenche os campos automaticamente
+        jTTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                int linhaSelecionada = jTTable1.getSelectedRow();
+                if (linhaSelecionada != -1) {
+                    try {
+                        // Pega o CPF da linha selecionada
+                        String cpf = modelo.getValueAt(linhaSelecionada, 1).toString();
+
+                        // Busca o funcionário completo no banco pelo CPF
+                        FuncionarioDAO dao = new FuncionarioDAO();
+                        java.util.List<Funcionario> funcionarios = dao.read();
+
+                        for (Funcionario f : funcionarios) {
+                            if (f.getCpf().equals(cpf)) {
+                                // Preenche TODOS os campos
+                                jTNomeFun.setText(f.getNome_Fun());
+                                jTCPF.setText(f.getCpf());
+                                jTTelefone.setText(f.getTelefone_Fun());
+                                jTEmailFun.setText(f.getEmail_Fun());
+                                jTCepFun.setText(f.getCep_Fun());
+                                jTNumeroFun.setText(String.valueOf(f.getNumero_Fun()));
+
+                                // Função pode ser null nos dados antigos
+                                if (f.getFuncao() != null && !f.getFuncao().isEmpty()) {
+                                    jBoxFun.setSelectedItem(f.getFuncao());
+                                } else {
+                                    jBoxFun.setSelectedIndex(0);
+                                }
+
+                                jTSenha.setText(""); // Senha vazia por segurança
+
+                                System.out.println("✓ Dados carregados para: " + f.getNome_Fun());
+
+                                // ADICIONADO AQUI ↓↓↓
+                                // Desabilita CONFIRMAR e destaca ATUALIZAR quando seleciona uma linha
+                                jBConfirmar.setEnabled(false);
+                                jBAtualizar.setEnabled(true);
+
+                                break;
+                            }
+                        }
+                    } catch (Exception e) {
+                        JOptionPane.showMessageDialog(null, "Erro ao carregar dados: " + e.getMessage());
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+
     }
     
     
@@ -287,75 +341,221 @@ public class TelaCadastroFun extends javax.swing.JFrame {
     }//GEN-LAST:event_jBoxFunActionPerformed
 
     private void jBConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBConfirmarActionPerformed
-     DefaultTableModel modelo = (DefaultTableModel) jTTable1.getModel();
+        // 1. CAPTURA DOS DADOS
+        String nome = jTNomeFun.getText();
+        String cpf = jTCPF.getText();
+        String telefone = jTTelefone.getText();
+        String email = jTEmailFun.getText();
+        String funcao = (String) jBoxFun.getSelectedItem();
+        String numero = jTNumeroFun.getText();
+        String cep = jTCepFun.getText();
+        String senhaDigitada = jTSenha.getText();
 
-    String nome = jTNomeFun.getText();
-    String cpf = jTCPF.getText();
-    String telefone = jTTelefone.getText();
-    String email = jTEmailFun.getText();
-    String funcao = (String) jBoxFun.getSelectedItem();
+        // 2. VALIDAÇÃO
+        if (nome.isEmpty() || cpf.isEmpty() || telefone.isEmpty() || email.isEmpty()
+                || numero.isEmpty() || cep.isEmpty() || senhaDigitada.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Preencha todos os campos antes de confirmar!");
+            return;
+        }
 
-    if (nome.isEmpty() || cpf.isEmpty() || telefone.isEmpty() || email.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Preencha todos os campos antes de confirmar!");
-        return;
-    }
+        // 3. CONVERSÃO PARA INT DO NÚMERO
+        int numeroInt;
+        try {
+            numeroInt = Integer.parseInt(numero);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Número inválido! Digite apenas números.");
+            return;
+        }
 
-    modelo.addRow(new Object[]{nome, cpf, telefone, email, funcao});
+        // 4. CRIA OBJETO FUNCIONARIO
+        Funcionario f = new Funcionario();
+        f.setNome_Fun(nome);
+        f.setCpf(cpf);
+        f.setTelefone_Fun(telefone);
+        f.setEmail_Fun(email);
+        f.setCep_Fun(cep);
+        f.setNumero_Fun(numeroInt);
+        f.setSenha(senhaDigitada);
+        f.setFuncao(funcao);
 
-    JOptionPane.showMessageDialog(this, "Funcionário cadastrado e exibido na tabela!");
+        // 5. SALVA NO BANCO
+        try {
+            FuncionarioDAO dao = new FuncionarioDAO();
+            dao.salvar(f);
 
-    jTNomeFun.setText("");
-    jTCPF.setText("");
-    jTTelefone.setText("");
-    jTEmailFun.setText("");
-    jTSenha.setText("");
-    jTCepFun.setText("");
-    jTNumeroFun.setText("");
-    jBoxFun.setSelectedIndex(0);
+            // 6. MENSAGEM DE SUCESSO
+            JOptionPane.showMessageDialog(this, "Funcionário cadastrado com sucesso!");
+
+            // 7. RECARREGA A TABELA DO BANCO
+            carregarTabelaFuncionarios();
+
+            // 8. LIMPAR CAMPOS
+            jTNomeFun.setText("");
+            jTCPF.setText("");
+            jTTelefone.setText("");
+            jTEmailFun.setText("");
+            jTSenha.setText("");
+            jTCepFun.setText("");
+            jTNumeroFun.setText("");
+            jBoxFun.setSelectedIndex(-1);
+
+            // 9. MANTÉM CONFIRMAR HABILITADO
+            jBConfirmar.setEnabled(true);
+
+        } catch (Exception e) {
+            // Verifica se é erro de CPF duplicado
+            if (e.getMessage() != null && (e.getMessage().contains("Duplicate entry") || e.getMessage().contains("PRIMARY"))) {
+                JOptionPane.showMessageDialog(this,
+                        "ERRO: Já existe um funcionário cadastrado com este CPF!\n\n"
+                        + "Se você deseja ATUALIZAR este funcionário, clique no botão 'ATUALIZAR'.",
+                        "CPF Duplicado",
+                        JOptionPane.ERROR_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(this,
+                        "Erro ao cadastrar: " + e.getMessage(),
+                        "Erro",
+                        JOptionPane.ERROR_MESSAGE);
+            }
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_jBConfirmarActionPerformed
 
     private void jBExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBExcluirActionPerformed
-    // Verifica se há uma linha selecionada na tabela
-int linhaSelecionada = jTTable1.getSelectedRow(); // substitua jTable1 pelo nome da sua tabela
-
-if (linhaSelecionada == -1) {
-    // Nenhuma linha foi selecionada
-    JOptionPane.showMessageDialog(this, "Selecione um funcionário para excluir.");
-} else {
-    // Confirmação de exclusão
-    int confirmacao = JOptionPane.showConfirmDialog(this, "Tem certeza que deseja excluir este funcionário?", "Confirmação", JOptionPane.YES_NO_OPTION);
+        int linhaSelecionada = jTTable1.getSelectedRow();
     
-    if (confirmacao == JOptionPane.YES_OPTION) {
-        // Obtém o modelo da tabela e remove a linha selecionada
-        DefaultTableModel modelo = (DefaultTableModel) jTTable1.getModel();
-        modelo.removeRow(linhaSelecionada);
-
-        // Mensagem de sucesso
-        JOptionPane.showMessageDialog(this, "Funcionário excluído com sucesso!");
+    if (linhaSelecionada == -1) {
+        JOptionPane.showMessageDialog(this, "Selecione um funcionário para excluir.");
+    } else {
+        int confirmacao = JOptionPane.showConfirmDialog(this,
+                "Tem certeza que deseja excluir este funcionário?", "Confirmação", JOptionPane.YES_NO_OPTION);
+        
+        if (confirmacao == JOptionPane.YES_OPTION) {
+            try {
+                // Pega o CPF da linha selecionada
+                String cpf = modelo.getValueAt(linhaSelecionada, 1).toString();
+                
+                // Cria objeto funcionário com o CPF
+                Funcionario f = new Funcionario();
+                f.setCpf(cpf);
+                
+                // Deleta do banco
+                FuncionarioDAO dao = new FuncionarioDAO();
+                dao.delete(f);
+                
+                // Mensagem de sucesso
+                JOptionPane.showMessageDialog(this, "Funcionário excluído com sucesso!");
+                
+                // RECARREGA A TABELA
+                carregarTabelaFuncionarios();
+                
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Erro ao excluir: " + e.getMessage());
+                e.printStackTrace();
+            }
+        }
     }
-}
 
     }//GEN-LAST:event_jBExcluirActionPerformed
 
     private void jBAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAtualizarActionPerformed
-    // Captura os dados digitados nos campos
-    String nome = jTNomeFun.getText();
-    String cpf = jTCPF.getText();
-    String cargo = (String) jBoxFun.getSelectedItem();
+        // 1. CAPTURA DOS DADOS
+        String nome = jTNomeFun.getText();
+        String cpf = jTCPF.getText();
+        String telefone = jTTelefone.getText();
+        String email = jTEmailFun.getText();
+        String funcao = (String) jBoxFun.getSelectedItem();
+        String numero = jTNumeroFun.getText();
+        String cep = jTCepFun.getText();
+        String senhaDigitada = jTSenha.getText();
 
-    if (nome.isEmpty() || cpf.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Preencha todos os campos antes de atualizar!");
-        return;
-    }
+        // 2. VALIDAÇÃO
+        if (nome.isEmpty() || cpf.isEmpty() || telefone.isEmpty() || email.isEmpty()
+                || numero.isEmpty() || cep.isEmpty() || senhaDigitada.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Preencha todos os campos antes de atualizar!");
+            return;
+        }
 
-    JOptionPane.showMessageDialog(this, 
-        "Funcionário atualizado com sucesso!\n\n" +
-        "Nome: " + nome + "\n" +
-        "CPF: " + cpf + "\n" +
-        "Cargo: " + cargo);
+        // 3. CONVERSÃO PARA INT DO NÚMERO
+        int numeroInt;
+        try {
+            numeroInt = Integer.parseInt(numero);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Número inválido! Digite apenas números.");
+            return;
+        }
 
+        // 4. CRIA OBJETO FUNCIONARIO COM OS DADOS ATUALIZADOS
+        Funcionario f = new Funcionario();
+        f.setNome_Fun(nome);
+        f.setCpf(cpf);
+        f.setTelefone_Fun(telefone);
+        f.setEmail_Fun(email);
+        f.setCep_Fun(cep);
+        f.setNumero_Fun(numeroInt);
+        f.setSenha(senhaDigitada); // criptografa automaticamente
+        f.setFuncao(funcao);
+
+        // 5. ATUALIZA NO BANCO
+        try {
+            FuncionarioDAO dao = new FuncionarioDAO();
+            dao.update(f);
+
+            // 6. MENSAGEM DE SUCESSO
+            JOptionPane.showMessageDialog(this, "Funcionário atualizado com sucesso!");
+
+            // 7. RECARREGA A TABELA DO BANCO
+            carregarTabelaFuncionarios();
+
+            // 8. LIMPAR CAMPOS
+            jTNomeFun.setText("");
+            jTCPF.setText("");
+            jTTelefone.setText("");
+            jTEmailFun.setText("");
+            jTSenha.setText("");
+            jTCepFun.setText("");
+            jTNumeroFun.setText("");
+            jBoxFun.setSelectedIndex(-1);
+
+            // 9. REABILITA CONFIRMAR APÓS ATUALIZAR
+            jBConfirmar.setEnabled(true);
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Erro ao atualizar: " + e.getMessage());
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_jBAtualizarActionPerformed
-
+    
+    // MÉTODO PARA CARREGAR FUNCIONÁRIOS DO BANCO
+    private void carregarTabelaFuncionarios() {
+        try {
+            // Limpa a tabela antes de carregar
+            modelo.setRowCount(0);
+            
+            // Busca todos os funcionários do banco
+            FuncionarioDAO dao = new FuncionarioDAO();
+            java.util.List<Funcionario> funcionarios = dao.read();
+            
+            // Adiciona cada funcionário na tabela
+            for (Funcionario f : funcionarios) {
+                modelo.addRow(new Object[]{
+                    f.getNome_Fun(),
+                    f.getCpf(),
+                    f.getTelefone_Fun(),
+                    f.getEmail_Fun(),
+                    f.getFuncao()
+                });
+            }
+            
+            System.out.println("✓ " + funcionarios.size() + " funcionário(s) carregado(s)!");
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Erro ao carregar funcionários: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+    
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -384,10 +584,8 @@ if (linhaSelecionada == -1) {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new TelaCadastroFun().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new TelaCadastroFun().setVisible(true);
         });
     }
 
