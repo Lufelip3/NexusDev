@@ -4,6 +4,8 @@
  */
 package Janelas;
 
+import java.awt.Color;
+
 /**
  *
  * @author andrey.munhoz
@@ -15,6 +17,8 @@ public class Menu extends javax.swing.JFrame {
      */
     public Menu() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        getContentPane().setBackground(Color.GRAY);
     }
 
     /**
@@ -36,7 +40,7 @@ public class Menu extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jBCadastrarMed.setText("Cadastrar Medicamento");
+        jBCadastrarMed.setText("Medicamento");
         jBCadastrarMed.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBCadastrarMedActionPerformed(evt);
@@ -99,9 +103,11 @@ public class Menu extends javax.swing.JFrame {
                         .addGap(29, 29, 29)
                         .addComponent(jBDrogaria))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jBCadastrarMed, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(16, 16, 16)
+                        .addComponent(jBCadastrarMed, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jBCadastrarFun)))
+                        .addComponent(jBCadastrarFun)
+                        .addGap(13, 13, 13)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -128,31 +134,37 @@ public class Menu extends javax.swing.JFrame {
     private void jBCadastrarMedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCadastrarMedActionPerformed
         CadastroMedicamento cadmed = new CadastroMedicamento();
         cadmed.setVisible(true);
+        dispose();
     }//GEN-LAST:event_jBCadastrarMedActionPerformed
 
     private void jBCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCompraActionPerformed
-        Compra commed = new Compra();
+        JanelaCompra commed = new JanelaCompra();
         commed.setVisible(true);
+        dispose();
     }//GEN-LAST:event_jBCompraActionPerformed
 
     private void jBLaboratorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBLaboratorioActionPerformed
-       Laboratorio lab = new Laboratorio();
+       JanelaLaboratorio lab = new JanelaLaboratorio();
        lab.setVisible(true);
+       dispose();
     }//GEN-LAST:event_jBLaboratorioActionPerformed
 
     private void jBVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBVendaActionPerformed
-        Venda vmed = new Venda();
+        VendaJanela vmed = new VendaJanela();
         vmed.setVisible(true);
+        dispose();
     }//GEN-LAST:event_jBVendaActionPerformed
 
     private void jBDrogariaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBDrogariaActionPerformed
        Drogaria drogaria = new Drogaria();
-       drogaria.setVisible(true);   
+       drogaria.setVisible(true);
+       dispose();
     }//GEN-LAST:event_jBDrogariaActionPerformed
 
     private void jBCadastrarFunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCadastrarFunActionPerformed
        TelaCadastroFun cadfun = new TelaCadastroFun();
        cadfun.setVisible(true);
+       dispose();
     }//GEN-LAST:event_jBCadastrarFunActionPerformed
 
     /**

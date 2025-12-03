@@ -6,8 +6,6 @@ package DAO;
     
 import BD.Conexao;
 import Objetos.Medicamento;
-import com.mysql.cj.protocol.Resultset;
-import com.mysql.cj.xdevapi.PreparableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -24,17 +22,19 @@ public class MedicamentoDAO {
         ResultSet rs = null;
         List<Medicamento> medicamentos = new ArrayList<>();
         try {
-            stmt = con.prepareStatement("SELECT * FROM tbl_Produto");
+            stmt = con.prepareStatement("SELECT * FROM medicamento");
             rs = stmt.executeQuery();
 
             while (rs.next()) {
                 Medicamento m = new Medicamento();
-                m.setCodigoMed(rs.getInt("Cod_Med"));
+                m.setCodMed(rs.getInt("Cod_Med"));
                 m.setNomeMed(rs.getString("Nome_Med"));
                 m.setDescricaoMed(rs.getString("Desc_Med"));
-                m.setValorMed(rs.getDouble("Valor_Med"));
-                m.setQuantEstoqueMed(rs.getInt("Qtd_Med"));
                 m.setDataValidadeMed(rs.getString("DataVal_Med"));
+                m.setQuantidadeMed(rs.getInt("Qtd_Med"));
+                m.setValorMed(rs.getDouble("Valor_Med"));
+                m.setCodCatMed(rs.getInt("Cod_CatMed"));
+               
                 medicamentos.add(m);
             }
         } catch (SQLException e) {
@@ -50,13 +50,13 @@ public class MedicamentoDAO {
         PreparedStatement stmt = null;
 
         try {
-            stmt = con.prepareStatement("INSERT INTO medicamento (Cod_Med, Nome_Med, Desc_Med, Valor_Med, Qtd_Med, DataVal_Med) VALUES (?,?,?,?,?,?)");
-            stmt.setInt(1, m.getCodigoMed());
-            stmt.setString(2, m.getNomeMed());
-            stmt.setString(3, m.getDescricaoMed());
-            stmt.setDouble(4, m.getValorMed());
-            stmt.setInt(5, m.getQuantEstoqueMed());
-            stmt.setString(6, m.getDataValidadeMed());
+            stmt = con.prepareStatement("INSERT INTO medicamento (Nome_Med, Desc_Med, DataVal_Med, Qtd_Med, Valor_Med, Cod_CatMed) VALUES (?,?,?,?,?,?)");
+            stmt.setString(1, m.getNomeMed());
+            stmt.setString(2, m.getDescricaoMed());
+            stmt.setString(3, m.getDataValidadeMed());
+            stmt.setInt(4, m.getQuantidadeMed());
+            stmt.setDouble(5, m.getValorMed());
+            stmt.setInt(6, m.getCodCatMed());
 
             stmt.execute();
             JOptionPane.showMessageDialog(null, "Medicamento cadastrado com sucesso!");
@@ -73,13 +73,14 @@ public class MedicamentoDAO {
         PreparedStatement stmt = null;
 
         try {
-            stmt = con.prepareStatement("UPDATE medicamento set Nome_Med = ?, Desc_Med = ?, Valor_Med = ?, Qtd_Med = ?, DataVal_Med = ? where Cod_Med = ?");
+            stmt = con.prepareStatement("UPDATE medicamento set Nome_Med = ?, Desc_Med = ?, DataVal_Med = ?, Qtd_Med = ?, Valor_Med = ?, Cod_CatMed = ? where Cod_Med = ?");
             stmt.setString(1, m.getNomeMed());
             stmt.setString(2, m.getDescricaoMed());
-            stmt.setDouble(3, m.getValorMed());
-            stmt.setInt(4, m.getQuantEstoqueMed());
-            stmt.setString(5, m.getDataValidadeMed());
-            stmt.setInt(6, m.getCodigoMed());
+            stmt.setString(3, m.getDataValidadeMed());
+            stmt.setInt(4, m.getQuantidadeMed());
+            stmt.setDouble(5, m.getValorMed());
+            stmt.setInt(6, m.getCodCatMed());
+            stmt.setInt(7, m.getCodMed());
 
             stmt.execute();
             JOptionPane.showMessageDialog(null, "Medicamento atualizado com sucesso!");
@@ -97,7 +98,7 @@ public class MedicamentoDAO {
 
         try {
             stmt = con.prepareStatement("DELETE FROM medicamento where Cod_Med = ?");
-            stmt.setInt(1, m.getCodigoMed());
+            stmt.setInt(1, m.getCodMed());
 
             stmt.execute();
             JOptionPane.showMessageDialog(null, "Medicamento removido com sucesso!");

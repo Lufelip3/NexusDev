@@ -4,17 +4,28 @@
  */
 package Janelas;
 
+import DAO.DrogariaDAO;
+import Model.DrogariaTableModel;
+import Objetos.DrogariaObjeto;
+import java.awt.Color;
+
 /**
  *
  * @author andrey.munhoz
  */
 public class Drogaria extends javax.swing.JFrame {
+    
+     DrogariaTableModel modelo = new DrogariaTableModel();
 
     /**
      * Creates new form Drogaria2
      */
     public Drogaria() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        jTTabelaDrogaria.setModel(modelo);
+        modelo.recarregaTabela();
+        getContentPane().setBackground(Color.GRAY);
     }
 
     /**
@@ -30,11 +41,9 @@ public class Drogaria extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jTEmailDrogaria = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
         jBCadastrarDrogaria = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jTCNPJDrograria = new javax.swing.JTextField();
-        jTEnderecoDrogaria = new javax.swing.JTextField();
         jTCEPDrogaria = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jTNumeroDrogaria = new javax.swing.JTextField();
@@ -42,6 +51,11 @@ public class Drogaria extends javax.swing.JFrame {
         jTTelDrogaria = new javax.swing.JTextField();
         jTNomeDrogaria = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
+        jBVoltarDrogaria = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTTabelaDrogaria = new javax.swing.JTable();
+        jBExcluirDrogaria = new javax.swing.JButton();
+        jBAlterarDrogaria = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -51,33 +65,67 @@ public class Drogaria extends javax.swing.JFrame {
 
         jLabel3.setText("CNPJ:");
 
-        jTEmailDrogaria.setText("jTextField7");
-
-        jLabel4.setText("Endereço:");
+        jTEmailDrogaria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTEmailDrogariaActionPerformed(evt);
+            }
+        });
 
         jBCadastrarDrogaria.setText("Cadastrar");
+        jBCadastrarDrogaria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBCadastrarDrogariaActionPerformed(evt);
+            }
+        });
 
         jLabel5.setText("CEP:");
 
-        jTCNPJDrograria.setText("jTextField2");
-
-        jTEnderecoDrogaria.setText("jTextField3");
-
-        jTCEPDrogaria.setText("jTextField4");
-
         jLabel6.setText("Número:");
 
-        jTNumeroDrogaria.setText("jTextField5");
-
         jLabel7.setText("Telefone:");
-
-        jTTelDrogaria.setText("jTextField6");
-
-        jTNomeDrogaria.setText("jTextField1");
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("DROGARIA");
+
+        jBVoltarDrogaria.setText("Voltar");
+        jBVoltarDrogaria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBVoltarDrogariaActionPerformed(evt);
+            }
+        });
+
+        jTTabelaDrogaria.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jTTabelaDrogaria.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTTabelaDrogariaMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jTTabelaDrogaria);
+
+        jBExcluirDrogaria.setText("Excluir");
+        jBExcluirDrogaria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBExcluirDrogariaActionPerformed(evt);
+            }
+        });
+
+        jBAlterarDrogaria.setText("Alterar");
+        jBAlterarDrogaria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBAlterarDrogariaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -86,39 +134,55 @@ public class Drogaria extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel8))
-                .addGap(3, 3, 3)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jTEnderecoDrogaria, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel6)
-                        .addGap(18, 18, 18)
-                        .addComponent(jTNumeroDrogaria, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jTNomeDrogaria)
-                    .addComponent(jTCNPJDrograria)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel2))
+                        .addGap(19, 19, 19)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTNomeDrogaria)
+                            .addComponent(jTCNPJDrograria)))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jTCEPDrogaria, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addGap(31, 31, 31)
+                                .addComponent(jTCEPDrogaria, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(0, 2, Short.MAX_VALUE)
+                                .addComponent(jLabel8)
+                                .addGap(18, 18, 18)
+                                .addComponent(jTEmailDrogaria, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(6, 6, 6)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addGap(18, 18, 18)
+                                .addComponent(jTNumeroDrogaria, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel7)
+                                .addGap(18, 18, 18)
+                                .addComponent(jTTelDrogaria, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jBAlterarDrogaria)
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel7)
+                        .addComponent(jBExcluirDrogaria)
                         .addGap(18, 18, 18)
-                        .addComponent(jTTelDrogaria))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jTEmailDrogaria, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(jBCadastrarDrogaria)
+                        .addGap(18, 18, 18)
+                        .addComponent(jBVoltarDrogaria)))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jBCadastrarDrogaria)
-                .addGap(68, 68, 68))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(261, 261, 261))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 498, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(189, 189, 189))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -134,32 +198,105 @@ public class Drogaria extends javax.swing.JFrame {
                     .addComponent(jLabel3)
                     .addComponent(jTCNPJDrograria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(jTEnderecoDrogaria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
-                            .addComponent(jTCEPDrogaria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7)
-                            .addComponent(jTTelDrogaria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel6)
-                        .addComponent(jTNumeroDrogaria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(jTCEPDrogaria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6)
+                    .addComponent(jTNumeroDrogaria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(jTTelDrogaria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8)
                     .addComponent(jTEmailDrogaria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jBCadastrarDrogaria)
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 479, Short.MAX_VALUE)
+                .addGap(28, 28, 28)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jBCadastrarDrogaria)
+                    .addComponent(jBVoltarDrogaria)
+                    .addComponent(jBExcluirDrogaria)
+                    .addComponent(jBAlterarDrogaria))
+                .addGap(14, 14, 14))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jBCadastrarDrogariaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCadastrarDrogariaActionPerformed
+        DrogariaObjeto d = new DrogariaObjeto();
+        DrogariaDAO dao = new DrogariaDAO();
+        
+        d.setNomeDrogaria(jTNomeDrogaria.getText());
+        d.setCnpjDrogaria(jTCNPJDrograria.getText());
+        d.setCepDrogaria(jTCEPDrogaria.getText());
+        d.setEmailDrogaria(jTEmailDrogaria.getText());
+        d.setTelefoneDrogaria(jTTelDrogaria.getText());
+        d.setNumeroDrogaria(Integer.parseInt(jTNumeroDrogaria.getText()));
+        
+        dao.create(d);
+        modelo.recarregaTabela();
+        LimpaCampos();
+        
+    }//GEN-LAST:event_jBCadastrarDrogariaActionPerformed
+
+    private void jBVoltarDrogariaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBVoltarDrogariaActionPerformed
+        Menu m = new Menu();
+        m.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jBVoltarDrogariaActionPerformed
+
+    private void jTEmailDrogariaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTEmailDrogariaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTEmailDrogariaActionPerformed
+
+    private void jTTabelaDrogariaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTTabelaDrogariaMouseClicked
+         if (jTTabelaDrogaria.getSelectedRow() != -1){
+           DrogariaObjeto d = modelo.pegaDadosLinha(jTTabelaDrogaria.getSelectedRow());
+            jTNomeDrogaria.setText(d.getNomeDrogaria());
+            jTCNPJDrograria.setText(d.getCnpjDrogaria());
+            jTNumeroDrogaria.setText(String.valueOf(d.getNumeroDrogaria()));
+            jTCEPDrogaria.setText(d.getCepDrogaria());
+            jTEmailDrogaria.setText(d.getEmailDrogaria());
+            jTTelDrogaria.setText(d.getTelefoneDrogaria());
+        }
+    }//GEN-LAST:event_jTTabelaDrogariaMouseClicked
+
+    private void jBAlterarDrogariaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAlterarDrogariaActionPerformed
+        if (jTTabelaDrogaria.getSelectedRow() != -1) {
+            modelo.setValueAt(jTCNPJDrograria.getText(), jTTabelaDrogaria.getSelectedRow(), 0);
+            modelo.setValueAt(jTNomeDrogaria.getText(), jTTabelaDrogaria.getSelectedRow(), 1);
+            modelo.setValueAt(jTTelDrogaria.getText(), jTTabelaDrogaria.getSelectedRow(), 2);
+            modelo.setValueAt(jTEmailDrogaria.getText(), jTTabelaDrogaria.getSelectedRow(), 3);
+            modelo.setValueAt(jTCEPDrogaria.getText(), jTTabelaDrogaria.getSelectedRow(), 4);
+            modelo.setValueAt(jTNumeroDrogaria.getText(), jTTabelaDrogaria.getSelectedRow(), 5);
+
+            DrogariaObjeto d = modelo.pegaDadosLinha(jTTabelaDrogaria.getSelectedRow());
+            DrogariaDAO dao = new DrogariaDAO();
+            dao.updtae(d);
+            LimpaCampos();
+            modelo.recarregaTabela();
+        }
+    }//GEN-LAST:event_jBAlterarDrogariaActionPerformed
+
+    private void jBExcluirDrogariaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBExcluirDrogariaActionPerformed
+        if (jTTabelaDrogaria.getSelectedRow() != -1) {
+            DrogariaObjeto d = modelo.pegaDadosLinha(jTTabelaDrogaria.getSelectedRow());
+            DrogariaDAO dao = new DrogariaDAO();
+            dao.delete(d);
+            modelo.recarregaTabela();
+        }
+    }//GEN-LAST:event_jBExcluirDrogariaActionPerformed
+
+    private void LimpaCampos() {
+        jTCEPDrogaria.setText("");
+        jTCNPJDrograria.setText("");
+        jTEmailDrogaria.setText("");
+        jTNomeDrogaria.setText("");
+        jTNumeroDrogaria.setText("");
+        jTTelDrogaria.setText("");
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -197,21 +334,24 @@ public class Drogaria extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBAlterarDrogaria;
     private javax.swing.JButton jBCadastrarDrogaria;
+    private javax.swing.JButton jBExcluirDrogaria;
+    private javax.swing.JButton jBVoltarDrogaria;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTCEPDrogaria;
     private javax.swing.JTextField jTCNPJDrograria;
     private javax.swing.JTextField jTEmailDrogaria;
-    private javax.swing.JTextField jTEnderecoDrogaria;
     private javax.swing.JTextField jTNomeDrogaria;
     private javax.swing.JTextField jTNumeroDrogaria;
+    private javax.swing.JTable jTTabelaDrogaria;
     private javax.swing.JTextField jTTelDrogaria;
     // End of variables declaration//GEN-END:variables
 }
