@@ -9,10 +9,12 @@ import Model.MedicamentoTableModel;
 import Objetos.Medicamento;
 import java.awt.Color;
 
+
 /**
  *
  * @author luis.fmleite
  */
+
 public class CadastroMedicamento extends javax.swing.JFrame {
 
     MedicamentoTableModel modelo = new MedicamentoTableModel();
@@ -43,7 +45,6 @@ public class CadastroMedicamento extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jTQuantidadeMedicamento = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jTDataValidadeMedicamento = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jTCodigoCatalogo = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
@@ -58,6 +59,7 @@ public class CadastroMedicamento extends javax.swing.JFrame {
         jBVoltarCadastroMedicamento = new javax.swing.JButton();
         jBExcluirMed = new javax.swing.JButton();
         jBCadastrarMed = new javax.swing.JButton();
+        jTDataValidadeMedicamento = new javax.swing.JFormattedTextField();
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -79,6 +81,12 @@ public class CadastroMedicamento extends javax.swing.JFrame {
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel5.setText("Data de Validade:");
+
+        jTValorMedicamento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTValorMedicamentoActionPerformed(evt);
+            }
+        });
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel6.setText("Quantidade:");
@@ -148,6 +156,17 @@ public class CadastroMedicamento extends javax.swing.JFrame {
             }
         });
 
+        try {
+            jTDataValidadeMedicamento.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        jTDataValidadeMedicamento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTDataValidadeMedicamentoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -159,12 +178,12 @@ public class CadastroMedicamento extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel2)
-                                .addGap(33, 33, 33)
-                                .addComponent(jTQuantidadeMedicamento))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTNomeMedicamento))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTDataValidadeMedicamento))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTDescricaoMedicamento))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
@@ -182,23 +201,23 @@ public class CadastroMedicamento extends javax.swing.JFrame {
                                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                         .addComponent(jLabel6)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jTNomeMedicamento)))))
+                                        .addComponent(jTQuantidadeMedicamento)))))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTValorMedicamento, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel7)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTDescricaoMedicamento))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(9, 9, 9)
                                 .addComponent(jBExcluirMed)
                                 .addGap(30, 30, 30)
-                                .addComponent(jBVoltarCadastroMedicamento)))))
-                .addGap(73, 73, 73))
+                                .addComponent(jBVoltarCadastroMedicamento))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel7)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTValorMedicamento, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTDataValidadeMedicamento)))))
+                .addContainerGap())
             .addComponent(jScrollPane1)
         );
         jPanel1Layout.setVerticalGroup(
@@ -207,24 +226,24 @@ public class CadastroMedicamento extends javax.swing.JFrame {
                 .addGap(16, 16, 16)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTQuantidadeMedicamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTNomeMedicamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jTDataValidadeMedicamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTDescricaoMedicamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(jTCodigoCatalogo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5)
-                    .addComponent(jTValorMedicamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTDataValidadeMedicamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(jTNomeMedicamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7)
-                    .addComponent(jTDescricaoMedicamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(46, 46, 46)
+                    .addComponent(jTValorMedicamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTQuantidadeMedicamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(55, 55, 55)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBCadastrarMed)
                     .addComponent(jBAlterarMed)
@@ -271,7 +290,7 @@ public class CadastroMedicamento extends javax.swing.JFrame {
         cmed.setNomeMed(jTNomeMedicamento.getText());
         cmed.setDescricaoMed(jTDescricaoMedicamento.getText());
         cmed.setQuantidadeMed(Integer.parseInt(jTQuantidadeMedicamento.getText()));
-        cmed.setValorMed(Double.valueOf(jTValorMedicamento.getText().replace(",", ".")));
+        cmed.setValorMed(Double.valueOf(jTDataValidadeMedicamento.getText().replace(",", ".")));
         cmed.setDataValidadeMed(jTDataValidadeMedicamento.getText());
         cmed.setCodCatMed(Integer.parseInt(jTCodigoCatalogo.getText()));
 
@@ -305,7 +324,7 @@ public class CadastroMedicamento extends javax.swing.JFrame {
             modelo.setValueAt(jTNomeMedicamento.getText(), jTTabelaMed.getSelectedRow(), 1);
             modelo.setValueAt(jTDescricaoMedicamento.getText(), jTTabelaMed.getSelectedRow(), 2);
             modelo.setValueAt(jTQuantidadeMedicamento.getText(), jTTabelaMed.getSelectedRow(), 3);
-            modelo.setValueAt(jTValorMedicamento.getText(), jTTabelaMed.getSelectedRow(), 4);
+            modelo.setValueAt(jTDataValidadeMedicamento.getText(), jTTabelaMed.getSelectedRow(), 4);
             modelo.setValueAt(jTDataValidadeMedicamento.getText(), jTTabelaMed.getSelectedRow(), 5);
             modelo.setValueAt(jTCodigoCatalogo.getText(), jTTabelaMed.getSelectedRow(), 6);
 
@@ -318,7 +337,7 @@ public class CadastroMedicamento extends javax.swing.JFrame {
     }//GEN-LAST:event_jBAlterarMedActionPerformed
 
     private void jTTabelaMedMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTTabelaMedMouseClicked
-        if (jTTabelaMed.getSelectedRow() != -1){
+        if (jTTabelaMed.getSelectedRow() != -1) {
             Medicamento cmed = modelo.pegaDadosLinha(jTTabelaMed.getSelectedRow());
             jTNomeMedicamento.setText(cmed.getNomeMed());
             jTDescricaoMedicamento.setText(cmed.getDescricaoMed());
@@ -329,49 +348,57 @@ public class CadastroMedicamento extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jTTabelaMedMouseClicked
 
+    private void jTValorMedicamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTValorMedicamentoActionPerformed
+
+    }//GEN-LAST:event_jTValorMedicamentoActionPerformed
+
+    private void jTDataValidadeMedicamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTDataValidadeMedicamentoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTDataValidadeMedicamentoActionPerformed
+
     private void LimpaCampos() {
-        jTCodigoCatalogo.setText("");
-        jTDataValidadeMedicamento.setText("");
-        jTDescricaoMedicamento.setText("");
-        jTNomeMedicamento.setText("");
-        jTQuantidadeMedicamento.setText("");
-        jTValorMedicamento.setText("");
-    }
+    jTCodigoCatalogo.setText("");
+    jTDataValidadeMedicamento.setText("");
+    jTDescricaoMedicamento.setText("");
+    jTNomeMedicamento.setText("");
+    jTQuantidadeMedicamento.setText("");
+    jTDataValidadeMedicamento.setText("");
+}
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+    /* Set the Nimbus look and feel */
+    //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+    /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
+     */
+    try {
+        for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+            if ("Nimbus".equals(info.getName())) {
+                javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                break;
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CadastroMedicamento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CadastroMedicamento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CadastroMedicamento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CadastroMedicamento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new CadastroMedicamento().setVisible(true);
-            }
-        });
+    } catch (ClassNotFoundException ex) {
+        java.util.logging.Logger.getLogger(CadastroMedicamento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    } catch (InstantiationException ex) {
+        java.util.logging.Logger.getLogger(CadastroMedicamento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    } catch (IllegalAccessException ex) {
+        java.util.logging.Logger.getLogger(CadastroMedicamento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        java.util.logging.Logger.getLogger(CadastroMedicamento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
     }
+    //</editor-fold>
+
+    /* Create and display the form */
+    java.awt.EventQueue.invokeLater(new Runnable() {
+        public void run() {
+            new CadastroMedicamento().setVisible(true);
+        }
+    });
+}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBAlterarMed;
@@ -389,7 +416,7 @@ public class CadastroMedicamento extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTCodigoCatalogo;
-    private javax.swing.JTextField jTDataValidadeMedicamento;
+    private javax.swing.JFormattedTextField jTDataValidadeMedicamento;
     private javax.swing.JTextField jTDescricaoMedicamento;
     private javax.swing.JTextField jTNomeMedicamento;
     private javax.swing.JTextField jTQuantidadeMedicamento;

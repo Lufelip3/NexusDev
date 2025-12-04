@@ -39,12 +39,12 @@ public class VendaJanela extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jTDataVenda = new javax.swing.JTextField();
-        jTCPFVenda = new javax.swing.JTextField();
         jTCNPJVenda = new javax.swing.JTextField();
         jTValorVenda = new javax.swing.JTextField();
         jTNotaFiscalVenda = new javax.swing.JTextField();
         jBCadastrar = new javax.swing.JButton();
         jBVoltar = new javax.swing.JButton();
+        jTCPFVenda = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -62,12 +62,6 @@ public class VendaJanela extends javax.swing.JFrame {
 
         jLabel6.setText("Nota Fiscal Venda:");
 
-        jTCPFVenda.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTCPFVendaActionPerformed(evt);
-            }
-        });
-
         jBCadastrar.setText("Cadastrar");
         jBCadastrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -81,6 +75,12 @@ public class VendaJanela extends javax.swing.JFrame {
                 jBVoltarActionPerformed(evt);
             }
         });
+
+        try {
+            jTCPFVenda.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##	")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -96,13 +96,16 @@ public class VendaJanela extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jTDataVenda))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTCPFVenda))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTCNPJVenda))))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel3)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jTCPFVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel4)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jTCNPJVenda)))
+                                .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(5, 5, 5)
                         .addComponent(jLabel5)
@@ -177,10 +180,6 @@ public class VendaJanela extends javax.swing.JFrame {
         v.setCpfVenda(jTCPFVenda.getText());
     }//GEN-LAST:event_jBCadastrarActionPerformed
 
-    private void jTCPFVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTCPFVendaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTCPFVendaActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -227,7 +226,7 @@ public class VendaJanela extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JTextField jTCNPJVenda;
-    private javax.swing.JTextField jTCPFVenda;
+    private javax.swing.JFormattedTextField jTCPFVenda;
     private javax.swing.JTextField jTDataVenda;
     private javax.swing.JTextField jTNotaFiscalVenda;
     private javax.swing.JTextField jTValorVenda;
