@@ -83,9 +83,9 @@ public class ItensTableModel extends AbstractTableModel{
     }
 
     public void addLinha(Itens i) {
-        this.dados.add(i);
-        this.fireTableDataChanged();
-    }
+    addItem(i);
+}
+
 
     public void removeLinha(int linha) {
         this.dados.remove(linha);
@@ -111,4 +111,10 @@ public class ItensTableModel extends AbstractTableModel{
         lerDados();
         this.fireTableDataChanged();
     }
+    public void addItem(Itens item) {
+    dados.add(item); 
+    int lastIndex = dados.size() - 1;
+    fireTableRowsInserted(lastIndex, lastIndex);
+}
+
 }

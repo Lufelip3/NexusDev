@@ -3,7 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package Janelas;
-
 import Objetos.Funcionario;
 import java.awt.Color;
 import javax.swing.JOptionPane;
@@ -13,16 +12,18 @@ import javax.swing.JOptionPane;
  * @author andrey.munhoz
  */
 public class Menu extends javax.swing.JFrame {
-
     private Funcionario user;
-
+    private String funcaoUsuario;
+    private String nomeUsuario;
+    
     /**
      * Creates new form Menu2
      */
     public Menu() {
         initComponents();
     }
-
+    
+    // CONSTRUTOR QUE RECEBE O OBJETO FUNCIONARIO COMPLETO
     public Menu(Funcionario f) {
         initComponents();
         this.setLocationRelativeTo(null);

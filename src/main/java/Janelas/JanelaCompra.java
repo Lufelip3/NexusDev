@@ -7,7 +7,6 @@ package Janelas;
 import DAO.CompraDAO;
 import Objetos.Compra;
 import java.awt.Color;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -15,22 +14,16 @@ import javax.swing.JOptionPane;
  */
 public class JanelaCompra extends javax.swing.JFrame {
     
-        private String cpf;
-
+    
     
     /**
      * Creates new form Compra2
      */
     public JanelaCompra() {
         initComponents();
-    }
-
-    public JanelaCompra(String cpf) {
-        initComponents();
         this.setLocationRelativeTo(null);
         getContentPane().setBackground(Color.GRAY);
-        this.cpf = cpf;
-        jLabel2.setText(cpf);
+        
     }
 
     /**
@@ -49,7 +42,6 @@ public class JanelaCompra extends javax.swing.JFrame {
         jBVoltarCompra = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTTabelaMed = new javax.swing.JTable();
-        jLabel2 = new javax.swing.JLabel();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -102,16 +94,12 @@ public class JanelaCompra extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(jTTabelaMed);
 
-        jLabel2.setText("jLabel2");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel2)
-                .addGap(201, 201, 201)
                 .addComponent(jBCadastrarCompra)
                 .addGap(18, 18, 18)
                 .addComponent(jBVoltarCompra)
@@ -136,8 +124,7 @@ public class JanelaCompra extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBCadastrarCompra)
-                    .addComponent(jBVoltarCompra)
-                    .addComponent(jLabel2))
+                    .addComponent(jBVoltarCompra))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -145,8 +132,7 @@ public class JanelaCompra extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBCadastrarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCadastrarCompraActionPerformed
-          iniciarCompra();
-
+  
     }//GEN-LAST:event_jBCadastrarCompraActionPerformed
 
     private void jBVoltarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBVoltarCompraActionPerformed
@@ -154,28 +140,7 @@ public class JanelaCompra extends javax.swing.JFrame {
         m.setVisible(true);
         dispose();
     }//GEN-LAST:event_jBVoltarCompraActionPerformed
-private void iniciarCompra() {
-        try {
 
-            Compra compra = new Compra();
-            compra.setValorTotal(0.0);
-            compra.setCpfCompra(cpf);
-            compra.setCnpjCompra(null); // definido depois
-
-            CompraDAO compraDAO = new CompraDAO();
-            int notaGerada = compraDAO.createAndReturnNota(compra);
-
-            JOptionPane.showMessageDialog(this,
-                    "Compra iniciada! Nota Fiscal gerada: " + notaGerada);
-
-            SelecaoItensCompra itensJanela = new SelecaoItensCompra(notaGerada);
-            itensJanela.setVisible(true);
-            this.dispose();
-
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Erro ao iniciar compra: " + e);
-        }
-    }
     private void jTTabelaMedMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTTabelaMedMouseClicked
         
     }//GEN-LAST:event_jTTabelaMedMouseClicked
@@ -222,7 +187,6 @@ private void iniciarCompra() {
     private javax.swing.JButton jBCadastrarCompra;
     private javax.swing.JButton jBVoltarCompra;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTTabelaMed;

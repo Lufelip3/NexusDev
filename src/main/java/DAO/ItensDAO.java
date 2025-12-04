@@ -49,8 +49,8 @@ public class ItensDAO {
 
         try {
             stmt = con.prepareStatement(
-                "INSERT INTO item (DataVal_Item, Qtd_Item, Valor_Item, Data_Venda, NotaFiscal_Entrada, Cod_CatMed, Cod_Med)"
-              + " VALUES (?, ?, ?, ?, ?, ?, ?)"
+                    "INSERT INTO item (DataVal_Item, Qtd_Item, Valor_Item, Data_Venda, NotaFiscal_Entrada, Cod_CatMed, Cod_Med)"
+                    + " VALUES (?, ?, ?, ?, ?, ?, ?)"
             );
 
             stmt.setString(1, i.getDataValItem());
@@ -83,15 +83,20 @@ public class ItensDAO {
 
         try {
             stmt = con.prepareStatement(
-                "SELECT SUM(Valor_Item * Qtd_Item) AS Total "
-              + "FROM item WHERE NotaFiscal_Entrada = ?"
+                    "SELECT SUM(Valor_Item * Qtd_Item) AS Total "
+                    + "FROM item WHERE NotaFiscal_Entrada = ?"
             );
 
             stmt.setInt(1, notaFiscal);
             rs = stmt.executeQuery();
 
             if (rs.next()) {
-                return rs.getDouble("Total");
+                double total = rs.getDouble("Total");
+                if (rs.wasNull()) {
+                    return 0;
+                }
+                return total;
+
             }
 
         } catch (SQLException e) {
