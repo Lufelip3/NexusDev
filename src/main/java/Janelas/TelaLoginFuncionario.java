@@ -117,12 +117,12 @@ public class TelaLoginFuncionario extends javax.swing.JFrame {
     }//GEN-LAST:event_jTNomeLoginActionPerformed
 
     private void jBEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEntrarActionPerformed
-         // ---------------------------
+          // ---------------------------
     // 1. PEGAR DADOS DA TELA
     // ---------------------------
     String email = jTNomeLogin.getText();
     String senhaDigitada = new String(jPSenha.getPassword());
-
+    
     // ---------------------------
     // 2. VALIDAÇÃO
     // ---------------------------
@@ -130,28 +130,42 @@ public class TelaLoginFuncionario extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this, "Preencha email e senha!");
         return;
     }
-
+    
     // ---------------------------
     // 3. BUSCAR FUNCIONÁRIO NO BANCO
     // ---------------------------
     FuncionarioDAO dao = new FuncionarioDAO();
     Funcionario user = dao.verificaFuncionario(email);
-
+    
     if (user == null) {
         JOptionPane.showMessageDialog(this, "Email não encontrado!");
         return;
     }
-
+    
     // ---------------------------
     // 4. VERIFICAR SENHA (BCrypt)
     // ---------------------------
     if (user.verificarSenha(senhaDigitada)) {
-        // LOGIN OK → abrir menu
-        Menu m = new Menu();
+        // LOGIN OK → Mensagem de sucesso
+        JOptionPane.showMessageDialog(this, 
+            "Login realizado com sucesso!\n\nBem-vindo(a), " + user.getNome_Fun() + "!",
+            "Login Confirmado",
+            JOptionPane.INFORMATION_MESSAGE);
+        
+        // PASSA A FUNÇÃO E O NOME DO USUÁRIO PARA O MENU
+        Menu m = new Menu(user.getFuncao(), user.getNome_Fun());
         m.setVisible(true);
+        
+        // Fecha a tela de login
         this.dispose();
+        
+        System.out.println("✓ Login bem-sucedido: " + user.getNome_Fun() + " - " + user.getFuncao());
+        
     } else {
-        JOptionPane.showMessageDialog(this, "Senha incorreta!");
+        JOptionPane.showMessageDialog(this, 
+            "Senha incorreta!",
+            "Erro de Autenticação",
+            JOptionPane.ERROR_MESSAGE);
     }
 
 
