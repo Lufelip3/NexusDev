@@ -6,6 +6,7 @@ package Janelas;
 
 import DAO.FuncionarioDAO;
 import Objetos.Funcionario;
+
 import java.awt.Color;
 import javax.swing.JOptionPane;
 
@@ -15,12 +16,14 @@ import javax.swing.JOptionPane;
  */
 public class TelaLoginFuncionario extends javax.swing.JFrame {
 
+    Funcionario user;
     /**
      * Creates new form TelaLoginFuncionario
      */
     public TelaLoginFuncionario() {
         initComponents();
         getContentPane().setBackground(Color.GRAY);
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -117,56 +120,43 @@ public class TelaLoginFuncionario extends javax.swing.JFrame {
     }//GEN-LAST:event_jTNomeLoginActionPerformed
 
     private void jBEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEntrarActionPerformed
-          // ---------------------------
-    // 1. PEGAR DADOS DA TELA
-    // ---------------------------
-    String email = jTNomeLogin.getText();
-    String senhaDigitada = new String(jPSenha.getPassword());
-    
-    // ---------------------------
-    // 2. VALIDAÇÃO
-    // ---------------------------
-    if (email.isEmpty() || senhaDigitada.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Preencha email e senha!");
-        return;
-    }
-    
-    // ---------------------------
-    // 3. BUSCAR FUNCIONÁRIO NO BANCO
-    // ---------------------------
-    FuncionarioDAO dao = new FuncionarioDAO();
-    Funcionario user = dao.verificaFuncionario(email);
-    
-    if (user == null) {
-        JOptionPane.showMessageDialog(this, "Email não encontrado!");
-        return;
-    }
-    
-    // ---------------------------
-    // 4. VERIFICAR SENHA (BCrypt)
-    // ---------------------------
-    if (user.verificarSenha(senhaDigitada)) {
-        // LOGIN OK → Mensagem de sucesso
-        JOptionPane.showMessageDialog(this, 
-            "Login realizado com sucesso!\n\nBem-vindo(a), " + user.getNome_Fun() + "!",
-            "Login Confirmado",
-            JOptionPane.INFORMATION_MESSAGE);
+        // ---------------------------
+        // 1. PEGAR DADOS DA TELA
+        // ---------------------------
+        String email = jTNomeLogin.getText();
+        String senhaDigitada = new String(jPSenha.getPassword());
+
+        // ---------------------------
+        // 2. VALIDAÇÃO
+        // ---------------------------
+        if (email.isEmpty() || senhaDigitada.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Preencha email e senha!");
+            return;
+        }
+
+        // ---------------------------
+        // 3. BUSCAR FUNCIONÁRIO NO BANCO
+        // ---------------------------
+        FuncionarioDAO dao = new FuncionarioDAO();
         
-        // PASSA A FUNÇÃO E O NOME DO USUÁRIO PARA O MENU
-        Menu m = new Menu(user.getFuncao(), user.getNome_Fun());
+        user = dao.verificaFuncionario(email);
+
+        if (user == null) {
+            JOptionPane.showMessageDialog(this, "Email não encontrado!");
+            return;
+        }
+
+        // ---------------------------
+        // 4. VERIFICAR SENHA (BCrypt)
+        // ---------------------------
+        if (user.verificarSenha(senhaDigitada)) {
+            // LOGIN OK → abrir menu
+          Menu m = new Menu(user);
         m.setVisible(true);
-        
-        // Fecha a tela de login
-        this.dispose();
-        
-        System.out.println("✓ Login bem-sucedido: " + user.getNome_Fun() + " - " + user.getFuncao());
-        
-    } else {
-        JOptionPane.showMessageDialog(this, 
-            "Senha incorreta!",
-            "Erro de Autenticação",
-            JOptionPane.ERROR_MESSAGE);
-    }
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(this, "Senha incorreta!");
+        }
 
 
     }//GEN-LAST:event_jBEntrarActionPerformed

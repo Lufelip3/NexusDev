@@ -5,6 +5,8 @@
 package Janelas;
 import Objetos.Funcionario;
 import java.awt.Color;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author andrey.munhoz
@@ -27,42 +29,8 @@ public class Menu extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         getContentPane().setBackground(Color.GRAY);
         this.user = f;
-        this.funcaoUsuario = f.getFuncao();
-        this.nomeUsuario = f.getNome_Fun();
-        
-        // CONTROLA O ACESSO AO BOTÃO DE CADASTRO
-        controlarAcessoCadastro();
-    }
-    
-    // NOVO CONSTRUTOR QUE RECEBE FUNÇÃO E NOME SEPARADAMENTE
-    public Menu(String funcao, String nome) {
-        initComponents();
-        this.setLocationRelativeTo(null);
-        getContentPane().setBackground(Color.GRAY);
-        this.funcaoUsuario = funcao;
-        this.nomeUsuario = nome;
-        
-        // CONTROLA O ACESSO AO BOTÃO DE CADASTRO
-        controlarAcessoCadastro();
-        
-        System.out.println("✓ Menu aberto - Usuário: " + nome + " - Função: " + funcao);
-    }
-    
-    // MÉTODO QUE CONTROLA O ACESSO AO BOTÃO CADASTRO FUNCIONÁRIO
-    private void controlarAcessoCadastro() {
-        // Se NÃO for Gerente, desabilita o botão
-        if (funcaoUsuario == null || !funcaoUsuario.equalsIgnoreCase("Gerente")) {
-            jBCadastrarFun.setEnabled(false);
-            jBCadastrarFun.setToolTipText("Acesso restrito apenas para Gerentes");
-            
-            // Deixa o botão visualmente diferente (cinza escuro)
-            jBCadastrarFun.setBackground(new java.awt.Color(180, 180, 180));
-            
-            System.out.println("⚠ Acesso ao Cadastro de Funcionário: NEGADO (Função: " + funcaoUsuario + ")");
-        } else {
-            jBCadastrarFun.setEnabled(true);
-            System.out.println("✓ Acesso ao Cadastro de Funcionário: PERMITIDO (Gerente)");
-        }
+     
+                
     }
 
     /**
