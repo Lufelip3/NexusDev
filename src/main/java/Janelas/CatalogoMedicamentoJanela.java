@@ -44,7 +44,7 @@ public class CatalogoMedicamentoJanela extends javax.swing.JFrame {
         jTDescricaoCatMed = new javax.swing.JTextField();
         jTValorCatMed = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jTCnpjCatMed = new javax.swing.JTextField();
+        jTCnpjCatMed = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -76,6 +76,12 @@ public class CatalogoMedicamentoJanela extends javax.swing.JFrame {
 
         jLabel6.setText("CNPJ:");
 
+        try {
+            jTCnpjCatMed.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##.###.###/####-##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -96,19 +102,18 @@ public class CatalogoMedicamentoJanela extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel6)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTCnpjCatMed)
-                                    .addComponent(jTNomeCatMed)))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(27, 27, 27)))))
+                                .addGap(27, 27, 27))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel6))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jTNomeCatMed)
+                                    .addComponent(jTCnpjCatMed))))))
                 .addGap(9, 9, 9))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(224, Short.MAX_VALUE)
@@ -218,7 +223,7 @@ public class CatalogoMedicamentoJanela extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JTextField jTCnpjCatMed;
+    private javax.swing.JFormattedTextField jTCnpjCatMed;
     private javax.swing.JTextField jTCodigoCatMed;
     private javax.swing.JTextField jTDescricaoCatMed;
     private javax.swing.JTextField jTNomeCatMed;
