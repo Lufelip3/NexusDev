@@ -6,6 +6,7 @@ package Janelas;
 
 import DAO.FuncionarioDAO;
 import Objetos.Funcionario;
+
 import java.awt.Color;
 import javax.swing.JOptionPane;
 
@@ -15,12 +16,14 @@ import javax.swing.JOptionPane;
  */
 public class TelaLoginFuncionario extends javax.swing.JFrame {
 
+    Funcionario user;
     /**
      * Creates new form TelaLoginFuncionario
      */
     public TelaLoginFuncionario() {
         initComponents();
         getContentPane().setBackground(Color.GRAY);
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -46,7 +49,7 @@ public class TelaLoginFuncionario extends javax.swing.JFrame {
         jLabel1.setText("NEXUS DEV");
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel2.setText("Nome:");
+        jLabel2.setText("Email:");
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel3.setText("Senha:");
@@ -117,42 +120,43 @@ public class TelaLoginFuncionario extends javax.swing.JFrame {
     }//GEN-LAST:event_jTNomeLoginActionPerformed
 
     private void jBEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEntrarActionPerformed
-         // ---------------------------
-    // 1. PEGAR DADOS DA TELA
-    // ---------------------------
-    String email = jTNomeLogin.getText();
-    String senhaDigitada = new String(jPSenha.getPassword());
+        // ---------------------------
+        // 1. PEGAR DADOS DA TELA
+        // ---------------------------
+        String email = jTNomeLogin.getText();
+        String senhaDigitada = new String(jPSenha.getPassword());
 
-    // ---------------------------
-    // 2. VALIDAÇÃO
-    // ---------------------------
-    if (email.isEmpty() || senhaDigitada.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Preencha email e senha!");
-        return;
-    }
+        // ---------------------------
+        // 2. VALIDAÇÃO
+        // ---------------------------
+        if (email.isEmpty() || senhaDigitada.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Preencha email e senha!");
+            return;
+        }
 
-    // ---------------------------
-    // 3. BUSCAR FUNCIONÁRIO NO BANCO
-    // ---------------------------
-    FuncionarioDAO dao = new FuncionarioDAO();
-    Funcionario user = dao.verificaFuncionario(email);
+        // ---------------------------
+        // 3. BUSCAR FUNCIONÁRIO NO BANCO
+        // ---------------------------
+        FuncionarioDAO dao = new FuncionarioDAO();
+        
+        user = dao.verificaFuncionario(email);
 
-    if (user == null) {
-        JOptionPane.showMessageDialog(this, "Email não encontrado!");
-        return;
-    }
+        if (user == null) {
+            JOptionPane.showMessageDialog(this, "Email não encontrado!");
+            return;
+        }
 
-    // ---------------------------
-    // 4. VERIFICAR SENHA (BCrypt)
-    // ---------------------------
-    if (user.verificarSenha(senhaDigitada)) {
-        // LOGIN OK → abrir menu
-        Menu m = new Menu();
+        // ---------------------------
+        // 4. VERIFICAR SENHA (BCrypt)
+        // ---------------------------
+        if (user.verificarSenha(senhaDigitada)) {
+            // LOGIN OK → abrir menu
+          Menu m = new Menu(user);
         m.setVisible(true);
-        this.dispose();
-    } else {
-        JOptionPane.showMessageDialog(this, "Senha incorreta!");
-    }
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(this, "Senha incorreta!");
+        }
 
 
     }//GEN-LAST:event_jBEntrarActionPerformed

@@ -6,6 +6,7 @@ package Janelas;
 
 import Objetos.Funcionario;
 import java.awt.Color;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -27,6 +28,8 @@ public class Menu extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         getContentPane().setBackground(Color.GRAY);
         this.user = f;
+     
+                
     }
 
     /**
