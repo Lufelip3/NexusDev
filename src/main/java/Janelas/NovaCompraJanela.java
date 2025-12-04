@@ -4,11 +4,21 @@
  */
 package Janelas;
 
+import DAO.CompraDAO;
+import Janelas.SelecaoItensCompra;
+import Model.ItensTableModel;
+import Objetos.Compra;
+import Objetos.Itens;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
+
 /**
  *
  * @author andrey.munhoz
  */
 public class NovaCompraJanela extends javax.swing.JFrame {
+private int notaFiscal;
 
     /**
      * Creates new form SelecaoItens
@@ -35,8 +45,14 @@ public class NovaCompraJanela extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
+<<<<<<< Updated upstream
         jTTabelaNovaCompra = new javax.swing.JTable();
         jTDataNovaCompra = new javax.swing.JFormattedTextField();
+=======
+        jTTabelaItemCompra = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
+        jBAdicionar = new javax.swing.JButton();
+>>>>>>> Stashed changes
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -64,7 +80,7 @@ public class NovaCompraJanela extends javax.swing.JFrame {
 
         jTextField1.setText("jTextField1");
 
-        jTTabelaNovaCompra.setModel(new javax.swing.table.DefaultTableModel(
+        jTTabelaItemCompra.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -75,12 +91,21 @@ public class NovaCompraJanela extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jTTabelaNovaCompra.addMouseListener(new java.awt.event.MouseAdapter() {
+        jTTabelaItemCompra.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTTabelaNovaCompraMouseClicked(evt);
+                jTTabelaItemCompraMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(jTTabelaNovaCompra);
+        jScrollPane1.setViewportView(jTTabelaItemCompra);
+
+        jButton1.setText("jButton1");
+
+        jBAdicionar.setText("Adicionar");
+        jBAdicionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBAdicionarActionPerformed(evt);
+            }
+        });
 
         try {
             jTDataNovaCompra.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
@@ -110,11 +135,21 @@ public class NovaCompraJanela extends javax.swing.JFrame {
                         .addComponent(jCItemNovaCompra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 9, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel4)
-                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(34, 34, 34)
+                        .addComponent(jLabel4))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jBAdicionar)))
+                .addGap(14, 14, 14)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 348, Short.MAX_VALUE)
+                    .addComponent(jButton1)
+                    .addGap(0, 348, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -141,20 +176,57 @@ public class NovaCompraJanela extends javax.swing.JFrame {
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jBAdicionar)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 152, Short.MAX_VALUE)
+                    .addComponent(jButton1)
+                    .addGap(0, 153, Short.MAX_VALUE)))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTTabelaNovaCompraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTTabelaNovaCompraMouseClicked
+    private void jTTabelaItemCompraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTTabelaItemCompraMouseClicked
         
-    }//GEN-LAST:event_jTTabelaNovaCompraMouseClicked
+    }//GEN-LAST:event_jTTabelaItemCompraMouseClicked
+public void adicionarItemNaTabela(Itens item) {
+    ItensTableModel model = (ItensTableModel) jTTabelaItemCompra.getModel();
+    model.addItem(item);
+}
 
+}
     private void jBFinalizarNovaCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBFinalizarNovaCompraActionPerformed
-        
+       
     }//GEN-LAST:event_jBFinalizarNovaCompraActionPerformed
+
+    private void jBAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAdicionarActionPerformed
+    // Se ainda não existe nota fiscal, cria agora
+    if (notaFiscal == null) {
+
+        Compra compra = new Compra();
+        compra.setCpfCompra("TESTE");  // pegar do combo box depois
+        compra.setCnpjCompra("TESTE"); // pegar da drogaria depois
+        compra.setValorTotal(0.0);     // itens vão atualizar depois
+
+        CompraDAO dao = new CompraDAO();
+        notaFiscal = dao.createAndReturnNota(compra);
+
+        if (notaFiscal <= 0) {
+            JOptionPane.showMessageDialog(this, "Erro ao gerar nota fiscal!");
+            return;
+        }
+    }
+
+    // Agora sim abre a janela enviando a nota fiscal
+    SelecaoItensCompra sic = new SelecaoItensCompra(this, notaFiscal);
+    sic.setVisible(true);
+
+    }//GEN-LAST:event_jBAdicionarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -199,16 +271,23 @@ public class NovaCompraJanela extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBAdicionar;
     private javax.swing.JButton jBCancelarNovaCompra;
     private javax.swing.JButton jBFinalizarNovaCompra;
+    private javax.swing.JButton jButton1;
     private javax.swing.JComboBox<String> jCItemNovaCompra;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
+<<<<<<< Updated upstream
     private javax.swing.JFormattedTextField jTDataNovaCompra;
     private javax.swing.JTable jTTabelaNovaCompra;
+=======
+    private javax.swing.JTextField jTDataNovaCompra;
+    private javax.swing.JTable jTTabelaItemCompra;
+>>>>>>> Stashed changes
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }

@@ -4,23 +4,36 @@
  */
 package Janelas;
 
+import Model.CatalogoTableModel;
+import Objetos.Itens;
+import java.awt.Color;
+import javax.swing.JOptionPane;
+
+
 /**
  *
  * @author andrey.munhoz
  */
 public class SelecaoItensCompra extends javax.swing.JFrame {
+    CatalogoTableModel modelo = new CatalogoTableModel();
+private NovaCompraJanela novaCompraJanela;
 
     /**
      * Creates new form NovaVendaJanela
      */
     private int notaFiscal;
 
-    public SelecaoItensCompra(int notaFiscal) {
-        initComponents();
-        this.notaFiscal = notaFiscal;
+    public SelecaoItensCompra(NovaCompraJanela janela, int notaFiscal) {
+    initComponents();
+    this.novaCompraJanela = janela;
+    this.notaFiscal = notaFiscal;
+    this.setLocationRelativeTo(null);
+    jTTabelaSelecao.setModel(modelo);
+    modelo.recarregaTabela();
+    getContentPane().setBackground(Color.GRAY);
+    jLValorTotalSelecaoItens.setText("Nota Fiscal: " + notaFiscal);
+}
 
-        jLValorTotalSelecaoItens.setText("Nota Fiscal: " + notaFiscal); // opcional, caso tenha um label
-    }
     
      public SelecaoItensCompra() {
         initComponents();
@@ -41,7 +54,7 @@ public class SelecaoItensCompra extends javax.swing.JFrame {
         jTQuantidadeSelecaoItens = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jBCancelarSelecaoItens = new javax.swing.JButton();
-        jBCadastrarSelecaoItens = new javax.swing.JButton();
+        jBAdicionarSelecaoItens = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTTabelaSelecao = new javax.swing.JTable();
         jLValorTotalSelecaoItens = new javax.swing.JLabel();
@@ -58,10 +71,10 @@ public class SelecaoItensCompra extends javax.swing.JFrame {
 
         jBCancelarSelecaoItens.setText("Cancelar");
 
-        jBCadastrarSelecaoItens.setText("Cadastrar");
-        jBCadastrarSelecaoItens.addActionListener(new java.awt.event.ActionListener() {
+        jBAdicionarSelecaoItens.setText("Adicionar");
+        jBAdicionarSelecaoItens.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBCadastrarSelecaoItensActionPerformed(evt);
+                jBAdicionarSelecaoItensActionPerformed(evt);
             }
         });
 
@@ -100,7 +113,7 @@ public class SelecaoItensCompra extends javax.swing.JFrame {
                                 .addComponent(jLValorTotalSelecaoItens, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(13, 13, 13)
-                                .addComponent(jBCadastrarSelecaoItens)
+                                .addComponent(jBAdicionarSelecaoItens)
                                 .addGap(18, 18, 18)
                                 .addComponent(jBCancelarSelecaoItens)))
                         .addGap(27, 27, 27)
@@ -125,7 +138,7 @@ public class SelecaoItensCompra extends javax.swing.JFrame {
                             .addComponent(jLValorTotalSelecaoItens))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jBCadastrarSelecaoItens)
+                            .addComponent(jBAdicionarSelecaoItens)
                             .addComponent(jBCancelarSelecaoItens)))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(20, Short.MAX_VALUE))
@@ -134,9 +147,43 @@ public class SelecaoItensCompra extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jBCadastrarSelecaoItensActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCadastrarSelecaoItensActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jBCadastrarSelecaoItensActionPerformed
+    private void jBAdicionarSelecaoItensActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAdicionarSelecaoItensActionPerformed
+int linhaSelecionada = jTTabelaSelecao.getSelectedRow();
+    
+    if (linhaSelecionada == -1) {
+        JOptionPane.showMessageDialog(this, "Selecione um item da lista!");
+        return;
+    }
+    
+    if (jTQuantidadeSelecaoItens.getText().trim().isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Informe a quantidade!");
+        return;
+    }
+
+    int quantidade = Integer.parseInt(jTQuantidadeSelecaoItens.getText());
+
+    // PEGANDO OS DADOS DA TABELA
+    int codMed = (int) jTTabelaSelecao.getValueAt(linhaSelecionada, 0);
+    String dataVal = String.valueOf(jTTabelaSelecao.getValueAt(linhaSelecionada, 3));
+    double valor = Double.parseDouble(String.valueOf(jTTabelaSelecao.getValueAt(linhaSelecionada, 2)));
+
+    // Criando objeto Itens corretamente
+    Itens item = new Itens();
+    item.setCodMedItem(codMed);
+    item.setQuantidadeItem(quantidade);
+    item.setValorItem(valor);
+    item.setDataValItem(dataVal);
+
+    // informações adicionais
+    item.setNotaFiscalCompraItem(notaFiscal); // vindo do construtor
+    item.setDataVendaItem(null);              // compra não tem dataVenda
+    item.setCodCatMedItem(0);                 // se não existir na tabela, set 0
+
+    // Envia para a NovaCompraJanela
+    novaCompraJanela.adicionarItemNaCompra(item);
+
+    this.dispose();
+    }//GEN-LAST:event_jBAdicionarSelecaoItensActionPerformed
 
     /**
      * @param args the command line arguments
@@ -177,7 +224,7 @@ public class SelecaoItensCompra extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jBCadastrarSelecaoItens;
+    private javax.swing.JButton jBAdicionarSelecaoItens;
     private javax.swing.JButton jBCancelarSelecaoItens;
     private javax.swing.JLabel jLValorTotalSelecaoItens;
     private javax.swing.JLabel jLabel1;

@@ -48,8 +48,6 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="32767" attributes="0"/>
-              <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="201" max="-2" attributes="0"/>
               <Component id="jBCadastrarCompra" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="jBVoltarCompra" min="-2" max="-2" attributes="0"/>
@@ -81,7 +79,6 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jBCadastrarCompra" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jBVoltarCompra" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
@@ -138,10 +135,5 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JLabel" name="jLabel2">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jLabel2"/>
-      </Properties>
-    </Component>
   </SubComponents>
 </Form>
