@@ -14,23 +14,22 @@ import javax.swing.JOptionPane;
  * @author andrey.munhoz
  */
 public class JanelaCompra extends javax.swing.JFrame {
-    
-        private String cpf;
 
+    private String cpf;
 
-    
     /**
      * Creates new form Compra2
      */
     public JanelaCompra() {
         initComponents();
-        
+
     }
+
     public JanelaCompra(String cpf) {
         initComponents();
         this.setLocationRelativeTo(null);
         getContentPane().setBackground(Color.GRAY);
-        
+
         this.cpf = cpf;
     }
 
@@ -140,7 +139,7 @@ public class JanelaCompra extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBCadastrarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCadastrarCompraActionPerformed
-  
+        iniciarCompra();
     }//GEN-LAST:event_jBCadastrarCompraActionPerformed
 
     private void jBVoltarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBVoltarCompraActionPerformed
@@ -150,56 +149,52 @@ public class JanelaCompra extends javax.swing.JFrame {
     }//GEN-LAST:event_jBVoltarCompraActionPerformed
 
     private void jTTabelaMedMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTTabelaMedMouseClicked
-        
+
     }//GEN-LAST:event_jTTabelaMedMouseClicked
-private void iniciarCompra() {
-    // Validação: garante que há um funcionário logado
-    if (cpf == null || cpf.trim().isEmpty()) {
-        JOptionPane.showMessageDialog(this,
-            "Erro: Nenhum funcionário identificado no sistema!\n" +
-            "Por favor, faça login novamente.",
-            "Erro de Autenticação",
-            JOptionPane.ERROR_MESSAGE);
-        
-        //redirecionar para tela de login
-        new TelaLoginFuncionario().setVisible(true);
-        this.dispose();
-        return;
-    }
-    
-    
-    try {
-        Compra compra = new Compra();
-        compra.setValorTotal(0.0);
-        compra.setCpfCompra(cpf); // CPF do funcionário logado
-        compra.setCnpjCompra(null); // será definido ao selecionar a drogaria
-        
-        CompraDAO compraDAO = new CompraDAO();
-        int notaGerada = compraDAO.createAndReturnNota(compra);
-        
-        
-        System.out.println("Compra iniciada - Nota: " + notaGerada + 
-                         ", Funcionário CPF: " + cpf);
-        
-        JOptionPane.showMessageDialog(this,
-            "Compra iniciada com sucesso!\nNota Fiscal: " + notaGerada,
-            "Sucesso",
-            JOptionPane.INFORMATION_MESSAGE);
-        
-        // Abre a tela de nova compra
-        NovaJanelaCompra janela = new NovaJanelaCompra(notaGerada, cpf);
-        janela.setVisible(true);
-        this.dispose();
-        
-    } 
-        
-     catch (Exception e) {
-        JOptionPane.showMessageDialog(this,
-            "Erro inesperado ao iniciar compra:\n" + e.getMessage(),
-            "Erro",
-            JOptionPane.ERROR_MESSAGE);
-        e.printStackTrace();
-    }
+    private void iniciarCompra() {
+        // Validação: garante que há um funcionário logado
+        if (cpf == null || cpf.trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this,
+                    "Erro: Nenhum funcionário identificado no sistema!\n"
+                    + "Por favor, faça login novamente.",
+                    "Erro de Autenticação",
+                    JOptionPane.ERROR_MESSAGE);
+
+            //redirecionar para tela de login
+            new TelaLoginFuncionario().setVisible(true);
+            this.dispose();
+            return;
+        }
+
+        try {
+            Compra compra = new Compra();
+            compra.setValorTotal(0.0);
+            compra.setCpfCompra(cpf); // CPF do funcionário logado
+            compra.setCnpjCompra(null); // será definido ao selecionar a drogaria
+
+            CompraDAO compraDAO = new CompraDAO();
+            int notaGerada = compraDAO.createAndReturnNota(compra);
+
+            System.out.println("Compra iniciada - Nota: " + notaGerada
+                    + ", Funcionário CPF: " + cpf);
+
+            JOptionPane.showMessageDialog(this,
+                    "Compra iniciada com sucesso!\nNota Fiscal: " + notaGerada,
+                    "Sucesso",
+                    JOptionPane.INFORMATION_MESSAGE);
+
+            // Abre a tela de nova compra
+            NovaJanelaCompra janela = new NovaJanelaCompra(notaGerada, cpf);
+            janela.setVisible(true);
+            this.dispose();
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this,
+                    "Erro inesperado ao iniciar compra:\n" + e.getMessage(),
+                    "Erro",
+                    JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+        }
     }
 
     /**

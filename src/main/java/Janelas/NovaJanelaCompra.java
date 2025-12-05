@@ -5,6 +5,7 @@
 package Janelas;
 
 import DAO.LaboratorioDAO;
+import Model.CatalogoTableModel;
 import Model.ItensTableModel;
 import Objetos.Laboratorio;
 import java.awt.Color;
@@ -20,7 +21,8 @@ import javax.swing.JOptionPane;
 public class NovaJanelaCompra extends javax.swing.JFrame {
     private int notaFiscalCompra;
     private String cpfFuncionario;
-    ItensTableModel modelo = new ItensTableModel();
+    ItensTableModel modeloItem = new ItensTableModel();
+    CatalogoTableModel modeloCat = new CatalogoTableModel();
     /**
      * Creates new form NovaJanelaCompra
      */
@@ -32,8 +34,9 @@ public class NovaJanelaCompra extends javax.swing.JFrame {
         initComponents();
         this.notaFiscalCompra = notaGerada;
         this.cpfFuncionario = cpf;
-        jTTabelaNovaCompra.setModel(modelo);
-        modelo.recarregaTabela();
+        jTTabelaNovaCompra.setModel(modeloCat);
+        jTTabelaNovaCompra.setModel(modeloItem);
+        modeloCat.recarregaTabela();
         getContentPane().setBackground(Color.GRAY);
         carregarLaboratorios();
     }
@@ -55,10 +58,11 @@ public class NovaJanelaCompra extends javax.swing.JFrame {
         jBFinalizarNovaCompra = new javax.swing.JButton();
         jBCancelarNovaCompra = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
         jTDataNovaCompra = new javax.swing.JFormattedTextField();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        jScrollPane2 = new javax.swing.JScrollPane();
         jTTabelaNovaCompra = new javax.swing.JTable();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTTabelaItensCompra = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -89,9 +93,7 @@ public class NovaJanelaCompra extends javax.swing.JFrame {
         jBCancelarNovaCompra.setText("Cancelar");
 
         jLabel4.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
-        jLabel4.setText("Itens");
-
-        jTextField1.setText("jTextField1");
+        jLabel4.setText("Itens da compra");
 
         try {
             jTDataNovaCompra.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
@@ -115,67 +117,91 @@ public class NovaJanelaCompra extends javax.swing.JFrame {
                 jTTabelaNovaCompraMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(jTTabelaNovaCompra);
+        jScrollPane2.setViewportView(jTTabelaNovaCompra);
+
+        jTTabelaItensCompra.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jTTabelaItensCompra.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTTabelaItensCompraMouseClicked(evt);
+            }
+        });
+        jScrollPane3.setViewportView(jTTabelaItensCompra);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jBFinalizarNovaCompra)
-                        .addGap(18, 18, 18)
-                        .addComponent(jBCancelarNovaCompra))
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addGap(18, 18, 18)
-                        .addComponent(jTDataNovaCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jCItemNovaCompra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 9, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(37, 37, 37)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane3)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel4))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jCItemNovaCompra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(3, 3, 3)
-                        .addComponent(jBAdicionar)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1293, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jBFinalizarNovaCompra)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jBCancelarNovaCompra))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel3)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jTDataNovaCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(30, 30, 30)
+                                .addComponent(jBAdicionar)))))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel1)
-                            .addGap(35, 35, 35)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel2)
-                                .addComponent(jCItemNovaCompra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(18, 18, 18)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel3)
-                                .addComponent(jTDataNovaCompra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(46, 46, 46)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jBFinalizarNovaCompra)
-                                .addComponent(jBCancelarNovaCompra))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(100, 100, 100)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(jTDataNovaCompra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(46, 46, 46)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jBFinalizarNovaCompra)
+                            .addComponent(jBCancelarNovaCompra)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(39, 39, 39)
+                        .addComponent(jBAdicionar)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel4)
-                        .addGap(39, 39, 39)
-                        .addComponent(jBAdicionar))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 9, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel2)
+                        .addComponent(jCItemNovaCompra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(79, 79, 79))
         );
 
         pack();
@@ -200,7 +226,7 @@ public class NovaJanelaCompra extends javax.swing.JFrame {
         }
 
         // Validar se tem itens
-        if (modelo.getRowCount() == 0) {
+        if (modeloItem.getRowCount() == 0) {
             JOptionPane.showMessageDialog(this,
                     "Adicione pelo menos um item antes de finalizar!",
                     "Validação",
@@ -210,7 +236,7 @@ public class NovaJanelaCompra extends javax.swing.JFrame {
 
         int confirma = JOptionPane.showConfirmDialog(this,
                 "Finalizar a compra?\nLaboratório: " + labSelecionado.getNomeLab()
-                + "\nTotal de itens: " + modelo.getRowCount(),
+                + "\nTotal de itens: " + modeloItem.getRowCount(),
                 "Confirmar",
                 JOptionPane.YES_NO_OPTION);
 
@@ -232,19 +258,15 @@ private void carregarLaboratorios() {
         Laboratorio itemVazio = new Laboratorio();
         itemVazio.setCnpjLab("");
         itemVazio.setNomeLab("");
+        jCItemNovaCompra.addItem(itemVazio);
 
         // Cria o modelo do ComboBox
         DefaultComboBoxModel<Laboratorio> model = new DefaultComboBoxModel<>();
         model.addElement(itemVazio);
 
-        // Adiciona todos os laboratórios
-        for (Laboratorio lab : laboratorios) {
-            model.addElement(lab);
+       for (Laboratorio lab : laboratorios) {
+            jCItemNovaCompra.addItem(lab); // Mostra o NOME por causa do toString()
         }
-
-        // FAZ O CAST AQUI
-        jCItemNovaCompra.setModel((DefaultComboBoxModel) model);
-        jCItemNovaCompra.setSelectedIndex(0);
 
         System.out.println("Laboratórios carregados: " + laboratorios.size());
 
@@ -257,8 +279,12 @@ private void carregarLaboratorios() {
     }
 }
     private void jTTabelaNovaCompraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTTabelaNovaCompraMouseClicked
-
+        // TODO add your handling code here:
     }//GEN-LAST:event_jTTabelaNovaCompraMouseClicked
+
+    private void jTTabelaItensCompraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTTabelaItensCompraMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTTabelaItensCompraMouseClicked
 
     /**
      * @param args the command line arguments
@@ -304,10 +330,11 @@ private void carregarLaboratorios() {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JFormattedTextField jTDataNovaCompra;
+    private javax.swing.JTable jTTabelaItensCompra;
     private javax.swing.JTable jTTabelaNovaCompra;
-    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 
 }
