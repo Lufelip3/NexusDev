@@ -38,15 +38,20 @@ public class Menu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
         jBCadastrarMed = new javax.swing.JButton();
-        jBCompra = new javax.swing.JButton();
-        jBDrogaria = new javax.swing.JButton();
+        jBCadastrarFun = new javax.swing.JButton();
         jBLaboratorio = new javax.swing.JButton();
         jBVenda = new javax.swing.JButton();
-        jBCadastrarFun = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        jBCompra = new javax.swing.JButton();
+        jBDrogaria = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("TELA DE OPÇÕES");
 
         jBCadastrarMed.setText("Medicamento");
         jBCadastrarMed.addActionListener(new java.awt.event.ActionListener() {
@@ -55,17 +60,10 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
-        jBCompra.setText("Compra");
-        jBCompra.addActionListener(new java.awt.event.ActionListener() {
+        jBCadastrarFun.setText("Cadastro Funcionário");
+        jBCadastrarFun.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBCompraActionPerformed(evt);
-            }
-        });
-
-        jBDrogaria.setText("Drogaria");
-        jBDrogaria.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBDrogariaActionPerformed(evt);
+                jBCadastrarFunActionPerformed(evt);
             }
         });
 
@@ -83,57 +81,74 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
-        jBCadastrarFun.setText("Cadastro Funcionário");
-        jBCadastrarFun.addActionListener(new java.awt.event.ActionListener() {
+        jBCompra.setText("Compra");
+        jBCompra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBCadastrarFunActionPerformed(evt);
+                jBCompraActionPerformed(evt);
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("TELA DE OPÇÕES");
+        jBDrogaria.setText("Drogaria");
+        jBDrogaria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBDrogariaActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(17, 17, 17)
+                                .addComponent(jBLaboratorio)
+                                .addGap(36, 36, 36)
+                                .addComponent(jBVenda)
+                                .addGap(101, 101, 101)
+                                .addComponent(jBCompra)
+                                .addGap(32, 32, 32)
+                                .addComponent(jBDrogaria))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(26, 26, 26)
+                                .addComponent(jBCadastrarMed, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jBCadastrarFun)))
+                        .addGap(0, 31, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jLabel1)
+                .addGap(77, 77, 77)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jBCadastrarMed)
+                    .addComponent(jBCadastrarFun))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 121, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jBLaboratorio)
+                    .addComponent(jBVenda)
+                    .addComponent(jBCompra)
+                    .addComponent(jBDrogaria))
+                .addGap(15, 15, 15))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jBLaboratorio)
-                        .addGap(33, 33, 33)
-                        .addComponent(jBVenda)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
-                        .addComponent(jBCompra)
-                        .addGap(29, 29, 29)
-                        .addComponent(jBDrogaria))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(16, 16, 16)
-                        .addComponent(jBCadastrarMed, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jBCadastrarFun)
-                        .addGap(13, 13, 13)))
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(21, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(30, 30, 30)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jBCadastrarMed)
-                    .addComponent(jBCadastrarFun))
-                .addGap(38, 38, 38)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jBVenda)
-                    .addComponent(jBCompra)
-                    .addComponent(jBDrogaria)
-                    .addComponent(jBLaboratorio))
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -219,5 +234,6 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JButton jBLaboratorio;
     private javax.swing.JButton jBVenda;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
