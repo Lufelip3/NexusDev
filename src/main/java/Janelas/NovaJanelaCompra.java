@@ -4,27 +4,38 @@
  */
 package Janelas;
 
-import DAO.CompraDAO;
-import Janelas.SelecaoItensCompra;
+import DAO.LaboratorioDAO;
 import Model.ItensTableModel;
-import Objetos.Compra;
-import Objetos.Itens;
+import Objetos.Laboratorio;
+import java.awt.Color;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
-
 
 /**
  *
- * @author andrey.munhoz
+ * @author luis.fmleite
  */
-public class NovaCompraJanela extends javax.swing.JFrame {
-private int notaFiscal;
 
+public class NovaJanelaCompra extends javax.swing.JFrame {
+    private int notaFiscalCompra;
+    private String cpfFuncionario;
+    ItensTableModel modelo = new ItensTableModel();
     /**
-     * Creates new form SelecaoItens
+     * Creates new form NovaJanelaCompra
      */
-    public NovaCompraJanela() {
+    public NovaJanelaCompra() {
         initComponents();
+    }
+
+    public NovaJanelaCompra(int notaGerada, String cpf) {
+        initComponents();
+        this.notaFiscalCompra = notaGerada;
+        this.cpfFuncionario = cpf;
+        jTTabelaNovaCompra.setModel(modelo);
+        modelo.recarregaTabela();
+        getContentPane().setBackground(Color.GRAY);
+        carregarLaboratorios();
     }
 
     /**
@@ -39,20 +50,15 @@ private int notaFiscal;
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        jBAdicionar = new javax.swing.JButton();
         jCItemNovaCompra = new javax.swing.JComboBox<>();
         jBFinalizarNovaCompra = new javax.swing.JButton();
         jBCancelarNovaCompra = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
-        jScrollPane1 = new javax.swing.JScrollPane();
-<<<<<<< Updated upstream
-        jTTabelaNovaCompra = new javax.swing.JTable();
         jTDataNovaCompra = new javax.swing.JFormattedTextField();
-=======
-        jTTabelaItemCompra = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jBAdicionar = new javax.swing.JButton();
->>>>>>> Stashed changes
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTTabelaNovaCompra = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -63,6 +69,13 @@ private int notaFiscal;
         jLabel2.setText("Cliente:");
 
         jLabel3.setText("Data:");
+
+        jBAdicionar.setText("Adicionar");
+        jBAdicionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBAdicionarActionPerformed(evt);
+            }
+        });
 
         jCItemNovaCompra.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -80,7 +93,13 @@ private int notaFiscal;
 
         jTextField1.setText("jTextField1");
 
-        jTTabelaItemCompra.setModel(new javax.swing.table.DefaultTableModel(
+        try {
+            jTDataNovaCompra.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
+        jTTabelaNovaCompra.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -91,27 +110,12 @@ private int notaFiscal;
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jTTabelaItemCompra.addMouseListener(new java.awt.event.MouseAdapter() {
+        jTTabelaNovaCompra.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTTabelaItemCompraMouseClicked(evt);
+                jTTabelaNovaCompraMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(jTTabelaItemCompra);
-
-        jButton1.setText("jButton1");
-
-        jBAdicionar.setText("Adicionar");
-        jBAdicionar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBAdicionarActionPerformed(evt);
-            }
-        });
-
-        try {
-            jTDataNovaCompra.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
+        jScrollPane1.setViewportView(jTTabelaNovaCompra);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -124,7 +128,7 @@ private int notaFiscal;
                         .addComponent(jBFinalizarNovaCompra)
                         .addGap(18, 18, 18)
                         .addComponent(jBCancelarNovaCompra))
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addGap(18, 18, 18)
@@ -137,19 +141,14 @@ private int notaFiscal;
                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 9, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(34, 34, 34)
+                        .addGap(18, 18, 18)
                         .addComponent(jLabel4))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
+                        .addGap(3, 3, 3)
                         .addComponent(jBAdicionar)))
-                .addGap(14, 14, 14)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 348, Short.MAX_VALUE)
-                    .addComponent(jButton1)
-                    .addGap(0, 348, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -158,7 +157,6 @@ private int notaFiscal;
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
-                            .addContainerGap()
                             .addComponent(jLabel1)
                             .addGap(35, 35, 35)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -173,121 +171,143 @@ private int notaFiscal;
                                 .addComponent(jBFinalizarNovaCompra)
                                 .addComponent(jBCancelarNovaCompra))))
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jBAdicionar)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 152, Short.MAX_VALUE)
-                    .addComponent(jButton1)
-                    .addGap(0, 153, Short.MAX_VALUE)))
+                        .addComponent(jLabel4)
+                        .addGap(39, 39, 39)
+                        .addComponent(jBAdicionar))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 9, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTTabelaItemCompraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTTabelaItemCompraMouseClicked
-        
-    }//GEN-LAST:event_jTTabelaItemCompraMouseClicked
-public void adicionarItemNaTabela(Itens item) {
-    ItensTableModel model = (ItensTableModel) jTTabelaItemCompra.getModel();
-    model.addItem(item);
-}
-
-}
-    private void jBFinalizarNovaCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBFinalizarNovaCompraActionPerformed
-       
-    }//GEN-LAST:event_jBFinalizarNovaCompraActionPerformed
-
     private void jBAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAdicionarActionPerformed
-    // Se ainda não existe nota fiscal, cria agora
-    if (notaFiscal == null) {
+        // Se ainda não existe nota fiscal, cria agora
+    }//GEN-LAST:event_jBAdicionarActionPerformed
 
-        Compra compra = new Compra();
-        compra.setCpfCompra("TESTE");  // pegar do combo box depois
-        compra.setCnpjCompra("TESTE"); // pegar da drogaria depois
-        compra.setValorTotal(0.0);     // itens vão atualizar depois
+    private void jBFinalizarNovaCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBFinalizarNovaCompraActionPerformed
+// Validar se selecionou laboratório
+        Laboratorio labSelecionado = (Laboratorio) jCItemNovaCompra.getSelectedItem();
 
-        CompraDAO dao = new CompraDAO();
-        notaFiscal = dao.createAndReturnNota(compra);
-
-        if (notaFiscal <= 0) {
-            JOptionPane.showMessageDialog(this, "Erro ao gerar nota fiscal!");
+        if (labSelecionado == null
+                || labSelecionado.getCnpjLab() == null
+                || labSelecionado.getCnpjLab().isEmpty()) {
+            JOptionPane.showMessageDialog(this,
+                    "Selecione um laboratório antes de finalizar!",
+                    "Validação",
+                    JOptionPane.WARNING_MESSAGE);
             return;
         }
+
+        // Validar se tem itens
+        if (modelo.getRowCount() == 0) {
+            JOptionPane.showMessageDialog(this,
+                    "Adicione pelo menos um item antes de finalizar!",
+                    "Validação",
+                    JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        int confirma = JOptionPane.showConfirmDialog(this,
+                "Finalizar a compra?\nLaboratório: " + labSelecionado.getNomeLab()
+                + "\nTotal de itens: " + modelo.getRowCount(),
+                "Confirmar",
+                JOptionPane.YES_NO_OPTION);
+
+        if (confirma == JOptionPane.YES_OPTION) {
+            JOptionPane.showMessageDialog(this,
+                    "Compra finalizada com sucesso!",
+                    "Sucesso",
+                    JOptionPane.INFORMATION_MESSAGE);
+            this.dispose();
+        }
+    
+    }//GEN-LAST:event_jBFinalizarNovaCompraActionPerformed
+private void carregarLaboratorios() {
+    try {
+        LaboratorioDAO labDAO = new LaboratorioDAO();
+        List<Laboratorio> laboratorios = labDAO.read();
+
+        // Cria um item vazio para o início
+        Laboratorio itemVazio = new Laboratorio();
+        itemVazio.setCnpjLab("");
+        itemVazio.setNomeLab("");
+
+        // Cria o modelo do ComboBox
+        DefaultComboBoxModel<Laboratorio> model = new DefaultComboBoxModel<>();
+        model.addElement(itemVazio);
+
+        // Adiciona todos os laboratórios
+        for (Laboratorio lab : laboratorios) {
+            model.addElement(lab);
+        }
+
+        // FAZ O CAST AQUI
+        jCItemNovaCompra.setModel((DefaultComboBoxModel) model);
+        jCItemNovaCompra.setSelectedIndex(0);
+
+        System.out.println("Laboratórios carregados: " + laboratorios.size());
+
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(null,
+                "Erro ao carregar laboratórios:\n" + e.getMessage(),
+                "Erro",
+                JOptionPane.ERROR_MESSAGE);
+        e.printStackTrace();
     }
+}
+    private void jTTabelaNovaCompraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTTabelaNovaCompraMouseClicked
 
-    // Agora sim abre a janela enviando a nota fiscal
-    SelecaoItensCompra sic = new SelecaoItensCompra(this, notaFiscal);
-    sic.setVisible(true);
-
-    }//GEN-LAST:event_jBAdicionarActionPerformed
+    }//GEN-LAST:event_jTTabelaNovaCompraMouseClicked
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[])
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+    public static void main(String args[]) {
+    /* Set the Nimbus look and feel */
+    //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+    /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
+     */
+    try {
+        for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+            if ("Nimbus".equals(info.getName())) {
+                javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                break;
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(NovaCompraJanela.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(NovaCompraJanela.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(NovaCompraJanela.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(NovaCompraJanela.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new NovaCompraJanela().setVisible(true);
-            }
-        });
+    } catch (ClassNotFoundException ex) {
+        java.util.logging.Logger.getLogger(NovaJanelaCompra.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    } catch (InstantiationException ex) {
+        java.util.logging.Logger.getLogger(NovaJanelaCompra.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    } catch (IllegalAccessException ex) {
+        java.util.logging.Logger.getLogger(NovaJanelaCompra.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        java.util.logging.Logger.getLogger(NovaJanelaCompra.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
     }
+    //</editor-fold>
+
+    /* Create and display the form */
+    java.awt.EventQueue.invokeLater(new Runnable() {
+        public void run() {
+            new NovaJanelaCompra().setVisible(true);
+        }
+    });
+}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBAdicionar;
     private javax.swing.JButton jBCancelarNovaCompra;
     private javax.swing.JButton jBFinalizarNovaCompra;
-    private javax.swing.JButton jButton1;
     private javax.swing.JComboBox<String> jCItemNovaCompra;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
-<<<<<<< Updated upstream
     private javax.swing.JFormattedTextField jTDataNovaCompra;
     private javax.swing.JTable jTTabelaNovaCompra;
-=======
-    private javax.swing.JTextField jTDataNovaCompra;
-    private javax.swing.JTable jTTabelaItemCompra;
->>>>>>> Stashed changes
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
+
 }

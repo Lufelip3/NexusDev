@@ -98,7 +98,7 @@ public int createAndReturnNota(Compra c) {
 
         try {
             stmt = con.prepareStatement(
-                "UPDATE compra SET CNPJ_Drog = ? WHERE NotaFiscal_Entrada = ?"
+                "UPDATE compra SET CNPJ_Lab = ? WHERE NotaFiscal_Entrada = ?"
             );
 
             stmt.setString(1, cnpj);

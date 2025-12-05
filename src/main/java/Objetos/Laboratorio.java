@@ -16,7 +16,18 @@ public class Laboratorio {
     private String emailLab;
     private int numeroLab;
     private String cepLab;
+    
+    public Laboratorio(String cnpj, String nome) {
+        this.cnpjLab = cnpj;
+        this.nomeLab = nome;
+    }
 
+    public Laboratorio() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+    public String toString() {
+        return nomeLab;
+    }
     public String getNomeLab() {
         return nomeLab;
     }

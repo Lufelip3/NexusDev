@@ -9,35 +9,34 @@ import Objetos.Itens;
 import java.awt.Color;
 import javax.swing.JOptionPane;
 
-
 /**
  *
  * @author andrey.munhoz
  */
 public class SelecaoItensCompra extends javax.swing.JFrame {
+
     CatalogoTableModel modelo = new CatalogoTableModel();
-private NovaCompraJanela novaCompraJanela;
+    private NovaJanelaCompra novaCompraJanela;
 
     /**
      * Creates new form NovaVendaJanela
      */
     private int notaFiscal;
 
-    public SelecaoItensCompra(NovaCompraJanela janela, int notaFiscal) {
-    initComponents();
-    this.novaCompraJanela = janela;
-    this.notaFiscal = notaFiscal;
-    this.setLocationRelativeTo(null);
-    jTTabelaSelecao.setModel(modelo);
-    modelo.recarregaTabela();
-    getContentPane().setBackground(Color.GRAY);
-    jLValorTotalSelecaoItens.setText("Nota Fiscal: " + notaFiscal);
-}
+//    public SelecaoItensCompra(NovaCompraJanela janela, int notaFiscal) {
+//        initComponents();
+//        this.novaCompraJanela = janela;
+//        this.notaFiscal = notaFiscal;
+//        this.setLocationRelativeTo(null);
+//        jTTabelaSelecao.setModel(modelo);
+//        modelo.recarregaTabela();
+//        getContentPane().setBackground(Color.GRAY);
+//        jLValorTotalSelecaoItens.setText("Nota Fiscal: " + notaFiscal);
+//    }
 
-    
-     public SelecaoItensCompra() {
+    public SelecaoItensCompra() {
         initComponents();
-        
+
     }
 
     /**
@@ -148,41 +147,41 @@ private NovaCompraJanela novaCompraJanela;
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBAdicionarSelecaoItensActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAdicionarSelecaoItensActionPerformed
-int linhaSelecionada = jTTabelaSelecao.getSelectedRow();
-    
-    if (linhaSelecionada == -1) {
-        JOptionPane.showMessageDialog(this, "Selecione um item da lista!");
-        return;
-    }
-    
-    if (jTQuantidadeSelecaoItens.getText().trim().isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Informe a quantidade!");
-        return;
-    }
+        int linhaSelecionada = jTTabelaSelecao.getSelectedRow();
 
-    int quantidade = Integer.parseInt(jTQuantidadeSelecaoItens.getText());
+        if (linhaSelecionada == -1) {
+            JOptionPane.showMessageDialog(this, "Selecione um item da lista!");
+            return;
+        }
 
-    // PEGANDO OS DADOS DA TABELA
-    int codMed = (int) jTTabelaSelecao.getValueAt(linhaSelecionada, 0);
-    String dataVal = String.valueOf(jTTabelaSelecao.getValueAt(linhaSelecionada, 3));
-    double valor = Double.parseDouble(String.valueOf(jTTabelaSelecao.getValueAt(linhaSelecionada, 2)));
+        if (jTQuantidadeSelecaoItens.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Informe a quantidade!");
+            return;
+        }
 
-    // Criando objeto Itens corretamente
-    Itens item = new Itens();
-    item.setCodMedItem(codMed);
-    item.setQuantidadeItem(quantidade);
-    item.setValorItem(valor);
-    item.setDataValItem(dataVal);
+        int quantidade = Integer.parseInt(jTQuantidadeSelecaoItens.getText());
 
-    // informações adicionais
-    item.setNotaFiscalCompraItem(notaFiscal); // vindo do construtor
-    item.setDataVendaItem(null);              // compra não tem dataVenda
-    item.setCodCatMedItem(0);                 // se não existir na tabela, set 0
+        // PEGANDO OS DADOS DA TABELA
+        int codMed = (int) jTTabelaSelecao.getValueAt(linhaSelecionada, 0);
+        String dataVal = String.valueOf(jTTabelaSelecao.getValueAt(linhaSelecionada, 3));
+        double valor = Double.parseDouble(String.valueOf(jTTabelaSelecao.getValueAt(linhaSelecionada, 2)));
 
-    // Envia para a NovaCompraJanela
-    novaCompraJanela.adicionarItemNaCompra(item);
+        // Criando objeto Itens corretamente
+        Itens item = new Itens();
+        item.setCodMedItem(codMed);
+        item.setQuantidadeItem(quantidade);
+        item.setValorItem(valor);
+        item.setDataValItem(dataVal);
 
-    this.dispose();
+        // informações adicionais
+        item.setNotaFiscalCompraItem(notaFiscal); // vindo do construtor
+        item.setDataVendaItem(null);              // compra não tem dataVenda
+        item.setCodCatMedItem(0);                 // se não existir na tabela, set 0
+
+        // Envia para a NovaCompraJanela
+//        novaCompraJanela.adicionarItemNaCompra(item);
+
+        this.dispose();
     }//GEN-LAST:event_jBAdicionarSelecaoItensActionPerformed
 
     /**
