@@ -8,6 +8,7 @@ import DAO.FuncionarioDAO;
 import Objetos.Funcionario;
 import java.awt.Color;
 import javax.swing.JOptionPane;
+import Objetos.FuncionarioLogado;
 
 /**
  *
@@ -21,7 +22,9 @@ public class TelaLoginFuncionario extends javax.swing.JFrame {
     public TelaLoginFuncionario() {
         initComponents();
         getContentPane().setBackground(Color.GRAY);
+        
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -151,6 +154,9 @@ public class TelaLoginFuncionario extends javax.swing.JFrame {
             "Login realizado com sucesso!\n\nBem-vindo(a), " + user.getNome_Fun() + "!",
             "Login Confirmado",
             JOptionPane.INFORMATION_MESSAGE);
+        
+        // SALVA O FUNCIONÁRIO LOGADO NA CLASSE ESTÁTICA (ADICIONE ESTA LINHA)
+        FuncionarioLogado.setFuncionario(user);
         
         // PASSA A FUNÇÃO E O NOME DO USUÁRIO PARA O MENU
         Menu m = new Menu(user.getFuncao(), user.getNome_Fun());

@@ -8,6 +8,7 @@ import DAO.DrogariaDAO;
 import Model.DrogariaTableModel;
 import Objetos.DrogariaObjeto;
 import java.awt.Color;
+import Objetos.FuncionarioLogado;
 
 /**
  *
@@ -241,7 +242,7 @@ public class Drogaria extends javax.swing.JFrame {
     }//GEN-LAST:event_jBCadastrarDrogariaActionPerformed
 
     private void jBVoltarDrogariaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBVoltarDrogariaActionPerformed
-        Menu m = new Menu();
+         Menu m = new Menu(FuncionarioLogado.getFuncao(), FuncionarioLogado.getNome());
         m.setVisible(true);
         dispose();
     }//GEN-LAST:event_jBVoltarDrogariaActionPerformed

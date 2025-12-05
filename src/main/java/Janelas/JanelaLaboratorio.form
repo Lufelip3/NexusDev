@@ -66,7 +66,6 @@
                           <Component id="jTNomeLaboratorio" min="-2" pref="729" max="-2" attributes="0"/>
                           <Component id="jTCNPJLaboratorio" alignment="1" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
                   <Component id="jScrollPane1" alignment="0" min="-2" pref="767" max="-2" attributes="0"/>
               </Group>

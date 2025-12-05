@@ -8,6 +8,7 @@ import DAO.MedicamentoDAO;
 import Model.MedicamentoTableModel;
 import Objetos.Medicamento;
 import java.awt.Color;
+import Objetos.FuncionarioLogado;
 
 /**
  *
@@ -286,7 +287,7 @@ public class CadastroMedicamento extends javax.swing.JFrame {
     }//GEN-LAST:event_jTNomeMedicamentoActionPerformed
 
     private void jBVoltarCadastroMedicamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBVoltarCadastroMedicamentoActionPerformed
-        Menu m = new Menu();
+        Menu m = new Menu(FuncionarioLogado.getFuncao(), FuncionarioLogado.getNome());
         m.setVisible(true);
         dispose();
     }//GEN-LAST:event_jBVoltarCadastroMedicamentoActionPerformed

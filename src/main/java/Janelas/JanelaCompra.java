@@ -8,6 +8,7 @@ import DAO.CompraDAO;
 import Objetos.Compra;
 import java.awt.Color;
 import javax.swing.JOptionPane;
+import Objetos.FuncionarioLogado;
 
 /**
  *
@@ -150,7 +151,7 @@ public class JanelaCompra extends javax.swing.JFrame {
     }//GEN-LAST:event_jBCadastrarCompraActionPerformed
 
     private void jBVoltarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBVoltarCompraActionPerformed
-        Menu m = new Menu();
+        Menu m = new Menu(FuncionarioLogado.getFuncao(), FuncionarioLogado.getNome());
         m.setVisible(true);
         dispose();
     }//GEN-LAST:event_jBVoltarCompraActionPerformed

@@ -7,6 +7,7 @@ package Janelas;
 import DAO.CatalogoDAO;
 import Objetos.CatalogoMedicamento;
 import java.awt.Color;
+import Objetos.FuncionarioLogado;
 
 /**
  *
@@ -166,7 +167,7 @@ public class CatalogoMedicamentoJanela extends javax.swing.JFrame {
     }//GEN-LAST:event_jBCadastrarCatMedActionPerformed
 
     private void jBVoltarCatalogoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBVoltarCatalogoActionPerformed
-        Menu m = new Menu();
+        Menu m = new Menu(FuncionarioLogado.getFuncao(), FuncionarioLogado.getNome());
         m.setVisible(true);
         dispose();
     }//GEN-LAST:event_jBVoltarCatalogoActionPerformed

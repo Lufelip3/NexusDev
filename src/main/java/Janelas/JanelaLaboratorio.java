@@ -8,6 +8,7 @@ import DAO.LaboratorioDAO;
 import Model.LaboratorioTableModel;
 import Objetos.Laboratorio;
 import java.awt.Color;
+import Objetos.FuncionarioLogado;
 
 /**
  *
@@ -254,7 +255,7 @@ public class JanelaLaboratorio extends javax.swing.JFrame {
     }//GEN-LAST:event_jBCadastrarLaboratorioActionPerformed
 
     private void jBVoltarLaboratorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBVoltarLaboratorioActionPerformed
-        Menu m = new Menu();
+        Menu m = new Menu(FuncionarioLogado.getFuncao(), FuncionarioLogado.getNome());
         m.setVisible(true);
         dispose();
     }//GEN-LAST:event_jBVoltarLaboratorioActionPerformed

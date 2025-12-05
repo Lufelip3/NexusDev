@@ -7,6 +7,7 @@ package Janelas;
 import DAO.VendaDAO;
 import Objetos.Venda;
 import java.awt.Color;
+import Objetos.FuncionarioLogado;
 
 /**
  *
@@ -161,7 +162,7 @@ public class VendaJanela extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBVoltarActionPerformed
-        Menu m = new Menu();
+        Menu m = new Menu(FuncionarioLogado.getFuncao(), FuncionarioLogado.getNome());
         m.setVisible(true);
         dispose();
     }//GEN-LAST:event_jBVoltarActionPerformed

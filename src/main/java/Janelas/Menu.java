@@ -4,6 +4,7 @@
  */
 package Janelas;
 import Objetos.Funcionario;
+import Objetos.FuncionarioLogado;
 import java.awt.Color;
 /**
  *
@@ -19,12 +20,12 @@ public class Menu extends javax.swing.JFrame {
      */
     public Menu() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
     
     // CONSTRUTOR QUE RECEBE O OBJETO FUNCIONARIO COMPLETO
     public Menu(Funcionario f) {
         initComponents();
-        this.setLocationRelativeTo(null);
         getContentPane().setBackground(Color.GRAY);
         this.user = f;
         this.funcaoUsuario = f.getFuncao();
@@ -182,7 +183,8 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_jBCadastrarMedActionPerformed
 
     private void jBCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCompraActionPerformed
-        JanelaCompra commed = new JanelaCompra(user.getCpf());
+        // USA O CPF DO FUNCIONÁRIO LOGADO
+        JanelaCompra commed = new JanelaCompra(FuncionarioLogado.getCpf());
         commed.setVisible(true);
         dispose();
     }//GEN-LAST:event_jBCompraActionPerformed
