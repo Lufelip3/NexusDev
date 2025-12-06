@@ -5,8 +5,14 @@
 package Janelas;
 
 import DAO.CompraDAO;
+import DAO.LaboratorioDAO;
 import Objetos.Compra;
+import Objetos.Laboratorio;
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
@@ -14,26 +20,61 @@ import javax.swing.JOptionPane;
  * @author andrey.munhoz
  */
 public class JanelaCompra extends javax.swing.JFrame {
-    
-        private String cpf;
 
+    private String cpf;
+     private List<Laboratorio> laboratorios = new ArrayList<>();
+     private String cnpj;
 
-    
     /**
      * Creates new form Compra2
      */
     public JanelaCompra() {
         initComponents();
-        
+
     }
+
     public JanelaCompra(String cpf) {
         initComponents();
         this.setLocationRelativeTo(null);
         getContentPane().setBackground(Color.GRAY);
-        
+
         this.cpf = cpf;
+        carregarLaboratorios();
+        jBCadastrarCompra.setEnabled(false);
+        
+        
+        jCItemNovaCompra.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Código que executa quando selecionar algo
+                cnpj = laboratorios.get(jCItemNovaCompra.getSelectedIndex()).getCnpjLab();
+                System.out.println(laboratorios.get(jCItemNovaCompra.getSelectedIndex()).getCnpjLab());
+                jBCadastrarCompra.setEnabled(true);
+            }
+        });
     }
 
+    
+    private void carregarLaboratorios() {
+        try {
+            LaboratorioDAO labDAO = new LaboratorioDAO();
+
+            laboratorios = labDAO.read();
+            System.out.println(laboratorios.size());
+            jCItemNovaCompra.removeAllItems();
+
+            for (Laboratorio lab : laboratorios) {
+                jCItemNovaCompra.addItem(lab.getNomeLab());
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,
+                    "Erro ao carregar laboratórios:\n" + e.getMessage(),
+                    "Erro",
+                    JOptionPane.ERROR_MESSAGE);
+            //   e.printStackTrace();
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -50,6 +91,7 @@ public class JanelaCompra extends javax.swing.JFrame {
         jBVoltarCompra = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTTabelaMed = new javax.swing.JTable();
+        jCItemNovaCompra = new javax.swing.JComboBox<>();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -102,16 +144,12 @@ public class JanelaCompra extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(jTTabelaMed);
 
+        jCItemNovaCompra.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jBCadastrarCompra)
-                .addGap(18, 18, 18)
-                .addComponent(jBVoltarCompra)
-                .addGap(48, 48, 48))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -121,6 +159,14 @@ public class JanelaCompra extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 714, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jCItemNovaCompra, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jBCadastrarCompra, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jBVoltarCompra)
+                .addGap(48, 48, 48))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -129,18 +175,22 @@ public class JanelaCompra extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addComponent(jCItemNovaCompra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBCadastrarCompra)
                     .addComponent(jBVoltarCompra))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(38, 38, 38))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBCadastrarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCadastrarCompraActionPerformed
-  
+        
+        
+        iniciarCompra();
     }//GEN-LAST:event_jBCadastrarCompraActionPerformed
 
     private void jBVoltarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBVoltarCompraActionPerformed
@@ -150,56 +200,52 @@ public class JanelaCompra extends javax.swing.JFrame {
     }//GEN-LAST:event_jBVoltarCompraActionPerformed
 
     private void jTTabelaMedMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTTabelaMedMouseClicked
-        
+
     }//GEN-LAST:event_jTTabelaMedMouseClicked
-private void iniciarCompra() {
-    // Validação: garante que há um funcionário logado
-    if (cpf == null || cpf.trim().isEmpty()) {
-        JOptionPane.showMessageDialog(this,
-            "Erro: Nenhum funcionário identificado no sistema!\n" +
-            "Por favor, faça login novamente.",
-            "Erro de Autenticação",
-            JOptionPane.ERROR_MESSAGE);
-        
-        //redirecionar para tela de login
-        new TelaLoginFuncionario().setVisible(true);
-        this.dispose();
-        return;
-    }
-    
-    
-    try {
-        Compra compra = new Compra();
-        compra.setValorTotal(0.0);
-        compra.setCpfCompra(cpf); // CPF do funcionário logado
-        compra.setCnpjCompra(null); // será definido ao selecionar a drogaria
-        
-        CompraDAO compraDAO = new CompraDAO();
-        int notaGerada = compraDAO.createAndReturnNota(compra);
-        
-        
-        System.out.println("Compra iniciada - Nota: " + notaGerada + 
-                         ", Funcionário CPF: " + cpf);
-        
-        JOptionPane.showMessageDialog(this,
-            "Compra iniciada com sucesso!\nNota Fiscal: " + notaGerada,
-            "Sucesso",
-            JOptionPane.INFORMATION_MESSAGE);
-        
-        // Abre a tela de nova compra
-        NovaJanelaCompra janela = new NovaJanelaCompra(notaGerada, cpf);
-        janela.setVisible(true);
-        this.dispose();
-        
-    } 
-        
-     catch (Exception e) {
-        JOptionPane.showMessageDialog(this,
-            "Erro inesperado ao iniciar compra:\n" + e.getMessage(),
-            "Erro",
-            JOptionPane.ERROR_MESSAGE);
-        e.printStackTrace();
-    }
+    private void iniciarCompra() {
+        // Validação: garante que há um funcionário logado
+        if (cpf == null || cpf.trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this,
+                    "Erro: Nenhum funcionário identificado no sistema!\n"
+                    + "Por favor, faça login novamente.",
+                    "Erro de Autenticação",
+                    JOptionPane.ERROR_MESSAGE);
+
+            //redirecionar para tela de login
+            new TelaLoginFuncionario().setVisible(true);
+            this.dispose();
+            return;
+        }
+
+        try {
+            Compra compra = new Compra();
+            compra.setValorTotal(0.0);
+            compra.setCpfCompra(cpf); // CPF do funcionário logado
+            compra.setCnpjCompra(null); // será definido ao selecionar a drogaria
+
+            CompraDAO compraDAO = new CompraDAO();
+            int notaGerada = compraDAO.createAndReturnNota(compra);
+
+            System.out.println("Compra iniciada - Nota: " + notaGerada
+                    + ", Funcionário CPF: " + cpf);
+
+            JOptionPane.showMessageDialog(this,
+                    "Compra iniciada com sucesso!\nNota Fiscal: " + notaGerada,
+                    "Sucesso",
+                    JOptionPane.INFORMATION_MESSAGE);
+
+            // Abre a tela de nova compra
+            NovaJanelaCompra janela = new NovaJanelaCompra(notaGerada, cpf, cnpj);
+            janela.setVisible(true);
+            this.dispose();
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this,
+                    "Erro inesperado ao iniciar compra:\n" + e.getMessage(),
+                    "Erro",
+                    JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -243,6 +289,7 @@ private void iniciarCompra() {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBCadastrarCompra;
     private javax.swing.JButton jBVoltarCompra;
+    private javax.swing.JComboBox<String> jCItemNovaCompra;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
