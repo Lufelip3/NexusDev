@@ -55,6 +55,7 @@ public class TelaLoginFuncionario extends javax.swing.JFrame {
         jLabel3.setText("Senha:");
 
         jTNomeLogin.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        jTNomeLogin.setText("12345");
         jTNomeLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTNomeLoginActionPerformed(evt);

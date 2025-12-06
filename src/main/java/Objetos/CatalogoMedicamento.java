@@ -16,6 +16,10 @@ public class CatalogoMedicamento {
     private String descCatalogo;
     private Double valorCatalogo;
     private String cnpjLabCat;
+    private int quantidade;
+    
+    
+            
 
     /**
      * @return the codCatMed
@@ -85,6 +89,20 @@ public class CatalogoMedicamento {
      */
     public void setCnpjLabCat(String cnpjLabCat) {
         this.cnpjLabCat = cnpjLabCat;
+    }
+
+    /**
+     * @return the quantidade
+     */
+    public int getQuantidade() {
+        return quantidade;
+    }
+
+    /**
+     * @param quantidade the quantidade to set
+     */
+    public void setQuantidade(int quantidade) {
+        this.quantidade = quantidade;
     }
 
 }

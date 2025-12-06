@@ -45,6 +45,34 @@ public class CatalogoDAO {
         }
         return catalogoMedicamento;
     }
+    
+    
+    public List<CatalogoMedicamento> readCNPJ(String cnpj) {
+        Connection con = Conexao.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        List<CatalogoMedicamento> catalogoMedicamento = new ArrayList<>();
+        try {
+            stmt = con.prepareStatement("SELECT * FROM catalogo_medicamento WHERE CNPJ_Lab = ?");
+            stmt.setString(1, cnpj);
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                CatalogoMedicamento cm = new CatalogoMedicamento();
+                cm.setNomeCatalogo(rs.getString("Nome_CatMed"));
+                cm.setCodCatMed(rs.getInt("Cod_CatMed"));
+                cm.setDescCatalogo(rs.getString("Desc_CatMed"));
+                cm.setValorCatalogo(rs.getDouble("Valor_CatMed"));
+                cm.setCnpjLabCat(rs.getString("CNPJ_Lab"));
+                catalogoMedicamento.add(cm);
+            }
+        } catch (SQLException e) {
+            JOptionPane.showConfirmDialog(null, "Falha ao obter dados: " + e);
+        } finally {
+            Conexao.closeConnection(con, stmt, rs);
+        }
+        return catalogoMedicamento;
+    }
 
     public void create(CatalogoMedicamento cm) {
         Connection con = Conexao.getConnection();

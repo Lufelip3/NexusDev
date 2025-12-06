@@ -100,10 +100,14 @@ public class LaboratorioTableModel extends AbstractTableModel{
         }
         this.fireTableDataChanged();
     }
+    
+   
 
     public void recarregaTabela() {
         this.dados.clear();
         lerDados();
         this.fireTableDataChanged();
     }
+    
+  
 }

@@ -19,6 +19,7 @@ import javax.swing.JOptionPane;
  * @author andrey.munhoz
  */
 public class LaboratorioDAO {
+
     public List<Laboratorio> read() {
         Connection con = Conexao.getConnection();
         PreparedStatement stmt = null;
@@ -46,33 +47,35 @@ public class LaboratorioDAO {
         }
         return laboratorio;
     }
-public Laboratorio findByCnpj(String cnpj) {
-    Connection con = Conexao.getConnection();
-    PreparedStatement stmt = null;
-    ResultSet rs = null;
-    Laboratorio lab = null;
-    
-    try {
-        stmt = con.prepareStatement("SELECT * FROM laboratorio WHERE CNPJ_Lab = ?");
-        stmt.setString(1, cnpj);
-        rs = stmt.executeQuery();
-        
-        if (rs.next()) {
-            lab = new Laboratorio();
-            lab.setCnpjLab(rs.getString("CNPJ_Lab"));
-            lab.setNomeLab(rs.getString("Nome_Lab"));
-            lab.setTelefoneLab(rs.getString("Telefone_Lab"));
-            lab.setCepLab(rs.getString("Cep_Lab"));
-            lab.setNumeroLab(rs.getInt("Num_Lab"));
-            lab.setEmailLab(rs.getString("Email_Lab"));
+
+    public Laboratorio findByCnpj(String cnpj) {
+        Connection con = Conexao.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        Laboratorio lab = null;
+
+        try {
+            stmt = con.prepareStatement("SELECT * FROM laboratorio WHERE CNPJ_Lab = ?");
+            stmt.setString(1, cnpj);
+            rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                lab = new Laboratorio();
+                lab.setCnpjLab(rs.getString("CNPJ_Lab"));
+                lab.setNomeLab(rs.getString("Nome_Lab"));
+                lab.setTelefoneLab(rs.getString("Telefone_Lab"));
+                lab.setCepLab(rs.getString("Cep_Lab"));
+                lab.setNumeroLab(rs.getInt("Num_Lab"));
+                lab.setEmailLab(rs.getString("Email_Lab"));
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Falha ao buscar laboratório: " + e);
+        } finally {
+            Conexao.closeConnection(con, stmt, rs);
         }
-    } catch (SQLException e) {
-        JOptionPane.showMessageDialog(null, "Falha ao buscar laboratório: " + e);
-    } finally {
-        Conexao.closeConnection(con, stmt, rs);
+        return lab;
     }
-    return lab;
-}
+
     public void create(Laboratorio l) {
         Connection con = Conexao.getConnection();
         PreparedStatement stmt = null;

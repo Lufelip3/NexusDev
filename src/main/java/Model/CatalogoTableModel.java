@@ -90,10 +90,28 @@ public class CatalogoTableModel extends AbstractTableModel{
         }
         this.fireTableDataChanged();
     }
+    
+     private void lerDadosCNPJ(String cnpj) {
+        CatalogoDAO cdao = new CatalogoDAO();
+
+        for (CatalogoMedicamento cd : cdao.readCNPJ(cnpj)) {
+            this.addLinha(cd);
+
+        }
+        this.fireTableDataChanged();
+    }
 
     public void recarregaTabela() {
         this.dados.clear();
         lerDados();
         this.fireTableDataChanged();
     }
+    
+     public void recarregaTabelaCNPJ(String cnpj) {
+        this.dados.clear();
+        lerDadosCNPJ(cnpj);
+        this.fireTableDataChanged();
+    }
+    
+    
 }
