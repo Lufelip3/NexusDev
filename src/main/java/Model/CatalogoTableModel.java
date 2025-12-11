@@ -14,9 +14,10 @@ import javax.swing.table.AbstractTableModel;
  *
  * @author andrey.munhoz
  */
-public class CatalogoTableModel extends AbstractTableModel{
+public class CatalogoTableModel extends AbstractTableModel {
+    
     private List<CatalogoMedicamento> dados = new ArrayList<>();
-    private String[] colunas = {"Nome", "Código", "Descrição","Valor"};
+    private String[] colunas = {"Nome", "Código", "Descrição", "Valor", "CNPJ Lab", "Data Validade", "Quantidade"};
 
     @Override
     public String getColumnName(int column) {
@@ -44,6 +45,12 @@ public class CatalogoTableModel extends AbstractTableModel{
                 return dados.get(linha).getDescCatalogo();
             case 3:
                 return dados.get(linha).getValorCatalogo();
+            case 4:
+                return dados.get(linha).getCnpjLabCat();
+            case 5:
+                return dados.get(linha).getDataValItemCat();
+            case 6:
+                return dados.get(linha).getQuantidade();
         }
         return null;
     }
@@ -52,16 +59,25 @@ public class CatalogoTableModel extends AbstractTableModel{
     public void setValueAt(Object valor, int linha, int coluna) {
         switch (coluna) {
             case 0:
-                dados.get(linha).setNomeCatalogo((String)valor);
+                dados.get(linha).setNomeCatalogo((String) valor);
                 break;
             case 1:
-                dados.get(linha).setCodCatMed(Integer.parseInt((String)valor));
+                dados.get(linha).setCodCatMed(Integer.parseInt((String) valor));
                 break;
             case 2:
-                dados.get(linha).setDescCatalogo((String)valor);
+                dados.get(linha).setDescCatalogo((String) valor);
                 break;
             case 3:
-                dados.get(linha).setValorCatalogo(Double.valueOf((String)valor));
+                dados.get(linha).setValorCatalogo(Double.valueOf((String) valor));
+                break;
+            case 4:
+                dados.get(linha).setCnpjLabCat((String) valor);
+                break;
+            case 5:
+                dados.get(linha).setDataValItemCat((String) valor);
+                break;
+            case 6:
+                dados.get(linha).setQuantidade(Integer.parseInt((String) valor));
                 break;
         }
         this.fireTableRowsUpdated(linha, linha);
@@ -83,20 +99,16 @@ public class CatalogoTableModel extends AbstractTableModel{
 
     private void lerDados() {
         CatalogoDAO cdao = new CatalogoDAO();
-
         for (CatalogoMedicamento cd : cdao.read()) {
             this.addLinha(cd);
-
         }
         this.fireTableDataChanged();
     }
-    
-     private void lerDadosCNPJ(String cnpj) {
-        CatalogoDAO cdao = new CatalogoDAO();
 
+    private void lerDadosCNPJ(String cnpj) {
+        CatalogoDAO cdao = new CatalogoDAO();
         for (CatalogoMedicamento cd : cdao.readCNPJ(cnpj)) {
             this.addLinha(cd);
-
         }
         this.fireTableDataChanged();
     }
@@ -106,12 +118,10 @@ public class CatalogoTableModel extends AbstractTableModel{
         lerDados();
         this.fireTableDataChanged();
     }
-    
-     public void recarregaTabelaCNPJ(String cnpj) {
+
+    public void recarregaTabelaCNPJ(String cnpj) {
         this.dados.clear();
         lerDadosCNPJ(cnpj);
         this.fireTableDataChanged();
     }
-    
-    
 }

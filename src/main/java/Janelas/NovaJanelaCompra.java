@@ -4,6 +4,8 @@
  */
 package Janelas;
 
+import DAO.CompraDAO;
+import DAO.ItensDAO;
 import DAO.LaboratorioDAO;
 import Model.CatalogoTableModel;
 import Model.ItensTableModel;
@@ -26,6 +28,7 @@ public class NovaJanelaCompra extends javax.swing.JFrame {
 
     private int notaFiscalCompra;
     private String cpfFuncionario;
+    private double valorTotalCompra = 0.0;
     ItensTableModel modeloItem = new ItensTableModel();
     CatalogoTableModel modeloCat = new CatalogoTableModel();
 
@@ -40,14 +43,33 @@ public class NovaJanelaCompra extends javax.swing.JFrame {
         initComponents();
         this.notaFiscalCompra = notaGerada;
         this.cpfFuncionario = cpf;
-         modeloCat.recarregaTabelaCNPJ(cnpj);
+        modeloCat.recarregaTabelaCNPJ(cnpj);
         jTTabelaNovaCompra.setModel(modeloCat);
         jTTabelaItensCompra.setModel(modeloItem);
-       
-        
-       
+        atualizarValorTotal();
+
         getContentPane().setBackground(Color.GRAY);
 
+    }
+// Método para calcular o valor total da compra
+
+    private double calcularValorTotal() {
+        double total = 0.0;
+
+        // Percorre todos os itens da tabela
+        for (int i = 0; i < modeloItem.getRowCount(); i++) {
+            Itens item = modeloItem.pegaDadosLinha(i);
+            double valorItem = item.getValorItem() * item.getQuantidadeItem();
+            total += valorItem;
+        }
+
+        return total;
+    }
+
+    // Método para atualizar a exibição do valor total
+    private void atualizarValorTotal() {
+        valorTotalCompra = calcularValorTotal();
+        jLabel5.setText(String.format("Itens da compra - Total: R$ %.2f", valorTotalCompra));
     }
 
     /**
@@ -70,6 +92,8 @@ public class NovaJanelaCompra extends javax.swing.JFrame {
         jTTabelaNovaCompra = new javax.swing.JTable();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTTabelaItensCompra = new javax.swing.JTable();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -94,6 +118,11 @@ public class NovaJanelaCompra extends javax.swing.JFrame {
         });
 
         jBCancelarNovaCompra.setText("Cancelar");
+        jBCancelarNovaCompra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBCancelarNovaCompraActionPerformed(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
         jLabel4.setText("Itens da compra");
@@ -140,6 +169,10 @@ public class NovaJanelaCompra extends javax.swing.JFrame {
         });
         jScrollPane3.setViewportView(jTTabelaItensCompra);
 
+        jLabel2.setText("Total:");
+
+        jLabel5.setText("Total:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -149,12 +182,13 @@ public class NovaJanelaCompra extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(37, 37, 37)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(115, 115, 115)
-                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 361, Short.MAX_VALUE))
+                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 561, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 852, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -172,6 +206,12 @@ public class NovaJanelaCompra extends javax.swing.JFrame {
                                 .addGap(30, 30, 30)
                                 .addComponent(jBAdicionar)))))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel5)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -190,13 +230,17 @@ public class NovaJanelaCompra extends javax.swing.JFrame {
                         .addComponent(jLabel1)
                         .addGap(39, 39, 39)
                         .addComponent(jBAdicionar)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel5))
+                .addGap(144, 144, 144)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(79, 79, 79))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 375, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addGap(20, 20, 20))
         );
 
         pack();
@@ -217,42 +261,111 @@ public class NovaJanelaCompra extends javax.swing.JFrame {
                     JOptionPane.WARNING_MESSAGE);
             return;
         }
-
+        if (jTDataNovaCompra.getText().replace("/", "").trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this,
+                    "Informe a data da compra!",
+                    "Validação",
+                    JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        atualizarValorTotal();
         int confirma = JOptionPane.showConfirmDialog(this,
-                "Finalizar a compra?\nLaboratório: \nTotal de itens: " + modeloItem.getRowCount(),
-                "Confirmar",
+                String.format("Finalizar a compra?\n"
+                        + "Nota Fiscal: %d\n"
+                        + "Total de itens: %d\n"
+                        + "Valor Total: R$ %.2f\n"
+                        + "Data: %s",
+                        notaFiscalCompra,
+                        modeloItem.getRowCount(),
+                        valorTotalCompra,
+                        jTDataNovaCompra.getText()),
+                "Confirmar Compra",
                 JOptionPane.YES_NO_OPTION);
 
         if (confirma == JOptionPane.YES_OPTION) {
-            JOptionPane.showMessageDialog(this,
-                    "Compra finalizada com sucesso!",
-                    "Sucesso",
-                    JOptionPane.INFORMATION_MESSAGE);
-            this.dispose();
+            try {
+                CompraDAO compraDAO = new CompraDAO();
+                ItensDAO itensDAO = new ItensDAO();
+
+                // Atualiza o valor total da compra no banco
+                compraDAO.atualizarValorTotal(notaFiscalCompra, valorTotalCompra);
+
+                // Salvar todos os itens da compra
+                for (int i = 0; i < modeloItem.getRowCount(); i++) {
+                    Itens item = modeloItem.pegaDadosLinha(i);
+
+                    // Garante que o item tem a nota fiscal correta
+                    item.setNotaFiscalCompraItem(notaFiscalCompra);
+
+                    // Salva o item no banco
+                    itensDAO.create(item);
+                }
+
+                JOptionPane.showMessageDialog(this,
+                        String.format("Compra finalizada com sucesso!\n"
+                                + "Nota Fiscal: %d\n"
+                                + "Total de itens: %d\n"
+                                + "Valor Total: R$ %.2f",
+                                notaFiscalCompra,
+                                modeloItem.getRowCount(),
+                                valorTotalCompra),
+                        "Sucesso",
+                        JOptionPane.INFORMATION_MESSAGE);
+
+                this.dispose();
+                Menu m = new Menu();
+                m.setVisible(true);
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this,
+                        "Erro ao finalizar compra: " + e.getMessage(),
+                        "Erro",
+                        JOptionPane.ERROR_MESSAGE);
+                e.printStackTrace();
+            }
+
         }
 
     }//GEN-LAST:event_jBFinalizarNovaCompraActionPerformed
 
     private void jTTabelaNovaCompraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTTabelaNovaCompraMouseClicked
-     //    QUANDO SELECIONA ITEM NA TABELA DE MEDICAMNENTO, MOSTRA PARA INSERIR QUANTIDADE
-     // PRECISO PEGAR OS DADOS DO MEDICAMENTO QUE É UM ITEM DA COMPRA, 
-     // ADICIONAR NO ATRIBUTO DO ITEM A QUANTIDADE E ADICIONAR NO MODEL DA TABELA DE ITEM;
+        //    QUANDO SELECIONA ITEM NA TABELA DE MEDICAMNENTO, MOSTRA PARA INSERIR QUANTIDADE
+        // PRECISO PEGAR OS DADOS DO MEDICAMENTO QUE É UM ITEM DA COMPRA, 
+        // ADICIONAR NO ATRIBUTO DO ITEM A QUANTIDADE E ADICIONAR NO MODEL DA TABELA DE ITEM;
         if (jTTabelaNovaCompra.getSelectedRow() != -1) {
-             int QTD_Item = Integer.parseInt(JOptionPane.showInputDialog("Quantidade do Medicamento"));
-             Itens item = new Itens();
-             item.setDataValItem(modeloCat.pegaDadosLinha(jTTabelaNovaCompra.getSelectedRow()).getNomeCatalogo());
-            item.setQuantidadeItem(QTD_Item);           
+            int QTD_Item = Integer.parseInt(JOptionPane.showInputDialog("Quantidade do Medicamento"));
+            Itens item = new Itens();
+            item.setCodCatMedItem(modeloCat.pegaDadosLinha(jTTabelaNovaCompra.getSelectedRow()).getCodCatMed());
+            item.setDataValItem(modeloCat.pegaDadosLinha(jTTabelaNovaCompra.getSelectedRow()).getDataValItemCat());
+            item.setDataVendaItem(modeloCat.pegaDadosLinha(jTTabelaNovaCompra.getSelectedRow()).getDatacompraItemCat());
+            item.setQuantidadeItem(modeloCat.pegaDadosLinha(jTTabelaNovaCompra.getSelectedRow()).getQuantidade());
+            item.setValorItem(modeloCat.pegaDadosLinha(jTTabelaNovaCompra.getSelectedRow()).getValorCatalogo());
+
+            item.setQuantidadeItem(QTD_Item);
             modeloItem.addItem(item);
-            
-             
+
         }
-       
-       
+
+
     }//GEN-LAST:event_jTTabelaNovaCompraMouseClicked
 
     private void jTTabelaItensCompraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTTabelaItensCompraMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_jTTabelaItensCompraMouseClicked
+
+    private void jBCancelarNovaCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCancelarNovaCompraActionPerformed
+        int confirma = JOptionPane.showConfirmDialog(this,
+                "Deseja realmente cancelar esta compra?\nTodos os itens adicionados serão perdidos!",
+                "Confirmar Cancelamento",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.WARNING_MESSAGE);
+
+        if (confirma == JOptionPane.YES_OPTION) {
+            this.dispose();
+            Menu m = new Menu();
+            m.setVisible(true);
+        }
+    }//GEN-LAST:event_jBCancelarNovaCompraActionPerformed
 
     /**
      * @param args the command line arguments
@@ -294,8 +407,10 @@ public class NovaJanelaCompra extends javax.swing.JFrame {
     private javax.swing.JButton jBCancelarNovaCompra;
     private javax.swing.JButton jBFinalizarNovaCompra;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JFormattedTextField jTDataNovaCompra;

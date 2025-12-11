@@ -16,8 +16,7 @@ import javax.swing.table.AbstractTableModel;
  */
 public class ItensTableModel extends AbstractTableModel{
     private List<Itens> dados = new ArrayList<>();
-    private String[] colunas = {"Código", "Quantidade", "Valor", "Data de Validade", "Data da venda", "Nota fiscal", "Código do medicamento"};
-    
+    private String[] colunas = {"Código", "Quantidade", "Valor", "Data de Validade", "Nota fiscal", "Código do medicamento"};
     @Override
     public String getColumnName(int column) {
         return colunas[column];
@@ -45,10 +44,8 @@ public class ItensTableModel extends AbstractTableModel{
             case 3:
                 return dados.get(linha).getDataValItem();
             case 4:
-                return dados.get(linha).getDataVendaItem();
-            case 5:
                 return dados.get(linha).getNotaFiscalCompraItem();
-            case 6:
+            case 5:
                 return dados.get(linha).getCodMedItem();
         }
         return null;
@@ -70,12 +67,9 @@ public class ItensTableModel extends AbstractTableModel{
                 dados.get(linha).setDataValItem((String)valor);
                 break;
             case 4:
-                dados.get(linha).setDataVendaItem((String)valor);
-                break;
-            case 5:
                 dados.get(linha).setNotaFiscalCompraItem(Integer.parseInt((String)valor));
                 break;
-            case 6:
+            case 5:
                 dados.get(linha).setCodMedItem(Integer.parseInt((String)valor));
                 break;
         }

@@ -6,6 +6,7 @@ package Janelas;
 
 import DAO.CompraDAO;
 import DAO.LaboratorioDAO;
+import Model.CompraTableModel;
 import Objetos.Compra;
 import Objetos.Laboratorio;
 import java.awt.Color;
@@ -24,7 +25,7 @@ public class JanelaCompra extends javax.swing.JFrame {
     private String cpf;
      private List<Laboratorio> laboratorios = new ArrayList<>();
      private String cnpj;
-
+    CompraTableModel modelo= new CompraTableModel();
     /**
      * Creates new form Compra2
      */
@@ -41,6 +42,8 @@ public class JanelaCompra extends javax.swing.JFrame {
         this.cpf = cpf;
         carregarLaboratorios();
         jBCadastrarCompra.setEnabled(false);
+        jTTabelaMed.setModel(modelo);
+        modelo.recarregaTabela();
         
         
         jCItemNovaCompra.addActionListener(new ActionListener() {
@@ -188,9 +191,7 @@ public class JanelaCompra extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBCadastrarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCadastrarCompraActionPerformed
-        
-        
-        iniciarCompra();
+      iniciarCompra();
     }//GEN-LAST:event_jBCadastrarCompraActionPerformed
 
     private void jBVoltarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBVoltarCompraActionPerformed

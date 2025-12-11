@@ -17,7 +17,8 @@ public class CatalogoMedicamento {
     private Double valorCatalogo;
     private String cnpjLabCat;
     private int quantidade;
-    
+    private String dataValItemCat;
+    private String datacompraItemCat;
     
             
 
@@ -103,6 +104,34 @@ public class CatalogoMedicamento {
      */
     public void setQuantidade(int quantidade) {
         this.quantidade = quantidade;
+    }
+
+    /**
+     * @return the dataValItemCat
+     */
+    public String getDataValItemCat() {
+        return dataValItemCat;
+    }
+
+    /**
+     * @param dataValItemCat the dataValItemCat to set
+     */
+    public void setDataValItemCat(String dataValItemCat) {
+        this.dataValItemCat = dataValItemCat;
+    }
+
+    /**
+     * @return the datacompraItemCat
+     */
+    public String getDatacompraItemCat() {
+        return datacompraItemCat;
+    }
+
+    /**
+     * @param datacompraItemCat the datacompraItemCat to set
+     */
+    public void setDatacompraItemCat(String datacompraItemCat) {
+        this.datacompraItemCat = datacompraItemCat;
     }
 
 }

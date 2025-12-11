@@ -149,17 +149,17 @@ INSERT INTO laboratorio (CNPJ_Lab, Nome_Lab, Telefone_Lab, Cep_Lab, Num_Lab, Ema
 ('09.999.999/0001-09', 'Bayer', '(11)90000-0009', '06010-000', 9, 'bayer@br.com'),
 ('10.000.000/0001-10', 'Medley', '(11)90000-0010', '07010-000', 10, 'medley@farmaco.com');
 
-INSERT INTO catalogo_medicamento (Nome_CatMed, Desc_CatMed, Valor_CatMed, CNPJ_Lab) VALUES
-('Paracetamol', 'Analgésico e antipirético', 12.50, '01.111.111/0001-01'),
-('Ibuprofeno', 'Anti-inflamatório não esteroide', 18.90, '02.222.222/0001-02'),
-('Amoxicilina', 'Antibiótico de amplo espectro', 32.00, '03.333.333/0001-03'),
-('Loratadina', 'Antialérgico', 15.75, '04.444.444/0001-04'),
-('Omeprazol', 'Inibidor da bomba de prótons', 25.00, '05.555.555/0001-05'),
-('Dipirona', 'Analgésico e antitérmico', 10.00, '06.666.666/0001-06'),
-('Cetoprofeno', 'Anti-inflamatório', 19.50, '07.777.777/0001-07'),
-('Sinvastatina', 'Reduz colesterol', 28.40, '08.888.888/0001-08'),
-('Azitromicina', 'Antibiótico', 35.00, '09.999.999/0001-09'),
-('Losartana', 'Antihipertensivo', 22.90, '10.000.000/0001-10');
+INSERT INTO catalogo_medicamento (Nome_CatMed, Desc_CatMed, Valor_CatMed, CNPJ_Lab, datacompraItemCat, dataValItemCat, quantidade) VALUES
+('Paracetamol', 'Analgésico e antipirético', 12.50, '01.111.111/0001-01', '2024-01-15', '2026-01-15', 100),
+('Ibuprofeno', 'Anti-inflamatório não esteroide', 18.90, '02.222.222/0001-02', '2024-02-20', '2026-02-20', 150),
+('Amoxicilina', 'Antibiótico de amplo espectro', 32.00, '03.333.333/0001-03', '2024-03-10', '2025-03-10', 80),
+('Loratadina', 'Antialérgico', 15.75, '04.444.444/0001-04', '2024-01-25', '2026-01-25', 200),
+('Omeprazol', 'Inibidor da bomba de prótons', 25.00, '05.555.555/0001-05', '2024-04-05', '2026-04-05', 120),
+('Dipirona', 'Analgésico e antitérmico', 10.00, '06.666.666/0001-06', '2024-02-15', '2026-02-15', 250),
+('Cetoprofeno', 'Anti-inflamatório', 19.50, '07.777.777/0001-07', '2024-03-20', '2025-09-20', 90),
+('Sinvastatina', 'Reduz colesterol', 28.40, '08.888.888/0001-08', '2024-01-30', '2026-01-30', 110),
+('Azitromicina', 'Antibiótico', 35.00, '09.999.999/0001-09', '2024-04-10', '2025-04-10', 70),
+('Losartana', 'Antihipertensivo', 22.90, '10.000.000/0001-10', '2024-02-28', '2026-02-28', 180);
 
 INSERT INTO medicamento (Nome_Med, Desc_Med, DataVal_Med, Qtd_Med, Valor_Med, Cod_CatMed) VALUES
 ('Paracetamol 500mg', 'Comprimidos 500mg', '2026-05-20', 150, 12.50, 1),
