@@ -7,11 +7,13 @@ package Janelas;
 import DAO.CompraDAO;
 import DAO.ItensDAO;
 import DAO.LaboratorioDAO;
+import DAO.MedicamentoDAO;
 import Model.CatalogoTableModel;
 import Model.ItensTableModel;
 import Objetos.CatalogoMedicamento;
 import Objetos.Itens;
 import Objetos.Laboratorio;
+import Objetos.Medicamento;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -26,8 +28,8 @@ import javax.swing.JOptionPane;
  */
 public class NovaJanelaCompra extends javax.swing.JFrame {
 
+    private String cpf;
     private int notaFiscalCompra;
-    private String cpfFuncionario;
     private double valorTotalCompra = 0.0;
     ItensTableModel modeloItem = new ItensTableModel();
     CatalogoTableModel modeloCat = new CatalogoTableModel();
@@ -41,8 +43,8 @@ public class NovaJanelaCompra extends javax.swing.JFrame {
 
     public NovaJanelaCompra(int notaGerada, String cpf, String cnpj) {
         initComponents();
+        this.cpf = cpf;
         this.notaFiscalCompra = notaGerada;
-        this.cpfFuncionario = cpf;
         modeloCat.recarregaTabelaCNPJ(cnpj);
         jTTabelaNovaCompra.setModel(modeloCat);
         jTTabelaItensCompra.setModel(modeloItem);
@@ -286,6 +288,7 @@ public class NovaJanelaCompra extends javax.swing.JFrame {
             try {
                 CompraDAO compraDAO = new CompraDAO();
                 ItensDAO itensDAO = new ItensDAO();
+                MedicamentoDAO medDAO = new MedicamentoDAO();
 
                 // Atualiza o valor total da compra no banco
                 compraDAO.atualizarValorTotal(notaFiscalCompra, valorTotalCompra);
@@ -294,11 +297,33 @@ public class NovaJanelaCompra extends javax.swing.JFrame {
                 for (int i = 0; i < modeloItem.getRowCount(); i++) {
                     Itens item = modeloItem.pegaDadosLinha(i);
 
+                    // Pega o catálogo correspondente (para nome e descrição)
+                    CatalogoMedicamento cat = modeloCat.pegaDadosLinha(i);
+
+                    // Cria objeto Medicamento
+                    Medicamento med = new Medicamento();
+                    med.setCodCatMed(item.getCodCatMedItem());
+                    med.setNomeMed(cat.getNomeCatalogo());           
+                    med.setDescricaoMed(cat.getDescCatalogo());      
+                    med.setQuantidadeMed(item.getQuantidadeItem());  
+                    med.setValorMed(item.getValorItem());            
+                    med.setDataValidadeMed(item.getDataValItem());
+
+                    // Salva no banco e retorna o Cod_Med gerado
+                    int codMedCriado = medDAO.createAndReturnId(med);
+                    // Retorna código auto increment do banco
+
+                    // Define o Cod_Med no item
+                    item.setCodMedItem(codMedCriado);
+                    // Item agora tem Cod_Med
+
                     // Garante que o item tem a nota fiscal correta
                     item.setNotaFiscalCompraItem(notaFiscalCompra);
 
                     // Salva o item no banco
                     itensDAO.create(item);
+                    System.out.println("CodCat do item: " +  med.getCodCatMed());
+
                 }
 
                 JOptionPane.showMessageDialog(this,

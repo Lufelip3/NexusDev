@@ -109,4 +109,34 @@ public class MedicamentoDAO {
             Conexao.closeConnection(con, stmt);
         }
     }
+   public int createAndReturnId(Medicamento med) {
+    String sql = "INSERT INTO medicamento (Nome_Med, Valor_Med, Qtd_Med, Desc_Med, DataVal_Med, Cod_CatMed) VALUES (?, ?, ?, ?, ?, ?)";
+    
+    try (Connection con = Conexao.getConnection();
+         PreparedStatement stmt = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
+        
+        // Define os valores
+        stmt.setString(1, med.getNomeMed());
+        stmt.setDouble(2, med.getValorMed());
+        stmt.setInt(3, med.getQuantidadeMed());
+        stmt.setString(4, med.getDescricaoMed());
+        stmt.setString(5, med.getDataValidadeMed());
+        stmt.setInt(6, med.getCodCatMed());
+        // Executa o INSERT
+        stmt.executeUpdate();
+        
+        // Pega o Cod_Med gerado pelo auto_increment
+        try (ResultSet rs = stmt.getGeneratedKeys()) {
+            if (rs.next()) {
+                return rs.getInt(1);  // Retorna o Cod_Med
+            }
+        }
+        
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(null, "Erro: " + e.getMessage());
+        e.printStackTrace();
+    }
+    
+    return -1;  // Erro
+} 
 }

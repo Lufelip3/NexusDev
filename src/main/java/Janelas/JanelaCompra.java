@@ -23,9 +23,10 @@ import javax.swing.JOptionPane;
 public class JanelaCompra extends javax.swing.JFrame {
 
     private String cpf;
-     private List<Laboratorio> laboratorios = new ArrayList<>();
-     private String cnpj;
-    CompraTableModel modelo= new CompraTableModel();
+    private List<Laboratorio> laboratorios = new ArrayList<>();
+    private String cnpj;
+    CompraTableModel modelo = new CompraTableModel();
+
     /**
      * Creates new form Compra2
      */
@@ -44,11 +45,18 @@ public class JanelaCompra extends javax.swing.JFrame {
         jBCadastrarCompra.setEnabled(false);
         jTTabelaMed.setModel(modelo);
         modelo.recarregaTabela();
-        
-        
+
         jCItemNovaCompra.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                int index = jCItemNovaCompra.getSelectedIndex();
+
+                if (index == 0) {
+                    cnpj = null;
+                    jBCadastrarCompra.setEnabled(false);
+                    return;
+                }
+
                 // Código que executa quando selecionar algo
                 cnpj = laboratorios.get(jCItemNovaCompra.getSelectedIndex()).getCnpjLab();
                 System.out.println(laboratorios.get(jCItemNovaCompra.getSelectedIndex()).getCnpjLab());
@@ -57,14 +65,15 @@ public class JanelaCompra extends javax.swing.JFrame {
         });
     }
 
-    
     private void carregarLaboratorios() {
         try {
+
             LaboratorioDAO labDAO = new LaboratorioDAO();
 
             laboratorios = labDAO.read();
             System.out.println(laboratorios.size());
             jCItemNovaCompra.removeAllItems();
+            jCItemNovaCompra.addItem("-- Selecione um laboratório --");  // Primeiro item
 
             for (Laboratorio lab : laboratorios) {
                 jCItemNovaCompra.addItem(lab.getNomeLab());
@@ -77,7 +86,10 @@ public class JanelaCompra extends javax.swing.JFrame {
                     JOptionPane.ERROR_MESSAGE);
             //   e.printStackTrace();
         }
+        jCItemNovaCompra.setSelectedIndex(0);
+
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -148,6 +160,11 @@ public class JanelaCompra extends javax.swing.JFrame {
         jScrollPane2.setViewportView(jTTabelaMed);
 
         jCItemNovaCompra.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jCItemNovaCompra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCItemNovaCompraActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -191,7 +208,7 @@ public class JanelaCompra extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBCadastrarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCadastrarCompraActionPerformed
-      iniciarCompra();
+        iniciarCompra();
     }//GEN-LAST:event_jBCadastrarCompraActionPerformed
 
     private void jBVoltarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBVoltarCompraActionPerformed
@@ -203,6 +220,10 @@ public class JanelaCompra extends javax.swing.JFrame {
     private void jTTabelaMedMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTTabelaMedMouseClicked
 
     }//GEN-LAST:event_jTTabelaMedMouseClicked
+
+    private void jCItemNovaCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCItemNovaCompraActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCItemNovaCompraActionPerformed
     private void iniciarCompra() {
         // Validação: garante que há um funcionário logado
         if (cpf == null || cpf.trim().isEmpty()) {
@@ -217,12 +238,19 @@ public class JanelaCompra extends javax.swing.JFrame {
             this.dispose();
             return;
         }
-
+//Verifica se laboratório foi selecionado
+        if (cnpj == null || cnpj.trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this,
+                    "Selecione um laboratório antes de iniciar a compra!",
+                    "Validação",
+                    JOptionPane.WARNING_MESSAGE);
+            return;
+        }
         try {
             Compra compra = new Compra();
             compra.setValorTotal(0.0);
             compra.setCpfCompra(cpf); // CPF do funcionário logado
-            compra.setCnpjCompra(null); // será definido ao selecionar a drogaria
+            compra.setCnpjCompra(cnpj); // será definido ao selecionar a drogaria
 
             CompraDAO compraDAO = new CompraDAO();
             int notaGerada = compraDAO.createAndReturnNota(compra);

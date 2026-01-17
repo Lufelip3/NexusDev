@@ -25,7 +25,7 @@ public class CompraDAO {
                 c.setNotaFiscalCompra(rs.getInt("NotaFiscal_Entrada"));
                 c.setValorTotal(rs.getDouble("Valor_Total"));
                 c.setCpfCompra(rs.getString("CPF"));
-                c.setCnpjCompra(rs.getString("CNPJ_Drog"));
+                c.setCnpjCompra(rs.getString("CNPJ_Lab"));
                 compras.add(c);
             }
         } catch (SQLException e) {
@@ -37,7 +37,7 @@ public class CompraDAO {
     }
     
 public int createAndReturnNota(Compra c) {
-    String sql = "INSERT INTO compra (Valor_Total, CPF, CNPJ_Drog) VALUES (?, ?, ?)";
+    String sql = "INSERT INTO compra (Valor_Total, CPF, CNPJ_Lab) VALUES (?, ?, ?)";
 
     try (Connection con = Conexao.getConnection();
          PreparedStatement stmt = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
