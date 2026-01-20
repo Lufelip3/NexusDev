@@ -4,18 +4,16 @@
  */
 package Janelas;
 
-import DAO.CompraDAO;
-import DAO.ItensDAO;
-import DAO.LaboratorioDAO;
+import DAO.DrogariaDAO;
+import DAO.ItensVendaDAO;
 import DAO.MedicamentoDAO;
-import Model.CatalogoTableModel;
-import Model.ItensTableModel;
-import Objetos.CatalogoMedicamento;
-import Objetos.Compra;
+import DAO.VendaDAO;
+import Model.ItensVendaTableModel;
+import Model.MedicamentoTableModel;
+import Objetos.DrogariaObjeto;
 import Objetos.Funcionario;
-import Objetos.Itens;
-import Objetos.Laboratorio;
-import Objetos.Medicamento;
+import Objetos.ItensVenda;
+import Objetos.Venda;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -28,48 +26,88 @@ import javax.swing.JOptionPane;
  *
  * @author luis.fmleite
  */
-public class NovaJanelaCompra extends javax.swing.JFrame {
+public class NovaJanelaVenda extends javax.swing.JFrame {
 
     private Funcionario user;
-
     private String cpf;
-    private int notaFiscalCompra;
-    private double valorTotalCompra = 0.0;
-    ItensTableModel modeloItem = new ItensTableModel();
-    CatalogoTableModel modeloCat = new CatalogoTableModel();
-    private Compra compraAtual;
+    private List<DrogariaObjeto> drogarias = new ArrayList<>();
+    private String cnpjDrogaria;
+    private int notaFiscalVenda;
+    private double valorTotalVenda = 0.0;
+    ItensVendaTableModel modeloItem = new ItensVendaTableModel();
+    MedicamentoTableModel modeloMed = new MedicamentoTableModel();
 
     /**
      * Creates new form NovaJanelaCompra
      */
-    public NovaJanelaCompra() {
+    public NovaJanelaVenda() {
         initComponents();
     }
 
-    public NovaJanelaCompra(Funcionario user, int notaGerada, String cpf, String cnpj) {
+    public NovaJanelaVenda(Funcionario user, int notaGerada, String cpf, String cnpj) {
         initComponents();
-        this.cpf = user.getCpf();
         this.user = user;
+        carregarDrogarias();
 
-        this.notaFiscalCompra = notaGerada;
-        modeloCat.recarregaTabelaCNPJ(cnpj);
-        jTTabelaNovaCompra.setModel(modeloCat);
+        jBFinalizarNovaCompra.setEnabled(false);
+
+        this.cpf = user.getCpf();
+        this.notaFiscalVenda = notaGerada;
+        modeloMed.recarregaTabela();
+        jTTabelaNovaCompra.setModel(modeloMed);
         jTTabelaItensCompra.setModel(modeloItem);
         atualizarValorTotal();
-        compraAtual.getDataCompra();
 
         getContentPane().setBackground(Color.GRAY);
+        jCDrogarias.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int index = jCDrogarias.getSelectedIndex();
 
+                if (index == 0) {
+                    cnpjDrogaria = null;
+                    jBFinalizarNovaCompra.setEnabled(false);
+                    return;
+                }
+
+                // Seleção válida
+                cnpjDrogaria = drogarias.get(jCDrogarias.getSelectedIndex()).getCnpjDrogaria();
+                System.out.println("Drogaria selecionada: " + cnpjDrogaria);
+                jBFinalizarNovaCompra.setEnabled(true);
+            }
+        });
     }
 // Método para calcular o valor total da compra
+
+    private void carregarDrogarias() {
+        try {
+            DrogariaDAO drogDAO = new DrogariaDAO();
+            drogarias = drogDAO.read();
+
+            jCDrogarias.removeAllItems();
+            jCDrogarias.addItem("-- Selecione uma drogaria --");
+
+            for (DrogariaObjeto d : drogarias) {
+                jCDrogarias.addItem(d.getNomeDrogaria());
+            }
+
+            jCDrogarias.setSelectedIndex(0);
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this,
+                    "Erro ao carregar drogarias:\n" + e.getMessage(),
+                    "Erro",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+    }
 
     private double calcularValorTotal() {
         double total = 0.0;
 
         // Percorre todos os itens da tabela
         for (int i = 0; i < modeloItem.getRowCount(); i++) {
-            Itens item = modeloItem.pegaDadosLinha(i);
-            double valorItem = item.getValorItem() * item.getQuantidadeItem();
+            ItensVenda itemVenda = modeloItem.pegaDadosLinha(i);
+            double valorItem = itemVenda.getValorItemVenda() * itemVenda.getQuantidadeItemVenda();
             total += valorItem;
         }
 
@@ -78,8 +116,8 @@ public class NovaJanelaCompra extends javax.swing.JFrame {
 
     // Método para atualizar a exibição do valor total
     private void atualizarValorTotal() {
-        valorTotalCompra = calcularValorTotal();
-        jLabel5.setText(String.format("Itens da compra - Total: R$ %.2f", valorTotalCompra));
+        valorTotalVenda = calcularValorTotal();
+        jLabel5.setText(String.format("Itens da compra - Total: R$ %.2f", valorTotalVenda));
     }
 
     /**
@@ -101,12 +139,13 @@ public class NovaJanelaCompra extends javax.swing.JFrame {
         jTTabelaItensCompra = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        jCDrogarias = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Nova Compra");
+        jLabel1.setText("Nova Venda");
 
         jBFinalizarNovaCompra.setText("Finalizar");
         jBFinalizarNovaCompra.addActionListener(new java.awt.event.ActionListener() {
@@ -123,7 +162,7 @@ public class NovaJanelaCompra extends javax.swing.JFrame {
         });
 
         jLabel4.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
-        jLabel4.setText("Itens da compra");
+        jLabel4.setText("Itens da venda");
 
         jTTabelaNovaCompra.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -165,6 +204,13 @@ public class NovaJanelaCompra extends javax.swing.JFrame {
 
         jLabel5.setText("Total:");
 
+        jCDrogarias.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jCDrogarias.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCDrogariasActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -194,17 +240,21 @@ public class NovaJanelaCompra extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane3)))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jCDrogarias, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(1236, 1236, 1236))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(168, 168, 168)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jBFinalizarNovaCompra)
-                            .addComponent(jBCancelarNovaCompra)))
-                    .addComponent(jLabel1))
+                .addComponent(jLabel1)
+                .addGap(103, 103, 103)
+                .addComponent(jCDrogarias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jBFinalizarNovaCompra)
+                    .addComponent(jBCancelarNovaCompra))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 91, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -226,6 +276,7 @@ public class NovaJanelaCompra extends javax.swing.JFrame {
 
     private void jBFinalizarNovaCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBFinalizarNovaCompraActionPerformed
 // Validar se selecionou laboratório
+        int index = jCDrogarias.getSelectedIndex();
 
         // Validar se tem itens
         if (modeloItem.getRowCount() == 0) {
@@ -235,80 +286,70 @@ public class NovaJanelaCompra extends javax.swing.JFrame {
                     JOptionPane.WARNING_MESSAGE);
             return;
         }
-        
+        if (cnpjDrogaria == null || cnpjDrogaria.trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this,
+                    "Selecione uma drogaria antes de finalizar a venda!",
+                    "Validação",
+                    JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
         atualizarValorTotal();
-        
         int confirma = JOptionPane.showConfirmDialog(this,
-        String.format("Finalizar a compra?\n"
+        String.format("Finalizar a venda?\n"
                 + "Nota Fiscal: %d\n"
                 + "Total de itens: %d\n"
                 + "Valor Total: R$ %.2f",
-                notaFiscalCompra,
+                notaFiscalVenda,
                 modeloItem.getRowCount(),
-                valorTotalCompra),
+                valorTotalVenda),
         "Confirmar Venda",
         JOptionPane.YES_NO_OPTION);
 
 
         if (confirma == JOptionPane.YES_OPTION) {
             try {
-                CompraDAO compraDAO = new CompraDAO();
-                ItensDAO itensDAO = new ItensDAO();
+                DrogariaObjeto drogariaSelecionada = drogarias.get(index);
+                cnpjDrogaria = drogariaSelecionada.getCnpjDrogaria();
+                System.out.println(cnpjDrogaria);
+                VendaDAO vendaDAO = new VendaDAO();
+                ItensVendaDAO itensDAO = new ItensVendaDAO();
                 MedicamentoDAO medDAO = new MedicamentoDAO();
 
                 // Atualiza o valor total da compra no banco
-                compraDAO.atualizarValorTotal(notaFiscalCompra, valorTotalCompra);
+                vendaDAO.atualizarValorTotal(notaFiscalVenda, valorTotalVenda);
+                vendaDAO.atualizarCnpj(notaFiscalVenda, cnpjDrogaria);
 
                 // Salvar todos os itens da compra
                 for (int i = 0; i < modeloItem.getRowCount(); i++) {
-                    Itens item = modeloItem.pegaDadosLinha(i);
-
-                    // Pega o catálogo correspondente (para nome e descrição)
-                    CatalogoMedicamento cat = modeloCat.pegaDadosLinha(i);
-
-                    // Cria objeto Medicamento
-                    Medicamento med = new Medicamento();
-                    med.setCodCatMed(item.getCodCatMedItem());
-                    med.setNomeMed(cat.getNomeCatalogo());
-                    med.setDescricaoMed(cat.getDescCatalogo());
-                    med.setQuantidadeMed(item.getQuantidadeItem());
-                    med.setValorMed(item.getValorItem());
-                    med.setDataValidadeMed(item.getDataValItem());
-
-                    // Salva no banco e retorna o Cod_Med gerado
-                    int codMedCriado = medDAO.createAndReturnId(med);
-                    // Retorna código auto increment do banco
-
-                    // Define o Cod_Med no item
-                    item.setCodMedItem(codMedCriado);
-                    // Item agora tem Cod_Med
+                    ItensVenda itemVenda = modeloItem.pegaDadosLinha(i);
 
                     // Garante que o item tem a nota fiscal correta
-                    item.setNotaFiscalCompraItem(notaFiscalCompra);
+                    itemVenda.setNotaFiscalVendaItem(notaFiscalVenda);
 
                     // Salva o item no banco
-                    itensDAO.create(item);
-                    System.out.println("CodCat do item: " + med.getCodCatMed());
+                    itensDAO.create(itemVenda);
 
                 }
 
                 JOptionPane.showMessageDialog(this,
-                        String.format("Compra finalizada com sucesso!\n"
+                        String.format("Venda finalizada com sucesso!\n"
                                 + "Nota Fiscal: %d\n"
                                 + "Total de itens: %d\n"
                                 + "Valor Total: R$ %.2f",
-                                notaFiscalCompra,
+                                notaFiscalVenda,
                                 modeloItem.getRowCount(),
-                                valorTotalCompra),
+                                valorTotalVenda),
                         "Sucesso",
                         JOptionPane.INFORMATION_MESSAGE);
 
-                JanelaCompra commed = new JanelaCompra(user);
-                commed.setVisible(true);
+                JanelaVenda vmed = new JanelaVenda(user);
+                vmed.setVisible(true);
                 dispose();
+
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this,
-                        "Erro ao finalizar compra: " + e.getMessage(),
+                        "Erro ao finalizar venda: " + e.getMessage(),
                         "Erro",
                         JOptionPane.ERROR_MESSAGE);
                 e.printStackTrace();
@@ -324,15 +365,14 @@ public class NovaJanelaCompra extends javax.swing.JFrame {
         // ADICIONAR NO ATRIBUTO DO ITEM A QUANTIDADE E ADICIONAR NO MODEL DA TABELA DE ITEM;
         if (jTTabelaNovaCompra.getSelectedRow() != -1) {
             int QTD_Item = Integer.parseInt(JOptionPane.showInputDialog("Quantidade do Medicamento"));
-            Itens item = new Itens();
-            item.setCodCatMedItem(modeloCat.pegaDadosLinha(jTTabelaNovaCompra.getSelectedRow()).getCodCatMed());
-            item.setDataValItem(modeloCat.pegaDadosLinha(jTTabelaNovaCompra.getSelectedRow()).getDataValItemCat());
-            item.setDataVendaItem(modeloCat.pegaDadosLinha(jTTabelaNovaCompra.getSelectedRow()).getDatacompraItemCat());
-            item.setQuantidadeItem(modeloCat.pegaDadosLinha(jTTabelaNovaCompra.getSelectedRow()).getQuantidade());
-            item.setValorItem(modeloCat.pegaDadosLinha(jTTabelaNovaCompra.getSelectedRow()).getValorCatalogo());
+            ItensVenda itemVenda = new ItensVenda();
+            itemVenda.setDataValItemVenda(modeloMed.pegaDadosLinha(jTTabelaNovaCompra.getSelectedRow()).getDataValidadeMed());
+            itemVenda.setQuantidadeItemVenda(modeloMed.pegaDadosLinha(jTTabelaNovaCompra.getSelectedRow()).getQuantidadeMed());
+            itemVenda.setValorItemVenda(modeloMed.pegaDadosLinha(jTTabelaNovaCompra.getSelectedRow()).getValorMed());
+            itemVenda.setCodMedItemVenda(modeloMed.pegaDadosLinha(jTTabelaNovaCompra.getSelectedRow()).getCodMed());
 
-            item.setQuantidadeItem(QTD_Item);
-            modeloItem.addItem(item);
+            itemVenda.setQuantidadeItemVenda(QTD_Item);
+            modeloItem.addItem(itemVenda);
 
         }
 
@@ -345,17 +385,21 @@ public class NovaJanelaCompra extends javax.swing.JFrame {
 
     private void jBCancelarNovaCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCancelarNovaCompraActionPerformed
         int confirma = JOptionPane.showConfirmDialog(this,
-                "Deseja realmente cancelar esta compra?\nTodos os itens adicionados serão perdidos!",
+                "Deseja realmente cancelar esta venda?\nTodos os itens adicionados serão perdidos!",
                 "Confirmar Cancelamento",
                 JOptionPane.YES_NO_OPTION,
                 JOptionPane.WARNING_MESSAGE);
 
         if (confirma == JOptionPane.YES_OPTION) {
-            JanelaCompra commed = new JanelaCompra(user);
-            commed.setVisible(true);
+            JanelaVenda vmed = new JanelaVenda(user);
+            vmed.setVisible(true);
             dispose();
         }
     }//GEN-LAST:event_jBCancelarNovaCompraActionPerformed
+
+    private void jCDrogariasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCDrogariasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCDrogariasActionPerformed
 
     /**
      * @param args the command line arguments
@@ -374,20 +418,21 @@ public class NovaJanelaCompra extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(NovaJanelaCompra.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NovaJanelaVenda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(NovaJanelaCompra.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NovaJanelaVenda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(NovaJanelaCompra.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NovaJanelaVenda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(NovaJanelaCompra.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NovaJanelaVenda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new NovaJanelaCompra().setVisible(true);
+                new NovaJanelaVenda().setVisible(true);
             }
         });
     }
@@ -395,6 +440,7 @@ public class NovaJanelaCompra extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBCancelarNovaCompra;
     private javax.swing.JButton jBFinalizarNovaCompra;
+    private javax.swing.JComboBox<String> jCDrogarias;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;

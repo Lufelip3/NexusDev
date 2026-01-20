@@ -102,11 +102,22 @@ public class MedicamentoTableModel extends AbstractTableModel {
         }
         this.fireTableDataChanged();
     }
+//    private void lerDadosCNPJ(String cnpj) {
+//        MedicamentoDAO cdao = new MedicamentoDAO();
+//        for (Medicamento cd : cdao.readCNPJ(cnpj)) {
+//            this.addLinha(cd);
+//        }
+//        this.fireTableDataChanged();
+//    }
 
     public void recarregaTabela() {
         this.dados.clear();
         lerDados();
         this.fireTableDataChanged();
     }
-
+//    public void recarregaTabelaCNPJ(String cnpj) {
+//        this.dados.clear();
+//        lerDadosCNPJ(cnpj);
+//        this.fireTableDataChanged();
+//    }
 }

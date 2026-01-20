@@ -4,12 +4,12 @@
  */
 package Janelas;
 
-import DAO.CompraDAO;
-import DAO.LaboratorioDAO;
-import Model.CompraTableModel;
-import Objetos.Compra;
+import DAO.DrogariaDAO;
+import DAO.VendaDAO;
+import Model.VendaTableModel;
+import Objetos.DrogariaObjeto;
 import Objetos.Funcionario;
-import Objetos.Laboratorio;
+import Objetos.Venda;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -21,91 +21,47 @@ import javax.swing.JOptionPane;
  *
  * @author andrey.munhoz
  */
-public class JanelaCompra extends javax.swing.JFrame {
+public class JanelaVenda extends javax.swing.JFrame {
 
     private Funcionario user;
     private String cpf;
-    private List<Laboratorio> laboratorios = new ArrayList<>();
+    private List<DrogariaObjeto> drogarias = new ArrayList<>();
     private String cnpj;
-    CompraTableModel modelo = new CompraTableModel();
+    VendaTableModel modelo = new VendaTableModel();
 
     /**
      * Creates new form Compra2
      */
-    public JanelaCompra() {
+    public JanelaVenda() {
         initComponents();
 
     }
 
-    public JanelaCompra(Funcionario user) {
+    public JanelaVenda(Funcionario user) {
         initComponents();
         this.setLocationRelativeTo(null);
         getContentPane().setBackground(Color.GRAY);
         this.user = user;
-
         this.cpf = user.getCpf();
         carregarLaboratorios();
-        filtroLaboratorios();
-        jBCadastrarCompra.setEnabled(false);
+        jBCadastrarVenda.setEnabled(true);
         jTTabelaMed.setModel(modelo);
         modelo.recarregaTabela();
-
-        jCItemNovaCompra.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                int index = jCItemNovaCompra.getSelectedIndex();
-
-                if (index == 0) {
-                    cnpj = null;
-                    jBCadastrarCompra.setEnabled(false);
-                    return;
-                }
-
-                // Código que executa quando selecionar algo
-                cnpj = laboratorios.get(jCItemNovaCompra.getSelectedIndex()).getCnpjLab();
-                System.out.println(laboratorios.get(jCItemNovaCompra.getSelectedIndex()).getCnpjLab());
-                jBCadastrarCompra.setEnabled(true);
-            }
-        });
-    }
-
-    private void filtroLaboratorios() {
-        try {
-
-            LaboratorioDAO labDAO = new LaboratorioDAO();
-
-            laboratorios = labDAO.read();
-            System.out.println(laboratorios.size());
-            jCFiltroLaboratório.removeAllItems();
-            jCFiltroLaboratório.addItem("Todos");  // Primeiro item
-
-            for (Laboratorio lab : laboratorios) {
-                jCFiltroLaboratório.addItem(lab.getNomeLab());
-            }
-
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null,
-                    "Erro ao carregar laboratórios:\n" + e.getMessage(),
-                    "Erro",
-                    JOptionPane.ERROR_MESSAGE);
-            //   e.printStackTrace();
-        }
-        jCFiltroLaboratório.setSelectedIndex(0);
 
     }
 
     private void carregarLaboratorios() {
         try {
 
-            LaboratorioDAO labDAO = new LaboratorioDAO();
+            DrogariaDAO drogDAO = new DrogariaDAO();
 
-            laboratorios = labDAO.read();
-            System.out.println(laboratorios.size());
-            jCItemNovaCompra.removeAllItems();
-            jCItemNovaCompra.addItem("-- Selecione um laboratório --");  // Primeiro item
+            drogarias = drogDAO.read();
+            System.out.println(drogarias.size());
+            jCFiltroDrogaria.removeAllItems();
+            jCFiltroDrogaria.addItem("Todos");  // Primeiro item
 
-            for (Laboratorio lab : laboratorios) {
-                jCItemNovaCompra.addItem(lab.getNomeLab());
+            for (DrogariaObjeto lab : drogarias) {
+                jCFiltroDrogaria.addItem(lab.getNomeDrogaria());
             }
 
         } catch (Exception e) {
@@ -115,9 +71,10 @@ public class JanelaCompra extends javax.swing.JFrame {
                     JOptionPane.ERROR_MESSAGE);
             //   e.printStackTrace();
         }
-        jCItemNovaCompra.setSelectedIndex(0);
+        jCFiltroDrogaria.setSelectedIndex(0);
 
     }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -131,12 +88,11 @@ public class JanelaCompra extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        jBCadastrarCompra = new javax.swing.JButton();
+        jBCadastrarVenda = new javax.swing.JButton();
         jBVoltarCompra = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTTabelaMed = new javax.swing.JTable();
-        jCItemNovaCompra = new javax.swing.JComboBox<>();
-        jCFiltroLaboratório = new javax.swing.JComboBox<>();
+        jCFiltroDrogaria = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -156,12 +112,12 @@ public class JanelaCompra extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("COMPRAS");
+        jLabel1.setText("VENDAS");
 
-        jBCadastrarCompra.setText("Iniciar compra");
-        jBCadastrarCompra.addActionListener(new java.awt.event.ActionListener() {
+        jBCadastrarVenda.setText("Iniciar Venda");
+        jBCadastrarVenda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBCadastrarCompraActionPerformed(evt);
+                jBCadastrarVendaActionPerformed(evt);
             }
         });
 
@@ -190,17 +146,10 @@ public class JanelaCompra extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(jTTabelaMed);
 
-        jCItemNovaCompra.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jCItemNovaCompra.addActionListener(new java.awt.event.ActionListener() {
+        jCFiltroDrogaria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jCFiltroDrogaria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCItemNovaCompraActionPerformed(evt);
-            }
-        });
-
-        jCFiltroLaboratório.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jCFiltroLaboratório.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCFiltroLaboratórioActionPerformed(evt);
+                jCFiltroDrogariaActionPerformed(evt);
             }
         });
 
@@ -216,23 +165,25 @@ public class JanelaCompra extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(12, 12, 12)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(104, 104, 104))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 714, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jCFiltroLaboratório, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jCItemNovaCompra, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jBCadastrarCompra, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addComponent(jBVoltarCompra)
-                .addGap(48, 48, 48))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jBCadastrarVenda)
+                        .addGap(18, 18, 18)
+                        .addComponent(jBVoltarCompra)
+                        .addGap(48, 48, 48))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jCFiltroDrogaria, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -241,15 +192,13 @@ public class JanelaCompra extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jCItemNovaCompra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jCFiltroLaboratório, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel2)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jBCadastrarCompra)
+                    .addComponent(jCFiltroDrogaria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jBCadastrarVenda)
                     .addComponent(jBVoltarCompra))
                 .addGap(38, 38, 38))
         );
@@ -257,9 +206,9 @@ public class JanelaCompra extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jBCadastrarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCadastrarCompraActionPerformed
+    private void jBCadastrarVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCadastrarVendaActionPerformed
         iniciarCompra();
-    }//GEN-LAST:event_jBCadastrarCompraActionPerformed
+    }//GEN-LAST:event_jBCadastrarVendaActionPerformed
 
     private void jBVoltarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBVoltarCompraActionPerformed
         Menu m = new Menu(user);
@@ -271,34 +220,30 @@ public class JanelaCompra extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jTTabelaMedMouseClicked
 
-    private void jCItemNovaCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCItemNovaCompraActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCItemNovaCompraActionPerformed
+    private void jCFiltroDrogariaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCFiltroDrogariaActionPerformed
+    int index = jCFiltroDrogaria.getSelectedIndex();
 
-    private void jCFiltroLaboratórioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCFiltroLaboratórioActionPerformed
-        int index = jCFiltroLaboratório.getSelectedIndex();
+    VendaDAO dao = new VendaDAO();
 
-        CompraDAO dao = new CompraDAO();
+    // Item "Todos"
+    if (index <= 0) {
+        modelo.setVendas(dao.read());
+        return;
+    }
 
-        // Item "Todos"
-        if (index <= 0) {
-            modelo.setCompras(dao.read());
-            return;
+    // Ajuste do índice por causa do item "Todos"
+    String cnpjSelecionado = drogarias.get(index - 1).getCnpjDrogaria();
+
+    List<Venda> filtradas = new ArrayList<>();
+
+    for (Venda v : dao.read()) {
+        if (cnpjSelecionado != null && cnpjSelecionado.equals(v.getCnpjVenda())) {
+            filtradas.add(v);
         }
+    }
 
-        // Ajuste do índice por causa do item "Todos"
-        String cnpjSelecionado = laboratorios.get(index - 1).getCnpjLab();
-
-        List<Compra> filtradas = new ArrayList<>();
-
-        for (Compra v : dao.read()) {
-            if (cnpjSelecionado != null && cnpjSelecionado.equals(v.getCnpjCompra())) {
-                filtradas.add(v);
-            }
-        }
-
-        modelo.setCompras(filtradas);
-    }//GEN-LAST:event_jCFiltroLaboratórioActionPerformed
+    modelo.setVendas(filtradas);
+    }//GEN-LAST:event_jCFiltroDrogariaActionPerformed
     private void iniciarCompra() {
         // Validação: garante que há um funcionário logado
         if (cpf == null || cpf.trim().isEmpty()) {
@@ -313,39 +258,31 @@ public class JanelaCompra extends javax.swing.JFrame {
             this.dispose();
             return;
         }
-//Verifica se laboratório foi selecionado
-        if (cnpj == null || cnpj.trim().isEmpty()) {
-            JOptionPane.showMessageDialog(this,
-                    "Selecione um laboratório antes de iniciar a compra!",
-                    "Validação",
-                    JOptionPane.WARNING_MESSAGE);
-            return;
-        }
         try {
-            Compra compra = new Compra();
-            compra.setValorTotal(0.0);
-            compra.setCpfCompra(cpf); // CPF do funcionário logado
-            compra.setCnpjCompra(cnpj); // será definido ao selecionar a drogaria
+            Venda vendas = new Venda();
+            vendas.setValorVenda(0.0);
+            vendas.setCpfVenda(cpf); // CPF do funcionário logado
+            vendas.setCnpjVenda(null); // será definido ao selecionar a drogaria
 
-            CompraDAO compraDAO = new CompraDAO();
-            int notaGerada = compraDAO.createAndReturnNota(compra);
+            VendaDAO vendaDAO = new VendaDAO();
+            int notaGerada = vendaDAO.createAndReturnNota(vendas);
 
-            System.out.println("Compra iniciada - Nota: " + notaGerada
+            System.out.println("Venda iniciada - Nota: " + notaGerada
                     + ", Funcionário CPF: " + cpf);
 
             JOptionPane.showMessageDialog(this,
-                    "Compra iniciada com sucesso!\nNota Fiscal: " + notaGerada,
+                    "Venda iniciada com sucesso!\nNota Fiscal: " + notaGerada,
                     "Sucesso",
                     JOptionPane.INFORMATION_MESSAGE);
 
-            // Abre a tela de nova compra
-            NovaJanelaCompra janela = new NovaJanelaCompra(user, notaGerada, cpf, cnpj);
+            // Abre a tela de nova venda
+            NovaJanelaVenda janela = new NovaJanelaVenda(user, notaGerada, cpf, cnpj);
             janela.setVisible(true);
             this.dispose();
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this,
-                    "Erro inesperado ao iniciar compra:\n" + e.getMessage(),
+                    "Erro inesperado ao iniciar venda:\n" + e.getMessage(),
                     "Erro",
                     JOptionPane.ERROR_MESSAGE);
             e.printStackTrace();
@@ -369,14 +306,18 @@ public class JanelaCompra extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(JanelaCompra.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JanelaVenda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(JanelaCompra.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JanelaVenda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(JanelaCompra.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JanelaVenda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(JanelaCompra.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JanelaVenda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -385,16 +326,15 @@ public class JanelaCompra extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JanelaCompra().setVisible(true);
+                new JanelaVenda().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jBCadastrarCompra;
+    private javax.swing.JButton jBCadastrarVenda;
     private javax.swing.JButton jBVoltarCompra;
-    private javax.swing.JComboBox<String> jCFiltroLaboratório;
-    private javax.swing.JComboBox<String> jCItemNovaCompra;
+    private javax.swing.JComboBox<String> jCFiltroDrogaria;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;

@@ -112,6 +112,30 @@ public int createAndReturnNota(Compra c) {
             Conexao.closeConnection(con, stmt);
         }
     }
+    public List<Compra> readByCnpj(String cnpj) {
+    List<Compra> lista = new ArrayList<>();
+    String sql = "SELECT * FROM venda WHERE cnpj_venda = ?";
+
+    try (Connection con = Conexao.getConnection();
+         PreparedStatement ps = con.prepareStatement(sql)) {
+
+        ps.setString(1, cnpj);
+        ResultSet rs = ps.executeQuery();
+
+        while (rs.next()) {
+            Compra c = new Compra();
+            c.setNotaFiscalCompra(rs.getInt("NotaFiscal_Entrada"));
+            c.setValorTotal(rs.getDouble("Valor_Total"));
+            c.setCpfCompra(rs.getString("CPF"));
+            c.setCnpjCompra(rs.getString("CNPJ_Lab"));
+            lista.add(c);
+        }
+
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+    return lista;
+}
 
     public void delete(Compra c) {
         Connection con = Conexao.getConnection();

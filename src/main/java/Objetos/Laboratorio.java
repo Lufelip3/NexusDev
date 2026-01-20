@@ -16,12 +16,6 @@ public class Laboratorio {
     private String emailLab;
     private int numeroLab;
     private String cepLab;
-    
-//    public Laboratorio(String cnpj, String nome) {
-//        this.cnpjLab = cnpj;
-//        this.nomeLab = nome;
-//    }
-
    
     public String toString() {
         return nomeLab;

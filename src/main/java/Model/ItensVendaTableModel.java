@@ -4,47 +4,47 @@
  */
 package Model;
 
-import DAO.CompraDAO;
-import Objetos.Compra;
+import DAO.ItensVendaDAO;
+import Objetos.ItensVenda;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
 /**
  *
- * @author Andrey
+ * @author andrey.munhoz
  */
-public class CompraTableModel extends AbstractTableModel {
-   private List<Compra> dados = new ArrayList<>();
-    private String[] colunas = {"Nota Fiscal", "Data de Compra", "Valor", "CNPJ", "CPF"};
-
-@Override
+public class ItensVendaTableModel extends AbstractTableModel{
+    private List<ItensVenda> dados = new ArrayList<>();
+    private String[] colunas = {"Quantidade", "Valor", "Data de Validade", "Nota fiscal", "Código do medicamento"};
+    @Override
     public String getColumnName(int column) {
         return colunas[column];
     }
-@Override
+
+    @Override
     public int getRowCount() {
         return dados.size();
     }
 
-@Override
+    @Override
     public int getColumnCount() {
         return colunas.length;
     }
 
-
+    @Override
     public Object getValueAt(int linha, int coluna) {
         switch (coluna) {
             case 0:
-                return dados.get(linha).getNotaFiscalCompra();
+                return dados.get(linha).getQuantidadeItemVenda();
             case 1:
-                return dados.get(linha).getDataCompra();
+                return dados.get(linha).getValorItemVenda();
             case 2:
-                return dados.get(linha).getValorTotal();
+                return dados.get(linha).getDataValItemVenda();
             case 3:
-                return dados.get(linha).getCnpjCompra();
+                return dados.get(linha).getNotaFiscalVendaItem();
             case 4:
-                return dados.get(linha).getCpfCompra();
+                return dados.get(linha).getCodMedItemVenda();
         }
         return null;
     }
@@ -53,44 +53,43 @@ public class CompraTableModel extends AbstractTableModel {
     public void setValueAt(Object valor, int linha, int coluna) {
         switch (coluna) {
             case 0:
-                dados.get(linha).setNotaFiscalCompra((int) valor);
+                dados.get(linha).setQuantidadeItemVenda(Integer.parseInt((String)valor));
                 break;
             case 1:
-                dados.get(linha).setDataCompra((String)valor);
+                dados.get(linha).setValorItemVenda(Double.valueOf((String)valor));
                 break;
             case 2:
-                dados.get(linha).setValorTotal((Double) valor);
+                dados.get(linha).setDataValItemVenda((String)valor);
                 break;
             case 3:
-                dados.get(linha).setCnpjCompra((String) valor);
+                dados.get(linha).setNotaFiscalVendaItem(Integer.parseInt((String)valor));
                 break;
             case 4:
-                dados.get(linha).setCpfCompra((String) valor);
+                dados.get(linha).setCodMedItemVenda(Integer.parseInt((String)valor));
                 break;
-            
         }
         this.fireTableRowsUpdated(linha, linha);
     }
 
-    public void addLinha(Compra c) {
-        this.dados.add(c);
-        this.fireTableDataChanged();
-    }
+    public void addLinha(ItensVenda iv) {
+    addItem(iv);
+}
+
 
     public void removeLinha(int linha) {
         this.dados.remove(linha);
         this.fireTableRowsDeleted(linha, linha);
     }
 
-    public Compra pegaDadosLinha(int linha) {
+    public ItensVenda pegaDadosLinha(int linha) {
         return dados.get(linha);
     }
 
     private void lerDados() {
-        CompraDAO cdao = new CompraDAO();
+        ItensVendaDAO ivdao = new ItensVendaDAO();
 
-        for (Compra c : cdao.read()) {
-            this.addLinha(c);
+        for (ItensVenda iv : ivdao.read()) {
+            this.addLinha(iv);
 
         }
         this.fireTableDataChanged();
@@ -101,8 +100,10 @@ public class CompraTableModel extends AbstractTableModel {
         lerDados();
         this.fireTableDataChanged();
     }
-    public void setCompras(List<Compra> compras) {
-        this.dados = compras;
-        fireTableDataChanged();
-    }
+    public void addItem(ItensVenda itemVenda) {
+    dados.add(itemVenda); 
+    int lastIndex = dados.size() - 1;
+    fireTableRowsInserted(lastIndex, lastIndex);
+}
+
 }

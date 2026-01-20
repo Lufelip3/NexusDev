@@ -9,11 +9,12 @@ package Objetos;
  * @author luis.fmleite
  */
 public class Compra {
-    
+
     private Double valorTotal;
     private int notaFiscalCompra;
     private String cpfCompra;
     private String cnpjCompra;
+    private String dataCompra;
 
     /**
      * @return the valorTotal
@@ -69,6 +70,20 @@ public class Compra {
      */
     public void setCnpjCompra(String cnpjCompra) {
         this.cnpjCompra = cnpjCompra;
+    }
+
+    /**
+     * @return the dataCompra
+     */
+    public String getDataCompra() {
+        return dataCompra;
+    }
+
+    /**
+     * @param dataCompra the dataCompra to set
+     */
+    public void setDataCompra(String dataCompra) {
+        this.dataCompra = dataCompra;
     }
 
 }

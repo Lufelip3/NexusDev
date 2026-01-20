@@ -150,7 +150,7 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_jBCadastrarMedActionPerformed
 
     private void jBCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCompraActionPerformed
-        JanelaCompra commed = new JanelaCompra(user.getCpf());
+        JanelaCompra commed = new JanelaCompra(user);
         commed.setVisible(true);
         dispose();
     }//GEN-LAST:event_jBCompraActionPerformed
@@ -162,7 +162,7 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_jBLaboratorioActionPerformed
 
     private void jBVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBVendaActionPerformed
-        VendaJanela vmed = new VendaJanela();
+        JanelaVenda vmed = new JanelaVenda(user);
         vmed.setVisible(true);
         dispose();
     }//GEN-LAST:event_jBVendaActionPerformed

@@ -18,6 +18,9 @@ public class DrogariaObjeto {
     private String emailDrogaria;
     private String telefoneDrogaria; 
 
+    public String toString() {
+        return nomeDrogaria;
+    }
     public String getNomeDrogaria() {
         return nomeDrogaria;
     }
