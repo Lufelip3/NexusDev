@@ -56,7 +56,6 @@ public class NovaJanelaCompra extends javax.swing.JFrame {
         jTTabelaNovaCompra.setModel(modeloCat);
         jTTabelaItensCompra.setModel(modeloItem);
         atualizarValorTotal();
-        compraAtual.getDataCompra();
 
         getContentPane().setBackground(Color.GRAY);
 
@@ -235,20 +234,19 @@ public class NovaJanelaCompra extends javax.swing.JFrame {
                     JOptionPane.WARNING_MESSAGE);
             return;
         }
-        
-        atualizarValorTotal();
-        
-        int confirma = JOptionPane.showConfirmDialog(this,
-        String.format("Finalizar a compra?\n"
-                + "Nota Fiscal: %d\n"
-                + "Total de itens: %d\n"
-                + "Valor Total: R$ %.2f",
-                notaFiscalCompra,
-                modeloItem.getRowCount(),
-                valorTotalCompra),
-        "Confirmar Venda",
-        JOptionPane.YES_NO_OPTION);
 
+        atualizarValorTotal();
+
+        int confirma = JOptionPane.showConfirmDialog(this,
+                String.format("Finalizar a compra?\n"
+                        + "Nota Fiscal: %d\n"
+                        + "Total de itens: %d\n"
+                        + "Valor Total: R$ %.2f",
+                        notaFiscalCompra,
+                        modeloItem.getRowCount(),
+                        valorTotalCompra),
+                "Confirmar Venda",
+                JOptionPane.YES_NO_OPTION);
 
         if (confirma == JOptionPane.YES_OPTION) {
             try {
@@ -351,6 +349,12 @@ public class NovaJanelaCompra extends javax.swing.JFrame {
                 JOptionPane.WARNING_MESSAGE);
 
         if (confirma == JOptionPane.YES_OPTION) {
+            //EXCLUI A COMPRA NO BANCO
+            Compra c = new Compra();
+            c.setNotaFiscalCompra(notaFiscalCompra);
+
+            CompraDAO dao = new CompraDAO();
+            dao.delete(c);
             JanelaCompra commed = new JanelaCompra(user);
             commed.setVisible(true);
             dispose();

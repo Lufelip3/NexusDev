@@ -242,11 +242,11 @@ public class JanelaCompra extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jCItemNovaCompra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jCFiltroLaboratório, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel2)))
+                        .addComponent(jLabel2))
+                    .addComponent(jCItemNovaCompra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBCadastrarCompra)
@@ -268,7 +268,20 @@ public class JanelaCompra extends javax.swing.JFrame {
     }//GEN-LAST:event_jBVoltarCompraActionPerformed
 
     private void jTTabelaMedMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTTabelaMedMouseClicked
+    int linhaSelecionada = jTTabelaMed.getSelectedRow();
 
+    if (linhaSelecionada == -1) {
+        return;
+    }
+
+    // Recupera o objeto Venda direto do TableModel
+    Compra compraSelecionada = modelo.pegaDadosLinha(linhaSelecionada);
+
+    int notaFiscal = compraSelecionada.getNotaFiscalCompra();
+
+    // Abre a janela de detalhes
+    JanelaDetalhesCompra detalhes = new JanelaDetalhesCompra (notaFiscal);
+    detalhes.setVisible(true);
     }//GEN-LAST:event_jTTabelaMedMouseClicked
 
     private void jCItemNovaCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCItemNovaCompraActionPerformed

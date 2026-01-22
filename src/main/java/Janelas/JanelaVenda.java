@@ -182,7 +182,7 @@ public class JanelaVenda extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jCFiltroDrogaria, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jCFiltroDrogaria, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())))
         );
         layout.setVerticalGroup(
@@ -217,7 +217,20 @@ public class JanelaVenda extends javax.swing.JFrame {
     }//GEN-LAST:event_jBVoltarCompraActionPerformed
 
     private void jTTabelaMedMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTTabelaMedMouseClicked
+    int linhaSelecionada = jTTabelaMed.getSelectedRow();
 
+    if (linhaSelecionada == -1) {
+        return;
+    }
+
+    // Recupera o objeto Venda direto do TableModel
+    Venda vendaSelecionada = modelo.pegaDadosLinha(linhaSelecionada);
+
+    int notaFiscal = vendaSelecionada.getNotaFiscalVenda();
+
+    // Abre a janela de detalhes
+    JanelaDetalhesVenda detalhes = new JanelaDetalhesVenda(notaFiscal);
+    detalhes.setVisible(true);
     }//GEN-LAST:event_jTTabelaMedMouseClicked
 
     private void jCFiltroDrogariaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCFiltroDrogariaActionPerformed
@@ -288,7 +301,7 @@ public class JanelaVenda extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }
-
+   
     /**
      * @param args the command line arguments
      */

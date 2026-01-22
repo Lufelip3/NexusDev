@@ -104,4 +104,42 @@ public class ItensVendaDAO {
 
         return 0;
     }
+
+    public List<ItensVenda> readByNotaFiscal(int notaFiscal) {
+        List<ItensVenda> itens = new ArrayList<>();
+        Connection con = Conexao.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
+        try {
+            stmt = con.prepareStatement(
+                    "SELECT * FROM item_venda WHERE NotaFiscal_Saida = ?"
+            );
+            stmt.setInt(1, notaFiscal);
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                ItensVenda item = new ItensVenda();
+
+                item.setNotaFiscalVendaItem(rs.getInt("NotaFiscal_Saida"));
+                item.setCodMedItemVenda(rs.getInt("Cod_Med"));
+                item.setQuantidadeItemVenda(rs.getInt("Qtd_ItemVenda"));
+                item.setValorItemVenda(rs.getDouble("Valor_ItemVenda"));
+                item.setDataValItemVenda(rs.getDate("DataVal_ItemVenda").toString());
+
+                itens.add(item);
+            }
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(
+                    null,
+                    "Erro ao buscar itens da venda:\n" + e.getMessage()
+            );
+        } finally {
+            Conexao.closeConnection(con, stmt, rs);
+        }
+
+        return itens;
+    }
+
 }

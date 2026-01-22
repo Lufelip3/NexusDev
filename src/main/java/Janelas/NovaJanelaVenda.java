@@ -391,6 +391,12 @@ public class NovaJanelaVenda extends javax.swing.JFrame {
                 JOptionPane.WARNING_MESSAGE);
 
         if (confirma == JOptionPane.YES_OPTION) {
+            //EXCLUI A VENDA NO BANCO
+            Venda v = new Venda();
+            v.setNotaFiscalVenda(notaFiscalVenda);
+
+            VendaDAO dao = new VendaDAO();
+            dao.delete(v);
             JanelaVenda vmed = new JanelaVenda(user);
             vmed.setVisible(true);
             dispose();

@@ -14,9 +14,11 @@ import javax.swing.table.AbstractTableModel;
  *
  * @author andrey.munhoz
  */
-public class ItensVendaTableModel extends AbstractTableModel{
+public class ItensVendaTableModel extends AbstractTableModel {
+
     private List<ItensVenda> dados = new ArrayList<>();
     private String[] colunas = {"Quantidade", "Valor", "Data de Validade", "Nota fiscal", "Código do medicamento"};
+
     @Override
     public String getColumnName(int column) {
         return colunas[column];
@@ -53,28 +55,27 @@ public class ItensVendaTableModel extends AbstractTableModel{
     public void setValueAt(Object valor, int linha, int coluna) {
         switch (coluna) {
             case 0:
-                dados.get(linha).setQuantidadeItemVenda(Integer.parseInt((String)valor));
+                dados.get(linha).setQuantidadeItemVenda(Integer.parseInt((String) valor));
                 break;
             case 1:
-                dados.get(linha).setValorItemVenda(Double.valueOf((String)valor));
+                dados.get(linha).setValorItemVenda(Double.valueOf((String) valor));
                 break;
             case 2:
-                dados.get(linha).setDataValItemVenda((String)valor);
+                dados.get(linha).setDataValItemVenda((String) valor);
                 break;
             case 3:
-                dados.get(linha).setNotaFiscalVendaItem(Integer.parseInt((String)valor));
+                dados.get(linha).setNotaFiscalVendaItem(Integer.parseInt((String) valor));
                 break;
             case 4:
-                dados.get(linha).setCodMedItemVenda(Integer.parseInt((String)valor));
+                dados.get(linha).setCodMedItemVenda(Integer.parseInt((String) valor));
                 break;
         }
         this.fireTableRowsUpdated(linha, linha);
     }
 
     public void addLinha(ItensVenda iv) {
-    addItem(iv);
-}
-
+        addItem(iv);
+    }
 
     public void removeLinha(int linha) {
         this.dados.remove(linha);
@@ -100,10 +101,17 @@ public class ItensVendaTableModel extends AbstractTableModel{
         lerDados();
         this.fireTableDataChanged();
     }
+
     public void addItem(ItensVenda itemVenda) {
-    dados.add(itemVenda); 
-    int lastIndex = dados.size() - 1;
-    fireTableRowsInserted(lastIndex, lastIndex);
-}
+        dados.add(itemVenda);
+        int lastIndex = dados.size() - 1;
+        fireTableRowsInserted(lastIndex, lastIndex);
+    }
+
+    public void setItensVenda(List<ItensVenda> itens) {
+        this.dados.clear();
+        this.dados.addAll(itens);
+        fireTableDataChanged();
+    }
 
 }
