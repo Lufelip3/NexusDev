@@ -6,6 +6,7 @@ package Janelas;
 
 import DAO.MedicamentoDAO;
 import Model.MedicamentoTableModel;
+import Objetos.Funcionario;
 import Objetos.Medicamento;
 import java.awt.Color;
 
@@ -16,6 +17,7 @@ import java.awt.Color;
  */
 
 public class CadastroMedicamento extends javax.swing.JFrame {
+    private Funcionario user;
 
     MedicamentoTableModel modelo = new MedicamentoTableModel();
 
@@ -23,6 +25,10 @@ public class CadastroMedicamento extends javax.swing.JFrame {
      * Creates new form CadastroMedicamento
      */
     public CadastroMedicamento() {
+        initComponents();
+}
+    
+    public CadastroMedicamento(Funcionario user) {
         initComponents();
         this.setLocationRelativeTo(null);
         jTTabelaMed.setModel(modelo);
@@ -305,7 +311,7 @@ public class CadastroMedicamento extends javax.swing.JFrame {
     }//GEN-LAST:event_jTNomeMedicamentoActionPerformed
 
     private void jBVoltarCadastroMedicamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBVoltarCadastroMedicamentoActionPerformed
-        Menu m = new Menu();
+        Menu m = new Menu(user);
         m.setVisible(true);
         dispose();
     }//GEN-LAST:event_jBVoltarCadastroMedicamentoActionPerformed

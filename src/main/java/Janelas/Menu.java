@@ -144,7 +144,7 @@ public class Menu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBCadastrarMedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCadastrarMedActionPerformed
-        CadastroMedicamento cadmed = new CadastroMedicamento();
+        CadastroMedicamento cadmed = new CadastroMedicamento(user);
         cadmed.setVisible(true);
         dispose();
     }//GEN-LAST:event_jBCadastrarMedActionPerformed
