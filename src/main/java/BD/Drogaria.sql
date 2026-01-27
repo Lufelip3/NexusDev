@@ -46,6 +46,9 @@ CREATE TABLE catalogo_medicamento (
   Nome_CatMed VARCHAR(50) NOT NULL,
   Desc_CatMed VARCHAR(100) NOT NULL,
   Valor_CatMed DECIMAL(10,2) NOT NULL,
+  datacompraItemCat DATE,
+  dataValItemCat DATE,
+  quantidade INT NOT NULL,
   CNPJ_Lab VARCHAR(18),
   FOREIGN KEY (CNPJ_Lab) REFERENCES laboratorio(CNPJ_Lab)
 );
