@@ -296,16 +296,15 @@ public class NovaJanelaVenda extends javax.swing.JFrame {
 
         atualizarValorTotal();
         int confirma = JOptionPane.showConfirmDialog(this,
-        String.format("Finalizar a venda?\n"
-                + "Nota Fiscal: %d\n"
-                + "Total de itens: %d\n"
-                + "Valor Total: R$ %.2f",
-                notaFiscalVenda,
-                modeloItem.getRowCount(),
-                valorTotalVenda),
-        "Confirmar Venda",
-        JOptionPane.YES_NO_OPTION);
-
+                String.format("Finalizar a venda?\n"
+                        + "Nota Fiscal: %d\n"
+                        + "Total de itens: %d\n"
+                        + "Valor Total: R$ %.2f",
+                        notaFiscalVenda,
+                        modeloItem.getRowCount(),
+                        valorTotalVenda),
+                "Confirmar Venda",
+                JOptionPane.YES_NO_OPTION);
 
         if (confirma == JOptionPane.YES_OPTION) {
             try {
@@ -329,7 +328,6 @@ public class NovaJanelaVenda extends javax.swing.JFrame {
 
                     // Salva o item no banco
                     itensDAO.create(itemVenda);
-
                 }
 
                 JOptionPane.showMessageDialog(this,
@@ -364,15 +362,67 @@ public class NovaJanelaVenda extends javax.swing.JFrame {
         // PRECISO PEGAR OS DADOS DO MEDICAMENTO QUE É UM ITEM DA COMPRA, 
         // ADICIONAR NO ATRIBUTO DO ITEM A QUANTIDADE E ADICIONAR NO MODEL DA TABELA DE ITEM;
         if (jTTabelaNovaCompra.getSelectedRow() != -1) {
-            int QTD_Item = Integer.parseInt(JOptionPane.showInputDialog("Quantidade do Medicamento"));
-            ItensVenda itemVenda = new ItensVenda();
-            itemVenda.setDataValItemVenda(modeloMed.pegaDadosLinha(jTTabelaNovaCompra.getSelectedRow()).getDataValidadeMed());
-            itemVenda.setQuantidadeItemVenda(modeloMed.pegaDadosLinha(jTTabelaNovaCompra.getSelectedRow()).getQuantidadeMed());
-            itemVenda.setValorItemVenda(modeloMed.pegaDadosLinha(jTTabelaNovaCompra.getSelectedRow()).getValorMed());
-            itemVenda.setCodMedItemVenda(modeloMed.pegaDadosLinha(jTTabelaNovaCompra.getSelectedRow()).getCodMed());
 
+            int linhaSelecionada = jTTabelaNovaCompra.getSelectedRow();
+
+            // Medicamento selecionado
+            var medicamento = modeloMed.pegaDadosLinha(linhaSelecionada);
+
+            int estoqueDisponivel = medicamento.getQuantidadeMed();
+
+            String input = JOptionPane.showInputDialog(
+                    this,
+                    "Quantidade do Medicamento\nEstoque disponível: " + estoqueDisponivel
+            );
+            // Cancelou o input
+            if (input == null) {
+                return;
+            }
+            int QTD_Item;
+            try {
+                QTD_Item = Integer.parseInt(input);
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(
+                        this,
+                        "Digite um número válido.",
+                        "Erro",
+                        JOptionPane.ERROR_MESSAGE
+                );
+                return;
+            }
+
+            // Quantidade inválida
+            if (QTD_Item <= 0) {
+                JOptionPane.showMessageDialog(
+                        this,
+                        "A quantidade deve ser maior que zero.",
+                        "Erro",
+                        JOptionPane.ERROR_MESSAGE
+                );
+                return;
+            }
+
+            // Quantidade maior que o estoque
+            if (QTD_Item > estoqueDisponivel) {
+                JOptionPane.showMessageDialog(
+                        this,
+                        "Quantidade solicitada maior que o estoque disponível.\n"
+                        + "Estoque atual: " + estoqueDisponivel,
+                        "Estoque insuficiente",
+                        JOptionPane.WARNING_MESSAGE
+                );
+                return;
+            }
+
+            // PASSOU NA VALIDAÇÃO → adiciona item
+            ItensVenda itemVenda = new ItensVenda();
+            itemVenda.setDataValItemVenda(medicamento.getDataValidadeMed());
+            itemVenda.setValorItemVenda(medicamento.getValorMed());
+            itemVenda.setCodMedItemVenda(medicamento.getCodMed());
             itemVenda.setQuantidadeItemVenda(QTD_Item);
+
             modeloItem.addItem(itemVenda);
+            atualizarValorTotal();
 
         }
 

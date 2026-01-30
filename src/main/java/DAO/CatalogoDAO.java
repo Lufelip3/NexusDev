@@ -55,7 +55,7 @@ public class CatalogoDAO {
         ResultSet rs = null;
         List<CatalogoMedicamento> catalogoMedicamento = new ArrayList<>();
         try {
-            stmt = con.prepareStatement("SELECT * FROM catalogo_medicamento WHERE CNPJ_Lab = ?");
+            stmt = con.prepareStatement("SELECT * FROM catalogo_medicamento WHERE CNPJ_Lab = ? AND quantidade > 0");
             stmt.setString(1, cnpj);
             rs = stmt.executeQuery();
 
@@ -98,6 +98,24 @@ public class CatalogoDAO {
 
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Falha ao cadastrar: " + e);
+        } finally {
+            Conexao.closeConnection(con, stmt);
+        }
+    }
+
+    public void atualizarQuantidade(int codCatMed, int quantidadeComprada) {
+        Connection con = Conexao.getConnection();
+        PreparedStatement stmt = null;
+
+        try {
+            stmt = con.prepareStatement("UPDATE catalogo_medicamento SET quantidade = quantidade - ? WHERE Cod_CatMed = ?");
+            stmt.setInt(1, quantidadeComprada);
+            stmt.setInt(2, codCatMed);
+
+            stmt.execute();
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Falha ao atualizar quantidade do catálogo: " + e);
         } finally {
             Conexao.closeConnection(con, stmt);
         }

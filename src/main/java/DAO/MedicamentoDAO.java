@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package DAO;
-    
+
 import BD.Conexao;
 import Objetos.Medicamento;
 import java.sql.Connection;
@@ -14,15 +14,15 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 
-
 public class MedicamentoDAO {
+
     public List<Medicamento> read() {
         Connection con = Conexao.getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;
         List<Medicamento> medicamentos = new ArrayList<>();
         try {
-            stmt = con.prepareStatement("SELECT * FROM medicamento");
+            stmt = con.prepareStatement("SELECT * FROM medicamento WHERE Qtd_Med > 0");
             rs = stmt.executeQuery();
 
             while (rs.next()) {
@@ -34,7 +34,7 @@ public class MedicamentoDAO {
                 m.setQuantidadeMed(rs.getInt("Qtd_Med"));
                 m.setValorMed(rs.getDouble("Valor_Med"));
                 m.setCodCatMed(rs.getInt("Cod_CatMed"));
-               
+
                 medicamentos.add(m);
             }
         } catch (SQLException e) {
@@ -44,35 +44,7 @@ public class MedicamentoDAO {
         }
         return medicamentos;
     }
-//    public List<Medicamento> readCNPJ(String cnpj) {
-//        Connection con = Conexao.getConnection();
-//        PreparedStatement stmt = null;
-//        ResultSet rs = null;
-//        List<Medicamento> medicamento = new ArrayList<>();
-//        try {
-//            stmt = con.prepareStatement("SELECT * FROM catalogo_medicamento WHERE CNPJ_Lab = ?");
-//            stmt.setString(1, cnpj);
-//            rs = stmt.executeQuery();
-//
-//            while (rs.next()) {
-//                Medicamento m = new Medicamento();
-//                m.setNomeMed(rs.getString("Nome_CatMed"));
-//                m.setCodCatMed(rs.getInt("Cod_CatMed"));
-//                m.setDescCatalogo(rs.getString("Desc_CatMed"));
-//                m.setValorCatalogo(rs.getDouble("Valor_CatMed"));
-//                m.setCnpjLabCat(rs.getString("CNPJ_Lab"));
-//                m.setDatacompraItemCat(rs.getString("datacompraItemCat"));
-//                m.setDataValItemCat(rs.getString("dataValItemCat"));
-//                m.setQuantidade(rs.getInt("quantidade"));
-//                medicamento.add(m);
-//            }
-//        } catch (SQLException e) {
-//            JOptionPane.showConfirmDialog(null, "Falha ao obter dados: " + e);
-//        } finally {
-//            Conexao.closeConnection(con, stmt, rs);
-//        }
-//        return catalogoMedicamento;
-//    }
+
     public void create(Medicamento m) {
         Connection con = Conexao.getConnection();
         PreparedStatement stmt = null;
@@ -137,34 +109,34 @@ public class MedicamentoDAO {
             Conexao.closeConnection(con, stmt);
         }
     }
-   public int createAndReturnId(Medicamento med) {
-    String sql = "INSERT INTO medicamento (Nome_Med, Valor_Med, Qtd_Med, Desc_Med, DataVal_Med, Cod_CatMed) VALUES (?, ?, ?, ?, ?, ?)";
-    
-    try (Connection con = Conexao.getConnection();
-         PreparedStatement stmt = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
-        
-        // Define os valores
-        stmt.setString(1, med.getNomeMed());
-        stmt.setDouble(2, med.getValorMed());
-        stmt.setInt(3, med.getQuantidadeMed());
-        stmt.setString(4, med.getDescricaoMed());
-        stmt.setString(5, med.getDataValidadeMed());
-        stmt.setInt(6, med.getCodCatMed());
-        // Executa o INSERT
-        stmt.executeUpdate();
-        
-        // Pega o Cod_Med gerado pelo auto_increment
-        try (ResultSet rs = stmt.getGeneratedKeys()) {
-            if (rs.next()) {
-                return rs.getInt(1);  // Retorna o Cod_Med
+
+    public int createAndReturnId(Medicamento med) {
+        String sql = "INSERT INTO medicamento (Nome_Med, Valor_Med, Qtd_Med, Desc_Med, DataVal_Med, Cod_CatMed) VALUES (?, ?, ?, ?, ?, ?)";
+
+        try (Connection con = Conexao.getConnection(); PreparedStatement stmt = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
+
+            // Define os valores
+            stmt.setString(1, med.getNomeMed());
+            stmt.setDouble(2, med.getValorMed());
+            stmt.setInt(3, med.getQuantidadeMed());
+            stmt.setString(4, med.getDescricaoMed());
+            stmt.setString(5, med.getDataValidadeMed());
+            stmt.setInt(6, med.getCodCatMed());
+            // Executa o INSERT
+            stmt.executeUpdate();
+
+            // Pega o Cod_Med gerado pelo auto_increment
+            try (ResultSet rs = stmt.getGeneratedKeys()) {
+                if (rs.next()) {
+                    return rs.getInt(1);  // Retorna o Cod_Med
+                }
             }
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Erro: " + e.getMessage());
+            e.printStackTrace();
         }
-        
-    } catch (SQLException e) {
-        JOptionPane.showMessageDialog(null, "Erro: " + e.getMessage());
-        e.printStackTrace();
+
+        return -1;  // Erro
     }
-    
-    return -1;  // Erro
-} 
 }

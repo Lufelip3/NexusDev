@@ -4,6 +4,7 @@
  */
 package Janelas;
 
+import DAO.CatalogoDAO;
 import DAO.CompraDAO;
 import DAO.ItensDAO;
 import DAO.LaboratorioDAO;
@@ -253,6 +254,7 @@ public class NovaJanelaCompra extends javax.swing.JFrame {
                 CompraDAO compraDAO = new CompraDAO();
                 ItensDAO itensDAO = new ItensDAO();
                 MedicamentoDAO medDAO = new MedicamentoDAO();
+                CatalogoDAO catalogoDAO = new CatalogoDAO();
 
                 // Atualiza o valor total da compra no banco
                 compraDAO.atualizarValorTotal(notaFiscalCompra, valorTotalCompra);
@@ -286,6 +288,10 @@ public class NovaJanelaCompra extends javax.swing.JFrame {
 
                     // Salva o item no banco
                     itensDAO.create(item);
+
+                    // Atualiza a quantidade no catálogo
+                    catalogoDAO.atualizarQuantidade(item.getCodCatMedItem(), item.getQuantidadeItem());
+
                     System.out.println("CodCat do item: " + med.getCodCatMed());
 
                 }
@@ -321,17 +327,70 @@ public class NovaJanelaCompra extends javax.swing.JFrame {
         // PRECISO PEGAR OS DADOS DO MEDICAMENTO QUE É UM ITEM DA COMPRA, 
         // ADICIONAR NO ATRIBUTO DO ITEM A QUANTIDADE E ADICIONAR NO MODEL DA TABELA DE ITEM;
         if (jTTabelaNovaCompra.getSelectedRow() != -1) {
-            int QTD_Item = Integer.parseInt(JOptionPane.showInputDialog("Quantidade do Medicamento"));
+
+            int linhaSelecionada = jTTabelaNovaCompra.getSelectedRow();
+
+            // Catálogo selecionado
+            CatalogoMedicamento cat = modeloCat.pegaDadosLinha(linhaSelecionada);
+            int estoqueDisponivel = cat.getQuantidade();
+
+            String input = JOptionPane.showInputDialog(
+                    this,
+                    "Quantidade do Medicamento\nDisponível no catálogo: " + estoqueDisponivel
+            );
+
+            // Cancelou
+            if (input == null) {
+                return;
+            }
+
+            int QTD_Item;
+
+            try {
+                QTD_Item = Integer.parseInt(input);
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(
+                        this,
+                        "Digite um número válido.",
+                        "Erro",
+                        JOptionPane.ERROR_MESSAGE
+                );
+                return;
+            }
+
+            // Quantidade inválida
+            if (QTD_Item <= 0) {
+                JOptionPane.showMessageDialog(
+                        this,
+                        "A quantidade deve ser maior que zero.",
+                        "Erro",
+                        JOptionPane.ERROR_MESSAGE
+                );
+                return;
+            }
+
+            // Quantidade maior que o disponível no catálogo
+            if (QTD_Item > estoqueDisponivel) {
+                JOptionPane.showMessageDialog(
+                        this,
+                        "Quantidade solicitada maior que o disponível no catálogo.\n"
+                        + "Disponível: " + estoqueDisponivel,
+                        "Quantidade indisponível",
+                        JOptionPane.WARNING_MESSAGE
+                );
+                return;
+            }
+
+            // PASSOU NA VALIDAÇÃO
             Itens item = new Itens();
-            item.setCodCatMedItem(modeloCat.pegaDadosLinha(jTTabelaNovaCompra.getSelectedRow()).getCodCatMed());
-            item.setDataValItem(modeloCat.pegaDadosLinha(jTTabelaNovaCompra.getSelectedRow()).getDataValItemCat());
-            item.setDataVendaItem(modeloCat.pegaDadosLinha(jTTabelaNovaCompra.getSelectedRow()).getDatacompraItemCat());
-            item.setQuantidadeItem(modeloCat.pegaDadosLinha(jTTabelaNovaCompra.getSelectedRow()).getQuantidade());
-            item.setValorItem(modeloCat.pegaDadosLinha(jTTabelaNovaCompra.getSelectedRow()).getValorCatalogo());
-
+            item.setCodCatMedItem(cat.getCodCatMed());
+            item.setDataValItem(cat.getDataValItemCat());
+            item.setDataVendaItem(cat.getDatacompraItemCat());
+            item.setValorItem(cat.getValorCatalogo());
             item.setQuantidadeItem(QTD_Item);
-            modeloItem.addItem(item);
 
+            modeloItem.addItem(item);
+            atualizarValorTotal();
         }
 
 
