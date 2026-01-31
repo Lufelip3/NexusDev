@@ -29,12 +29,14 @@ public class JanelaCompra extends javax.swing.JFrame {
     private List<Laboratorio> laboratorios = new ArrayList<>();
     private String cnpj;
     CompraTableModel modelo = new CompraTableModel();
+    private Menu menu;
 
     /**
      * Creates new form Compra2
      */
     public JanelaCompra() {
         initComponents();
+       
 
     }
 
@@ -264,9 +266,8 @@ public class JanelaCompra extends javax.swing.JFrame {
     }//GEN-LAST:event_jBCadastrarCompraActionPerformed
 
     private void jBVoltarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBVoltarCompraActionPerformed
-        Menu m = new Menu(user);
-        m.setVisible(true);
-        dispose();
+        menu.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jBVoltarCompraActionPerformed
 
     private void jTTabelaMedMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTTabelaMedMouseClicked

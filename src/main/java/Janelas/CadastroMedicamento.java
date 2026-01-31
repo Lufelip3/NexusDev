@@ -18,6 +18,7 @@ import java.awt.Color;
 
 public class CadastroMedicamento extends javax.swing.JFrame {
     private Funcionario user;
+    private Menu menu;
 
     MedicamentoTableModel modelo = new MedicamentoTableModel();
 
@@ -28,8 +29,9 @@ public class CadastroMedicamento extends javax.swing.JFrame {
         initComponents();
 }
     
-    public CadastroMedicamento(Funcionario user) {
+    public CadastroMedicamento(Funcionario user, Menu menu) {
         initComponents();
+        this.menu = menu;
         this.setLocationRelativeTo(null);
         jTTabelaMed.setModel(modelo);
         modelo.recarregaTabela();
@@ -311,9 +313,9 @@ public class CadastroMedicamento extends javax.swing.JFrame {
     }//GEN-LAST:event_jTNomeMedicamentoActionPerformed
 
     private void jBVoltarCadastroMedicamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBVoltarCadastroMedicamentoActionPerformed
-        Menu m = new Menu(user);
-        m.setVisible(true);
-        dispose();
+        menu.setVisible(true);
+        this.dispose();
+        
     }//GEN-LAST:event_jBVoltarCadastroMedicamentoActionPerformed
 
     private void jBExcluirMedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBExcluirMedActionPerformed

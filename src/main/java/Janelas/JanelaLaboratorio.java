@@ -15,18 +15,24 @@ import java.awt.Color;
  */
 public class JanelaLaboratorio extends javax.swing.JFrame {
 
+        private Menu menu;
     LaboratorioTableModel modelo = new LaboratorioTableModel();
 
     /**
      * Creates new form Laboratório2
      */
-    public JanelaLaboratorio() {
+    public JanelaLaboratorio(Menu menu) {
         initComponents();
         this.setLocationRelativeTo(null);
+        this.menu = menu;
       
         jTTabelaLab.setModel(modelo);
         modelo.recarregaTabela();
         getContentPane().setBackground(Color.GRAY);
+    }
+    
+    public JanelaLaboratorio() {
+        initComponents();
     }
 
   
@@ -273,9 +279,8 @@ public class JanelaLaboratorio extends javax.swing.JFrame {
     }//GEN-LAST:event_jBCadastrarLaboratorioActionPerformed
 
     private void jBVoltarLaboratorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBVoltarLaboratorioActionPerformed
-        Menu m = new Menu();
-        m.setVisible(true);
-        dispose();
+        menu.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jBVoltarLaboratorioActionPerformed
 
     private void jBAlterarLaboratorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAlterarLaboratorioActionPerformed

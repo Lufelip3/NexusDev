@@ -15,17 +15,24 @@ import java.awt.Color;
  */
 public class Drogaria extends javax.swing.JFrame {
     
+        private Menu menu;
+        
      DrogariaTableModel modelo = new DrogariaTableModel();
 
     /**
      * Creates new form Drogaria2
      */
-    public Drogaria() {
+    public Drogaria(Menu menu) {
         initComponents();
+        this.menu = menu;
         this.setLocationRelativeTo(null);
         jTTabelaDrogaria.setModel(modelo);
         modelo.recarregaTabela();
         getContentPane().setBackground(Color.GRAY);
+    }
+    
+    public Drogaria() {
+        initComponents();
     }
 
     /**
@@ -261,9 +268,8 @@ public class Drogaria extends javax.swing.JFrame {
     }//GEN-LAST:event_jBCadastrarDrogariaActionPerformed
 
     private void jBVoltarDrogariaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBVoltarDrogariaActionPerformed
-        Menu m = new Menu();
-        m.setVisible(true);
-        dispose();
+        menu.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jBVoltarDrogariaActionPerformed
 
     private void jTEmailDrogariaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTEmailDrogariaActionPerformed

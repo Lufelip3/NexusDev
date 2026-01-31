@@ -17,12 +17,20 @@ import javax.swing.table.DefaultTableModel;
  * @author lucas.gmpedro
  */
 public class TelaCadastroFun extends javax.swing.JFrame {
+    private Menu menu;
    
-    private final DefaultTableModel modelo;
+    //private final DefaultTableModel modelo;
+    DefaultTableModel modelo = new DefaultTableModel();
+
      
     public TelaCadastroFun() {
         initComponents();
+    }
+    
+    public TelaCadastroFun(Menu menu) {
+        initComponents();
         getContentPane().setBackground(Color.GRAY);
+        this.menu = menu;
         
         jBoxFun.removeAllItems();    
         jBoxFun.addItem("Gerente");
@@ -611,13 +619,8 @@ public class TelaCadastroFun extends javax.swing.JFrame {
     }//GEN-LAST:event_jBlimparActionPerformed
 
     private void jBvoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBvoltarActionPerformed
-        // Fecha a tela atual (Cadastro de Funcionário)
+         menu.setVisible(true);
         this.dispose();
-
-        // Abre a tela do Menu
-        new Menu().setVisible(true);
-
-        System.out.println("✓ Voltou para o menu principal");
     }//GEN-LAST:event_jBvoltarActionPerformed
     
     // MÉTODO PARA CARREGAR FUNCIONÁRIOS DO BANCO
