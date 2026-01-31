@@ -14,13 +14,16 @@ import java.awt.Color;
  */
 public class VendaJanela extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Venda
-     */
-    public VendaJanela() {
+        private Menu menu;
+    
+    public VendaJanela(Menu menu) {
         initComponents();
         this.setLocationRelativeTo(null);
         getContentPane().setBackground(Color.GRAY);
+    }
+    
+    public VendaJanela() {
+        initComponents();
     }
 
     /**
@@ -164,9 +167,8 @@ public class VendaJanela extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBVoltarActionPerformed
-        Menu m = new Menu();
-        m.setVisible(true);
-        dispose();
+       menu.setVisible(true);
+       this.dispose();
     }//GEN-LAST:event_jBVoltarActionPerformed
 
     private void jBCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCadastrarActionPerformed

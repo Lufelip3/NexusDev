@@ -13,14 +13,18 @@ import java.awt.Color;
  * @author andrey.munhoz
  */
 public class CatalogoMedicamentoJanela extends javax.swing.JFrame {
-
-    /**
-     * Creates new form CatalogoMedicamento2
-     */
-    public CatalogoMedicamentoJanela() {
+        
+        private Menu menu;
+    
+    public CatalogoMedicamentoJanela(Menu menu) {
         initComponents();
+        this.menu = menu;
         this.setLocationRelativeTo(null);
         getContentPane().setBackground(Color.GRAY);
+    }
+    
+    public CatalogoMedicamentoJanela() {
+        initComponents();
     }
 
     /**
@@ -171,9 +175,8 @@ public class CatalogoMedicamentoJanela extends javax.swing.JFrame {
     }//GEN-LAST:event_jBCadastrarCatMedActionPerformed
 
     private void jBVoltarCatalogoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBVoltarCatalogoActionPerformed
-        Menu m = new Menu();
-        m.setVisible(true);
-        dispose();
+        menu.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jBVoltarCatalogoActionPerformed
 
     /**
