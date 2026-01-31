@@ -28,6 +28,7 @@ public class JanelaVenda extends javax.swing.JFrame {
     private List<DrogariaObjeto> drogarias = new ArrayList<>();
     private String cnpj;
     VendaTableModel modelo = new VendaTableModel();
+    private Menu menu;
 
     /**
      * Creates new form Compra2
@@ -37,10 +38,11 @@ public class JanelaVenda extends javax.swing.JFrame {
 
     }
 
-    public JanelaVenda(Funcionario user) {
+    public JanelaVenda(Funcionario user, Menu menu) {
         initComponents();
         this.setLocationRelativeTo(null);
         getContentPane().setBackground(Color.GRAY);
+        this.menu = menu;
         this.user = user;
         this.cpf = user.getCpf();
         carregarLaboratorios();
@@ -74,7 +76,6 @@ public class JanelaVenda extends javax.swing.JFrame {
         jCFiltroDrogaria.setSelectedIndex(0);
 
     }
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -211,51 +212,50 @@ public class JanelaVenda extends javax.swing.JFrame {
     }//GEN-LAST:event_jBCadastrarVendaActionPerformed
 
     private void jBVoltarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBVoltarCompraActionPerformed
-        Menu m = new Menu(user);
-        m.setVisible(true);
-        dispose();
+        menu.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jBVoltarCompraActionPerformed
 
     private void jTTabelaMedMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTTabelaMedMouseClicked
-    int linhaSelecionada = jTTabelaMed.getSelectedRow();
+        int linhaSelecionada = jTTabelaMed.getSelectedRow();
 
-    if (linhaSelecionada == -1) {
-        return;
-    }
+        if (linhaSelecionada == -1) {
+            return;
+        }
 
-    // Recupera o objeto Venda direto do TableModel
-    Venda vendaSelecionada = modelo.pegaDadosLinha(linhaSelecionada);
+        // Recupera o objeto Venda direto do TableModel
+        Venda vendaSelecionada = modelo.pegaDadosLinha(linhaSelecionada);
 
-    int notaFiscal = vendaSelecionada.getNotaFiscalVenda();
+        int notaFiscal = vendaSelecionada.getNotaFiscalVenda();
 
-    // Abre a janela de detalhes
-    JanelaDetalhesVenda detalhes = new JanelaDetalhesVenda(notaFiscal);
-    detalhes.setVisible(true);
+        // Abre a janela de detalhes
+        JanelaDetalhesVenda detalhes = new JanelaDetalhesVenda(notaFiscal);
+        detalhes.setVisible(true);
     }//GEN-LAST:event_jTTabelaMedMouseClicked
 
     private void jCFiltroDrogariaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCFiltroDrogariaActionPerformed
-    int index = jCFiltroDrogaria.getSelectedIndex();
+        int index = jCFiltroDrogaria.getSelectedIndex();
 
-    VendaDAO dao = new VendaDAO();
+        VendaDAO dao = new VendaDAO();
 
-    // Item "Todos"
-    if (index <= 0) {
-        modelo.setVendas(dao.read());
-        return;
-    }
-
-    // Ajuste do índice por causa do item "Todos"
-    String cnpjSelecionado = drogarias.get(index - 1).getCnpjDrogaria();
-
-    List<Venda> filtradas = new ArrayList<>();
-
-    for (Venda v : dao.read()) {
-        if (cnpjSelecionado != null && cnpjSelecionado.equals(v.getCnpjVenda())) {
-            filtradas.add(v);
+        // Item "Todos"
+        if (index <= 0) {
+            modelo.setVendas(dao.read());
+            return;
         }
-    }
 
-    modelo.setVendas(filtradas);
+        // Ajuste do índice por causa do item "Todos"
+        String cnpjSelecionado = drogarias.get(index - 1).getCnpjDrogaria();
+
+        List<Venda> filtradas = new ArrayList<>();
+
+        for (Venda v : dao.read()) {
+            if (cnpjSelecionado != null && cnpjSelecionado.equals(v.getCnpjVenda())) {
+                filtradas.add(v);
+            }
+        }
+
+        modelo.setVendas(filtradas);
     }//GEN-LAST:event_jCFiltroDrogariaActionPerformed
     private void iniciarCompra() {
         // Validação: garante que há um funcionário logado
@@ -301,7 +301,7 @@ public class JanelaVenda extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }
-   
+
     /**
      * @param args the command line arguments
      */
