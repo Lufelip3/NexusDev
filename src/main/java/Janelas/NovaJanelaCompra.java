@@ -32,7 +32,7 @@ import javax.swing.JOptionPane;
 public class NovaJanelaCompra extends javax.swing.JFrame {
 
     private Funcionario user;
-
+    private Menu menu;
     private String cpf;
     private int notaFiscalCompra;
     private double valorTotalCompra = 0.0;
@@ -47,10 +47,11 @@ public class NovaJanelaCompra extends javax.swing.JFrame {
         initComponents();
     }
 
-    public NovaJanelaCompra(Funcionario user, int notaGerada, String cpf, String cnpj) {
+    public NovaJanelaCompra(Funcionario user, int notaGerada, String cpf, String cnpj, Menu menu) {
         initComponents();
         this.cpf = user.getCpf();
         this.user = user;
+        this.menu = menu;
 
         this.notaFiscalCompra = notaGerada;
         modeloCat.recarregaTabelaCNPJ(cnpj);
@@ -307,7 +308,7 @@ public class NovaJanelaCompra extends javax.swing.JFrame {
                         "Sucesso",
                         JOptionPane.INFORMATION_MESSAGE);
 
-                JanelaCompra commed = new JanelaCompra(user);
+                JanelaCompra commed = new JanelaCompra(user, menu);
                 commed.setVisible(true);
                 dispose();
             } catch (Exception e) {
@@ -414,7 +415,7 @@ public class NovaJanelaCompra extends javax.swing.JFrame {
 
             CompraDAO dao = new CompraDAO();
             dao.delete(c);
-            JanelaCompra commed = new JanelaCompra(user);
+            JanelaCompra commed = new JanelaCompra(user, menu);
             commed.setVisible(true);
             dispose();
         }

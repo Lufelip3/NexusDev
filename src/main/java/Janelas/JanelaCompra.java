@@ -24,6 +24,7 @@ import javax.swing.JOptionPane;
 public class JanelaCompra extends javax.swing.JFrame {
 
     private Funcionario user;
+        private Menu menu;
     private String cpf;
     private List<Laboratorio> laboratorios = new ArrayList<>();
     private String cnpj;
@@ -37,11 +38,12 @@ public class JanelaCompra extends javax.swing.JFrame {
 
     }
 
-    public JanelaCompra(Funcionario user) {
+    public JanelaCompra(Funcionario user, Menu menu) {
         initComponents();
         this.setLocationRelativeTo(null);
         getContentPane().setBackground(Color.GRAY);
         this.user = user;
+        this.menu = menu;
 
         this.cpf = user.getCpf();
         carregarLaboratorios();
@@ -352,7 +354,7 @@ public class JanelaCompra extends javax.swing.JFrame {
                     JOptionPane.INFORMATION_MESSAGE);
 
             // Abre a tela de nova compra
-            NovaJanelaCompra janela = new NovaJanelaCompra(user, notaGerada, cpf, cnpj);
+            NovaJanelaCompra janela = new NovaJanelaCompra(user, notaGerada, cpf, cnpj, menu);
             janela.setVisible(true);
             this.dispose();
 

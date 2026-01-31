@@ -289,7 +289,7 @@ public class JanelaVenda extends javax.swing.JFrame {
                     JOptionPane.INFORMATION_MESSAGE);
 
             // Abre a tela de nova venda
-            NovaJanelaVenda janela = new NovaJanelaVenda(user, notaGerada, cpf, cnpj);
+            NovaJanelaVenda janela = new NovaJanelaVenda(user, notaGerada, cpf, cnpj, menu);
             janela.setVisible(true);
             this.dispose();
 

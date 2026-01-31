@@ -36,6 +36,7 @@ public class NovaJanelaVenda extends javax.swing.JFrame {
     private double valorTotalVenda = 0.0;
     ItensVendaTableModel modeloItem = new ItensVendaTableModel();
     MedicamentoTableModel modeloMed = new MedicamentoTableModel();
+        private Menu menu;
 
     /**
      * Creates new form NovaJanelaCompra
@@ -44,10 +45,11 @@ public class NovaJanelaVenda extends javax.swing.JFrame {
         initComponents();
     }
 
-    public NovaJanelaVenda(Funcionario user, int notaGerada, String cpf, String cnpj) {
+    public NovaJanelaVenda(Funcionario user, int notaGerada, String cpf, String cnpj, Menu menu) {
         initComponents();
         this.user = user;
         carregarDrogarias();
+        this.menu = menu;
 
         jBFinalizarNovaCompra.setEnabled(false);
 
@@ -341,7 +343,7 @@ public class NovaJanelaVenda extends javax.swing.JFrame {
                         "Sucesso",
                         JOptionPane.INFORMATION_MESSAGE);
 
-                JanelaVenda vmed = new JanelaVenda(user);
+                JanelaVenda vmed = new JanelaVenda(user, menu);
                 vmed.setVisible(true);
                 dispose();
 
@@ -447,7 +449,7 @@ public class NovaJanelaVenda extends javax.swing.JFrame {
 
             VendaDAO dao = new VendaDAO();
             dao.delete(v);
-            JanelaVenda vmed = new JanelaVenda(user);
+            JanelaVenda vmed = new JanelaVenda(user, menu);
             vmed.setVisible(true);
             dispose();
         }
