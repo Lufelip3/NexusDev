@@ -29,7 +29,6 @@ public class JanelaCompra extends javax.swing.JFrame {
     private List<Laboratorio> laboratorios = new ArrayList<>();
     private String cnpj;
     CompraTableModel modelo = new CompraTableModel();
-    private Menu menu;
 
     /**
      * Creates new form Compra2

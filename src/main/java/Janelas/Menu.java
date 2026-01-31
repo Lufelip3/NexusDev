@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package Janelas;
+
 import Objetos.Funcionario;
 import java.awt.Color;
 import javax.swing.JOptionPane;
@@ -12,27 +13,26 @@ import javax.swing.JOptionPane;
  * @author andrey.munhoz
  */
 public class Menu extends javax.swing.JFrame {
+
     private Funcionario user;
-        private Menu menu;
+    private Menu menu;
     private String funcaoUsuario;
     private String nomeUsuario;
-    
+
     /**
      * Creates new form Menu2
      */
     public Menu() {
         initComponents();
     }
-    
+
     // CONSTRUTOR QUE RECEBE O OBJETO FUNCIONARIO COMPLETO
-    public Menu(Funcionario f, Menu menu) {
+    public Menu(Funcionario f) {
         initComponents();
         this.setLocationRelativeTo(null);
         getContentPane().setBackground(Color.GRAY);
         this.user = f;
-             this.menu = menu;
 
-                
     }
 
     /**
@@ -146,7 +146,7 @@ public class Menu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBCadastrarMedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCadastrarMedActionPerformed
-        CadastroMedicamento cadmed = new CadastroMedicamento(user);
+        CadastroMedicamento cadmed = new CadastroMedicamento();
         cadmed.setVisible(true);
         menu.setVisible(false);
 
@@ -165,7 +165,7 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_jBLaboratorioActionPerformed
 
     private void jBVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBVendaActionPerformed
-        JanelaVenda vmed = new JanelaVenda(user, menu);
+        JanelaVenda vmed = new JanelaVenda(user, this);
         vmed.setVisible(true);
         menu.setVisible(false);
     }//GEN-LAST:event_jBVendaActionPerformed
