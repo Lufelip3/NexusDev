@@ -10,7 +10,9 @@ CREATE TABLE drogaria (
   Telefone_Drog VARCHAR(15) NOT NULL,
   Cep_Drog VARCHAR(10) NOT NULL,
   Num_Drog INT NOT NULL,
-  Email_Drog VARCHAR(50) UNIQUE NOT NULL
+  Email_Drog VARCHAR(50) UNIQUE NOT NULL,
+  Ativo_Drog TINYINT(1) NOT NULL DEFAULT 1
+
 );
 -- ===============================
 -- Tabela: laboratorio
@@ -21,7 +23,9 @@ CREATE TABLE laboratorio (
   Telefone_Lab VARCHAR(15) NOT NULL,
   Cep_Lab VARCHAR(10) NOT NULL,
   Num_Lab INT UNIQUE NOT NULL,
-  Email_Lab VARCHAR(50) UNIQUE NOT NULL
+  Email_Lab VARCHAR(50) UNIQUE NOT NULL,
+  Ativo_Lab TINYINT(1) NOT NULL DEFAULT 1
+
 );
 -- ===============================
 -- Tabela Funcionário
@@ -35,7 +39,9 @@ Cep_Fun VARCHAR(10) NOT NULL,
 Num_Fun INT NOT NULL,
 Email_Fun VARCHAR(50) UNIQUE NOT NULL,
 Senha_Fun VARCHAR(255) NOT NULL,
-Funcao VARCHAR(50)
+Funcao VARCHAR(50),
+Ativo_Fun TINYINT(1) NOT NULL DEFAULT 1
+
 );
 
 -- ===============================
@@ -75,9 +81,9 @@ CREATE TABLE compra (
   Valor_Total DECIMAL(10,2),
   Data_Compra DATE DEFAULT (CURRENT_DATE),
   CPF VARCHAR(14),
-  CNPJ_Drog VARCHAR(18),
+  CNPJ_Lab VARCHAR(18),
   FOREIGN KEY (CPF) REFERENCES funcionario(CPF),
-  FOREIGN KEY (CNPJ_Drog) REFERENCES drogaria(CNPJ_Drog)
+  FOREIGN KEY (CNPJ_Lab) REFERENCES laboratorio(CNPJ_Lab)
 );
 
 -- ===============================
@@ -254,4 +260,3 @@ BEGIN
 END $$
 
 DELIMITER ;
- select*from funcionario;

@@ -15,7 +15,6 @@ import javax.swing.JOptionPane;
 public class Menu extends javax.swing.JFrame {
 
     private Funcionario user;
-    private Menu menu;
     private String funcaoUsuario;
     private String nomeUsuario;
 
@@ -146,40 +145,40 @@ public class Menu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBCadastrarMedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCadastrarMedActionPerformed
-        CadastroMedicamento cadmed = new CadastroMedicamento();
+        CadastroMedicamento cadmed = new CadastroMedicamento(user, this);
         cadmed.setVisible(true);
-        menu.setVisible(false);
+        this.setVisible(false);
 
     }//GEN-LAST:event_jBCadastrarMedActionPerformed
 
     private void jBCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCompraActionPerformed
-        JanelaCompra commed = new JanelaCompra(user, menu);
+        JanelaCompra commed = new JanelaCompra(user, this);
         commed.setVisible(true);
-        menu.setVisible(false);
+        this.setVisible(false);
     }//GEN-LAST:event_jBCompraActionPerformed
 
     private void jBLaboratorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBLaboratorioActionPerformed
-        JanelaLaboratorio lab = new JanelaLaboratorio();
+        JanelaLaboratorio lab = new JanelaLaboratorio(this);
         lab.setVisible(true);
-        menu.setVisible(false);
+        this.setVisible(false);
     }//GEN-LAST:event_jBLaboratorioActionPerformed
 
     private void jBVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBVendaActionPerformed
         JanelaVenda vmed = new JanelaVenda(user, this);
         vmed.setVisible(true);
-        menu.setVisible(false);
+        this.setVisible(false);
     }//GEN-LAST:event_jBVendaActionPerformed
 
     private void jBDrogariaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBDrogariaActionPerformed
-        Drogaria drogaria = new Drogaria();
+        Drogaria drogaria = new Drogaria(this);
         drogaria.setVisible(true);
-        menu.setVisible(false);
+        this.setVisible(false);
     }//GEN-LAST:event_jBDrogariaActionPerformed
 
     private void jBCadastrarFunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCadastrarFunActionPerformed
-        TelaCadastroFun cadfun = new TelaCadastroFun();
+        TelaCadastroFun cadfun = new TelaCadastroFun(this);
         cadfun.setVisible(true);
-        menu.setVisible(false);
+        this.setVisible(false);
     }//GEN-LAST:event_jBCadastrarFunActionPerformed
 
     /**
