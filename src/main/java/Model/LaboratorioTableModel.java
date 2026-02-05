@@ -101,11 +101,24 @@ public class LaboratorioTableModel extends AbstractTableModel{
         this.fireTableDataChanged();
     }
     
-   
+   private void lerDadosInativos() {
+        LaboratorioDAO ldao = new LaboratorioDAO();
+
+        for (Laboratorio l : ldao.readInativos()) {
+            this.addLinha(l);
+
+        }
+        this.fireTableDataChanged();
+    }
 
     public void recarregaTabela() {
         this.dados.clear();
         lerDados();
+        this.fireTableDataChanged();
+    }
+     public void recarregaTabelaInativos() {
+        this.dados.clear();
+        lerDadosInativos();
         this.fireTableDataChanged();
     }
     

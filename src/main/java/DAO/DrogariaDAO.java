@@ -25,7 +25,7 @@ public class DrogariaDAO {
         ResultSet rs = null;
         List<DrogariaObjeto> drogarias = new ArrayList<>();
         try {
-            stmt = con.prepareStatement("SELECT * FROM drogaria");
+            stmt = con.prepareStatement("SELECT * FROM drogaria WHERE Ativo_Drog = 1");
             rs = stmt.executeQuery();
 
             while (rs.next()) {
@@ -45,7 +45,32 @@ public class DrogariaDAO {
         }
         return drogarias;
     }
+public List<DrogariaObjeto> readInativos() {
+        Connection con = Conexao.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        List<DrogariaObjeto> drogarias = new ArrayList<>();
+        try {
+            stmt = con.prepareStatement("SELECT * FROM drogaria WHERE Ativo_Drog = 0");
+            rs = stmt.executeQuery();
 
+            while (rs.next()) {
+                DrogariaObjeto d = new DrogariaObjeto();
+                d.setCnpjDrogaria(rs.getString("CNPJ_Drog"));
+                d.setNomeDrogaria(rs.getString("Nome_Drog"));
+                d.setEmailDrogaria(rs.getString("Email_Drog"));
+                d.setTelefoneDrogaria(rs.getString("Telefone_Drog"));
+                d.setNumeroDrogaria(rs.getInt("Num_Drog"));
+                d.setCepDrogaria(rs.getString("Cep_Drog"));
+                drogarias.add(d);
+            }
+        } catch (SQLException e) {
+            JOptionPane.showConfirmDialog(null, "Falha ao obter dados: " + e);
+        } finally {
+            Conexao.closeConnection(con, stmt, rs);
+        }
+        return drogarias;
+    }
     public void create(DrogariaObjeto d) {
         Connection con = Conexao.getConnection();
         PreparedStatement stmt = null;
@@ -97,16 +122,37 @@ public class DrogariaDAO {
         PreparedStatement stmt = null;
 
         try {
-            stmt = con.prepareStatement("DELETE FROM drogaria where CNPJ_Lab = ?");
+            stmt = con.prepareStatement(
+                    "UPDATE drogaria SET Ativo_Drog = 0 WHERE CNPJ_Drog = ?"
+            );
             stmt.setString(1, d.getCnpjDrogaria());
 
-            stmt.execute();
-            JOptionPane.showMessageDialog(null, "Drogaria removida com sucesso!");
+            stmt.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Drogaria desativado com sucesso!");
 
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Falha ao remover: " + e);
+            JOptionPane.showMessageDialog(null, "Falha ao desativar: " + e.getMessage());
         } finally {
             Conexao.closeConnection(con, stmt);
         }
     }
+    public void ativar(DrogariaObjeto d) {
+    Connection con = Conexao.getConnection();
+    PreparedStatement stmt = null;
+
+    try {
+        stmt = con.prepareStatement(
+            "UPDATE drogaria SET Ativo_Drog = 1 WHERE CNPJ_Drog = ?"
+        );
+        stmt.setString(1, d.getCnpjDrogaria());
+
+        stmt.executeUpdate();
+        JOptionPane.showMessageDialog(null, "Drogaria reativado com sucesso!");
+
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(null, "Falha ao reativar: " + e.getMessage());
+    } finally {
+        Conexao.closeConnection(con, stmt);
+    }
+}
 }

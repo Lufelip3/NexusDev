@@ -26,7 +26,7 @@ public class LaboratorioDAO {
         ResultSet rs = null;
         List<Laboratorio> laboratorio = new ArrayList<>();
         try {
-            stmt = con.prepareStatement("SELECT * FROM laboratorio");
+            stmt = con.prepareStatement("SELECT * FROM laboratorio WHERE Ativo_Lab = 1");
             rs = stmt.executeQuery();
 
             while (rs.next()) {
@@ -46,6 +46,37 @@ public class LaboratorioDAO {
             Conexao.closeConnection(con, stmt, rs);
         }
         return laboratorio;
+    }
+
+    public List<Laboratorio> readInativos() {
+        Connection con = Conexao.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        List<Laboratorio> lista = new ArrayList<>();
+
+        try {
+            stmt = con.prepareStatement(
+                    "SELECT * FROM laboratorio WHERE Ativo_Lab = 0"
+            );
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Laboratorio l = new Laboratorio();
+                l.setCnpjLab(rs.getString("CNPJ_Lab"));
+                l.setNomeLab(rs.getString("Nome_Lab"));
+                l.setTelefoneLab(rs.getString("Telefone_Lab"));
+                l.setCepLab(rs.getString("Cep_Lab"));
+                l.setNumeroLab(rs.getInt("Num_Lab"));
+                l.setEmailLab(rs.getString("Email_Lab"));
+                lista.add(l);
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        } finally {
+            Conexao.closeConnection(con, stmt, rs);
+        }
+
+        return lista;
     }
 
     public Laboratorio findByCnpj(String cnpj) {
@@ -127,16 +158,38 @@ public class LaboratorioDAO {
         PreparedStatement stmt = null;
 
         try {
-            stmt = con.prepareStatement("DELETE FROM laboratorio where CNPJ_Lab = ?");
+            stmt = con.prepareStatement(
+                    "UPDATE laboratorio SET Ativo_Lab = 0 WHERE CNPJ_Lab = ?"
+            );
             stmt.setString(1, l.getCnpjLab());
 
-            stmt.execute();
-            JOptionPane.showMessageDialog(null, "Laboratório removido com sucesso!");
+            stmt.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Laboratório desativado com sucesso!");
 
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Falha ao remover: " + e);
+            JOptionPane.showMessageDialog(null, "Falha ao desativar: " + e.getMessage());
         } finally {
             Conexao.closeConnection(con, stmt);
         }
     }
+    public void ativar(Laboratorio l) {
+        Connection con = Conexao.getConnection();
+        PreparedStatement stmt = null;
+
+        try {
+            stmt = con.prepareStatement(
+                    "UPDATE laboratorio SET Ativo_Lab = 1 WHERE CNPJ_Lab = ?"
+            );
+            stmt.setString(1, l.getCnpjLab());
+
+            stmt.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Laboratório reativado com sucesso!");
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Falha ao reativar: " + e.getMessage());
+        } finally {
+            Conexao.closeConnection(con, stmt);
+        }
+    }
+
 }

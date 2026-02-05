@@ -18,7 +18,7 @@ public class DrogariaTableModel extends AbstractTableModel {
 
     private List<DrogariaObjeto> dados = new ArrayList<>();
     private String[] colunas = {"CNPJ", "Nome", "Telefone", "Email", "CEP", "Numero"};
-    
+
     @Override
     public String getColumnName(int column) {
         return colunas[column];
@@ -102,10 +102,25 @@ public class DrogariaTableModel extends AbstractTableModel {
         this.fireTableDataChanged();
     }
 
+    private void lerDadosInativos() {
+        DrogariaDAO ddao = new DrogariaDAO();
+
+        for (DrogariaObjeto d : ddao.readInativos()) {
+            this.addLinha(d);
+
+        }
+        this.fireTableDataChanged();
+    }
+
     public void recarregaTabela() {
         this.dados.clear();
         lerDados();
         this.fireTableDataChanged();
     }
-    
+
+    public void recarregaTabelaInativos() {
+        this.dados.clear();
+        lerDadosInativos();
+        this.fireTableDataChanged();
+    }
 }

@@ -37,6 +37,8 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              <Component id="jBDesativados" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                               <Component id="jBCadastrarLaboratorio" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jBAlterarLaboratorio" min="-2" max="-2" attributes="0"/>
@@ -150,6 +152,7 @@
                   <Component id="jBVoltarLaboratorio" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jBAlterarLaboratorio" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jBExcluirLaboratorio" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jBDesativados" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
           </Group>
@@ -281,6 +284,14 @@
           <Format format="(##) #####-####" subtype="-1" type="5"/>
         </Property>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="jBDesativados">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Desativados"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBDesativadosActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

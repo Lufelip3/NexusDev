@@ -15,7 +15,7 @@ import java.awt.Color;
  */
 public class JanelaLaboratorio extends javax.swing.JFrame {
 
-        private Menu menu;
+    private Menu menu;
     LaboratorioTableModel modelo = new LaboratorioTableModel();
 
     /**
@@ -25,17 +25,15 @@ public class JanelaLaboratorio extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.menu = menu;
-      
+
         jTTabelaLab.setModel(modelo);
         modelo.recarregaTabela();
         getContentPane().setBackground(Color.GRAY);
     }
-    
+
     public JanelaLaboratorio() {
         initComponents();
     }
-
-  
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -65,6 +63,7 @@ public class JanelaLaboratorio extends javax.swing.JFrame {
         jTCNPJLaboratorio = new javax.swing.JFormattedTextField();
         jTCEPLaboratorio = new javax.swing.JFormattedTextField();
         jTTelLaboratorio = new javax.swing.JFormattedTextField();
+        jBDesativados = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -154,6 +153,13 @@ public class JanelaLaboratorio extends javax.swing.JFrame {
             ex.printStackTrace();
         }
 
+        jBDesativados.setText("Desativados");
+        jBDesativados.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBDesativadosActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -171,6 +177,8 @@ public class JanelaLaboratorio extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jBDesativados)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jBCadastrarLaboratorio)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jBAlterarLaboratorio)
@@ -254,7 +262,8 @@ public class JanelaLaboratorio extends javax.swing.JFrame {
                     .addComponent(jBCadastrarLaboratorio)
                     .addComponent(jBVoltarLaboratorio)
                     .addComponent(jBAlterarLaboratorio)
-                    .addComponent(jBExcluirLaboratorio))
+                    .addComponent(jBExcluirLaboratorio)
+                    .addComponent(jBDesativados))
                 .addGap(31, 31, 31))
         );
 
@@ -324,6 +333,11 @@ public class JanelaLaboratorio extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTNomeLaboratorioActionPerformed
 
+    private void jBDesativadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBDesativadosActionPerformed
+        Lab_Inativos l = new Lab_Inativos();
+        l.setVisible(true);
+    }//GEN-LAST:event_jBDesativadosActionPerformed
+
     private void limpaCampos() {
         jTCEPLaboratorio.setText("");
         jTCNPJLaboratorio.setText("");
@@ -378,6 +392,7 @@ public class JanelaLaboratorio extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBAlterarLaboratorio;
     private javax.swing.JButton jBCadastrarLaboratorio;
+    private javax.swing.JButton jBDesativados;
     private javax.swing.JButton jBExcluirLaboratorio;
     private javax.swing.JButton jBVoltarLaboratorio;
     private javax.swing.JLabel jLabel10;

@@ -63,6 +63,7 @@ public class Drogaria extends javax.swing.JFrame {
         jTCNPJDrograria = new javax.swing.JFormattedTextField();
         jTCEPDrogaria = new javax.swing.JFormattedTextField();
         jTTelDrogaria = new javax.swing.JFormattedTextField();
+        jBDesativados = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -152,6 +153,13 @@ public class Drogaria extends javax.swing.JFrame {
             ex.printStackTrace();
         }
 
+        jBDesativados.setText("Desativados");
+        jBDesativados.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBDesativadosActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -193,6 +201,8 @@ public class Drogaria extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(jTTelDrogaria, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jBDesativados)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jBAlterarDrogaria)
                                 .addGap(18, 18, 18)
                                 .addComponent(jBExcluirDrogaria)
@@ -243,7 +253,8 @@ public class Drogaria extends javax.swing.JFrame {
                     .addComponent(jBCadastrarDrogaria)
                     .addComponent(jBVoltarDrogaria)
                     .addComponent(jBExcluirDrogaria)
-                    .addComponent(jBAlterarDrogaria))
+                    .addComponent(jBAlterarDrogaria)
+                    .addComponent(jBDesativados))
                 .addGap(14, 14, 14))
         );
 
@@ -314,6 +325,11 @@ public class Drogaria extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jBExcluirDrogariaActionPerformed
 
+    private void jBDesativadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBDesativadosActionPerformed
+        Drog_Inativos d = new Drog_Inativos();
+        d.setVisible(true);
+    }//GEN-LAST:event_jBDesativadosActionPerformed
+
     private void LimpaCampos() {
         jTCEPDrogaria.setText("");
         jTCNPJDrograria.setText("");
@@ -362,6 +378,7 @@ public class Drogaria extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBAlterarDrogaria;
     private javax.swing.JButton jBCadastrarDrogaria;
+    private javax.swing.JButton jBDesativados;
     private javax.swing.JButton jBExcluirDrogaria;
     private javax.swing.JButton jBVoltarDrogaria;
     private javax.swing.JLabel jLabel1;
